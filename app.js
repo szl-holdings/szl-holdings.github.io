@@ -283,7 +283,7 @@
   function buildReceiptLines(env, p) {
     var sig = env.signatures[0];
     function L(k, v, cls) { return [['k', k], [cls || 'v', v]]; }
-    return [
+    var lines = [
       [['k', '{']],
       L('  "payloadType"  : ', '"' + env.payloadType + '",'),
       L('  "typ"          : ', '"' + p.typ + '",'),
@@ -291,13 +291,21 @@
       L('  "served_by"    : ', '"' + p.served_by + '",'),
       L('  "sovereign"    : ', String(p.sovereign) + ','),
       L('  "receipts.in"  : ', '"sha256:' + p.message_sha256 + '",', 's'),
-      L('  "receipts.out" : ', '"sha256:' + p.reply_sha256 + '",', 's'),
+      L('  "receipts.out" : ', '"sha256:' + p.reply_sha256 + '",', 's')
+    ];
+    if (p.sources && p.sources.length) {
+      lines.push(L('  "sources"      : ', '[' + p.sources.map(function (s) { return '"' + s + '"'; }).join(', ') + '],', 's'));
+      if (p.retrieval_sha256) lines.push(L('  "retrieval"    : ', '"sha256:' + String(p.retrieval_sha256).slice(0, 32) + '\u2026",', 's'));
+    }
+    lines.push(
       L('  "invariant"    : ', '"receipts.in \u2261 receipts.out",'),
       L('  "sig.alg"      : ', '"ECDSA-P256 / DSSE",'),
       L('  "keyid"        : ', '"' + sig.keyid + '",'),
       L('  "sig"          : ', '"' + String(sig.sig).slice(0, 38) + '\u2026",', 's'),
-      L('  "ts"           : ', '"' + p.ts + '"')
-    ].concat([[['k', '}']]]);
+      L('  "ts"           : ', '"' + p.ts + '"'),
+      [['k', '}']]
+    );
+    return lines;
   }
   var body = document.getElementById("receiptBody");
   var badge = document.getElementById("verifyBadge");
@@ -464,6 +472,17 @@
         "sig (P1363) : " + String(sig.sig || "").slice(0, 44) + "\u2026\n\n" +
         "payload (signed):\n" + pj + "\n\n" +
         "verified in-browser via DSSE PAE + WebCrypto ECDSA-P256/SHA-256\nagainst szl-router's pinned public key.";
+      // Citations rendered ONLY from the cryptographically-verified payload (never top-level provenance).
+      if (r.ok && r.payload && Array.isArray(r.payload.sources) && r.payload.sources.length) {
+        var src = document.createElement("div");
+        src.className = "receipt-sources";
+        src.innerHTML = '<span class="src-label">grounded in \u00b7 attested</span>' +
+          r.payload.sources.map(function (id) {
+            var safe = String(id).replace(/[^a-z0-9._-]/gi, "");
+            return '<a class="src-link" href="https://github.com/szl-holdings/' + safe + '" target="_blank" rel="noopener">' + esc(id) + '</a>';
+          }).join("");
+        msgEl.insertBefore(src, env);
+      }
     });
   }
 
