@@ -18,7 +18,7 @@
   --body:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:88px}
 body{
   margin:0;background:var(--void);color:var(--text);font-family:var(--body);
   font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;
