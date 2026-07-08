@@ -3,9 +3,9 @@
   "use strict";
 
   /* ---------- config ---------- */
-  // Sovereign concierge endpoint. Empty = not yet wired -> honest local sample.
-  // Phase 2: point this at the szl-router public proxy (server-side token, CORS-allowed).
-  var ROUTER_ENDPOINT = "";
+  // Sovereign concierge endpoint — szl-router public proxy (server-side token, CORS-locked).
+  // Reasoning runs on SZL-owned infrastructure; every reply carries honest provenance.
+  var ROUTER_ENDPOINT = "https://alloyszlholdings.com/szl-concierge/chat";
 
   /* ---------- year ---------- */
   var y = document.getElementById("year");
@@ -205,11 +205,16 @@
     chat.appendChild(m); chat.scrollTop = chat.scrollHeight;
     return m;
   }
-  function provenance(mode) {
-    var h = hex(12);
-    return mode === "live"
-      ? 'via <b>szl-router</b> · sovereign-first · receipt <b>sha256:' + h + '</b>'
-      : 'sample · sovereign router wiring in progress · receipt <b>sha256:' + h + '</b>';
+  function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  function provenance(mode, p) {
+    if (mode === "live" && p) {
+      var by = p.served_by || "szl-router";
+      var sov = p.sovereign ? "sovereign" : "external";
+      var sha = (p.sha256 || "").slice(0, 12);
+      return 'via <b>szl-router</b> · ' + sov + ' · <b>' + esc(by) + '</b>' +
+        (sha ? ' · receipt <b>sha256:' + sha + '</b>' : '');
+    }
+    return 'offline sample · live concierge unavailable';
   }
 
   var greeted = false;
@@ -232,11 +237,18 @@
           method: "POST", headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ message: text })
         });
-        var data = await res.json();
-        typing.remove();
-        addMsg("bot", (data.reply || data.answer || answerFor(text)), provenance("live"));
-        return;
-      } catch (err) { /* fall through to sample */ }
+        if (res.ok) {
+          var data = await res.json();
+          if (data && data.reply) {
+            typing.remove();
+            addMsg("bot", esc(data.reply).replace(/\n/g, "<br>"), provenance("live", data.provenance));
+            return;
+          }
+        }
+      } catch (err) { /* fall through to honest sample */ }
+      typing.remove();
+      addMsg("bot", answerFor(text), provenance("sample"));
+      return;
     }
     setTimeout(function () {
       typing.remove();
