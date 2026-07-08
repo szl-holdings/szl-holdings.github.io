@@ -227,6 +227,18 @@ code{font-family:var(--mono);color:var(--teal)}
 .msg .receipt-sources .src-label{color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-right:2px}
 .msg .receipt-sources .src-link{display:inline-flex;align-items:center;padding:2px 9px;border-radius:999px;border:1px solid var(--teal-dim);background:var(--teal-soft);color:var(--teal);text-decoration:none;transition:border-color .2s,background .2s}
 .msg .receipt-sources .src-link:hover{border-color:var(--teal);background:rgba(58,244,200,.18)}
+
+/* ---------- concierge starter chips ---------- */
+.chat-suggest{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chat-suggest.used{display:none}
+.chat-suggest .suggest{font-family:var(--mono);font-size:11.5px;letter-spacing:.01em;color:var(--muted);background:rgba(58,244,200,.04);border:1px solid var(--border);border-radius:999px;padding:7px 13px;cursor:pointer;transition:border-color .2s,color .2s,background .2s}
+.chat-suggest .suggest:hover{border-color:var(--teal-dim);color:var(--text);background:var(--teal-soft)}
+
+/* ---------- verify-it-yourself strip ---------- */
+.verify-strip{display:flex;flex-wrap:wrap;align-items:center;gap:10px;justify-content:center;margin:38px auto 0;max-width:760px;padding:16px 20px;border:1px solid var(--border);border-radius:12px;background:var(--panel);font-family:var(--mono);font-size:12px}
+.verify-strip .verify-lead{color:var(--muted);letter-spacing:.02em}
+.verify-strip .verify-link{display:inline-flex;align-items:center;padding:5px 12px;border-radius:999px;border:1px solid var(--teal-dim);background:var(--teal-soft);color:var(--teal);text-decoration:none;transition:border-color .2s,background .2s}
+.verify-strip .verify-link:hover{border-color:var(--teal);background:rgba(58,244,200,.18)}
 .receipt-badge.bad{background:#3a1d1d!important;color:#ff9a9a!important;box-shadow:none!important}
 .receipt-badge.muted{background:var(--panel-2)!important;color:var(--muted)!important;box-shadow:none!important}
 
