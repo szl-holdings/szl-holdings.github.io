@@ -6,6 +6,8 @@
   // Sovereign concierge endpoint — szl-router public proxy (server-side token, CORS-locked).
   // Reasoning runs on SZL-owned infrastructure; every reply carries honest provenance.
   var ROUTER_ENDPOINT = "https://alloyszlholdings.com/szl-concierge/chat";
+  var PUBKEY_ENDPOINT = "https://alloyszlholdings.com/szl-concierge/pubkey";
+  var PROOF_PROMPT = "In one sentence, what does a szl-receipt guarantee?";
 
   /* ---------- year ---------- */
   var y = document.getElementById("year");
@@ -110,42 +112,90 @@
     draw();
   }
 
-  /* ---------- signed receipt typewriter ---------- */
-  function hex(n) { var s = ""; var c = "0123456789abcdef"; for (var i = 0; i < n; i++) s += c[Math.floor(Math.random() * 16)]; return s; }
-  var RECEIPT = [
+  /* ---------- verifiable DSSE receipts (WebCrypto, ECDSA P-256) ---------- */
+  function hex(n) { var s = "", c = "0123456789abcdef"; for (var i = 0; i < n; i++) s += c[Math.floor(Math.random() * 16)]; return s; }
+  function b64bytes(b64) { var bin = atob(b64), n = bin.length, out = new Uint8Array(n); for (var i = 0; i < n; i++) out[i] = bin.charCodeAt(i); return out; }
+  function paeBytes(type, bodyBytes) {
+    var enc = new TextEncoder();
+    var head = enc.encode("DSSEv1 " + enc.encode(type).length + " " + type + " " + bodyBytes.length + " ");
+    var out = new Uint8Array(head.length + bodyBytes.length);
+    out.set(head, 0); out.set(bodyBytes, head.length);
+    return out;
+  }
+  var _pubkey = null, _pubkeyTried = false;
+  async function getPubkey() {
+    if (_pubkey || _pubkeyTried) return _pubkey;
+    _pubkeyTried = true;
+    if (!(window.crypto && window.crypto.subtle && window.TextEncoder && window.TextDecoder)) return null;
+    try {
+      var meta = await (await fetch(PUBKEY_ENDPOINT)).json();
+      _pubkey = await crypto.subtle.importKey("spki", b64bytes(meta.spki_b64), { name: "ECDSA", namedCurve: "P-256" }, false, ["verify"]);
+      return _pubkey;
+    } catch (e) { return null; }
+  }
+  // Verify a DSSE envelope entirely in the browser against szl-router's pinned P-256 key.
+  async function verifyReceipt(receipt) {
+    try {
+      var bodyBytes = b64bytes(receipt.payload);
+      var payload = JSON.parse(new TextDecoder().decode(bodyBytes));
+      var key = await getPubkey();
+      if (!key) return { ok: false, payload: payload, reason: "no-key" };
+      var sig = b64bytes(receipt.signatures[0].sig);
+      var ok = await crypto.subtle.verify({ name: "ECDSA", hash: "SHA-256" }, key, sig, paeBytes(receipt.payloadType, bodyBytes));
+      return { ok: ok, payload: payload, keyid: receipt.signatures[0].keyid || "" };
+    } catch (e) { return { ok: false, reason: "error" }; }
+  }
+
+  /* ---------- proof-section receipt (real, fetched + live-verified) ---------- */
+  var RECEIPT_SAMPLE = [
     [['k', '{']],
     [['k', '  "_type"        : '], ['v', '"https://in-toto.io/Statement/v1",']],
     [['k', '  "component"    : '], ['v', '"szl-router",']],
     [['k', '  "decision"     : '], ['v', '"governed-inference",']],
-    [['k', '  "model"        : '], ['v', '"sovereign/local-primary",']],
-    [['k', '  "lambda"       : '], ['v', '"Conjecture-1 (advisory)",']],
     [['k', '  "receipts.in"  : '], ['s', '"sha256:' + hex(56) + '",']],
     [['k', '  "receipts.out" : '], ['s', '"sha256:' + hex(56) + '",']],
-    [['k', '  "invariant"    : '], ['v', '"receipts.in \u2261 receipts.out  \u2713",']],
-    [['k', '  "witnesses"    : '], ['v', '"3-of-4 BFT",']],
+    [['k', '  "invariant"    : '], ['v', '"receipts.in \u2261 receipts.out",']],
     [['k', '  "sig.alg"      : '], ['v', '"ECDSA-P256 / DSSE",']],
     [['k', '  "sig"          : '], ['s', '"MEUCIQD' + hex(40) + '",']],
-    [['k', '  "slsa"         : '], ['v', '"L1 (honest)",']],
-    [['k', '  "status"       : '], ['v', '"VERIFIED"']],
+    [['k', '  "status"       : '], ['v', '"illustrative"']],
     [['k', '}']]
   ];
+  function buildReceiptLines(env, p) {
+    var sig = env.signatures[0];
+    function L(k, v, cls) { return [['k', k], [cls || 'v', v]]; }
+    return [
+      [['k', '{']],
+      L('  "payloadType"  : ', '"' + env.payloadType + '",'),
+      L('  "typ"          : ', '"' + p.typ + '",'),
+      L('  "model"        : ', '"' + p.model + '",'),
+      L('  "served_by"    : ', '"' + p.served_by + '",'),
+      L('  "sovereign"    : ', String(p.sovereign) + ','),
+      L('  "receipts.in"  : ', '"sha256:' + p.message_sha256 + '",', 's'),
+      L('  "receipts.out" : ', '"sha256:' + p.reply_sha256 + '",', 's'),
+      L('  "invariant"    : ', '"receipts.in \u2261 receipts.out",'),
+      L('  "sig.alg"      : ', '"ECDSA-P256 / DSSE",'),
+      L('  "keyid"        : ', '"' + sig.keyid + '",'),
+      L('  "sig"          : ', '"' + String(sig.sig).slice(0, 38) + '\u2026",', 's'),
+      L('  "ts"           : ', '"' + p.ts + '"')
+    ].concat([[['k', '}']]]);
+  }
   var body = document.getElementById("receiptBody");
   var badge = document.getElementById("verifyBadge");
-  function typeReceipt() {
+  function typeReceiptLines(lines, onDone) {
     if (!body) return;
     body.innerHTML = ""; if (badge) badge.classList.remove("show");
     var cursor = document.createElement("span"); cursor.className = "cursor";
     body.appendChild(cursor);
     var li = 0;
     function nextLine() {
-      if (li >= RECEIPT.length) { if (cursor.parentNode) cursor.remove(); if (badge) badge.classList.add("show"); return; }
-      var segs = RECEIPT[li]; var si = 0;
+      if (li >= lines.length) { if (cursor.parentNode) cursor.remove(); if (onDone) onDone(); return; }
+      var segs = lines[li], si = 0;
       function nextSeg() {
-        if (si >= segs.length) { body.insertBefore(document.createTextNode("\n"), cursor); li++; setTimeout(nextLine, 55); return; }
+        if (si >= segs.length) { body.insertBefore(document.createTextNode("\n"), cursor); li++; setTimeout(nextLine, 45); return; }
         var cls = segs[si][0], txt = segs[si][1];
         var span = document.createElement("span"); span.className = cls;
         body.insertBefore(span, cursor);
-        var ch = 0; var speed = txt.length > 30 ? 5 : 14;
+        var ch = 0, speed = txt.length > 30 ? 4 : 13;
         (function typeChar() {
           span.textContent = txt.slice(0, ch); ch++;
           if (ch <= txt.length) setTimeout(typeChar, speed);
@@ -156,9 +206,33 @@
     }
     nextLine();
   }
+  async function initProofReceipt() {
+    if (!body) return;
+    body.innerHTML = '<span class="k">// requesting a live signed receipt from szl-router\u2026</span>';
+    var env = null, payload = null, verified = false, live = false;
+    try {
+      var res = await fetch(ROUTER_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ message: PROOF_PROMPT }) });
+      if (res.ok) {
+        var d = await res.json();
+        if (d && d.provenance && d.provenance.receipt) {
+          env = d.provenance.receipt;
+          var v = await verifyReceipt(env);
+          payload = v.payload; verified = !!v.ok; live = !!payload;
+        }
+      }
+    } catch (e) { /* fall through to illustrative sample */ }
+    var lines = live ? buildReceiptLines(env, payload) : RECEIPT_SAMPLE;
+    typeReceiptLines(lines, function () {
+      if (!badge) return;
+      badge.classList.add("show"); badge.classList.remove("bad", "muted");
+      if (live && verified) { badge.textContent = "VERIFIED"; }
+      else if (live) { badge.textContent = "UNVERIFIED"; badge.classList.add("bad"); }
+      else { badge.textContent = "ILLUSTRATIVE"; badge.classList.add("muted"); }
+    });
+  }
   if (body) {
     var rObs = new IntersectionObserver(function (es) {
-      es.forEach(function (e) { if (e.isIntersecting) { typeReceipt(); rObs.unobserve(e.target); } });
+      es.forEach(function (e) { if (e.isIntersecting) { initProofReceipt(); rObs.unobserve(e.target); } });
     }, { threshold: 0.4 });
     rObs.observe(body);
   }
@@ -229,6 +303,36 @@
     cObs.observe(chat);
   }
 
+  function renderReceipt(msgEl, receipt) {
+    if (!receipt || !receipt.signatures || !receipt.signatures[0]) return;
+    var sig = receipt.signatures[0];
+    var chip = document.createElement("button");
+    chip.type = "button"; chip.className = "receipt-chip";
+    chip.innerHTML = '<span class="dot"></span> verifying receipt\u2026';
+    var env = document.createElement("pre");
+    env.className = "receipt-env";
+    msgEl.appendChild(chip); msgEl.appendChild(env);
+    chip.addEventListener("click", function () { env.classList.toggle("show"); });
+    verifyReceipt(receipt).then(function (r) {
+      if (r.ok) {
+        chip.classList.add("ok");
+        chip.innerHTML = '<span class="dot"></span> receipt verified \u00b7 ECDSA&nbsp;P-256 \u00b7 key ' + esc(String(sig.keyid || "").slice(0, 8));
+      } else {
+        chip.classList.add("bad");
+        chip.innerHTML = '<span class="dot"></span> receipt ' + (r.reason === "no-key" ? "unchecked" : "unverified");
+      }
+      var pj = r.payload ? JSON.stringify(r.payload, null, 2) : "(payload unavailable)";
+      env.textContent =
+        "DSSE envelope\n" +
+        "payloadType : " + receipt.payloadType + "\n" +
+        "keyid       : " + (sig.keyid || "") + "\n" +
+        "alg         : " + (sig.alg || "ecdsa-p256-sha256") + "\n" +
+        "sig (P1363) : " + String(sig.sig || "").slice(0, 44) + "\u2026\n\n" +
+        "payload (signed):\n" + pj + "\n\n" +
+        "verified in-browser via DSSE PAE + WebCrypto ECDSA-P256/SHA-256\nagainst szl-router's pinned public key.";
+    });
+  }
+
   async function ask(text) {
     var typing = typingMsg();
     if (ROUTER_ENDPOINT) {
@@ -241,7 +345,8 @@
           var data = await res.json();
           if (data && data.reply) {
             typing.remove();
-            addMsg("bot", esc(data.reply).replace(/\n/g, "<br>"), provenance("live", data.provenance));
+            var m = addMsg("bot", esc(data.reply).replace(/\n/g, "<br>"), provenance("live", data.provenance));
+            if (data.provenance && data.provenance.receipt) renderReceipt(m, data.provenance.receipt);
             return;
           }
         }
