@@ -214,3 +214,14 @@ code{font-family:var(--mono);color:var(--teal)}
   .hero-stats{gap:26px}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important}.reveal{opacity:1;transform:none;transition:none}}
+
+/* ---- verifiable receipts (concierge chips + proof badge states) ---- */
+.msg .receipt-chip{display:inline-flex;align-items:center;gap:7px;margin-top:10px;padding:6px 11px;border-radius:8px;border:1px solid var(--border);background:rgba(58,244,200,.04);color:var(--muted);cursor:pointer;font-family:var(--mono);font-size:11px;letter-spacing:.02em;line-height:1;transition:border-color .2s,color .2s}
+.msg .receipt-chip:hover{border-color:var(--teal-dim);color:var(--text)}
+.msg .receipt-chip .dot{width:6px;height:6px;border-radius:50%;background:currentColor;box-shadow:0 0 8px currentColor;flex:none}
+.msg .receipt-chip.ok{color:var(--teal);border-color:var(--teal-dim);background:var(--teal-soft)}
+.msg .receipt-chip.bad{color:#ff9a9a;border-color:#5a2a2a;background:rgba(255,120,120,.06)}
+.msg .receipt-env{display:none;margin-top:8px;padding:12px 13px;border-radius:9px;border:1px solid var(--border);background:var(--void-2);color:var(--muted);font-family:var(--mono);font-size:11px;line-height:1.55;white-space:pre-wrap;word-break:break-word;max-height:300px;overflow:auto}
+.msg .receipt-env.show{display:block}
+.receipt-badge.bad{background:#3a1d1d!important;color:#ff9a9a!important;box-shadow:none!important}
+.receipt-badge.muted{background:var(--panel-2)!important;color:var(--muted)!important;box-shadow:none!important}
