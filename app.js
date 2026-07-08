@@ -486,18 +486,25 @@
     });
   }
 
+  // Rolling conversation memory (last few turns) so follow-up questions have context.
+  var convo = [];
+  function remember(role, content) {
+    convo.push({ role: role, content: String(content).slice(0, 1000) });
+    if (convo.length > 6) convo = convo.slice(-6);
+  }
   async function ask(text) {
     var typing = typingMsg();
     if (ROUTER_ENDPOINT) {
       try {
         var res = await fetch(ROUTER_ENDPOINT, {
           method: "POST", headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: text })
+          body: JSON.stringify({ message: text, history: convo.slice() })
         });
         if (res.ok) {
           var data = await res.json();
           if (data && data.reply) {
             typing.remove();
+            remember("user", text); remember("assistant", data.reply);
             var m = addMsg("bot", esc(data.reply).replace(/\n/g, "<br>"), provenance("live", data.provenance));
             if (data.provenance && data.provenance.receipt) renderReceipt(m, data.provenance.receipt);
             return;
@@ -522,6 +529,20 @@
       addMsg("user", text.replace(/</g, "&lt;"));
       input.value = "";
       ask(text);
+    });
+  }
+
+  var suggest = document.getElementById("chatSuggest");
+  if (suggest && chat) {
+    suggest.addEventListener("click", function (e) {
+      var b = e.target.closest ? e.target.closest(".suggest") : null;
+      if (!b) return;
+      var q = (b.getAttribute("data-q") || b.textContent || "").trim();
+      if (!q) return;
+      greet();
+      addMsg("user", q.replace(/</g, "&lt;"));
+      ask(q);
+      suggest.classList.add("used");
     });
   }
 })();
