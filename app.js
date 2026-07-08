@@ -35,40 +35,100 @@
     });
   }
 
-  /* ---------- portfolio (real szl-holdings repos) ---------- */
-  var PORTFOLIO = [
-    { name: "a11oy", lang: "Python", title: "The orchestrator", href: "https://a-11-oy.com",
-      desc: "Full governed-inference application — Command Center, Five Superpowers, Observability, Mesh, Evidence, LLM Router. The signed-receipt substrate itself." },
-    { name: "killinchu", lang: "Python", title: "Counter-UAS", href: "https://a-11-oy.com/killinchu",
-      desc: "16-view counter-drone application: sensor-fusion, ROE, 3-of-4 BFT, DSSE verifier, PQC, geofence, swarm. A DSSE receipt per interdiction." },
-    { name: "immune", lang: "TypeScript", title: "Verifiable-AI defense", href: "https://szlholdings-immune.hf.space",
-      desc: "The IMMUNE Defense Matrix — append-only SHA-256 receipt chain (YAWAR), SENTRA/GATE admission, HUKLLA tripwires. Live on Hugging Face." },
-    { name: "szl-router", lang: "Python", title: "Sovereign LLM router", href: "https://github.com/szl-holdings/szl-router",
-      desc: "Our own unified, OpenAI-compatible router — sovereign-first, honest provenance. The brain behind every concierge on this page." },
-    { name: "khipu-consensus", lang: "Python", title: "Multi-party witnessed AI", href: "https://github.com/szl-holdings/khipu-consensus",
-      desc: "3-of-4 BFT agreement — each witness cosigns an action hash with its own ECDSA P-256 key over DSSE. The category SZL invents." },
-    { name: "lutar-lean", lang: "Lean", title: "Machine-checked Λ", href: "https://doi.org/10.5281/zenodo.20434308",
-      desc: "Lean 4 + Mathlib formalization of the Λ aggregator. 749 declarations · 14 axioms · 163 tracked sorries. Λ-uniqueness stated as Conjecture 1." },
-    { name: "szl-receipt", lang: "Python", title: "The signing primitive", href: "https://github.com/szl-holdings/szl-receipt",
-      desc: "Shared signed-receipt library — DSSE / ECDSA-P256, cosign-compatible, UNSIGNED-honest fallback. Every SZL component shares this one." },
-    { name: "anatomy", lang: "JavaScript", title: "Living anatomy", href: "https://a-11-oy.com",
-      desc: "3D navigable substrate visualizing the five organs — reasoning cortex, trust gate, receipt bus, consensus, egress — powering a11oy + killinchu." },
-    { name: "governed-inference-meter", lang: "Python", title: "Energy-metered proof", href: "https://github.com/szl-holdings/governed-inference-meter",
-      desc: "Energy-metered governed-inference receipts — NVML joules, tokens/joule, advisory policy gate. Honest UNAVAILABLE when NVML is unset." },
+  /* ---------- ecosystem (real szl-holdings repos, grouped by function) ---------- */
+  var GH = "https://github.com/szl-holdings/";
+  var ECOSYSTEM = [
+    { g: "Flagship applications", no: "A",
+      note: "End-to-end products people actually operate — each emits a receipt per decision.",
+      items: [
+        { name: "a11oy", lang: "Python", title: "The orchestrator", href: "https://a-11-oy.com",
+          desc: "Full governed-inference application — Command Center, Five Superpowers, Observability, Mesh, Evidence, LLM Router. The signed-receipt substrate itself." },
+        { name: "killinchu", lang: "Python", title: "Counter-UAS", href: "https://a-11-oy.com/killinchu",
+          desc: "16-view counter-drone application: sensor-fusion, ROE, 3-of-4 BFT, DSSE verifier, PQC, geofence, swarm. A DSSE receipt per interdiction." },
+        { name: "immune", lang: "TypeScript", title: "Verifiable-AI defense", href: "https://szlholdings-immune.hf.space",
+          desc: "The IMMUNE Defense Matrix — append-only SHA-256 receipt chain (YAWAR), SENTRA/GATE admission, HUKLLA tripwires. Live on Hugging Face." },
+        { name: "yarqa", lang: "Python", title: "Signed flow networks", href: GH + "yarqa",
+          desc: "Turns CFD velocity fields into auditable compartmental networks with signed provenance receipts. Quechua: the canal that divides flow." },
+        { name: "khipu-sda-core", lang: "Python", title: "Sovereign SDA", href: GH + "khipu-sda-core",
+          desc: "Clean-room anomaly / space-domain-awareness engine — signed receipts and Λ-gated honest confidence. Kalman-grounded, doctrine v11." }
+      ] },
+    { g: "The signing substrate", no: "B",
+      note: "The receipt bus itself: one primitive, hash-chained storage, and multi-party witnessing.",
+      items: [
+        { name: "szl-receipt", lang: "Python", title: "The signing primitive", href: GH + "szl-receipt",
+          desc: "Shared signed-receipt library — DSSE / ECDSA-P256, cosign-compatible, UNSIGNED-honest fallback. Every SZL component shares this one." },
+        { name: "khipu-consensus", lang: "Python", title: "Multi-party witnessed AI", href: GH + "khipu-consensus",
+          desc: "3-of-4 BFT agreement — each witness cosigns an action hash with its own ECDSA P-256 key over DSSE. The category SZL invents." },
+        { name: "szl-mesh", lang: "Python", title: "Doctrine-pinned mesh", href: GH + "szl-mesh",
+          desc: "A CRDT mesh over BFT wiring with a 3-of-4 Khipu quorum — air-gap-friendly replication that never loses the receipt chain." },
+        { name: "szl-lake", lang: "Python", title: "Append-only receipt lake", href: GH + "szl-lake",
+          desc: "Append-only DSSE receipt store, GitHub-origin with a Hugging Face dataset mirror. The durable memory behind the substrate." },
+        { name: "szl-trust", lang: "Shell", title: "Public trust portal", href: GH + "szl-trust",
+          desc: "Covenant Proof Standard run artifacts and deterministic replay receipts — verify a run without trusting the operator." }
+      ] },
+    { g: "Sovereign inference & metering", no: "C",
+      note: "The reasoning cortex: your models, your keys, honest joules — paid providers unarmed.",
+      items: [
+        { name: "szl-router", lang: "Python", title: "Sovereign LLM router", href: GH + "szl-router",
+          desc: "Our own OpenAI-compatible gateway — sovereign-first, honest provenance. The brain behind every concierge on this page." },
+        { name: "governed-inference-meter", lang: "Python", title: "Energy-metered proof", href: GH + "governed-inference-meter",
+          desc: "Energy-metered inference receipts — NVML joules, tokens/joule, advisory policy gate. Honest UNAVAILABLE when NVML is unset." },
+        { name: "szl-energy-attest", lang: "Python", title: "Attestable energy", href: GH + "szl-energy-attest",
+          desc: "MEASURED-NVML joules or an honest UNAVAILABLE null — never fabricates a joule. Cheapest-watt placement with signable receipts." },
+        { name: "szl-lambda-gate", lang: "Python", title: "The Λ aggregator", href: GH + "szl-lambda-gate",
+          desc: "Weighted geometric mean over axis scores with an ADVISORY governance gate and A1–A4 axiom self-checks. Λ = Conjecture 1 — not proven trust." },
+        { name: "szl-governed-norm", lang: "Python", title: "Governed kernels", href: GH + "szl-governed-norm",
+          desc: "Correctness-verified RMSNorm / LayerNorm with optional SHA3-256 hash-chained provenance. Governance down at the kernel." }
+      ] },
+    { g: "Formal methods & research", no: "D",
+      note: "Machine-checked truth — and honesty about what is proven versus conjectured.",
+      items: [
+        { name: "lutar-lean", lang: "Lean", title: "Machine-checked Λ", href: "https://doi.org/10.5281/zenodo.20434308",
+          desc: "Lean 4 + Mathlib formalization of the Λ aggregator. 749 declarations · 14 axioms · 163 tracked sorries. Λ-uniqueness stated as Conjecture 1." },
+        { name: "lean-kernel", lang: "Python", title: "Live proof kernel", href: GH + "lean-kernel",
+          desc: "Live Lean v4.13.0 kernel for the Lutar Invariant, source-mirrored from a Hugging Face Space. The proofs, running — not just claimed." },
+        { name: "szl-papers", lang: "TeX", title: "Academic corpus", href: GH + "szl-papers",
+          desc: "Preprints, thesis lineage, bounty problems and prior-art disclosures. The written record behind the doctrine." },
+        { name: "anatomy", lang: "JavaScript", title: "Living anatomy", href: GH + "anatomy",
+          desc: "3D navigable substrate visualizing the five organs — reasoning cortex, trust gate, receipt bus, consensus, egress — powering a11oy + killinchu." }
+      ] },
+    { g: "Platform, runtime & developer tooling", no: "E",
+      note: "Everything needed to build on the substrate — and to prove your build did what it says.",
+      items: [
+        { name: "platform", lang: "TypeScript", title: "Substrate runtime", href: GH + "platform",
+          desc: "The monorepo: substrate runtime, agentic loops, an MCP server (11 tools), reusable workflows and CI gates. Doctrine v11 LOCKED." },
+        { name: "hatun-mcp", lang: "Python", title: "Doctrine-aware MCP", href: GH + "hatun-mcp",
+          desc: "Model Context Protocol server — 16 SZL tools under governance (Yuyay-13 gate, Khipu receipts, DSSE-signed). Streamable HTTP + SSE." },
+        { name: "ouroboros", lang: "TypeScript", title: "Bounded recursion", href: GH + "ouroboros",
+          desc: "Agentic-loop runtime with dual-witness emitters and governance budgets — recursion that provably terminates." },
+        { name: "vsp-otel", lang: "TypeScript", title: "Λ-signed telemetry", href: GH + "vsp-otel",
+          desc: "OpenTelemetry exporter for SZL audit fibers — every span Λ-signed. The egress organ, made observable." },
+        { name: "developers", lang: "HTML", title: "Developer hub", href: GH + "developers",
+          desc: "Build on SZL — API reference for all five flagships, a 5-minute quickstart, MCP integration for Claude / Cursor, runnable examples." },
+        { name: "docs-site", lang: "JavaScript", title: "Unified docs", href: GH + "docs-site",
+          desc: "Math-grounded, Quechua-rooted governed-AI documentation (VitePress). One place for the whole doctrine." },
+        { name: "szl-build-env", lang: "Shell", title: "10-minute stack", href: GH + "szl-build-env",
+          desc: "kind + Istio ambient mesh + OpenTelemetry + the 5-organ stack with a cosign verification gate. Local, reproducible, fast." }
+      ] }
   ];
-  var grid = document.getElementById("portfolioGrid");
-  if (grid) {
-    PORTFOLIO.forEach(function (p, i) {
-      var a = document.createElement("a");
-      a.className = "card reveal";
-      a.href = p.href; a.target = "_blank"; a.rel = "noopener";
-      a.setAttribute("data-d", String((i % 4) + 1));
-      a.innerHTML =
-        '<div class="card-top"><span class="card-name">' + p.name + '</span>' +
-        '<span class="card-lang">' + p.lang + '</span></div>' +
-        '<h3>' + p.title + '</h3><p>' + p.desc + '</p>' +
-        '<span class="card-link">view →</span>';
-      grid.appendChild(a);
+  var groups = document.getElementById("ecosystemGroups");
+  if (groups) {
+    ECOSYSTEM.forEach(function (grp) {
+      var cards = grp.items.map(function (p, i) {
+        return '<a class="card reveal" data-d="' + ((i % 4) + 1) + '" href="' + p.href + '" target="_blank" rel="noopener">' +
+          '<div class="card-top"><span class="card-name">' + p.name + '</span>' +
+          '<span class="card-lang">' + p.lang + '</span></div>' +
+          '<h3>' + p.title + '</h3><p>' + p.desc + '</p>' +
+          '<span class="card-link">view →</span></a>';
+      }).join("");
+      var sec = document.createElement("div");
+      sec.className = "eco-group reveal";
+      sec.innerHTML =
+        '<div class="eco-group-head"><span class="eco-no">' + grp.no + '</span>' +
+        '<h3>' + grp.g + '</h3><span class="eco-count">' + grp.items.length + '</span></div>' +
+        '<p class="eco-note">' + grp.note + '</p>' +
+        '<div class="grid">' + cards + '</div>';
+      groups.appendChild(sec);
     });
   }
 
@@ -110,6 +170,66 @@
       t++; requestAnimationFrame(draw);
     }
     draw();
+  }
+
+  /* ---------- holographic anatomy projection (canvas, no libraries) ---------- */
+  var holo = document.getElementById("holoCanvas");
+  if (holo && holo.getContext) {
+    var hx = holo.getContext("2d");
+    var hdpr = Math.min(window.devicePixelRatio || 1, 2);
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var HW, HH, ht = 0;
+    var LABELS = ["01 cortex", "02 gate", "03 bus", "04 consensus", "05 egress"];
+    function hresize() {
+      HW = holo.clientWidth; HH = holo.clientHeight;
+      holo.width = HW * hdpr; holo.height = HH * hdpr; hx.setTransform(hdpr, 0, 0, hdpr, 0, 0);
+    }
+    hresize(); window.addEventListener("resize", hresize);
+    function rad() { return Math.min(HW * 0.34, 220); }
+    function nodeAt(i, rot) {
+      var ang = (i / 5) * Math.PI * 2 + rot, rx = rad(), ry = rx * 0.34;
+      return { x: HW / 2 + Math.cos(ang) * rx, y: HH * 0.52 + Math.sin(ang) * ry, d: (Math.sin(ang) + 1) / 2 };
+    }
+    // chromatic holographic double-stroke (teal + pale-green offset, purple-free)
+    function hline(x1, y1, x2, y2, alpha, w) {
+      hx.lineWidth = w || 1;
+      hx.strokeStyle = "rgba(58,244,200," + alpha + ")"; hx.beginPath(); hx.moveTo(x1, y1); hx.lineTo(x2, y2); hx.stroke();
+      hx.strokeStyle = "rgba(150,255,225," + (alpha * 0.5) + ")"; hx.beginPath(); hx.moveTo(x1 + 0.9, y1); hx.lineTo(x2 + 0.9, y2); hx.stroke();
+    }
+    function frame() {
+      hx.clearRect(0, 0, HW, HH);
+      var rot = reduce ? 0.6 : ht * 0.006, cx = HW / 2, baseY = HH * 0.9;
+      // projector base + emitter cone
+      var bg = hx.createRadialGradient(cx, baseY, 0, cx, baseY, HW * 0.32);
+      bg.addColorStop(0, "rgba(58,244,200,0.32)"); bg.addColorStop(1, "rgba(58,244,200,0)");
+      hx.fillStyle = bg; hx.beginPath(); hx.ellipse(cx, baseY, HW * 0.30, 10, 0, 0, 6.29); hx.fill();
+      hline(cx - 6, baseY, cx - rad(), HH * 0.52, 0.10, 1);
+      hline(cx + 6, baseY, cx + rad(), HH * 0.52, 0.10, 1);
+      var ns = []; for (var i = 0; i < 5; i++) ns.push(nodeAt(i, rot));
+      // receipt bus (ring edges)
+      for (var e = 0; e < 5; e++) { var a = ns[e], b = ns[(e + 1) % 5]; hline(a.x, a.y, b.x, b.y, 0.16 + 0.24 * ((a.d + b.d) / 2), 1.2); }
+      // one signed receipt traveling the bus
+      var per = reduce ? 0.5 : (ht * 0.004) % 1, seg = per * 5, si = Math.floor(seg), f = seg - si;
+      var pa = ns[si % 5], pb = ns[(si + 1) % 5], px = pa.x + (pb.x - pa.x) * f, py = pa.y + (pb.y - pa.y) * f;
+      var pg = hx.createRadialGradient(px, py, 0, px, py, 26);
+      pg.addColorStop(0, "rgba(220,255,245,0.95)"); pg.addColorStop(1, "rgba(58,244,200,0)");
+      hx.fillStyle = pg; hx.beginPath(); hx.arc(px, py, 26, 0, 6.29); hx.fill();
+      // organ nodes, depth-sorted
+      ns.map(function (n, i) { return { n: n, i: i }; }).sort(function (A, B) { return A.n.d - B.n.d; }).forEach(function (o) {
+        var n = o.n, r = 2.5 + 3.5 * n.d, al = 0.35 + 0.6 * n.d, gr = 22 * n.d + 8;
+        var g = hx.createRadialGradient(n.x, n.y, 0, n.x, n.y, gr);
+        g.addColorStop(0, "rgba(58,244,200," + (al * 0.5) + ")"); g.addColorStop(1, "rgba(58,244,200,0)");
+        hx.fillStyle = g; hx.beginPath(); hx.arc(n.x, n.y, gr, 0, 6.29); hx.fill();
+        hx.fillStyle = "rgba(224,255,246," + al + ")"; hx.beginPath(); hx.arc(n.x, n.y, r, 0, 6.29); hx.fill();
+        if (n.d > 0.55) {
+          hx.font = "10px 'IBM Plex Mono',ui-monospace,monospace"; hx.textAlign = "center";
+          hx.fillStyle = "rgba(174,220,210," + (al * 0.9) + ")"; hx.fillText(LABELS[o.i], n.x, n.y - 12);
+        }
+      });
+      ht++;
+      if (!reduce) requestAnimationFrame(frame);
+    }
+    frame();
   }
 
   /* ---------- verifiable DSSE receipts (WebCrypto, ECDSA P-256) ---------- */
@@ -253,8 +373,22 @@
       a: "killinchu is our counter-UAS application at a-11-oy.com/killinchu \u2014 16 operational views with sensor-fusion, 3-of-4 BFT agreement, a DSSE verifier and PQC. Each interdiction produces its own signed receipt." },
     { q: /immune|matrix|hugging/i,
       a: "IMMUNE is our Verifiable-AI Defense Matrix: an append-only SHA-256 receipt chain (YAWAR) with SENTRA/GATE admission and HUKLLA tripwires. It runs live as a Hugging Face Space." },
-    { q: /portfolio|product|build|what.*do|company|szl/i,
-      a: "SZL Holdings builds the proof layer beneath consequential AI \u2014 a11oy (the orchestrator), killinchu (counter-UAS), IMMUNE (defense matrix), szl-router (sovereign inference), khipu-consensus (multi-party witnessed AI) and lutar-lean (machine-checked \u039b). One doctrine, one signing primitive." },
+    { q: /portfolio|ecosystem|product|repos?|company|what.*(do|make)|szl/i,
+      a: "SZL Holdings builds the proof layer beneath consequential AI, across the whole szl-holdings org grouped by job: flagship apps (a11oy, killinchu, IMMUNE, yarqa, khipu-sda-core); the signing substrate (szl-receipt, khipu-consensus, szl-mesh, szl-lake, szl-trust); sovereign inference & metering (szl-router, governed-inference-meter, szl-energy-attest, szl-lambda-gate, szl-governed-norm); formal methods & research (lutar-lean, lean-kernel, szl-papers, anatomy); and platform & tooling (platform, hatun-mcp, ouroboros, vsp-otel, developers, docs-site, szl-build-env). One doctrine, one signing primitive." },
+    { q: /standard|slsa|in.?toto|sigstore|cosign|supply.?chain|interoper|walled/i,
+      a: "SZL is built on open supply-chain attestation standards, not a walled garden: SLSA for provenance policy, in-toto for the attestation format (our receipts are in-toto Statements), and sigstore / cosign / DSSE for signing and transparency. szl-receipt is the one primitive underneath \u2014 so any cosign-compatible verifier can check our receipts with no SZL software installed." },
+    { q: /anatomy|organ|cortex|\bgate\b|\bbus\b|egress|nervous/i,
+      a: "Every governed inference flows through five organs: the reasoning cortex (sovereign inference via szl-router), the trust gate (the \u039b aggregator + advisory policy gate), the receipt bus (the szl-receipt DSSE primitive, hash-chained), consensus (3-of-4 BFT multi-party witnessing via khipu-consensus), and egress (\u039b-signed OpenTelemetry via vsp-otel). The receipt bus runs through all of them \u2014 nothing moves without leaving a signed trace." },
+    { q: /energy|joule|nvml|meter|watt|carbon|power/i,
+      a: "governed-inference-meter and szl-energy-attest record MEASURED-NVML joules and tokens/joule per inference, hash-chained and signable \u2014 and report an honest UNAVAILABLE null when NVML is unset. We never fabricate a joule." },
+    { q: /mesh|crdt|air.?gap|replicat|offline/i,
+      a: "szl-mesh is a doctrine-pinned CRDT mesh over BFT wiring with a 3-of-4 Khipu quorum \u2014 air-gap-friendly replication that never loses the receipt chain, even offline." },
+    { q: /mcp|tool|integrat|cursor|claude|developer|platform|build/i,
+      a: "Build on SZL via the platform monorepo and hatun-mcp \u2014 a doctrine-aware Model Context Protocol server exposing 16 governed tools (Yuyay-13 gate, Khipu receipts, DSSE-signed) over streamable HTTP + SSE, usable from Claude or Cursor. See the developers hub and docs-site, and stand up the whole 5-organ stack locally in under ten minutes with szl-build-env." },
+    { q: /regulat|eu ai act|compliance|audit|nist|record.?keep|\blaw\b/i,
+      a: "When the EU AI Act's high-risk obligations \u2014 logging, transparency, record-keeping \u2014 become enforceable on Aug 2, 2026, a signed, replayable receipt is exactly that record-keeping infrastructure. Verifiable AI has moved from research to production, and SZL's substrate is built for it." },
+    { q: /frontier|confidential|\btee\b|enclave|roadmap|future|next/i,
+      a: "The frontier we track: confidential computing / TEE attestation (H100/H200, TDX) is becoming the enterprise default for inference, and formal methods are going mainstream. SZL is sovereign-first today; hardware-attested inference is on the roadmap \u2014 stated honestly, not claimed as shipped." },
     { q: /consensus|khipu|bft|witness/i,
       a: "khipu-consensus is 3-of-4 BFT, multi-party-witnessed agreement: every witness cosigns an action hash with its own ECDSA P-256 key over DSSE. No single node decides alone \u2014 the category we call multi-party-witnessed AI." },
     { q: /stephen|lutar|founder|who/i,
