@@ -223,6 +223,10 @@ code{font-family:var(--mono);color:var(--teal)}
 .msg .receipt-chip.bad{color:#ff9a9a;border-color:#5a2a2a;background:rgba(255,120,120,.06)}
 .msg .receipt-env{display:none;margin-top:8px;padding:12px 13px;border-radius:9px;border:1px solid var(--border);background:var(--void-2);color:var(--muted);font-family:var(--mono);font-size:11px;line-height:1.55;white-space:pre-wrap;word-break:break-word;max-height:300px;overflow:auto}
 .msg .receipt-env.show{display:block}
+.msg .receipt-sources{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:8px;font-family:var(--mono);font-size:11px}
+.msg .receipt-sources .src-label{color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-right:2px}
+.msg .receipt-sources .src-link{display:inline-flex;align-items:center;padding:2px 9px;border-radius:999px;border:1px solid var(--teal-dim);background:var(--teal-soft);color:var(--teal);text-decoration:none;transition:border-color .2s,background .2s}
+.msg .receipt-sources .src-link:hover{border-color:var(--teal);background:rgba(58,244,200,.18)}
 .receipt-badge.bad{background:#3a1d1d!important;color:#ff9a9a!important;box-shadow:none!important}
 .receipt-badge.muted{background:var(--panel-2)!important;color:var(--muted)!important;box-shadow:none!important}
 
