@@ -6,14 +6,48 @@
   <title>SZL Holdings — Proof infrastructure for consequential AI</title>
   <meta name="description" content="SZL Holdings builds the proof layer beneath consequential AI: sovereign inference, DSSE-signed receipts, and machine-checked formal methods. Honest by design." />
   <meta name="theme-color" content="#080C14" />
+  <meta name="author" content="SZL Holdings" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://szl-holdings.github.io/" />
   <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAzMiAzMic+PHJlY3Qgd2lkdGg9JzMyJyBoZWlnaHQ9JzMyJyByeD0nNycgZmlsbD0nIzA4MEMxNCcvPjxyZWN0IHg9JzYnIHk9JzYnIHdpZHRoPScyMCcgaGVpZ2h0PScyMCcgcng9JzUnIGZpbGw9JyMzQUY0QzgnLz48cmVjdCB4PScxMScgeT0nMTEnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcgcng9JzInIGZpbGw9JyMwODBDMTQnLz48L3N2Zz4=" />
   <meta property="og:title" content="SZL Holdings — Proof infrastructure for consequential AI" />
   <meta property="og:description" content="Sovereign inference. DSSE-signed receipts. Machine-checked in Lean 4. receipts.in ≡ receipts.out." />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="SZL Holdings" />
+  <meta property="og:url" content="https://szl-holdings.github.io/" />
+  <meta property="og:image" content="https://szl-holdings.github.io/assets/hero.png" />
+  <meta property="og:image:alt" content="SZL Holdings — cryptographic proof infrastructure lattice" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="SZL Holdings — Proof infrastructure for consequential AI" />
+  <meta name="twitter:description" content="Sovereign inference. DSSE-signed receipts. Machine-checked in Lean 4. receipts.in ≡ receipts.out." />
+  <meta name="twitter:image" content="https://szl-holdings.github.io/assets/hero.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://szl-holdings.github.io/#org",
+        "name": "SZL Holdings",
+        "url": "https://szl-holdings.github.io/",
+        "description": "Cryptographic proof infrastructure for consequential AI decisions — sovereign inference, DSSE-signed receipts, and machine-checked formal methods.",
+        "founder": { "@type": "Person", "name": "Stephen Lutar" },
+        "sameAs": ["https://github.com/szl-holdings", "https://a-11-oy.com"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://szl-holdings.github.io/#site",
+        "url": "https://szl-holdings.github.io/",
+        "name": "SZL Holdings",
+        "publisher": { "@id": "https://szl-holdings.github.io/#org" }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
@@ -245,6 +279,12 @@
           <pre class="receipt-body" id="receiptBody"></pre>
         </figure>
       </div>
+      <div class="verify-strip reveal">
+        <span class="verify-lead">Verify it yourself — no SZL software required:</span>
+        <a class="verify-link" href="https://alloyszlholdings.com/szl-concierge/pubkey" target="_blank" rel="noopener">public key (SPKI)</a>
+        <a class="verify-link" href="https://alloyszlholdings.com/szl-concierge/kb" target="_blank" rel="noopener">retrieval corpus</a>
+        <a class="verify-link" href="https://github.com/szl-holdings/szl-receipt" target="_blank" rel="noopener">szl-receipt source</a>
+      </div>
     </section>
 
     <!-- CONCIERGE -->
@@ -259,6 +299,13 @@
       </div>
       <div class="concierge reveal">
         <div class="chat" id="chat" aria-live="polite"></div>
+        <div class="chat-suggest" id="chatSuggest" aria-label="Suggested questions">
+          <button type="button" class="suggest" data-q="What does a szl-receipt guarantee?">What does a szl-receipt guarantee?</button>
+          <button type="button" class="suggest" data-q="What is killinchu?">What is killinchu?</button>
+          <button type="button" class="suggest" data-q="How does khipu-consensus work?">How does khipu-consensus work?</button>
+          <button type="button" class="suggest" data-q="Is Λ-uniqueness proven?">Is Λ-uniqueness proven?</button>
+          <button type="button" class="suggest" data-q="What runs the sovereign inference?">What runs the sovereign inference?</button>
+        </div>
         <form class="chat-form" id="chatForm" autocomplete="off">
           <input id="chatInput" type="text" placeholder="Ask about SZL Holdings, receipts, or the doctrine…" aria-label="Message the sovereign concierge" />
           <button class="btn btn-primary" type="submit" id="chatSend">Send</button>
