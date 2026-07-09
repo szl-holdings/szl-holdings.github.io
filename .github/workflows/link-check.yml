@@ -1,0 +1,95 @@
+name: Link & Asset Check
+
+# Minimal, dependency-free guard for a static GitHub Pages site: verify the
+# committed HTML parses and that every local link / asset (including the Open
+# Graph image referenced in <meta>) resolves before it is published.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  link-check:
+    name: Validate HTML + local links/assets
+    runs-on: ubuntu-latest
+    steps:
+      - name: Harden runner
+        uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
+        with:
+          egress-policy: audit
+
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+
+      - name: Check HTML parses + local links/assets resolve
+        run: |
+          python3 - <<'PY'
+          import html.parser, pathlib, sys, urllib.parse
+          import xml.etree.ElementTree as ET
+
+          root = pathlib.Path(".")
+          same_origin = {"szl-holdings.github.io", "holdings.a-11-oy.com"}
+          errors = []
+
+          class Extractor(html.parser.HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.refs = []
+                  self.anchors = set()
+
+              def handle_starttag(self, tag, attrs):
+                  d = dict(attrs)
+                  if d.get("id"):
+                      self.anchors.add("#" + d["id"])
+                  for key in ("href", "src"):
+                      if d.get(key):
+                          self.refs.append(d[key])
+                  # og:image / twitter:image live in <meta content=...>
+                  ident = (d.get("property", "") + d.get("name", ""))
+                  if d.get("content") and ident.endswith("image"):
+                      self.refs.append(d["content"])
+
+          def is_external(u):
+              p = urllib.parse.urlparse(u)
+              return p.scheme in ("http", "https") and p.netloc not in same_origin
+
+          for htmlfile in sorted(root.glob("*.html")):
+              ex = Extractor()
+              ex.feed(htmlfile.read_text(encoding="utf-8"))
+              for ref in ex.refs:
+                  if not ref or ref.startswith(("data:", "mailto:", "tel:", "javascript:")):
+                      continue
+                  if is_external(ref):
+                      continue
+                  p = urllib.parse.urlparse(ref)
+                  if p.scheme in ("http", "https"):
+                      path = p.path.lstrip("/")
+                      if path and not (root / path).exists():
+                          errors.append(f"{htmlfile}: same-origin ref not found -> {ref}")
+                      continue
+                  if ref.startswith("#"):
+                      if ref != "#" and ref not in ex.anchors:
+                          errors.append(f"{htmlfile}: in-page anchor has no target -> {ref}")
+                      continue
+                  local = p.path
+                  if local and not (htmlfile.parent / local).exists():
+                      errors.append(f"{htmlfile}: local file not found -> {ref}")
+
+          if (root / "sitemap.xml").exists():
+              try:
+                  ET.parse(root / "sitemap.xml")
+              except ET.ParseError as e:
+                  errors.append(f"sitemap.xml is not valid XML: {e}")
+
+          if errors:
+              print("Link/asset check FAILED:")
+              for e in errors:
+                  print(" -", e)
+              sys.exit(1)
+          print("OK: HTML parses and all local links/assets resolve.")
+          PY
