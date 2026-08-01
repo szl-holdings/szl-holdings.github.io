@@ -36,7 +36,7 @@
         "url": "https://szl-holdings.github.io/",
         "description": "Cryptographic proof infrastructure for consequential AI decisions — sovereign inference, DSSE-signed receipts, and machine-checked formal methods.",
         "founder": { "@type": "Person", "name": "Stephen Lutar" },
-        "sameAs": ["https://github.com/szl-holdings", "https://a-11-oy.com"]
+        "sameAs": ["https://github.com/szl-holdings", "https://a-11-oy.com", "https://a11oy.net", "https://huggingface.co/SZLHOLDINGS"]
       },
       {
         "@type": "WebSite",
@@ -50,27 +50,28 @@
   </script>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <div class="grain" aria-hidden="true"></div>
 
   <header class="nav" id="nav">
-    <a class="brand" href="#top" aria-label="SZL Holdings home">
+    <a class="brand" href="#main-content" aria-label="SZL Holdings home">
       <span class="brand-mark" aria-hidden="true"></span>
       <span class="brand-text">SZL<span class="brand-dim">HOLDINGS</span></span>
     </a>
-    <nav class="nav-links" aria-label="Primary">
-      <a href="#thesis">Thesis</a>
-      <a href="#ecosystem">Ecosystem</a>
-      <a href="#anatomy">Anatomy</a>
-      <a href="#standards">Standards</a>
-      <a href="#proof">Proof</a>
-      <a class="nav-cta" href="#concierge">Sovereign brain</a>
+    <nav class="nav-links" id="primaryNavigation" aria-label="Primary navigation">
+      <a href="#thesis">Why SZL</a>
+      <a href="#front-door">Surfaces</a>
+      <a href="#ecosystem">Portfolio</a>
+      <a href="#anatomy">Architecture</a>
+      <a href="#proof">Evidence</a>
+      <a class="nav-cta" href="https://github.com/szl-holdings/docs-site" target="_blank" rel="noopener">Developer docs</a>
     </nav>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
-      <span></span><span></span><span></span>
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Open navigation" aria-controls="primaryNavigation" aria-expanded="false">
+      <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
     </button>
   </header>
 
-  <main id="top">
+  <main id="main-content" tabindex="-1">
     <!-- HERO -->
     <section class="hero" id="hero">
       <canvas class="hero-grid" id="heroGrid" aria-hidden="true"></canvas>
@@ -89,7 +90,8 @@
         <p class="hero-eq reveal"><code>receipts.in&nbsp;≡&nbsp;receipts.out</code></p>
         <div class="hero-cta reveal">
           <a class="btn btn-primary" href="https://a-11-oy.com" target="_blank" rel="noopener">Explore a11oy →</a>
-          <a class="btn btn-ghost" href="#concierge">Talk to the sovereign brain</a>
+          <a class="btn btn-ghost" href="https://a11oy.net" target="_blank" rel="noopener">Inspect evidence</a>
+          <a class="btn btn-text" href="https://github.com/szl-holdings/docs-site" target="_blank" rel="noopener">Build with SZL</a>
         </div>
         <ul class="hero-stats reveal" aria-label="Key facts">
           <li><b>749</b><span>Lean 4 declarations</span></li>
@@ -103,15 +105,83 @@
       </a>
     </section>
 
+    <!-- FRONT DOOR -->
+    <section class="section front-door" id="front-door" aria-labelledby="front-door-title">
+      <div class="front-door-head reveal">
+        <div>
+          <p class="kicker">Choose the right surface</p>
+          <h2 id="front-door-title">Product, evidence, and source stay distinct.</h2>
+        </div>
+        <p class="lede">
+          A public URL proves where a surface is published, not what is operational behind it.
+          Follow the labels at each destination for its current evidence and runtime boundary.
+        </p>
+      </div>
+
+      <div class="surface-grid" aria-label="SZL public surfaces">
+        <a class="surface-card reveal" href="https://a-11-oy.com" target="_blank" rel="noopener">
+          <span class="surface-label">Product</span>
+          <strong>a-11-oy.com</strong>
+          <span>Governed-inference product interface. Inspect each runtime claim at its source.</span>
+          <b aria-hidden="true">Open product &rarr;</b>
+        </a>
+        <a class="surface-card reveal" href="https://a11oy.net" target="_blank" rel="noopener">
+          <span class="surface-label">Evidence</span>
+          <strong>a11oy.net</strong>
+          <span>Independent index for receipts, assurance material, and public evidence artifacts.</span>
+          <b aria-hidden="true">Inspect evidence &rarr;</b>
+        </a>
+        <a class="surface-card reveal" href="https://github.com/szl-holdings" target="_blank" rel="noopener">
+          <span class="surface-label">Source</span>
+          <strong>GitHub</strong>
+          <span>Versioned source, reviews, release history, and CI records across the organization.</span>
+          <b aria-hidden="true">Browse source &rarr;</b>
+        </a>
+        <a class="surface-card reveal" href="https://huggingface.co/SZLHOLDINGS" target="_blank" rel="noopener">
+          <span class="surface-label">Public registry</span>
+          <strong>Hugging Face</strong>
+          <span>Models, datasets, collections, and Spaces. A listing does not establish capability.</span>
+          <b aria-hidden="true">Open registry &rarr;</b>
+        </a>
+        <a class="surface-card reveal" href="https://szlholdings-killinchu.hf.space/elite" target="_blank" rel="noopener">
+          <span class="surface-label">Defense surface</span>
+          <strong>Killinchu</strong>
+          <span>Public counter-UAS interface with live read feeds and simulated effectors labeled separately; human authority remains explicit.</span>
+          <b aria-hidden="true">Open Killinchu &rarr;</b>
+        </a>
+        <a class="surface-card reveal" href="https://github.com/szl-holdings/docs-site" target="_blank" rel="noopener">
+          <span class="surface-label">Developer docs</span>
+          <strong>Build with SZL</strong>
+          <span>Architecture, API, integration, and operator references for developers.</span>
+          <b aria-hidden="true">Read the docs &rarr;</b>
+        </a>
+      </div>
+
+      <div class="status-key reveal" aria-labelledby="status-key-title">
+        <div class="status-key-intro">
+          <p class="kicker">Evidence vocabulary</p>
+          <h3 id="status-key-title">Read the label before the claim.</h3>
+        </div>
+        <dl>
+          <div><dt>MEASURED</dt><dd>Captured from named instrumentation.</dd></div>
+          <div><dt>REPORTED</dt><dd>Supplied by a source, not independently measured here.</dd></div>
+          <div><dt>MODELED</dt><dd>Produced by a model or scenario, not observed deployment behavior.</dd></div>
+          <div><dt>UNAVAILABLE</dt><dd>Required evidence is absent and represented as such.</dd></div>
+          <div><dt>UNSIGNED</dt><dd>Content exists without an approved signature; it is not verified.</dd></div>
+          <div><dt>CONJECTURE</dt><dd>Stated for investigation, not presented as a closed theorem.</dd></div>
+        </dl>
+      </div>
+    </section>
+
     <!-- THESIS -->
     <section class="section" id="thesis">
       <div class="section-head reveal">
         <p class="kicker">The thesis</p>
         <h2>Proof, not promises.</h2>
         <p class="lede">
-          Most AI systems ask you to trust them. Ours ask you to <em>verify</em> them. Every
-          consequential decision leaves a signed, replayable trail — from the model that produced
-          it to the theorem that governs it.
+          Most AI systems ask you to trust them. SZL surfaces are designed to expose what was
+          observed, what was signed, and what remains unavailable. A receipt is evidence only when
+          its bytes, key, and source binding verify.
         </p>
       </div>
       <div class="pillars">
@@ -119,17 +189,17 @@
           <span class="pillar-no">01</span>
           <h3>Sovereign inference</h3>
           <p>
-            Runs on infrastructure you own. Paid providers stay unarmed — an explicit, honest
-            fallback, never the default. Your reasoning, your keys, your bill.
+            Supports owner-controlled inference paths. Each product surface reports the runtime it
+            actually used; this front door does not infer sovereignty from a URL.
           </p>
         </article>
         <article class="pillar reveal">
           <span class="pillar-no">02</span>
           <h3>Signed receipts</h3>
           <p>
-            Every action emits a DSSE / ECDSA&nbsp;P-256 receipt — cosign-compatible, hash-chained,
-            and <span class="hl">UNSIGNED-honest</span> when a key is absent. One signing primitive,
-            shared by every component.
+            Receipt-aware components can emit DSSE / ECDSA&nbsp;P-256 evidence. Missing keys or
+            unverifiable signatures remain <span class="hl">UNSIGNED</span> or
+            <span class="hl">UNAVAILABLE</span>; they never become verified by presentation.
           </p>
         </article>
         <article class="pillar reveal">
@@ -145,8 +215,8 @@
           <span class="pillar-no">04</span>
           <h3>Multi-party witnessed</h3>
           <p>
-            A new category: 3-of-4 BFT agreement where each witness cosigns an action hash with its
-            own P-256 key over DSSE. No single node decides alone.
+            Khipu contracts model 3-of-4 witnessed agreement with independently signed action
+            hashes. Runtime use and quorum completion must be proved by the consuming surface.
           </p>
         </article>
       </div>
@@ -158,9 +228,9 @@
         <p class="kicker">The ecosystem</p>
         <h2>One doctrine. Many organs.</h2>
         <p class="lede">
-          A family of clean-room systems across the <span class="hl">szl-holdings</span> org, sharing a
-          single signing primitive and a single doctrine — <span class="hl">v11 LOCKED</span>. Grouped by
-          the job each does. Every one is real; every one emits receipts.
+          A family of systems across <span class="hl">szl-holdings</span>, grouped by the job each
+          does. Shared contracts do not erase distinct trust roots, deployment states, or evidence
+          boundaries. A public link does not by itself establish runtime readiness.
         </p>
       </div>
       <div class="eco" id="ecosystemGroups"><!-- groups injected by app.js --></div>
@@ -173,21 +243,21 @@
         <p class="kicker">The anatomy</p>
         <h2>Five organs, one nervous system.</h2>
         <p class="lede">
-          Every governed inference flows through the same five organs. The
-          <span class="hl">receipt bus</span> runs through all of them — nothing moves without leaving a
-          signed trace.
+          The five-organ model is an architecture map: reasoning, policy, receipts, witnesses, and
+          egress. A deployed surface may implement only part of it; its own evidence must show which
+          stages ran and whether a signature verified.
         </p>
       </div>
       <div class="holo reveal" aria-hidden="true">
         <canvas id="holoCanvas"></canvas>
         <span class="holo-scan"></span>
-        <span class="holo-cap">live projection · one receipt routing through five organs</span>
+        <span class="holo-cap">architecture projection · five governed stages</span>
       </div>
       <ol class="organs" aria-label="The five organs of a governed inference">
         <li class="organ reveal" data-d="1">
           <span class="organ-no">01</span>
           <h3>Reasoning cortex</h3>
-          <p>Sovereign inference through <code>szl-router</code> — your models, your keys, honest provenance on every token.</p>
+          <p><code>szl-router</code> can expose model and provider provenance; each response must carry its own measured runtime state.</p>
         </li>
         <li class="organ reveal" data-d="2">
           <span class="organ-no">02</span>
@@ -202,12 +272,12 @@
         <li class="organ reveal" data-d="4">
           <span class="organ-no">04</span>
           <h3>Consensus</h3>
-          <p>3-of-4 BFT multi-party witnessing via <code>khipu-consensus</code> — each witness cosigns with its own P-256 key. No node decides alone.</p>
+          <p><code>khipu-consensus</code> defines a 3-of-4 witness contract. A quorum is claimed only when its signed witness set is present.</p>
         </li>
         <li class="organ reveal" data-d="4">
           <span class="organ-no">05</span>
           <h3>Egress</h3>
-          <p>Λ-signed OpenTelemetry audit fibers via <code>vsp-otel</code> — the trail leaves the system already signed.</p>
+          <p><code>vsp-otel</code> defines auditable egress records; signed status depends on the emitted record and configured trust root.</p>
         </li>
       </ol>
       <a class="btn btn-ghost anatomy-cta reveal" href="https://github.com/szl-holdings/anatomy" target="_blank" rel="noopener">Open the living anatomy →</a>
@@ -219,16 +289,15 @@
         <p class="kicker">The frontier</p>
         <h2>Open standards, not a walled garden.</h2>
         <p class="lede">
-          Verifiable AI has moved from research to production. SZL speaks the same supply-chain
-          attestation stack the industry is standardizing on — so any cosign-compatible verifier can
-          check our receipts, with no SZL software installed.
+          SZL uses open attestation formats where each component's contract says so. Verification
+          depends on the exact envelope, algorithm, and public key—not on a brand label or file name.
         </p>
       </div>
       <div class="stack reveal" aria-label="Where SZL sits in the attestation stack">
         <div class="stack-layer"><span class="stack-k">SLSA</span><span class="stack-v">Provenance policy — <b>what</b> guarantees must hold.</span></div>
-        <div class="stack-layer"><span class="stack-k">in-toto</span><span class="stack-v">Attestation format — our receipts are in-toto Statements.</span></div>
-        <div class="stack-layer"><span class="stack-k">sigstore · cosign · DSSE</span><span class="stack-v">Signing &amp; transparency — ECDSA over DSSE PAE.</span></div>
-        <div class="stack-layer own"><span class="stack-k">szl-receipt</span><span class="stack-v">The one primitive every SZL organ shares — UNSIGNED-honest fallback.</span></div>
+        <div class="stack-layer"><span class="stack-k">in-toto</span><span class="stack-v">Statement format used by applicable provenance records.</span></div>
+        <div class="stack-layer"><span class="stack-k">sigstore · cosign · DSSE</span><span class="stack-v">Compatible verification families; each artifact declares its exact contract.</span></div>
+        <div class="stack-layer own"><span class="stack-k">szl-receipt</span><span class="stack-v">Shared receipt library with explicit VERIFIED, UNSIGNED, and UNAVAILABLE states.</span></div>
       </div>
       <div class="frontier">
         <article class="frontier-card reveal" data-d="1">
@@ -257,11 +326,11 @@
       <div class="proof-wrap">
         <div class="section-head reveal" style="text-align:left;max-width:520px;margin:0">
           <p class="kicker">Verify, don't trust</p>
-          <h2>Every answer ships a receipt.</h2>
+          <h2>Verify the receipt that actually arrived.</h2>
           <p class="lede">
-            This is what the substrate emits for a single governed inference: a signed, hash-chained
-            record you can verify independently with any cosign-compatible verifier — no SZL software
-            required.
+            This panel requests a live envelope and verifies it in the browser. If the service or
+            public key is unavailable, it shows an explicitly illustrative sample instead of a
+            success state.
           </p>
           <ul class="proof-facts">
             <li><b>749</b> declarations · <b>14</b> axioms · <b>163</b> tracked sorries</li>
@@ -270,19 +339,18 @@
             <li>SLSA L1 honest · L2 roadmap</li>
           </ul>
         </div>
-        <figure class="receipt reveal" aria-label="Example signed receipt">
+        <figure class="receipt reveal" aria-label="Receipt verification status">
           <figcaption class="receipt-bar">
             <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
             <span class="receipt-title">szl-receipt · DSSE envelope</span>
-            <span class="receipt-badge" id="verifyBadge">VERIFIED</span>
+            <span class="receipt-badge muted" id="verifyBadge">CHECKING</span>
           </figcaption>
           <pre class="receipt-body" id="receiptBody"></pre>
         </figure>
       </div>
       <div class="verify-strip reveal">
-        <span class="verify-lead">Verify it yourself — no SZL software required:</span>
-        <a class="verify-link" href="https://alloyszlholdings.com/szl-concierge/pubkey" target="_blank" rel="noopener">public key (SPKI)</a>
-        <a class="verify-link" href="https://alloyszlholdings.com/szl-concierge/kb" target="_blank" rel="noopener">retrieval corpus</a>
+        <span class="verify-lead">Inspect the verification path:</span>
+        <a class="verify-link" href="https://github.com/szl-holdings/szl-holdings.github.io/blob/main/app.js" target="_blank" rel="noopener">browser verifier source</a>
         <a class="verify-link" href="https://github.com/szl-holdings/szl-receipt" target="_blank" rel="noopener">szl-receipt source</a>
       </div>
     </section>
@@ -293,8 +361,9 @@
         <p class="kicker">Use the brain</p>
         <h2>Ask the sovereign concierge.</h2>
         <p class="lede">
-          Powered by <code>szl-router</code> — sovereign-first, honest provenance. Ask about the
-          doctrine, the portfolio, or the proof standard. Each reply carries its own provenance line.
+          Live replies are requested from <code>szl-router</code> and display returned provenance.
+          When the endpoint is unavailable, the interface labels its bounded local answer as an
+          offline sample.
         </p>
       </div>
       <div class="concierge reveal">
@@ -347,14 +416,14 @@
       </div>
       <p class="footer-tag">Cryptographic proof infrastructure for consequential AI decisions. Honest by design.</p>
       <nav class="footer-links" aria-label="Footer">
-        <a href="#ecosystem">Ecosystem</a>
-        <a href="#anatomy">Anatomy</a>
-        <a href="#standards">Standards</a>
-        <a href="https://a-11-oy.com" target="_blank" rel="noopener">a11oy</a>
-        <a href="https://github.com/szl-holdings" target="_blank" rel="noopener">GitHub</a>
-        <a href="#concierge">Sovereign brain</a>
+        <a href="https://a-11-oy.com" target="_blank" rel="noopener">Product</a>
+        <a href="https://a11oy.net" target="_blank" rel="noopener">Evidence</a>
+        <a href="https://github.com/szl-holdings" target="_blank" rel="noopener">Source</a>
+        <a href="https://huggingface.co/SZLHOLDINGS" target="_blank" rel="noopener">Hugging Face</a>
+        <a href="https://szlholdings-killinchu.hf.space/elite" target="_blank" rel="noopener">Killinchu</a>
+        <a href="https://github.com/szl-holdings/docs-site" target="_blank" rel="noopener">Developer docs</a>
       </nav>
-      <p class="footer-fine">© <span id="year"></span> SZL Holdings · Doctrine v11 LOCKED · Powered by the SZL sovereign router · SLSA L1 honest.</p>
+      <p class="footer-fine">© <span id="year"></span> SZL Holdings · Verify evidence at its named source.</p>
     </div>
   </footer>
 

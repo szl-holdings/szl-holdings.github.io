@@ -3,11 +3,17 @@
   "use strict";
 
   /* ---------- config ---------- */
-  // Sovereign concierge endpoint — szl-router public proxy (server-side token, CORS-locked).
-  // Reasoning runs on SZL-owned infrastructure; every reply carries honest provenance.
-  var ROUTER_ENDPOINT = "https://alloyszlholdings.com/szl-concierge/chat";
-  var PUBKEY_ENDPOINT = "https://alloyszlholdings.com/szl-concierge/pubkey";
+  // Runtime identity and provenance are accepted only from a bound response payload;
+  // neither is inferred from an endpoint URL.
+  // Live calls stay disabled while the published host lacks a CORS-enabled JSON route
+  // and independently pinned trust root. The UI serves labeled offline samples instead.
+  var ROUTER_ENDPOINT = "";
+  var PUBKEY_ENDPOINT = "";
   var PROOF_PROMPT = "In one sentence, what does a szl-receipt guarantee?";
+  // VERIFIED is disabled until an independently reviewed trust-root publication
+  // supplies both protected values. The configured endpoint currently does not.
+  var PINNED_RECEIPT_KEY_ID = "";
+  var PINNED_RECEIPT_SPKI_SHA256 = "";
 
   /* ---------- year ---------- */
   var y = document.getElementById("year");
@@ -17,34 +23,74 @@
   var nav = document.getElementById("nav");
   var toggle = document.getElementById("navToggle");
   var links = document.querySelector(".nav-links");
-  window.addEventListener("scroll", function () {
-    nav.classList.toggle("scrolled", window.scrollY > 24);
-  }, { passive: true });
-  if (toggle) {
+  if (nav) {
+    window.addEventListener("scroll", function () {
+      nav.classList.toggle("scrolled", window.scrollY > 24);
+    }, { passive: true });
+  }
+  if (toggle && links) {
+    var desktopNav = window.matchMedia("(min-width: 861px)");
+    var setMenu = function (open, returnFocus) {
+      var mobileOpen = open && !desktopNav.matches;
+      links.classList.toggle("open", mobileOpen);
+      toggle.classList.toggle("open", mobileOpen);
+      toggle.setAttribute("aria-expanded", mobileOpen ? "true" : "false");
+      toggle.setAttribute("aria-label", mobileOpen ? "Close navigation" : "Open navigation");
+      document.body.classList.toggle("menu-open", mobileOpen);
+      if (!mobileOpen && returnFocus) toggle.focus();
+      links.inert = !desktopNav.matches && !mobileOpen;
+      if (mobileOpen) links.removeAttribute("aria-hidden");
+      else if (!desktopNav.matches) links.setAttribute("aria-hidden", "true");
+      else links.removeAttribute("aria-hidden");
+    };
+
     toggle.addEventListener("click", function () {
-      var open = links.classList.toggle("open");
-      toggle.classList.toggle("open", open);
-      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      setMenu(toggle.getAttribute("aria-expanded") !== "true");
     });
     links.querySelectorAll("a").forEach(function (a) {
-      a.addEventListener("click", function () {
-        links.classList.remove("open");
-        toggle.classList.remove("open");
-        toggle.setAttribute("aria-expanded", "false");
-      });
+      a.addEventListener("click", function () { setMenu(false, true); });
     });
+    document.addEventListener("keydown", function (event) {
+      if (toggle.getAttribute("aria-expanded") !== "true") return;
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setMenu(false, true);
+        return;
+      }
+      if (event.key !== "Tab") return;
+      var menuLinks = Array.prototype.slice.call(links.querySelectorAll("a"));
+      var first = menuLinks[0];
+      var last = menuLinks[menuLinks.length - 1];
+      if (!event.shiftKey && document.activeElement === toggle) {
+        event.preventDefault();
+        first.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        toggle.focus();
+      } else if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        toggle.focus();
+      } else if (event.shiftKey && document.activeElement === toggle) {
+        event.preventDefault();
+        last.focus();
+      }
+    });
+    var resetMenu = function () { setMenu(false); };
+    if (desktopNav.addEventListener) desktopNav.addEventListener("change", resetMenu);
+    else desktopNav.addListener(resetMenu);
+    setMenu(false);
   }
 
   /* ---------- ecosystem (real szl-holdings repos, grouped by function) ---------- */
   var GH = "https://github.com/szl-holdings/";
   var ECOSYSTEM = [
     { g: "Flagship applications", no: "A",
-      note: "End-to-end products people actually operate — each emits a receipt per decision.",
+      note: "Product surfaces; runtime and receipt claims remain scoped to each interface's evidence labels.",
       items: [
         { name: "a11oy", lang: "Python", title: "The orchestrator", href: "https://a-11-oy.com",
           desc: "Full governed-inference application — Command Center, Five Superpowers, Observability, Mesh, Evidence, LLM Router. The signed-receipt substrate itself." },
-        { name: "killinchu", lang: "Python", title: "Counter-UAS", href: "https://a-11-oy.com/killinchu",
-          desc: "16-view counter-drone application: sensor-fusion, ROE, 3-of-4 BFT, DSSE verifier, PQC, geofence, swarm. A DSSE receipt per interdiction." },
+        { name: "killinchu", lang: "Python", title: "Counter-UAS", href: "https://szlholdings-killinchu.hf.space/elite",
+          desc: "Public counter-UAS interface. Live read feeds and simulated effectors are labeled separately, with human-on-the-loop authority explicit." },
         { name: "immune", lang: "TypeScript", title: "Verifiable-AI defense", href: "https://szlholdings-immune.hf.space",
           desc: "The IMMUNE Defense Matrix — append-only SHA-256 receipt chain (YAWAR), SENTRA/GATE admission, HUKLLA tripwires. Live on Hugging Face." },
         { name: "yarqa", lang: "Python", title: "Signed flow networks", href: GH + "yarqa",
@@ -235,6 +281,15 @@
   /* ---------- verifiable DSSE receipts (WebCrypto, ECDSA P-256) ---------- */
   function hex(n) { var s = "", c = "0123456789abcdef"; for (var i = 0; i < n; i++) s += c[Math.floor(Math.random() * 16)]; return s; }
   function b64bytes(b64) { var bin = atob(b64), n = bin.length, out = new Uint8Array(n); for (var i = 0; i < n; i++) out[i] = bin.charCodeAt(i); return out; }
+  function hexBytes(bytes) { return Array.prototype.map.call(new Uint8Array(bytes), function (b) { return b.toString(16).padStart(2, "0"); }).join(""); }
+  async function sha256Text(value) { return hexBytes(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(String(value)))); }
+  async function fetchBounded(url, options, timeoutMs) {
+    var controller = new AbortController();
+    var timer = setTimeout(function () { controller.abort(); }, timeoutMs);
+    try {
+      return await fetch(url, Object.assign({}, options || {}, { signal: controller.signal }));
+    } finally { clearTimeout(timer); }
+  }
   function paeBytes(type, bodyBytes) {
     var enc = new TextEncoder();
     var head = enc.encode("DSSEv1 " + enc.encode(type).length + " " + type + " " + bodyBytes.length + " ");
@@ -247,22 +302,38 @@
     if (_pubkey || _pubkeyTried) return _pubkey;
     _pubkeyTried = true;
     if (!(window.crypto && window.crypto.subtle && window.TextEncoder && window.TextDecoder)) return null;
+    if (!/^[0-9a-f]{16}$/i.test(PINNED_RECEIPT_KEY_ID) || !/^[0-9a-f]{64}$/i.test(PINNED_RECEIPT_SPKI_SHA256)) return null;
     try {
-      var meta = await (await fetch(PUBKEY_ENDPOINT)).json();
-      _pubkey = await crypto.subtle.importKey("spki", b64bytes(meta.spki_b64), { name: "ECDSA", namedCurve: "P-256" }, false, ["verify"]);
+      var response = await fetchBounded(PUBKEY_ENDPOINT, { headers: { "Accept": "application/json" } }, 6000);
+      if (!response.ok || !(response.headers.get("content-type") || "").toLowerCase().includes("application/json")) return null;
+      var meta = await response.json();
+      if (!meta || meta.keyid !== PINNED_RECEIPT_KEY_ID || typeof meta.spki_b64 !== "string") return null;
+      var spki = b64bytes(meta.spki_b64);
+      var fingerprint = hexBytes(await crypto.subtle.digest("SHA-256", spki));
+      if (fingerprint !== PINNED_RECEIPT_SPKI_SHA256.toLowerCase()) return null;
+      _pubkey = await crypto.subtle.importKey("spki", spki, { name: "ECDSA", namedCurve: "P-256" }, false, ["verify"]);
       return _pubkey;
     } catch (e) { return null; }
   }
-  // Verify a DSSE envelope entirely in the browser against szl-router's pinned P-256 key.
-  async function verifyReceipt(receipt) {
+  // Verify a DSSE envelope against the protected trust root and exact interaction.
+  async function verifyReceipt(receipt, interaction) {
     try {
+      if (!PINNED_RECEIPT_KEY_ID || !PINNED_RECEIPT_SPKI_SHA256) return { ok: false, reason: "no-trust-root" };
+      if (!receipt || receipt.payloadType !== "application/vnd.in-toto+json" || !Array.isArray(receipt.signatures) || receipt.signatures.length !== 1) return { ok: false, reason: "schema" };
+      if (!interaction || typeof interaction.request !== "string" || typeof interaction.reply !== "string") return { ok: false, reason: "interaction" };
+      var signature = receipt.signatures[0];
+      if (!signature || signature.keyid !== PINNED_RECEIPT_KEY_ID || typeof signature.sig !== "string") return { ok: false, reason: "key-binding" };
       var bodyBytes = b64bytes(receipt.payload);
       var payload = JSON.parse(new TextDecoder().decode(bodyBytes));
+      if (!payload || typeof payload.typ !== "string" || typeof payload.model !== "string" || payload.served_by !== "szl-router" || typeof payload.sovereign !== "boolean") return { ok: false, reason: "source-binding" };
+      var requestHash = await sha256Text(interaction.request);
+      var replyHash = await sha256Text(interaction.reply);
+      if (payload.message_sha256 !== requestHash || payload.reply_sha256 !== replyHash) return { ok: false, payload: payload, reason: "interaction-binding" };
       var key = await getPubkey();
       if (!key) return { ok: false, payload: payload, reason: "no-key" };
-      var sig = b64bytes(receipt.signatures[0].sig);
+      var sig = b64bytes(signature.sig);
       var ok = await crypto.subtle.verify({ name: "ECDSA", hash: "SHA-256" }, key, sig, paeBytes(receipt.payloadType, bodyBytes));
-      return { ok: ok, payload: payload, keyid: receipt.signatures[0].keyid || "" };
+      return { ok: ok, payload: payload, keyid: signature.keyid || "", reason: ok ? "verified" : "signature" };
     } catch (e) { return { ok: false, reason: "error" }; }
   }
 
@@ -309,9 +380,16 @@
   }
   var body = document.getElementById("receiptBody");
   var badge = document.getElementById("verifyBadge");
+  function showReceiptState(label, className) {
+    if (!badge) return;
+    badge.textContent = label;
+    badge.classList.add("show");
+    badge.classList.remove("bad", "muted");
+    if (className) badge.classList.add(className);
+  }
   function typeReceiptLines(lines, onDone) {
     if (!body) return;
-    body.innerHTML = ""; if (badge) badge.classList.remove("show");
+    body.innerHTML = "";
     var cursor = document.createElement("span"); cursor.className = "cursor";
     body.appendChild(cursor);
     var li = 0;
@@ -336,15 +414,21 @@
   }
   async function initProofReceipt() {
     if (!body) return;
+    showReceiptState("CHECKING", "muted");
+    if (!ROUTER_ENDPOINT || !PUBKEY_ENDPOINT || !PINNED_RECEIPT_KEY_ID || !PINNED_RECEIPT_SPKI_SHA256) {
+      body.innerHTML = '<span class="k">// live verifier unavailable; rendering an illustrative envelope\u2026</span>';
+      typeReceiptLines(RECEIPT_SAMPLE, function () { showReceiptState("ILLUSTRATIVE", "muted"); });
+      return;
+    }
     body.innerHTML = '<span class="k">// requesting a live signed receipt from szl-router\u2026</span>';
     var env = null, payload = null, verified = false, live = false;
     try {
-      var res = await fetch(ROUTER_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ message: PROOF_PROMPT }) });
+      var res = await fetchBounded(ROUTER_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify({ message: PROOF_PROMPT }) }, 8000);
       if (res.ok) {
         var d = await res.json();
-        if (d && d.provenance && d.provenance.receipt) {
+        if (d && typeof d.reply === "string" && d.provenance && d.provenance.receipt) {
           env = d.provenance.receipt;
-          var v = await verifyReceipt(env);
+          var v = await verifyReceipt(env, { request: PROOF_PROMPT, reply: d.reply });
           payload = v.payload; verified = !!v.ok; live = !!payload;
         }
       }
@@ -352,10 +436,9 @@
     var lines = live ? buildReceiptLines(env, payload) : RECEIPT_SAMPLE;
     typeReceiptLines(lines, function () {
       if (!badge) return;
-      badge.classList.add("show"); badge.classList.remove("bad", "muted");
-      if (live && verified) { badge.textContent = "VERIFIED"; }
-      else if (live) { badge.textContent = "UNVERIFIED"; badge.classList.add("bad"); }
-      else { badge.textContent = "ILLUSTRATIVE"; badge.classList.add("muted"); }
+      if (live && verified) showReceiptState("VERIFIED");
+      else if (live) showReceiptState("UNVERIFIED", "bad");
+      else showReceiptState("ILLUSTRATIVE", "muted");
     });
   }
   if (body) {
@@ -372,33 +455,33 @@
 
   var KB = [
     { q: /receipt|sign|dsse|ecdsa|verify/i,
-      a: "Every consequential action emits a DSSE envelope signed with ECDSA P-256 — cosign-compatible and hash-chained. You can verify it with any standard verifier; no SZL software required. The core invariant is receipts.in \u2261 receipts.out." },
+      a: "Receipt-aware components can emit DSSE evidence. Treat a receipt as VERIFIED only after its payload, signature, public key, and source binding validate; missing evidence remains UNSIGNED or UNAVAILABLE." },
     { q: /sovereign|router|brain|inference|model/i,
-      a: "The concierge runs on szl-router — our own OpenAI-compatible gateway. It is sovereign-first: reasoning runs on infrastructure we own, and paid providers stay unarmed unless explicitly enabled. Honest provenance on every reply." },
+      a: "Live concierge responses are requested from szl-router. This page reports the served_by and sovereign fields returned by that response and falls back to an explicitly labeled offline sample when the endpoint is unavailable." },
     { q: /lean|theorem|proof|conjecture|lambda|\u039b|math/i,
       a: "The governance aggregator \u039b is formalized in Lean 4 + Mathlib: 749 declarations, 14 axioms, 163 tracked sorries. We state \u039b-uniqueness as Conjecture 1 \u2014 not a closed theorem. Being honest about that distinction is the point (DOI 10.5281/zenodo.20434308)." },
     { q: /killinchu|drone|uas|defense|counter/i,
-      a: "killinchu is our counter-UAS application at a-11-oy.com/killinchu \u2014 16 operational views with sensor-fusion, 3-of-4 BFT agreement, a DSSE verifier and PQC. Each interdiction produces its own signed receipt." },
+      a: "killinchu is the public counter-UAS interface at szlholdings-killinchu.hf.space/elite. The surface labels live read feeds separately from simulated effectors and keeps human-on-the-loop authority explicit; inspect its current evidence labels before treating any control as operational." },
     { q: /immune|matrix|hugging/i,
       a: "IMMUNE is our Verifiable-AI Defense Matrix: an append-only SHA-256 receipt chain (YAWAR) with SENTRA/GATE admission and HUKLLA tripwires. It runs live as a Hugging Face Space." },
     { q: /portfolio|ecosystem|product|repos?|company|what.*(do|make)|szl/i,
-      a: "SZL Holdings builds the proof layer beneath consequential AI, across the whole szl-holdings org grouped by job: flagship apps (a11oy, killinchu, IMMUNE, yarqa, khipu-sda-core); the signing substrate (szl-receipt, khipu-consensus, szl-mesh, szl-lake, szl-trust); sovereign inference & metering (szl-router, governed-inference-meter, szl-energy-attest, szl-lambda-gate, szl-governed-norm); formal methods & research (lutar-lean, lean-kernel, szl-papers, anatomy); and platform & tooling (platform, hatun-mcp, ouroboros, vsp-otel, developers, docs-site, szl-build-env). One doctrine, one signing primitive." },
+      a: "SZL Holdings builds governed-AI products, receipt and policy libraries, formal-methods research, and developer tooling. Each repository and live surface keeps its own deployment, trust-root, and evidence state; the portfolio view does not collapse them into one runtime claim." },
     { q: /standard|slsa|in.?toto|sigstore|cosign|supply.?chain|interoper|walled/i,
-      a: "SZL is built on open supply-chain attestation standards, not a walled garden: SLSA for provenance policy, in-toto for the attestation format (our receipts are in-toto Statements), and sigstore / cosign / DSSE for signing and transparency. szl-receipt is the one primitive underneath \u2014 so any cosign-compatible verifier can check our receipts with no SZL software installed." },
+      a: "SZL components use open provenance and signing formats where their checked-in contracts declare them. Verify the exact envelope with its declared algorithm and public key; format compatibility alone does not prove origin or operational status." },
     { q: /anatomy|organ|cortex|\bgate\b|\bbus\b|egress|nervous/i,
-      a: "Every governed inference flows through five organs: the reasoning cortex (sovereign inference via szl-router), the trust gate (the \u039b aggregator + advisory policy gate), the receipt bus (the szl-receipt DSSE primitive, hash-chained), consensus (3-of-4 BFT multi-party witnessing via khipu-consensus), and egress (\u039b-signed OpenTelemetry via vsp-otel). The receipt bus runs through all of them \u2014 nothing moves without leaving a signed trace." },
+      a: "The five-organ diagram is an architecture model for reasoning, policy, receipt handling, witnesses, and egress. A live product must prove which stages executed and whether its evidence verified; the diagram itself is not runtime proof." },
     { q: /energy|joule|nvml|meter|watt|carbon|power/i,
       a: "governed-inference-meter and szl-energy-attest record MEASURED-NVML joules and tokens/joule per inference, hash-chained and signable \u2014 and report an honest UNAVAILABLE null when NVML is unset. We never fabricate a joule." },
     { q: /mesh|crdt|air.?gap|replicat|offline/i,
-      a: "szl-mesh is a doctrine-pinned CRDT mesh over BFT wiring with a 3-of-4 Khipu quorum \u2014 air-gap-friendly replication that never loses the receipt chain, even offline." },
+      a: "szl-mesh defines CRDT replication and Khipu witness contracts. Durability, quorum, and offline recovery are accepted only when the named deployment supplies corresponding evidence." },
     { q: /mcp|tool|integrat|cursor|claude|developer|platform|build/i,
-      a: "Build on SZL via the platform monorepo and hatun-mcp \u2014 a doctrine-aware Model Context Protocol server exposing 16 governed tools (Yuyay-13 gate, Khipu receipts, DSSE-signed) over streamable HTTP + SSE, usable from Claude or Cursor. See the developers hub and docs-site, and stand up the whole 5-organ stack locally in under ten minutes with szl-build-env." },
+      a: "Start with the docs-site and each repository's checked-in quickstart. MCP endpoints and tool inventories are live-state claims: discover them at the named endpoint, authenticate where required, and do not rely on a static tool count." },
     { q: /regulat|eu ai act|compliance|audit|nist|record.?keep|\blaw\b/i,
       a: "When the EU AI Act's high-risk obligations \u2014 logging, transparency, record-keeping \u2014 become enforceable on Aug 2, 2026, a signed, replayable receipt is exactly that record-keeping infrastructure. Verifiable AI has moved from research to production, and SZL's substrate is built for it." },
     { q: /frontier|confidential|\btee\b|enclave|roadmap|future|next/i,
       a: "The frontier we track: confidential computing / TEE attestation (H100/H200, TDX) is becoming the enterprise default for inference, and formal methods are going mainstream. SZL is sovereign-first today; hardware-attested inference is on the roadmap \u2014 stated honestly, not claimed as shipped." },
     { q: /consensus|khipu|bft|witness/i,
-      a: "khipu-consensus is 3-of-4 BFT, multi-party-witnessed agreement: every witness cosigns an action hash with its own ECDSA P-256 key over DSSE. No single node decides alone \u2014 the category we call multi-party-witnessed AI." },
+      a: "khipu-consensus defines a 3-of-4 witnessed-action contract. A completed quorum requires the corresponding independently signed witness set; absent signatures remain unavailable rather than inferred." },
     { q: /stephen|lutar|founder|who/i,
       a: "Stephen Lutar is Founder & CEO of SZL Holdings. His premise: if a decision matters, it should leave a receipt \u2014 and if a guarantee matters, it should be a theorem, or honestly labeled a conjecture." },
   ];
@@ -436,7 +519,7 @@
   var greeted = false;
   function greet() {
     if (greeted) return; greeted = true;
-    addMsg("bot", "I'm the SZL sovereign concierge. Ask me about the doctrine, the signed-receipt substrate, or any product in the portfolio.");
+    addMsg("bot", "Ask about the portfolio, evidence states, or developer routes. Live answers and offline samples are labeled separately.");
   }
   if (chat) {
     var cObs = new IntersectionObserver(function (es) {
@@ -445,7 +528,7 @@
     cObs.observe(chat);
   }
 
-  function renderReceipt(msgEl, receipt) {
+  function renderReceipt(msgEl, receipt, interaction) {
     if (!receipt || !receipt.signatures || !receipt.signatures[0]) return;
     var sig = receipt.signatures[0];
     var chip = document.createElement("button");
@@ -455,13 +538,13 @@
     env.className = "receipt-env";
     msgEl.appendChild(chip); msgEl.appendChild(env);
     chip.addEventListener("click", function () { env.classList.toggle("show"); });
-    verifyReceipt(receipt).then(function (r) {
+    verifyReceipt(receipt, interaction).then(function (r) {
       if (r.ok) {
         chip.classList.add("ok");
         chip.innerHTML = '<span class="dot"></span> receipt verified \u00b7 ECDSA&nbsp;P-256 \u00b7 key ' + esc(String(sig.keyid || "").slice(0, 8));
       } else {
         chip.classList.add("bad");
-        chip.innerHTML = '<span class="dot"></span> receipt ' + (r.reason === "no-key" ? "unchecked" : "unverified");
+        chip.innerHTML = '<span class="dot"></span> receipt ' + (r.reason === "no-key" || r.reason === "no-trust-root" ? "unchecked" : "unverified");
       }
       var pj = r.payload ? JSON.stringify(r.payload, null, 2) : "(payload unavailable)";
       env.textContent =
@@ -471,7 +554,7 @@
         "alg         : " + (sig.alg || "ecdsa-p256-sha256") + "\n" +
         "sig (P1363) : " + String(sig.sig || "").slice(0, 44) + "\u2026\n\n" +
         "payload (signed):\n" + pj + "\n\n" +
-        "verified in-browser via DSSE PAE + WebCrypto ECDSA-P256/SHA-256\nagainst szl-router's pinned public key.";
+        (r.ok ? "VERIFIED in-browser: protected key ID + SPKI fingerprint, DSSE PAE, source fields, and request/reply hashes all match." : "NOT VERIFIED: " + (r.reason || "unknown") + ".");
       // Citations rendered ONLY from the cryptographically-verified payload (never top-level provenance).
       if (r.ok && r.payload && Array.isArray(r.payload.sources) && r.payload.sources.length) {
         var src = document.createElement("div");
@@ -496,17 +579,17 @@
     var typing = typingMsg();
     if (ROUTER_ENDPOINT) {
       try {
-        var res = await fetch(ROUTER_ENDPOINT, {
+        var res = await fetchBounded(ROUTER_ENDPOINT, {
           method: "POST", headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ message: text, history: convo.slice() })
-        });
+        }, 10000);
         if (res.ok) {
           var data = await res.json();
           if (data && data.reply) {
             typing.remove();
             remember("user", text); remember("assistant", data.reply);
             var m = addMsg("bot", esc(data.reply).replace(/\n/g, "<br>"), provenance("live", data.provenance));
-            if (data.provenance && data.provenance.receipt) renderReceipt(m, data.provenance.receipt);
+            if (data.provenance && data.provenance.receipt) renderReceipt(m, data.provenance.receipt, { request: text, reply: data.reply });
             return;
           }
         }

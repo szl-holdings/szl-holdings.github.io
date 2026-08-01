@@ -93,3 +93,48 @@ jobs:
               sys.exit(1)
           print("OK: HTML parses and all local links/assets resolve.")
           PY
+
+      - name: Check public truth and accessibility contract
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          html = Path("index.html").read_text(encoding="utf-8")
+          script = Path("app.js").read_text(encoding="utf-8")
+          required = {
+              'href="#main-content"': "skip link",
+              'aria-controls="primaryNavigation"': "menu ownership",
+              'id="verifyBadge">CHECKING</span>': "fail-closed initial receipt state",
+              "offline sample": "offline truth label",
+              "A public URL proves where a surface is published": "surface truth boundary",
+              'var PINNED_RECEIPT_KEY_ID = ""': "fail-closed trust-root pin",
+              'var PINNED_RECEIPT_SPKI_SHA256 = ""': "fail-closed SPKI pin",
+              'var ROUTER_ENDPOINT = ""': "disabled unavailable live route",
+              'var PUBKEY_ENDPOINT = ""': "disabled unavailable key route",
+              'setMenu(false, true)': "focus leaves hidden mobile menu",
+              'showReceiptState("CHECKING", "muted")': "visible bounded checking state",
+              'fetchBounded(ROUTER_ENDPOINT': "bounded concierge transport",
+              'payload.message_sha256 !== requestHash': "request hash binding",
+              'payload.reply_sha256 !== replyHash': "reply hash binding",
+          }
+          prohibited = {
+              "Every answer ships a receipt.": "universal receipt claim",
+              "Every action emits a DSSE": "universal signing claim",
+              "nothing moves without leaving a signed trace": "universal runtime claim",
+              "against szl-router's pinned public key": "unproven key pin claim",
+              "https://alloyszlholdings.com/szl-concierge/chat": "unbound live concierge route",
+              "https://alloyszlholdings.com/szl-concierge/pubkey": "unbound public-key route",
+              "live projection · one receipt routing": "modeled diagram labeled live",
+          }
+          failures = []
+          joined = html + "\n" + script
+          for needle, label in required.items():
+              if needle not in joined:
+                  failures.append(f"missing {label}: {needle}")
+          for needle, label in prohibited.items():
+              if needle in joined:
+                  failures.append(f"prohibited {label}: {needle}")
+          if failures:
+              raise SystemExit("Public truth contract FAILED:\n - " + "\n - ".join(failures))
+          print(f"OK: {len(required)} required and {len(prohibited)} prohibited truth checks passed.")
+          PY
