@@ -3,8 +3,8 @@
   "use strict";
 
   /* ---------- config ---------- */
-  // Sovereign concierge endpoint — szl-router public proxy (server-side token, CORS-locked).
-  // Reasoning runs on SZL-owned infrastructure; every reply carries honest provenance.
+  // Public concierge endpoint. Runtime identity and provenance are accepted only from the
+  // response payload and are never inferred from this configured URL.
   var ROUTER_ENDPOINT = "https://alloyszlholdings.com/szl-concierge/chat";
   var PUBKEY_ENDPOINT = "https://alloyszlholdings.com/szl-concierge/pubkey";
   var PROOF_PROMPT = "In one sentence, what does a szl-receipt guarantee?";
@@ -17,34 +17,74 @@
   var nav = document.getElementById("nav");
   var toggle = document.getElementById("navToggle");
   var links = document.querySelector(".nav-links");
-  window.addEventListener("scroll", function () {
-    nav.classList.toggle("scrolled", window.scrollY > 24);
-  }, { passive: true });
-  if (toggle) {
+  if (nav) {
+    window.addEventListener("scroll", function () {
+      nav.classList.toggle("scrolled", window.scrollY > 24);
+    }, { passive: true });
+  }
+  if (toggle && links) {
+    var desktopNav = window.matchMedia("(min-width: 861px)");
+    var setMenu = function (open, returnFocus) {
+      var mobileOpen = open && !desktopNav.matches;
+      links.classList.toggle("open", mobileOpen);
+      toggle.classList.toggle("open", mobileOpen);
+      toggle.setAttribute("aria-expanded", mobileOpen ? "true" : "false");
+      toggle.setAttribute("aria-label", mobileOpen ? "Close navigation" : "Open navigation");
+      document.body.classList.toggle("menu-open", mobileOpen);
+      links.inert = !desktopNav.matches && !mobileOpen;
+      if (mobileOpen) links.removeAttribute("aria-hidden");
+      else if (!desktopNav.matches) links.setAttribute("aria-hidden", "true");
+      else links.removeAttribute("aria-hidden");
+      if (!mobileOpen && returnFocus) toggle.focus();
+    };
+
     toggle.addEventListener("click", function () {
-      var open = links.classList.toggle("open");
-      toggle.classList.toggle("open", open);
-      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      setMenu(toggle.getAttribute("aria-expanded") !== "true");
     });
     links.querySelectorAll("a").forEach(function (a) {
-      a.addEventListener("click", function () {
-        links.classList.remove("open");
-        toggle.classList.remove("open");
-        toggle.setAttribute("aria-expanded", "false");
-      });
+      a.addEventListener("click", function () { setMenu(false); });
     });
+    document.addEventListener("keydown", function (event) {
+      if (toggle.getAttribute("aria-expanded") !== "true") return;
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setMenu(false, true);
+        return;
+      }
+      if (event.key !== "Tab") return;
+      var menuLinks = Array.prototype.slice.call(links.querySelectorAll("a"));
+      var first = menuLinks[0];
+      var last = menuLinks[menuLinks.length - 1];
+      if (!event.shiftKey && document.activeElement === toggle) {
+        event.preventDefault();
+        first.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        toggle.focus();
+      } else if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        toggle.focus();
+      } else if (event.shiftKey && document.activeElement === toggle) {
+        event.preventDefault();
+        last.focus();
+      }
+    });
+    var resetMenu = function () { setMenu(false); };
+    if (desktopNav.addEventListener) desktopNav.addEventListener("change", resetMenu);
+    else desktopNav.addListener(resetMenu);
+    setMenu(false);
   }
 
   /* ---------- ecosystem (real szl-holdings repos, grouped by function) ---------- */
   var GH = "https://github.com/szl-holdings/";
   var ECOSYSTEM = [
     { g: "Flagship applications", no: "A",
-      note: "End-to-end products people actually operate — each emits a receipt per decision.",
+      note: "Product surfaces; runtime and receipt claims remain scoped to each interface's evidence labels.",
       items: [
         { name: "a11oy", lang: "Python", title: "The orchestrator", href: "https://a-11-oy.com",
           desc: "Full governed-inference application — Command Center, Five Superpowers, Observability, Mesh, Evidence, LLM Router. The signed-receipt substrate itself." },
-        { name: "killinchu", lang: "Python", title: "Counter-UAS", href: "https://a-11-oy.com/killinchu",
-          desc: "16-view counter-drone application: sensor-fusion, ROE, 3-of-4 BFT, DSSE verifier, PQC, geofence, swarm. A DSSE receipt per interdiction." },
+        { name: "killinchu", lang: "Python", title: "Counter-UAS", href: "https://szlholdings-killinchu.hf.space/elite",
+          desc: "Public counter-UAS interface. Live read feeds and simulated effectors are labeled separately, with human-on-the-loop authority explicit." },
         { name: "immune", lang: "TypeScript", title: "Verifiable-AI defense", href: "https://szlholdings-immune.hf.space",
           desc: "The IMMUNE Defense Matrix — append-only SHA-256 receipt chain (YAWAR), SENTRA/GATE admission, HUKLLA tripwires. Live on Hugging Face." },
         { name: "yarqa", lang: "Python", title: "Signed flow networks", href: GH + "yarqa",
@@ -372,33 +412,33 @@
 
   var KB = [
     { q: /receipt|sign|dsse|ecdsa|verify/i,
-      a: "Every consequential action emits a DSSE envelope signed with ECDSA P-256 — cosign-compatible and hash-chained. You can verify it with any standard verifier; no SZL software required. The core invariant is receipts.in \u2261 receipts.out." },
+      a: "Receipt-aware components can emit DSSE evidence. Treat a receipt as VERIFIED only after its payload, signature, public key, and source binding validate; missing evidence remains UNSIGNED or UNAVAILABLE." },
     { q: /sovereign|router|brain|inference|model/i,
-      a: "The concierge runs on szl-router — our own OpenAI-compatible gateway. It is sovereign-first: reasoning runs on infrastructure we own, and paid providers stay unarmed unless explicitly enabled. Honest provenance on every reply." },
+      a: "Live concierge responses are requested from szl-router. This page reports the served_by and sovereign fields returned by that response and falls back to an explicitly labeled offline sample when the endpoint is unavailable." },
     { q: /lean|theorem|proof|conjecture|lambda|\u039b|math/i,
       a: "The governance aggregator \u039b is formalized in Lean 4 + Mathlib: 749 declarations, 14 axioms, 163 tracked sorries. We state \u039b-uniqueness as Conjecture 1 \u2014 not a closed theorem. Being honest about that distinction is the point (DOI 10.5281/zenodo.20434308)." },
     { q: /killinchu|drone|uas|defense|counter/i,
-      a: "killinchu is our counter-UAS application at a-11-oy.com/killinchu \u2014 16 operational views with sensor-fusion, 3-of-4 BFT agreement, a DSSE verifier and PQC. Each interdiction produces its own signed receipt." },
+      a: "killinchu is the public counter-UAS interface at szlholdings-killinchu.hf.space/elite. The surface labels live read feeds separately from simulated effectors and keeps human-on-the-loop authority explicit; inspect its current evidence labels before treating any control as operational." },
     { q: /immune|matrix|hugging/i,
       a: "IMMUNE is our Verifiable-AI Defense Matrix: an append-only SHA-256 receipt chain (YAWAR) with SENTRA/GATE admission and HUKLLA tripwires. It runs live as a Hugging Face Space." },
     { q: /portfolio|ecosystem|product|repos?|company|what.*(do|make)|szl/i,
-      a: "SZL Holdings builds the proof layer beneath consequential AI, across the whole szl-holdings org grouped by job: flagship apps (a11oy, killinchu, IMMUNE, yarqa, khipu-sda-core); the signing substrate (szl-receipt, khipu-consensus, szl-mesh, szl-lake, szl-trust); sovereign inference & metering (szl-router, governed-inference-meter, szl-energy-attest, szl-lambda-gate, szl-governed-norm); formal methods & research (lutar-lean, lean-kernel, szl-papers, anatomy); and platform & tooling (platform, hatun-mcp, ouroboros, vsp-otel, developers, docs-site, szl-build-env). One doctrine, one signing primitive." },
+      a: "SZL Holdings builds governed-AI products, receipt and policy libraries, formal-methods research, and developer tooling. Each repository and live surface keeps its own deployment, trust-root, and evidence state; the portfolio view does not collapse them into one runtime claim." },
     { q: /standard|slsa|in.?toto|sigstore|cosign|supply.?chain|interoper|walled/i,
-      a: "SZL is built on open supply-chain attestation standards, not a walled garden: SLSA for provenance policy, in-toto for the attestation format (our receipts are in-toto Statements), and sigstore / cosign / DSSE for signing and transparency. szl-receipt is the one primitive underneath \u2014 so any cosign-compatible verifier can check our receipts with no SZL software installed." },
+      a: "SZL components use open provenance and signing formats where their checked-in contracts declare them. Verify the exact envelope with its declared algorithm and public key; format compatibility alone does not prove origin or operational status." },
     { q: /anatomy|organ|cortex|\bgate\b|\bbus\b|egress|nervous/i,
-      a: "Every governed inference flows through five organs: the reasoning cortex (sovereign inference via szl-router), the trust gate (the \u039b aggregator + advisory policy gate), the receipt bus (the szl-receipt DSSE primitive, hash-chained), consensus (3-of-4 BFT multi-party witnessing via khipu-consensus), and egress (\u039b-signed OpenTelemetry via vsp-otel). The receipt bus runs through all of them \u2014 nothing moves without leaving a signed trace." },
+      a: "The five-organ diagram is an architecture model for reasoning, policy, receipt handling, witnesses, and egress. A live product must prove which stages executed and whether its evidence verified; the diagram itself is not runtime proof." },
     { q: /energy|joule|nvml|meter|watt|carbon|power/i,
       a: "governed-inference-meter and szl-energy-attest record MEASURED-NVML joules and tokens/joule per inference, hash-chained and signable \u2014 and report an honest UNAVAILABLE null when NVML is unset. We never fabricate a joule." },
     { q: /mesh|crdt|air.?gap|replicat|offline/i,
-      a: "szl-mesh is a doctrine-pinned CRDT mesh over BFT wiring with a 3-of-4 Khipu quorum \u2014 air-gap-friendly replication that never loses the receipt chain, even offline." },
+      a: "szl-mesh defines CRDT replication and Khipu witness contracts. Durability, quorum, and offline recovery are accepted only when the named deployment supplies corresponding evidence." },
     { q: /mcp|tool|integrat|cursor|claude|developer|platform|build/i,
-      a: "Build on SZL via the platform monorepo and hatun-mcp \u2014 a doctrine-aware Model Context Protocol server exposing 16 governed tools (Yuyay-13 gate, Khipu receipts, DSSE-signed) over streamable HTTP + SSE, usable from Claude or Cursor. See the developers hub and docs-site, and stand up the whole 5-organ stack locally in under ten minutes with szl-build-env." },
+      a: "Start with the docs-site and each repository's checked-in quickstart. MCP endpoints and tool inventories are live-state claims: discover them at the named endpoint, authenticate where required, and do not rely on a static tool count." },
     { q: /regulat|eu ai act|compliance|audit|nist|record.?keep|\blaw\b/i,
       a: "When the EU AI Act's high-risk obligations \u2014 logging, transparency, record-keeping \u2014 become enforceable on Aug 2, 2026, a signed, replayable receipt is exactly that record-keeping infrastructure. Verifiable AI has moved from research to production, and SZL's substrate is built for it." },
     { q: /frontier|confidential|\btee\b|enclave|roadmap|future|next/i,
       a: "The frontier we track: confidential computing / TEE attestation (H100/H200, TDX) is becoming the enterprise default for inference, and formal methods are going mainstream. SZL is sovereign-first today; hardware-attested inference is on the roadmap \u2014 stated honestly, not claimed as shipped." },
     { q: /consensus|khipu|bft|witness/i,
-      a: "khipu-consensus is 3-of-4 BFT, multi-party-witnessed agreement: every witness cosigns an action hash with its own ECDSA P-256 key over DSSE. No single node decides alone \u2014 the category we call multi-party-witnessed AI." },
+      a: "khipu-consensus defines a 3-of-4 witnessed-action contract. A completed quorum requires the corresponding independently signed witness set; absent signatures remain unavailable rather than inferred." },
     { q: /stephen|lutar|founder|who/i,
       a: "Stephen Lutar is Founder & CEO of SZL Holdings. His premise: if a decision matters, it should leave a receipt \u2014 and if a guarantee matters, it should be a theorem, or honestly labeled a conjecture." },
   ];
@@ -436,7 +476,7 @@
   var greeted = false;
   function greet() {
     if (greeted) return; greeted = true;
-    addMsg("bot", "I'm the SZL sovereign concierge. Ask me about the doctrine, the signed-receipt substrate, or any product in the portfolio.");
+    addMsg("bot", "Ask about the portfolio, evidence states, or developer routes. Live answers and offline samples are labeled separately.");
   }
   if (chat) {
     var cObs = new IntersectionObserver(function (es) {
