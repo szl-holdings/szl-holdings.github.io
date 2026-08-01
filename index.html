@@ -36,7 +36,7 @@
         "url": "https://szl-holdings.github.io/",
         "description": "Cryptographic proof infrastructure for consequential AI decisions — sovereign inference, DSSE-signed receipts, and machine-checked formal methods.",
         "founder": { "@type": "Person", "name": "Stephen Lutar" },
-        "sameAs": ["https://github.com/szl-holdings", "https://a-11-oy.com"]
+        "sameAs": ["https://github.com/szl-holdings", "https://a-11-oy.com", "https://a11oy.net", "https://huggingface.co/SZLHOLDINGS"]
       },
       {
         "@type": "WebSite",
@@ -50,27 +50,28 @@
   </script>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <div class="grain" aria-hidden="true"></div>
 
   <header class="nav" id="nav">
-    <a class="brand" href="#top" aria-label="SZL Holdings home">
+    <a class="brand" href="#main-content" aria-label="SZL Holdings home">
       <span class="brand-mark" aria-hidden="true"></span>
       <span class="brand-text">SZL<span class="brand-dim">HOLDINGS</span></span>
     </a>
-    <nav class="nav-links" aria-label="Primary">
-      <a href="#thesis">Thesis</a>
-      <a href="#ecosystem">Ecosystem</a>
-      <a href="#anatomy">Anatomy</a>
-      <a href="#standards">Standards</a>
-      <a href="#proof">Proof</a>
-      <a class="nav-cta" href="#concierge">Sovereign brain</a>
+    <nav class="nav-links" id="primaryNavigation" aria-label="Primary navigation">
+      <a href="#thesis">Why SZL</a>
+      <a href="#front-door">Surfaces</a>
+      <a href="#ecosystem">Portfolio</a>
+      <a href="#anatomy">Architecture</a>
+      <a href="#proof">Evidence</a>
+      <a class="nav-cta" href="https://szl-holdings.github.io/docs-site/" target="_blank" rel="noopener">Developer docs</a>
     </nav>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
-      <span></span><span></span><span></span>
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Open navigation" aria-controls="primaryNavigation" aria-expanded="false">
+      <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
     </button>
   </header>
 
-  <main id="top">
+  <main id="main-content" tabindex="-1">
     <!-- HERO -->
     <section class="hero" id="hero">
       <canvas class="hero-grid" id="heroGrid" aria-hidden="true"></canvas>
@@ -89,7 +90,8 @@
         <p class="hero-eq reveal"><code>receipts.in&nbsp;≡&nbsp;receipts.out</code></p>
         <div class="hero-cta reveal">
           <a class="btn btn-primary" href="https://a-11-oy.com" target="_blank" rel="noopener">Explore a11oy →</a>
-          <a class="btn btn-ghost" href="#concierge">Talk to the sovereign brain</a>
+          <a class="btn btn-ghost" href="https://a11oy.net" target="_blank" rel="noopener">Inspect evidence</a>
+          <a class="btn btn-text" href="https://szl-holdings.github.io/docs-site/" target="_blank" rel="noopener">Build with SZL</a>
         </div>
         <ul class="hero-stats reveal" aria-label="Key facts">
           <li><b>749</b><span>Lean 4 declarations</span></li>
@@ -101,6 +103,74 @@
       <a class="scroll-hint" href="#thesis" aria-label="Scroll to thesis">
         <span></span>
       </a>
+    </section>
+
+    <!-- FRONT DOOR -->
+    <section class="section front-door" id="front-door" aria-labelledby="front-door-title">
+      <div class="front-door-head reveal">
+        <div>
+          <p class="kicker">Choose the right surface</p>
+          <h2 id="front-door-title">Product, evidence, and source stay distinct.</h2>
+        </div>
+        <p class="lede">
+          A public URL proves where a surface is published, not what is operational behind it.
+          Follow the labels at each destination for its current evidence and runtime boundary.
+        </p>
+      </div>
+
+      <div class="surface-grid" aria-label="SZL public surfaces">
+        <a class="surface-card reveal" href="https://a-11-oy.com" target="_blank" rel="noopener">
+          <span class="surface-label">Product</span>
+          <strong>a-11-oy.com</strong>
+          <span>Governed-inference product interface. Inspect each runtime claim at its source.</span>
+          <b aria-hidden="true">Open product &rarr;</b>
+        </a>
+        <a class="surface-card reveal" href="https://a11oy.net" target="_blank" rel="noopener">
+          <span class="surface-label">Evidence</span>
+          <strong>a11oy.net</strong>
+          <span>Independent index for receipts, assurance material, and public evidence artifacts.</span>
+          <b aria-hidden="true">Inspect evidence &rarr;</b>
+        </a>
+        <a class="surface-card reveal" href="https://github.com/szl-holdings" target="_blank" rel="noopener">
+          <span class="surface-label">Source</span>
+          <strong>GitHub</strong>
+          <span>Versioned source, reviews, release history, and CI records across the organization.</span>
+          <b aria-hidden="true">Browse source &rarr;</b>
+        </a>
+        <a class="surface-card reveal" href="https://huggingface.co/SZLHOLDINGS" target="_blank" rel="noopener">
+          <span class="surface-label">Public registry</span>
+          <strong>Hugging Face</strong>
+          <span>Models, datasets, collections, and Spaces. A listing does not establish capability.</span>
+          <b aria-hidden="true">Open registry &rarr;</b>
+        </a>
+        <a class="surface-card reveal" href="https://szlholdings-killinchu.hf.space/elite" target="_blank" rel="noopener">
+          <span class="surface-label">Defense surface</span>
+          <strong>Killinchu</strong>
+          <span>Public counter-UAS interface with live read feeds and simulated effectors labeled separately; human authority remains explicit.</span>
+          <b aria-hidden="true">Open Killinchu &rarr;</b>
+        </a>
+        <a class="surface-card reveal" href="https://szl-holdings.github.io/docs-site/" target="_blank" rel="noopener">
+          <span class="surface-label">Developer docs</span>
+          <strong>Build with SZL</strong>
+          <span>Architecture, API, integration, and operator references for developers.</span>
+          <b aria-hidden="true">Read the docs &rarr;</b>
+        </a>
+      </div>
+
+      <div class="status-key reveal" aria-labelledby="status-key-title">
+        <div class="status-key-intro">
+          <p class="kicker">Evidence vocabulary</p>
+          <h3 id="status-key-title">Read the label before the claim.</h3>
+        </div>
+        <dl>
+          <div><dt>MEASURED</dt><dd>Captured from named instrumentation.</dd></div>
+          <div><dt>REPORTED</dt><dd>Supplied by a source, not independently measured here.</dd></div>
+          <div><dt>MODELED</dt><dd>Produced by a model or scenario, not observed deployment behavior.</dd></div>
+          <div><dt>UNAVAILABLE</dt><dd>Required evidence is absent and represented as such.</dd></div>
+          <div><dt>UNSIGNED</dt><dd>Content exists without an approved signature; it is not verified.</dd></div>
+          <div><dt>CONJECTURE</dt><dd>Stated for investigation, not presented as a closed theorem.</dd></div>
+        </dl>
+      </div>
     </section>
 
     <!-- THESIS -->
@@ -160,7 +230,8 @@
         <p class="lede">
           A family of clean-room systems across the <span class="hl">szl-holdings</span> org, sharing a
           single signing primitive and a single doctrine — <span class="hl">v11 LOCKED</span>. Grouped by
-          the job each does. Every one is real; every one emits receipts.
+          the job each does. Each surface retains its own evidence label and source boundary; a
+          public link does not by itself establish runtime readiness.
         </p>
       </div>
       <div class="eco" id="ecosystemGroups"><!-- groups injected by app.js --></div>
@@ -347,12 +418,12 @@
       </div>
       <p class="footer-tag">Cryptographic proof infrastructure for consequential AI decisions. Honest by design.</p>
       <nav class="footer-links" aria-label="Footer">
-        <a href="#ecosystem">Ecosystem</a>
-        <a href="#anatomy">Anatomy</a>
-        <a href="#standards">Standards</a>
-        <a href="https://a-11-oy.com" target="_blank" rel="noopener">a11oy</a>
-        <a href="https://github.com/szl-holdings" target="_blank" rel="noopener">GitHub</a>
-        <a href="#concierge">Sovereign brain</a>
+        <a href="https://a-11-oy.com" target="_blank" rel="noopener">Product</a>
+        <a href="https://a11oy.net" target="_blank" rel="noopener">Evidence</a>
+        <a href="https://github.com/szl-holdings" target="_blank" rel="noopener">Source</a>
+        <a href="https://huggingface.co/SZLHOLDINGS" target="_blank" rel="noopener">Hugging Face</a>
+        <a href="https://szlholdings-killinchu.hf.space/elite" target="_blank" rel="noopener">Killinchu</a>
+        <a href="https://szl-holdings.github.io/docs-site/" target="_blank" rel="noopener">Developer docs</a>
       </nav>
       <p class="footer-fine">© <span id="year"></span> SZL Holdings · Doctrine v11 LOCKED · Powered by the SZL sovereign router · SLSA L1 honest.</p>
     </div>

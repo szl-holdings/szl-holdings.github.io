@@ -17,34 +17,74 @@
   var nav = document.getElementById("nav");
   var toggle = document.getElementById("navToggle");
   var links = document.querySelector(".nav-links");
-  window.addEventListener("scroll", function () {
-    nav.classList.toggle("scrolled", window.scrollY > 24);
-  }, { passive: true });
-  if (toggle) {
+  if (nav) {
+    window.addEventListener("scroll", function () {
+      nav.classList.toggle("scrolled", window.scrollY > 24);
+    }, { passive: true });
+  }
+  if (toggle && links) {
+    var desktopNav = window.matchMedia("(min-width: 861px)");
+    var setMenu = function (open, returnFocus) {
+      var mobileOpen = open && !desktopNav.matches;
+      links.classList.toggle("open", mobileOpen);
+      toggle.classList.toggle("open", mobileOpen);
+      toggle.setAttribute("aria-expanded", mobileOpen ? "true" : "false");
+      toggle.setAttribute("aria-label", mobileOpen ? "Close navigation" : "Open navigation");
+      document.body.classList.toggle("menu-open", mobileOpen);
+      links.inert = !desktopNav.matches && !mobileOpen;
+      if (mobileOpen) links.removeAttribute("aria-hidden");
+      else if (!desktopNav.matches) links.setAttribute("aria-hidden", "true");
+      else links.removeAttribute("aria-hidden");
+      if (!mobileOpen && returnFocus) toggle.focus();
+    };
+
     toggle.addEventListener("click", function () {
-      var open = links.classList.toggle("open");
-      toggle.classList.toggle("open", open);
-      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      setMenu(toggle.getAttribute("aria-expanded") !== "true");
     });
     links.querySelectorAll("a").forEach(function (a) {
-      a.addEventListener("click", function () {
-        links.classList.remove("open");
-        toggle.classList.remove("open");
-        toggle.setAttribute("aria-expanded", "false");
-      });
+      a.addEventListener("click", function () { setMenu(false); });
     });
+    document.addEventListener("keydown", function (event) {
+      if (toggle.getAttribute("aria-expanded") !== "true") return;
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setMenu(false, true);
+        return;
+      }
+      if (event.key !== "Tab") return;
+      var menuLinks = Array.prototype.slice.call(links.querySelectorAll("a"));
+      var first = menuLinks[0];
+      var last = menuLinks[menuLinks.length - 1];
+      if (!event.shiftKey && document.activeElement === toggle) {
+        event.preventDefault();
+        first.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        toggle.focus();
+      } else if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        toggle.focus();
+      } else if (event.shiftKey && document.activeElement === toggle) {
+        event.preventDefault();
+        last.focus();
+      }
+    });
+    var resetMenu = function () { setMenu(false); };
+    if (desktopNav.addEventListener) desktopNav.addEventListener("change", resetMenu);
+    else desktopNav.addListener(resetMenu);
+    setMenu(false);
   }
 
   /* ---------- ecosystem (real szl-holdings repos, grouped by function) ---------- */
   var GH = "https://github.com/szl-holdings/";
   var ECOSYSTEM = [
     { g: "Flagship applications", no: "A",
-      note: "End-to-end products people actually operate — each emits a receipt per decision.",
+      note: "Product surfaces; runtime and receipt claims remain scoped to each interface's evidence labels.",
       items: [
         { name: "a11oy", lang: "Python", title: "The orchestrator", href: "https://a-11-oy.com",
           desc: "Full governed-inference application — Command Center, Five Superpowers, Observability, Mesh, Evidence, LLM Router. The signed-receipt substrate itself." },
-        { name: "killinchu", lang: "Python", title: "Counter-UAS", href: "https://a-11-oy.com/killinchu",
-          desc: "16-view counter-drone application: sensor-fusion, ROE, 3-of-4 BFT, DSSE verifier, PQC, geofence, swarm. A DSSE receipt per interdiction." },
+        { name: "killinchu", lang: "Python", title: "Counter-UAS", href: "https://szlholdings-killinchu.hf.space/elite",
+          desc: "Public counter-UAS interface. Live read feeds and simulated effectors are labeled separately, with human-on-the-loop authority explicit." },
         { name: "immune", lang: "TypeScript", title: "Verifiable-AI defense", href: "https://szlholdings-immune.hf.space",
           desc: "The IMMUNE Defense Matrix — append-only SHA-256 receipt chain (YAWAR), SENTRA/GATE admission, HUKLLA tripwires. Live on Hugging Face." },
         { name: "yarqa", lang: "Python", title: "Signed flow networks", href: GH + "yarqa",
@@ -378,7 +418,7 @@
     { q: /lean|theorem|proof|conjecture|lambda|\u039b|math/i,
       a: "The governance aggregator \u039b is formalized in Lean 4 + Mathlib: 749 declarations, 14 axioms, 163 tracked sorries. We state \u039b-uniqueness as Conjecture 1 \u2014 not a closed theorem. Being honest about that distinction is the point (DOI 10.5281/zenodo.20434308)." },
     { q: /killinchu|drone|uas|defense|counter/i,
-      a: "killinchu is our counter-UAS application at a-11-oy.com/killinchu \u2014 16 operational views with sensor-fusion, 3-of-4 BFT agreement, a DSSE verifier and PQC. Each interdiction produces its own signed receipt." },
+      a: "killinchu is the public counter-UAS interface at szlholdings-killinchu.hf.space/elite. The surface labels live read feeds separately from simulated effectors and keeps human-on-the-loop authority explicit; inspect its current evidence labels before treating any control as operational." },
     { q: /immune|matrix|hugging/i,
       a: "IMMUNE is our Verifiable-AI Defense Matrix: an append-only SHA-256 receipt chain (YAWAR) with SENTRA/GATE admission and HUKLLA tripwires. It runs live as a Hugging Face Space." },
     { q: /portfolio|ecosystem|product|repos?|company|what.*(do|make)|szl/i,
