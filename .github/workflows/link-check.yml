@@ -99,15 +99,41 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           import hashlib
+          import html.parser
+          import urllib.parse
 
           html = Path("index.html").read_text(encoding="utf-8")
           script = Path("app.js").read_text(encoding="utf-8")
+
+          class AssetBindings(html.parser.HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.styles = []
+                  self.scripts = []
+
+              def handle_starttag(self, tag, attrs):
+                  values = dict(attrs)
+                  if tag == "link" and "stylesheet" in values.get("rel", "").split():
+                      href = values.get("href", "")
+                      if urllib.parse.urlparse(href).path.endswith("styles.css"):
+                          self.styles.append(href)
+                  if tag == "script":
+                      src = values.get("src", "")
+                      if urllib.parse.urlparse(src).path.endswith("app.js"):
+                          self.scripts.append(src)
+
+          bindings = AssetBindings()
+          bindings.feed(html)
           for asset in ("styles.css", "app.js"):
               repository_bytes = Path(asset).read_bytes().replace(b"\r\n", b"\n")
               version = hashlib.sha256(repository_bytes).hexdigest()[:12]
               binding = f'{asset}?v={version}'
-              if binding not in html:
-                  raise SystemExit(f"Public truth contract FAILED: missing content-addressed asset binding {binding}")
+              active = bindings.styles if asset == "styles.css" else bindings.scripts
+              if active != [binding]:
+                  raise SystemExit(
+                      f"Public truth contract FAILED: {asset} must have exactly one active binding "
+                      f"{binding}; observed {active}"
+                  )
           required = {
               'href="#main-content"': "skip link",
               'aria-controls="primaryNavigation"': "menu ownership",
