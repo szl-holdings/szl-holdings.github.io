@@ -102,7 +102,7 @@ jobs:
           import html.parser
           import urllib.parse
 
-          html = Path("index.html").read_text(encoding="utf-8")
+          html_text = Path("index.html").read_text(encoding="utf-8")
           script = Path("app.js").read_text(encoding="utf-8")
 
           class AssetBindings(html.parser.HTMLParser):
@@ -123,7 +123,7 @@ jobs:
                           self.scripts.append(src)
 
           bindings = AssetBindings()
-          bindings.feed(html)
+          bindings.feed(html_text)
           for asset in ("styles.css", "app.js"):
               repository_bytes = Path(asset).read_bytes().replace(b"\r\n", b"\n")
               version = hashlib.sha256(repository_bytes).hexdigest()[:12]
@@ -160,7 +160,7 @@ jobs:
               "live projection · one receipt routing": "modeled diagram labeled live",
           }
           failures = []
-          joined = html + "\n" + script
+          joined = html_text + "\n" + script
           for needle, label in required.items():
               if needle not in joined:
                   failures.append(f"missing {label}: {needle}")
