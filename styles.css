@@ -180,7 +180,7 @@ body.menu-open{overflow:hidden}
 .dot.r{background:#ff5f57}.dot.y{background:#febc2e}.dot.g{background:#28c840}
 .receipt-title{font-family:var(--mono);font-size:12.5px;color:var(--muted);margin-left:8px}
 .receipt-badge{margin-left:auto;font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--void);
-  background:var(--teal);padding:3px 10px;border-radius:6px;font-weight:600;opacity:0;transform:scale(.9);transition:.4s}
+  background:var(--teal);padding:3px 10px;border-radius:6px;font-weight:600;opacity:1;transform:scale(1);transition:.4s}
 .receipt-badge.show{opacity:1;transform:scale(1);box-shadow:0 0 18px -4px var(--teal)}
 .receipt-body{margin:0;padding:22px;font-family:var(--mono);font-size:12.8px;line-height:1.85;color:#cfe0dc;
   white-space:pre-wrap;word-break:break-word;min-height:280px}

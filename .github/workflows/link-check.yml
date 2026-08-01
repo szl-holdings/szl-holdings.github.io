@@ -107,11 +107,23 @@ jobs:
               'id="verifyBadge">CHECKING</span>': "fail-closed initial receipt state",
               "offline sample": "offline truth label",
               "A public URL proves where a surface is published": "surface truth boundary",
+              'var PINNED_RECEIPT_KEY_ID = ""': "fail-closed trust-root pin",
+              'var PINNED_RECEIPT_SPKI_SHA256 = ""': "fail-closed SPKI pin",
+              'var ROUTER_ENDPOINT = ""': "disabled unavailable live route",
+              'var PUBKEY_ENDPOINT = ""': "disabled unavailable key route",
+              'setMenu(false, true)': "focus leaves hidden mobile menu",
+              'showReceiptState("CHECKING", "muted")': "visible bounded checking state",
+              'fetchBounded(ROUTER_ENDPOINT': "bounded concierge transport",
+              'payload.message_sha256 !== requestHash': "request hash binding",
+              'payload.reply_sha256 !== replyHash': "reply hash binding",
           }
           prohibited = {
               "Every answer ships a receipt.": "universal receipt claim",
               "Every action emits a DSSE": "universal signing claim",
               "nothing moves without leaving a signed trace": "universal runtime claim",
+              "against szl-router's pinned public key": "unproven key pin claim",
+              "https://alloyszlholdings.com/szl-concierge/chat": "unbound live concierge route",
+              "https://alloyszlholdings.com/szl-concierge/pubkey": "unbound public-key route",
               "live projection · one receipt routing": "modeled diagram labeled live",
           }
           failures = []

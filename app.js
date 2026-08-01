@@ -3,11 +3,17 @@
   "use strict";
 
   /* ---------- config ---------- */
-  // Public concierge endpoint. Runtime identity and provenance are accepted only from the
-  // response payload and are never inferred from this configured URL.
-  var ROUTER_ENDPOINT = "https://alloyszlholdings.com/szl-concierge/chat";
-  var PUBKEY_ENDPOINT = "https://alloyszlholdings.com/szl-concierge/pubkey";
+  // Runtime identity and provenance are accepted only from a bound response payload;
+  // neither is inferred from an endpoint URL.
+  // Live calls stay disabled while the published host lacks a CORS-enabled JSON route
+  // and independently pinned trust root. The UI serves labeled offline samples instead.
+  var ROUTER_ENDPOINT = "";
+  var PUBKEY_ENDPOINT = "";
   var PROOF_PROMPT = "In one sentence, what does a szl-receipt guarantee?";
+  // VERIFIED is disabled until an independently reviewed trust-root publication
+  // supplies both protected values. The configured endpoint currently does not.
+  var PINNED_RECEIPT_KEY_ID = "";
+  var PINNED_RECEIPT_SPKI_SHA256 = "";
 
   /* ---------- year ---------- */
   var y = document.getElementById("year");
@@ -31,18 +37,18 @@
       toggle.setAttribute("aria-expanded", mobileOpen ? "true" : "false");
       toggle.setAttribute("aria-label", mobileOpen ? "Close navigation" : "Open navigation");
       document.body.classList.toggle("menu-open", mobileOpen);
+      if (!mobileOpen && returnFocus) toggle.focus();
       links.inert = !desktopNav.matches && !mobileOpen;
       if (mobileOpen) links.removeAttribute("aria-hidden");
       else if (!desktopNav.matches) links.setAttribute("aria-hidden", "true");
       else links.removeAttribute("aria-hidden");
-      if (!mobileOpen && returnFocus) toggle.focus();
     };
 
     toggle.addEventListener("click", function () {
       setMenu(toggle.getAttribute("aria-expanded") !== "true");
     });
     links.querySelectorAll("a").forEach(function (a) {
-      a.addEventListener("click", function () { setMenu(false); });
+      a.addEventListener("click", function () { setMenu(false, true); });
     });
     document.addEventListener("keydown", function (event) {
       if (toggle.getAttribute("aria-expanded") !== "true") return;
@@ -275,6 +281,15 @@
   /* ---------- verifiable DSSE receipts (WebCrypto, ECDSA P-256) ---------- */
   function hex(n) { var s = "", c = "0123456789abcdef"; for (var i = 0; i < n; i++) s += c[Math.floor(Math.random() * 16)]; return s; }
   function b64bytes(b64) { var bin = atob(b64), n = bin.length, out = new Uint8Array(n); for (var i = 0; i < n; i++) out[i] = bin.charCodeAt(i); return out; }
+  function hexBytes(bytes) { return Array.prototype.map.call(new Uint8Array(bytes), function (b) { return b.toString(16).padStart(2, "0"); }).join(""); }
+  async function sha256Text(value) { return hexBytes(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(String(value)))); }
+  async function fetchBounded(url, options, timeoutMs) {
+    var controller = new AbortController();
+    var timer = setTimeout(function () { controller.abort(); }, timeoutMs);
+    try {
+      return await fetch(url, Object.assign({}, options || {}, { signal: controller.signal }));
+    } finally { clearTimeout(timer); }
+  }
   function paeBytes(type, bodyBytes) {
     var enc = new TextEncoder();
     var head = enc.encode("DSSEv1 " + enc.encode(type).length + " " + type + " " + bodyBytes.length + " ");
@@ -287,22 +302,38 @@
     if (_pubkey || _pubkeyTried) return _pubkey;
     _pubkeyTried = true;
     if (!(window.crypto && window.crypto.subtle && window.TextEncoder && window.TextDecoder)) return null;
+    if (!/^[0-9a-f]{16}$/i.test(PINNED_RECEIPT_KEY_ID) || !/^[0-9a-f]{64}$/i.test(PINNED_RECEIPT_SPKI_SHA256)) return null;
     try {
-      var meta = await (await fetch(PUBKEY_ENDPOINT)).json();
-      _pubkey = await crypto.subtle.importKey("spki", b64bytes(meta.spki_b64), { name: "ECDSA", namedCurve: "P-256" }, false, ["verify"]);
+      var response = await fetchBounded(PUBKEY_ENDPOINT, { headers: { "Accept": "application/json" } }, 6000);
+      if (!response.ok || !(response.headers.get("content-type") || "").toLowerCase().includes("application/json")) return null;
+      var meta = await response.json();
+      if (!meta || meta.keyid !== PINNED_RECEIPT_KEY_ID || typeof meta.spki_b64 !== "string") return null;
+      var spki = b64bytes(meta.spki_b64);
+      var fingerprint = hexBytes(await crypto.subtle.digest("SHA-256", spki));
+      if (fingerprint !== PINNED_RECEIPT_SPKI_SHA256.toLowerCase()) return null;
+      _pubkey = await crypto.subtle.importKey("spki", spki, { name: "ECDSA", namedCurve: "P-256" }, false, ["verify"]);
       return _pubkey;
     } catch (e) { return null; }
   }
-  // Verify a DSSE envelope entirely in the browser against szl-router's pinned P-256 key.
-  async function verifyReceipt(receipt) {
+  // Verify a DSSE envelope against the protected trust root and exact interaction.
+  async function verifyReceipt(receipt, interaction) {
     try {
+      if (!PINNED_RECEIPT_KEY_ID || !PINNED_RECEIPT_SPKI_SHA256) return { ok: false, reason: "no-trust-root" };
+      if (!receipt || receipt.payloadType !== "application/vnd.in-toto+json" || !Array.isArray(receipt.signatures) || receipt.signatures.length !== 1) return { ok: false, reason: "schema" };
+      if (!interaction || typeof interaction.request !== "string" || typeof interaction.reply !== "string") return { ok: false, reason: "interaction" };
+      var signature = receipt.signatures[0];
+      if (!signature || signature.keyid !== PINNED_RECEIPT_KEY_ID || typeof signature.sig !== "string") return { ok: false, reason: "key-binding" };
       var bodyBytes = b64bytes(receipt.payload);
       var payload = JSON.parse(new TextDecoder().decode(bodyBytes));
+      if (!payload || typeof payload.typ !== "string" || typeof payload.model !== "string" || payload.served_by !== "szl-router" || typeof payload.sovereign !== "boolean") return { ok: false, reason: "source-binding" };
+      var requestHash = await sha256Text(interaction.request);
+      var replyHash = await sha256Text(interaction.reply);
+      if (payload.message_sha256 !== requestHash || payload.reply_sha256 !== replyHash) return { ok: false, payload: payload, reason: "interaction-binding" };
       var key = await getPubkey();
       if (!key) return { ok: false, payload: payload, reason: "no-key" };
-      var sig = b64bytes(receipt.signatures[0].sig);
+      var sig = b64bytes(signature.sig);
       var ok = await crypto.subtle.verify({ name: "ECDSA", hash: "SHA-256" }, key, sig, paeBytes(receipt.payloadType, bodyBytes));
-      return { ok: ok, payload: payload, keyid: receipt.signatures[0].keyid || "" };
+      return { ok: ok, payload: payload, keyid: signature.keyid || "", reason: ok ? "verified" : "signature" };
     } catch (e) { return { ok: false, reason: "error" }; }
   }
 
@@ -349,9 +380,16 @@
   }
   var body = document.getElementById("receiptBody");
   var badge = document.getElementById("verifyBadge");
+  function showReceiptState(label, className) {
+    if (!badge) return;
+    badge.textContent = label;
+    badge.classList.add("show");
+    badge.classList.remove("bad", "muted");
+    if (className) badge.classList.add(className);
+  }
   function typeReceiptLines(lines, onDone) {
     if (!body) return;
-    body.innerHTML = ""; if (badge) badge.classList.remove("show");
+    body.innerHTML = "";
     var cursor = document.createElement("span"); cursor.className = "cursor";
     body.appendChild(cursor);
     var li = 0;
@@ -376,15 +414,21 @@
   }
   async function initProofReceipt() {
     if (!body) return;
+    showReceiptState("CHECKING", "muted");
+    if (!ROUTER_ENDPOINT || !PUBKEY_ENDPOINT || !PINNED_RECEIPT_KEY_ID || !PINNED_RECEIPT_SPKI_SHA256) {
+      body.innerHTML = '<span class="k">// live verifier unavailable; rendering an illustrative envelope\u2026</span>';
+      typeReceiptLines(RECEIPT_SAMPLE, function () { showReceiptState("ILLUSTRATIVE", "muted"); });
+      return;
+    }
     body.innerHTML = '<span class="k">// requesting a live signed receipt from szl-router\u2026</span>';
     var env = null, payload = null, verified = false, live = false;
     try {
-      var res = await fetch(ROUTER_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ message: PROOF_PROMPT }) });
+      var res = await fetchBounded(ROUTER_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify({ message: PROOF_PROMPT }) }, 8000);
       if (res.ok) {
         var d = await res.json();
-        if (d && d.provenance && d.provenance.receipt) {
+        if (d && typeof d.reply === "string" && d.provenance && d.provenance.receipt) {
           env = d.provenance.receipt;
-          var v = await verifyReceipt(env);
+          var v = await verifyReceipt(env, { request: PROOF_PROMPT, reply: d.reply });
           payload = v.payload; verified = !!v.ok; live = !!payload;
         }
       }
@@ -392,10 +436,9 @@
     var lines = live ? buildReceiptLines(env, payload) : RECEIPT_SAMPLE;
     typeReceiptLines(lines, function () {
       if (!badge) return;
-      badge.classList.add("show"); badge.classList.remove("bad", "muted");
-      if (live && verified) { badge.textContent = "VERIFIED"; }
-      else if (live) { badge.textContent = "UNVERIFIED"; badge.classList.add("bad"); }
-      else { badge.textContent = "ILLUSTRATIVE"; badge.classList.add("muted"); }
+      if (live && verified) showReceiptState("VERIFIED");
+      else if (live) showReceiptState("UNVERIFIED", "bad");
+      else showReceiptState("ILLUSTRATIVE", "muted");
     });
   }
   if (body) {
@@ -485,7 +528,7 @@
     cObs.observe(chat);
   }
 
-  function renderReceipt(msgEl, receipt) {
+  function renderReceipt(msgEl, receipt, interaction) {
     if (!receipt || !receipt.signatures || !receipt.signatures[0]) return;
     var sig = receipt.signatures[0];
     var chip = document.createElement("button");
@@ -495,13 +538,13 @@
     env.className = "receipt-env";
     msgEl.appendChild(chip); msgEl.appendChild(env);
     chip.addEventListener("click", function () { env.classList.toggle("show"); });
-    verifyReceipt(receipt).then(function (r) {
+    verifyReceipt(receipt, interaction).then(function (r) {
       if (r.ok) {
         chip.classList.add("ok");
         chip.innerHTML = '<span class="dot"></span> receipt verified \u00b7 ECDSA&nbsp;P-256 \u00b7 key ' + esc(String(sig.keyid || "").slice(0, 8));
       } else {
         chip.classList.add("bad");
-        chip.innerHTML = '<span class="dot"></span> receipt ' + (r.reason === "no-key" ? "unchecked" : "unverified");
+        chip.innerHTML = '<span class="dot"></span> receipt ' + (r.reason === "no-key" || r.reason === "no-trust-root" ? "unchecked" : "unverified");
       }
       var pj = r.payload ? JSON.stringify(r.payload, null, 2) : "(payload unavailable)";
       env.textContent =
@@ -511,7 +554,7 @@
         "alg         : " + (sig.alg || "ecdsa-p256-sha256") + "\n" +
         "sig (P1363) : " + String(sig.sig || "").slice(0, 44) + "\u2026\n\n" +
         "payload (signed):\n" + pj + "\n\n" +
-        "verified in-browser via DSSE PAE + WebCrypto ECDSA-P256/SHA-256\nagainst szl-router's pinned public key.";
+        (r.ok ? "VERIFIED in-browser: protected key ID + SPKI fingerprint, DSSE PAE, source fields, and request/reply hashes all match." : "NOT VERIFIED: " + (r.reason || "unknown") + ".");
       // Citations rendered ONLY from the cryptographically-verified payload (never top-level provenance).
       if (r.ok && r.payload && Array.isArray(r.payload.sources) && r.payload.sources.length) {
         var src = document.createElement("div");
@@ -536,17 +579,17 @@
     var typing = typingMsg();
     if (ROUTER_ENDPOINT) {
       try {
-        var res = await fetch(ROUTER_ENDPOINT, {
+        var res = await fetchBounded(ROUTER_ENDPOINT, {
           method: "POST", headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ message: text, history: convo.slice() })
-        });
+        }, 10000);
         if (res.ok) {
           var data = await res.json();
           if (data && data.reply) {
             typing.remove();
             remember("user", text); remember("assistant", data.reply);
             var m = addMsg("bot", esc(data.reply).replace(/\n/g, "<br>"), provenance("live", data.provenance));
-            if (data.provenance && data.provenance.receipt) renderReceipt(m, data.provenance.receipt);
+            if (data.provenance && data.provenance.receipt) renderReceipt(m, data.provenance.receipt, { request: text, reply: data.reply });
             return;
           }
         }
