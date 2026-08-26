@@ -34,6 +34,7 @@ jobs:
 
           root = pathlib.Path(".")
           same_origin = {"szl-holdings.github.io", "holdings.a-11-oy.com"}
+          separately_published_paths = {"/docs-site/"}
           errors = []
 
           class Extractor(html.parser.HTMLParser):
@@ -68,6 +69,8 @@ jobs:
                       continue
                   p = urllib.parse.urlparse(ref)
                   if p.scheme in ("http", "https"):
+                      if p.path in separately_published_paths:
+                          continue
                       path = p.path.lstrip("/")
                       if path and not (root / path).exists():
                           errors.append(f"{htmlfile}: same-origin ref not found -> {ref}")
@@ -100,27 +103,56 @@ jobs:
           from pathlib import Path
           import hashlib
           import html.parser
+          import json
           import urllib.parse
+          import xml.etree.ElementTree as ET
 
           html_text = Path("index.html").read_text(encoding="utf-8")
           script = Path("app.js").read_text(encoding="utf-8")
+          robots_text = Path("robots.txt").read_text(encoding="utf-8")
+          sitemap_text = Path("sitemap.xml").read_text(encoding="utf-8")
 
           class AssetBindings(html.parser.HTMLParser):
               def __init__(self):
                   super().__init__()
                   self.styles = []
                   self.scripts = []
+                  self.canonicals = []
+                  self.metadata = {}
+                  self.hrefs = []
+                  self.json_ld = []
+                  self._json_ld_parts = None
 
               def handle_starttag(self, tag, attrs):
                   values = dict(attrs)
-                  if tag == "link" and "stylesheet" in values.get("rel", "").split():
-                      href = values.get("href", "")
-                      if urllib.parse.urlparse(href).path.endswith("styles.css"):
+                  href = values.get("href", "")
+                  if href:
+                      self.hrefs.append(href)
+                  if tag == "link":
+                      rel = values.get("rel", "").split()
+                      if "stylesheet" in rel and urllib.parse.urlparse(href).path.endswith("styles.css"):
                           self.styles.append(href)
+                      if "canonical" in rel:
+                          self.canonicals.append(href)
+                  if tag == "meta":
+                      identity = values.get("property") or values.get("name")
+                      if identity and values.get("content") is not None:
+                          self.metadata.setdefault(identity, []).append(values["content"])
                   if tag == "script":
                       src = values.get("src", "")
                       if urllib.parse.urlparse(src).path.endswith("app.js"):
                           self.scripts.append(src)
+                      if values.get("type") == "application/ld+json":
+                          self._json_ld_parts = []
+
+              def handle_data(self, data):
+                  if self._json_ld_parts is not None:
+                      self._json_ld_parts.append(data)
+
+              def handle_endtag(self, tag):
+                  if tag == "script" and self._json_ld_parts is not None:
+                      self.json_ld.append("".join(self._json_ld_parts))
+                      self._json_ld_parts = None
 
           bindings = AssetBindings()
           bindings.feed(html_text)
@@ -134,6 +166,95 @@ jobs:
                       f"Public truth contract FAILED: {asset} must have exactly one active binding "
                       f"{binding}; observed {active}"
                   )
+          origin = "https://holdings.a-11-oy.com/"
+          image_url = origin + "assets/hero.png"
+          docs_url = origin + "docs-site/"
+          fallback_host = "szl-holdings.github.io"
+          failures = []
+
+          if Path("CNAME").read_text(encoding="utf-8").strip() != "holdings.a-11-oy.com":
+              failures.append("CNAME must remain holdings.a-11-oy.com")
+          if bindings.canonicals != [origin]:
+              failures.append(f"expected exactly one canonical {origin}; observed {bindings.canonicals}")
+          for key, expected in {
+              "og:url": origin,
+              "og:image": image_url,
+              "twitter:image": image_url,
+          }.items():
+              observed = bindings.metadata.get(key, [])
+              if observed != [expected]:
+                  failures.append(f"{key} must be exactly {expected}; observed {observed}")
+
+          if len(bindings.json_ld) != 1:
+              failures.append(f"expected exactly one JSON-LD block; observed {len(bindings.json_ld)}")
+          else:
+              try:
+                  graph = json.loads(bindings.json_ld[0]).get("@graph", [])
+              except (AttributeError, json.JSONDecodeError) as exc:
+                  failures.append(f"JSON-LD must parse as an object graph: {exc}")
+                  graph = []
+              typed = {}
+              for node in graph:
+                  if isinstance(node, dict) and isinstance(node.get("@type"), str):
+                      typed.setdefault(node["@type"], []).append(node)
+              organization_nodes = typed.get("Organization", [])
+              website_nodes = typed.get("WebSite", [])
+              if len(organization_nodes) != 1:
+                  failures.append(
+                      "JSON-LD must contain exactly one Organization; "
+                      f"observed {len(organization_nodes)}"
+                  )
+              if len(website_nodes) != 1:
+                  failures.append(
+                      "JSON-LD must contain exactly one WebSite; "
+                      f"observed {len(website_nodes)}"
+                  )
+              organization = organization_nodes[0] if len(organization_nodes) == 1 else {}
+              website = website_nodes[0] if len(website_nodes) == 1 else {}
+              if organization.get("@id") != origin + "#org" or organization.get("url") != origin:
+                  failures.append("JSON-LD Organization identity must bind to the canonical origin")
+              if website.get("@id") != origin + "#site" or website.get("url") != origin:
+                  failures.append("JSON-LD WebSite identity must bind to the canonical origin")
+              if website.get("publisher") != {"@id": origin + "#org"}:
+                  failures.append("JSON-LD WebSite publisher must bind to the canonical Organization")
+
+          robot_sitemaps = [
+              line.split(":", 1)[1].strip()
+              for line in robots_text.splitlines()
+              if line.lower().startswith("sitemap:")
+          ]
+          if robot_sitemaps != [origin + "sitemap.xml"]:
+              failures.append(f"robots.txt sitemap must bind to the canonical origin; observed {robot_sitemaps}")
+          try:
+              sitemap_root = ET.fromstring(sitemap_text)
+              sitemap_locations = [
+                  node.text for node in sitemap_root.findall(
+                      ".//{http://www.sitemaps.org/schemas/sitemap/0.9}loc"
+                  )
+              ]
+          except ET.ParseError as exc:
+              failures.append(f"sitemap.xml must parse: {exc}")
+              sitemap_locations = []
+          if sitemap_locations != [origin]:
+              failures.append(f"sitemap.xml must publish exactly the canonical origin; observed {sitemap_locations}")
+
+          docs_targets = [href for href in bindings.hrefs if "docs-site" in href]
+          if docs_targets != [docs_url] * 4:
+              failures.append(
+                  f"all four visible developer-docs CTAs must target {docs_url}; observed {docs_targets}"
+              )
+          if "https://github.com/szl-holdings" not in bindings.hrefs:
+              failures.append("the explicit GitHub organization source link must remain present")
+
+          identity_surface = "\n".join(
+              bindings.canonicals
+              + [value for values in bindings.metadata.values() for value in values]
+              + bindings.json_ld
+              + [robots_text, sitemap_text]
+          )
+          if fallback_host in identity_surface:
+              failures.append("stale fallback-host identity is prohibited in canonical metadata")
+
           required = {
               'href="#main-content"': "skip link",
               'aria-controls="primaryNavigation"': "menu ownership",
@@ -159,7 +280,6 @@ jobs:
               "https://alloyszlholdings.com/szl-concierge/pubkey": "unbound public-key route",
               "live projection · one receipt routing": "modeled diagram labeled live",
           }
-          failures = []
           joined = html_text + "\n" + script
           for needle, label in required.items():
               if needle not in joined:
