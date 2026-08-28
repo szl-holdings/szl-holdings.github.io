@@ -122,9 +122,18 @@ jobs:
                   self.metadata = {}
                   self.hrefs = []
                   self.json_ld = []
+                  self.duplicate_identity_attributes = []
                   self._json_ld_parts = None
 
               def handle_starttag(self, tag, attrs):
+                  attribute_names = [name.casefold() for name, _ in attrs]
+                  duplicates = sorted({
+                      name for name in attribute_names if attribute_names.count(name) > 1
+                  })
+                  if tag in {"link", "meta", "script"} and duplicates:
+                      self.duplicate_identity_attributes.append(
+                          f"{tag}: {', '.join(duplicates)}"
+                      )
                   values = dict(attrs)
                   href = values.get("href", "")
                   if href:
@@ -157,6 +166,11 @@ jobs:
 
           bindings = AssetBindings()
           bindings.feed(html_text)
+          if bindings.duplicate_identity_attributes:
+              raise SystemExit(
+                  "Public truth contract FAILED: duplicate attributes on identity-bearing tags: "
+                  + "; ".join(bindings.duplicate_identity_attributes)
+              )
           for asset in ("styles.css", "app.js"):
               repository_bytes = Path(asset).read_bytes().replace(b"\r\n", b"\n")
               version = hashlib.sha256(repository_bytes).hexdigest()[:12]
@@ -189,9 +203,20 @@ jobs:
           if len(bindings.json_ld) != 1:
               failures.append(f"expected exactly one JSON-LD block; observed {len(bindings.json_ld)}")
           else:
+              def reject_duplicate_json_keys(pairs):
+                  result = {}
+                  for key, value in pairs:
+                      if key in result:
+                          raise ValueError(f"duplicate JSON key: {key}")
+                      result[key] = value
+                  return result
+
               try:
-                  graph = json.loads(bindings.json_ld[0]).get("@graph", [])
-              except (AttributeError, json.JSONDecodeError) as exc:
+                  graph = json.loads(
+                      bindings.json_ld[0],
+                      object_pairs_hook=reject_duplicate_json_keys,
+                  ).get("@graph", [])
+              except (AttributeError, json.JSONDecodeError, ValueError) as exc:
                   failures.append(f"JSON-LD must parse as an object graph: {exc}")
                   graph = []
               typed = {}
