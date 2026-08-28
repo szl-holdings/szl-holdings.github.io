@@ -200,6 +200,7 @@ jobs:
               if observed != [expected]:
                   failures.append(f"{key} must be exactly {expected}; observed {observed}")
 
+          graph = []
           if len(bindings.json_ld) != 1:
               failures.append(f"expected exactly one JSON-LD block; observed {len(bindings.json_ld)}")
           else:
@@ -254,6 +255,16 @@ jobs:
               if website.get("publisher") != {"@id": origin + "#org"}:
                   failures.append("JSON-LD WebSite publisher must bind to the canonical Organization")
 
+          def iter_json_string_values(value):
+              if isinstance(value, str):
+                  yield value
+              elif isinstance(value, list):
+                  for item in value:
+                      yield from iter_json_string_values(item)
+              elif isinstance(value, dict):
+                  for item in value.values():
+                      yield from iter_json_string_values(item)
+
           robot_sitemaps = [
               line.split(":", 1)[1].strip()
               for line in robots_text.splitlines()
@@ -286,6 +297,7 @@ jobs:
               bindings.canonicals
               + [value for values in bindings.metadata.values() for value in values]
               + bindings.json_ld
+              + list(iter_json_string_values(graph))
               + [robots_text, sitemap_text]
           )
           def normalize_identity_hostname(url):
