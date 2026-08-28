@@ -227,19 +227,25 @@ jobs:
                   json_ld_document = {}
                   graph = []
               typed = {}
-              for node in graph:
-                  if not isinstance(node, dict):
-                      continue
-                  node_types = node.get("@type", [])
+              def collect_typed_identities(value):
+                  if isinstance(value, list):
+                      for item in value:
+                          collect_typed_identities(item)
+                      return
+                  if not isinstance(value, dict):
+                      return
+                  node_types = value.get("@type", [])
                   if isinstance(node_types, str):
                       node_types = [node_types]
-                  if not (
+                  if (
                       isinstance(node_types, list)
                       and all(isinstance(node_type, str) for node_type in node_types)
                   ):
-                      continue
-                  for node_type in node_types:
-                      typed.setdefault(node_type, []).append(node)
+                      for node_type in node_types:
+                          typed.setdefault(node_type, []).append(value)
+                  for item in value.values():
+                      collect_typed_identities(item)
+              collect_typed_identities(json_ld_document)
               organization_nodes = typed.get("Organization", [])
               website_nodes = typed.get("WebSite", [])
               if len(organization_nodes) != 1:
@@ -316,7 +322,10 @@ jobs:
                   parsed = urllib.parse.urlsplit(url)
               except ValueError as exc:
                   raise ValueError("URL authority is malformed") from exc
-              if parsed.scheme.casefold() not in {"http", "https"}:
+              scheme = parsed.scheme.casefold()
+              if scheme not in {"http", "https", ""}:
+                  raise ValueError("identity URL must use HTTP, HTTPS, or a network-path reference")
+              if scheme == "" and not url.startswith("//"):
                   raise ValueError("identity URL must use HTTP or HTTPS")
               authority = parsed.netloc
               if not authority:
@@ -336,6 +345,10 @@ jobs:
                   raise ValueError("URL hostname or port is malformed") from exc
               if not hostname:
                   raise ValueError("URL does not contain a hostname")
+              if hostname.startswith("[") and hostname.endswith("]"):
+                  hostname = hostname[1:-1]
+              if ":" in hostname:
+                  return hostname.casefold()
               if re.search(r"%(?![0-9A-Fa-f]{2})", hostname):
                   raise ValueError("hostname contains a malformed percent escape")
               try:
@@ -365,6 +378,7 @@ jobs:
               "https://szl-holdings\u3002github\u3002io/",
               "https://szl-holdings.github.io\u3002/",
               "https://szl-holdings%2egithub%2eio/",
+              "//szl-holdings.github.io/",
           )
           if normalized_fallback_host != fallback_host.casefold() or any(
               normalize_identity_hostname(url) != normalized_fallback_host
@@ -375,14 +389,21 @@ jobs:
               "https://szl-holdings.github.io.evil.example/"
           ) == normalized_fallback_host:
               failures.append("identity hostname normalizer must preserve DNS label boundaries")
+          try:
+              ipv6_host = normalize_identity_hostname("https://[2001:db8::1]/")
+          except ValueError:
+              failures.append("identity hostname normalizer must allow IPv6 literals")
+          else:
+              if ipv6_host != "2001:db8::1":
+                  failures.append("identity hostname normalizer must preserve IPv6 literals")
 
           identity_urls = set(
-              re.findall(r'https?://[^\s"\'<>]+', identity_surface, flags=re.IGNORECASE)
+              re.findall(r'(?:https?:)?//[^\s"\'<>]+', identity_surface, flags=re.IGNORECASE)
           )
           identity_urls.update(
               value.strip()
               for value in identity_values
-              if re.match(r"(?i)^https?:", value.strip())
+              if re.match(r"(?i)^(?:https?:)?//", value.strip())
           )
           identity_hosts = set()
           for url in identity_urls:
