@@ -152,7 +152,8 @@ jobs:
                       src = values.get("src", "")
                       if urllib.parse.urlparse(src).path.endswith("app.js"):
                           self.scripts.append(src)
-                      if values.get("type") == "application/ld+json":
+                      media_type = values.get("type", "").split(";", 1)[0].strip().casefold()
+                      if media_type == "application/ld+json":
                           self._json_ld_parts = []
 
               def handle_data(self, data):
@@ -200,6 +201,7 @@ jobs:
               if observed != [expected]:
                   failures.append(f"{key} must be exactly {expected}; observed {observed}")
 
+          json_ld_document = {}
           graph = []
           if len(bindings.json_ld) != 1:
               failures.append(f"expected exactly one JSON-LD block; observed {len(bindings.json_ld)}")
@@ -213,12 +215,16 @@ jobs:
                   return result
 
               try:
-                  graph = json.loads(
+                  json_ld_document = json.loads(
                       bindings.json_ld[0],
                       object_pairs_hook=reject_duplicate_json_keys,
-                  ).get("@graph", [])
+                  )
+                  if not isinstance(json_ld_document, dict):
+                      raise ValueError("top-level JSON-LD value must be an object")
+                  graph = json_ld_document.get("@graph", [])
               except (AttributeError, json.JSONDecodeError, ValueError) as exc:
                   failures.append(f"JSON-LD must parse as an object graph: {exc}")
+                  json_ld_document = {}
                   graph = []
               typed = {}
               for node in graph:
@@ -293,18 +299,41 @@ jobs:
           if "https://github.com/szl-holdings" not in bindings.hrefs:
               failures.append("the explicit GitHub organization source link must remain present")
 
-          identity_surface = "\n".join(
+          identity_values = (
               bindings.canonicals
               + [value for values in bindings.metadata.values() for value in values]
-              + bindings.json_ld
-              + list(iter_json_string_values(graph))
-              + [robots_text, sitemap_text]
+              + list(iter_json_string_values(json_ld_document))
+              + robot_sitemaps
+              + [value for value in sitemap_locations if isinstance(value, str)]
+          )
+          identity_surface = "\n".join(
+              identity_values + bindings.json_ld + [robots_text, sitemap_text]
           )
           def normalize_identity_hostname(url):
+              if any(character.isspace() or ord(character) < 0x20 for character in url):
+                  raise ValueError("URL contains whitespace or control characters")
               try:
-                  hostname = urllib.parse.urlparse(url).hostname
+                  parsed = urllib.parse.urlsplit(url)
               except ValueError as exc:
-                  raise ValueError("URL hostname is malformed") from exc
+                  raise ValueError("URL authority is malformed") from exc
+              if parsed.scheme.casefold() not in {"http", "https"}:
+                  raise ValueError("identity URL must use HTTP or HTTPS")
+              authority = parsed.netloc
+              if not authority:
+                  raise ValueError("URL does not contain an authority")
+              if re.search(r"%(?![0-9A-Fa-f]{2})", authority):
+                  raise ValueError("authority contains a malformed percent escape")
+              try:
+                  decoded_authority = urllib.parse.unquote_to_bytes(authority).decode("utf-8")
+              except UnicodeDecodeError as exc:
+                  raise ValueError("authority percent escapes are not valid UTF-8") from exc
+              if any(character in "\\/?#@" for character in decoded_authority):
+                  raise ValueError("decoded authority contains a prohibited delimiter")
+              try:
+                  hostname = parsed.hostname
+                  parsed.port
+              except ValueError as exc:
+                  raise ValueError("URL hostname or port is malformed") from exc
               if not hostname:
                   raise ValueError("URL does not contain a hostname")
               if re.search(r"%(?![0-9A-Fa-f]{2})", hostname):
@@ -347,8 +376,16 @@ jobs:
           ) == normalized_fallback_host:
               failures.append("identity hostname normalizer must preserve DNS label boundaries")
 
+          identity_urls = set(
+              re.findall(r'https?://[^\s"\'<>]+', identity_surface, flags=re.IGNORECASE)
+          )
+          identity_urls.update(
+              value.strip()
+              for value in identity_values
+              if re.match(r"(?i)^https?:", value.strip())
+          )
           identity_hosts = set()
-          for url in re.findall(r'https?://[^\s"\'<>]+', identity_surface, flags=re.IGNORECASE):
+          for url in identity_urls:
               try:
                   normalized_host = normalize_identity_hostname(url)
               except ValueError as exc:
