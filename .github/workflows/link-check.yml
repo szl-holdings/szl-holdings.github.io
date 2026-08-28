@@ -34,6 +34,7 @@ jobs:
 
           root = pathlib.Path(".")
           same_origin = {"szl-holdings.github.io", "holdings.a-11-oy.com"}
+          separately_published_paths = {"/docs-site/"}
           errors = []
 
           class Extractor(html.parser.HTMLParser):
@@ -68,6 +69,8 @@ jobs:
                       continue
                   p = urllib.parse.urlparse(ref)
                   if p.scheme in ("http", "https"):
+                      if p.path in separately_published_paths:
+                          continue
                       path = p.path.lstrip("/")
                       if path and not (root / path).exists():
                           errors.append(f"{htmlfile}: same-origin ref not found -> {ref}")
@@ -100,30 +103,75 @@ jobs:
           from pathlib import Path
           import hashlib
           import html.parser
+          import json
+          import re
           import urllib.parse
+          import xml.etree.ElementTree as ET
 
           html_text = Path("index.html").read_text(encoding="utf-8")
           script = Path("app.js").read_text(encoding="utf-8")
+          robots_text = Path("robots.txt").read_text(encoding="utf-8")
+          sitemap_text = Path("sitemap.xml").read_text(encoding="utf-8")
 
           class AssetBindings(html.parser.HTMLParser):
               def __init__(self):
                   super().__init__()
                   self.styles = []
                   self.scripts = []
+                  self.canonicals = []
+                  self.metadata = {}
+                  self.hrefs = []
+                  self.json_ld = []
+                  self.duplicate_identity_attributes = []
+                  self._json_ld_parts = None
 
               def handle_starttag(self, tag, attrs):
+                  attribute_names = [name.casefold() for name, _ in attrs]
+                  duplicates = sorted({
+                      name for name in attribute_names if attribute_names.count(name) > 1
+                  })
+                  if tag in {"link", "meta", "script"} and duplicates:
+                      self.duplicate_identity_attributes.append(
+                          f"{tag}: {', '.join(duplicates)}"
+                      )
                   values = dict(attrs)
-                  if tag == "link" and "stylesheet" in values.get("rel", "").split():
-                      href = values.get("href", "")
-                      if urllib.parse.urlparse(href).path.endswith("styles.css"):
+                  href = values.get("href", "")
+                  if href:
+                      self.hrefs.append(href)
+                  if tag == "link":
+                      rel = [token.casefold() for token in values.get("rel", "").split()]
+                      if "stylesheet" in rel and urllib.parse.urlparse(href).path.endswith("styles.css"):
                           self.styles.append(href)
+                      if "canonical" in rel:
+                          self.canonicals.append(href)
+                  if tag == "meta":
+                      identity = values.get("property") or values.get("name")
+                      if identity and values.get("content") is not None:
+                          self.metadata.setdefault(identity, []).append(values["content"])
                   if tag == "script":
                       src = values.get("src", "")
                       if urllib.parse.urlparse(src).path.endswith("app.js"):
                           self.scripts.append(src)
+                      media_type = values.get("type", "").split(";", 1)[0].strip().casefold()
+                      if media_type == "application/ld+json":
+                          self._json_ld_parts = []
+
+              def handle_data(self, data):
+                  if self._json_ld_parts is not None:
+                      self._json_ld_parts.append(data)
+
+              def handle_endtag(self, tag):
+                  if tag == "script" and self._json_ld_parts is not None:
+                      self.json_ld.append("".join(self._json_ld_parts))
+                      self._json_ld_parts = None
 
           bindings = AssetBindings()
           bindings.feed(html_text)
+          if bindings.duplicate_identity_attributes:
+              raise SystemExit(
+                  "Public truth contract FAILED: duplicate attributes on identity-bearing tags: "
+                  + "; ".join(bindings.duplicate_identity_attributes)
+              )
           for asset in ("styles.css", "app.js"):
               repository_bytes = Path(asset).read_bytes().replace(b"\r\n", b"\n")
               version = hashlib.sha256(repository_bytes).hexdigest()[:12]
@@ -134,6 +182,241 @@ jobs:
                       f"Public truth contract FAILED: {asset} must have exactly one active binding "
                       f"{binding}; observed {active}"
                   )
+          origin = "https://holdings.a-11-oy.com/"
+          image_url = origin + "assets/hero.png"
+          docs_url = origin + "docs-site/"
+          fallback_host = "szl-holdings.github.io"
+          failures = []
+
+          if Path("CNAME").read_text(encoding="utf-8").strip() != "holdings.a-11-oy.com":
+              failures.append("CNAME must remain holdings.a-11-oy.com")
+          if bindings.canonicals != [origin]:
+              failures.append(f"expected exactly one canonical {origin}; observed {bindings.canonicals}")
+          for key, expected in {
+              "og:url": origin,
+              "og:image": image_url,
+              "twitter:image": image_url,
+          }.items():
+              observed = bindings.metadata.get(key, [])
+              if observed != [expected]:
+                  failures.append(f"{key} must be exactly {expected}; observed {observed}")
+
+          json_ld_document = {}
+          graph = []
+          if len(bindings.json_ld) != 1:
+              failures.append(f"expected exactly one JSON-LD block; observed {len(bindings.json_ld)}")
+          else:
+              def reject_duplicate_json_keys(pairs):
+                  result = {}
+                  for key, value in pairs:
+                      if key in result:
+                          raise ValueError(f"duplicate JSON key: {key}")
+                      result[key] = value
+                  return result
+
+              try:
+                  json_ld_document = json.loads(
+                      bindings.json_ld[0],
+                      object_pairs_hook=reject_duplicate_json_keys,
+                  )
+                  if not isinstance(json_ld_document, dict):
+                      raise ValueError("top-level JSON-LD value must be an object")
+                  graph = json_ld_document.get("@graph", [])
+              except (AttributeError, json.JSONDecodeError, ValueError) as exc:
+                  failures.append(f"JSON-LD must parse as an object graph: {exc}")
+                  json_ld_document = {}
+                  graph = []
+              typed = {}
+              def collect_typed_identities(value):
+                  if isinstance(value, list):
+                      for item in value:
+                          collect_typed_identities(item)
+                      return
+                  if not isinstance(value, dict):
+                      return
+                  node_types = value.get("@type", [])
+                  if isinstance(node_types, str):
+                      node_types = [node_types]
+                  if (
+                      isinstance(node_types, list)
+                      and all(isinstance(node_type, str) for node_type in node_types)
+                  ):
+                      for node_type in node_types:
+                          typed.setdefault(node_type, []).append(value)
+                  for item in value.values():
+                      collect_typed_identities(item)
+              collect_typed_identities(json_ld_document)
+              organization_nodes = typed.get("Organization", [])
+              website_nodes = typed.get("WebSite", [])
+              if len(organization_nodes) != 1:
+                  failures.append(
+                      "JSON-LD must contain exactly one Organization; "
+                      f"observed {len(organization_nodes)}"
+                  )
+              if len(website_nodes) != 1:
+                  failures.append(
+                      "JSON-LD must contain exactly one WebSite; "
+                      f"observed {len(website_nodes)}"
+                  )
+              organization = organization_nodes[0] if len(organization_nodes) == 1 else {}
+              website = website_nodes[0] if len(website_nodes) == 1 else {}
+              if organization.get("@id") != origin + "#org" or organization.get("url") != origin:
+                  failures.append("JSON-LD Organization identity must bind to the canonical origin")
+              if website.get("@id") != origin + "#site" or website.get("url") != origin:
+                  failures.append("JSON-LD WebSite identity must bind to the canonical origin")
+              if website.get("publisher") != {"@id": origin + "#org"}:
+                  failures.append("JSON-LD WebSite publisher must bind to the canonical Organization")
+
+          def iter_json_string_values(value):
+              if isinstance(value, str):
+                  yield value
+              elif isinstance(value, list):
+                  for item in value:
+                      yield from iter_json_string_values(item)
+              elif isinstance(value, dict):
+                  for item in value.values():
+                      yield from iter_json_string_values(item)
+
+          robot_sitemaps = [
+              line.split(":", 1)[1].strip()
+              for line in robots_text.splitlines()
+              if line.lower().startswith("sitemap:")
+          ]
+          if robot_sitemaps != [origin + "sitemap.xml"]:
+              failures.append(f"robots.txt sitemap must bind to the canonical origin; observed {robot_sitemaps}")
+          try:
+              sitemap_root = ET.fromstring(sitemap_text)
+              sitemap_locations = [
+                  node.text for node in sitemap_root.findall(
+                      ".//{http://www.sitemaps.org/schemas/sitemap/0.9}loc"
+                  )
+              ]
+          except ET.ParseError as exc:
+              failures.append(f"sitemap.xml must parse: {exc}")
+              sitemap_locations = []
+          if sitemap_locations != [origin]:
+              failures.append(f"sitemap.xml must publish exactly the canonical origin; observed {sitemap_locations}")
+
+          docs_targets = [href for href in bindings.hrefs if "docs-site" in href]
+          if docs_targets != [docs_url] * 4:
+              failures.append(
+                  f"all four visible developer-docs CTAs must target {docs_url}; observed {docs_targets}"
+              )
+          if "https://github.com/szl-holdings" not in bindings.hrefs:
+              failures.append("the explicit GitHub organization source link must remain present")
+
+          identity_values = (
+              bindings.canonicals
+              + [value for values in bindings.metadata.values() for value in values]
+              + list(iter_json_string_values(json_ld_document))
+              + robot_sitemaps
+              + [value for value in sitemap_locations if isinstance(value, str)]
+          )
+          identity_surface = "\n".join(
+              identity_values + bindings.json_ld + [robots_text, sitemap_text]
+          )
+          def normalize_identity_hostname(url):
+              if any(character.isspace() or ord(character) < 0x20 for character in url):
+                  raise ValueError("URL contains whitespace or control characters")
+              try:
+                  parsed = urllib.parse.urlsplit(url)
+              except ValueError as exc:
+                  raise ValueError("URL authority is malformed") from exc
+              scheme = parsed.scheme.casefold()
+              if scheme not in {"http", "https", ""}:
+                  raise ValueError("identity URL must use HTTP, HTTPS, or a network-path reference")
+              if scheme == "" and not url.startswith("//"):
+                  raise ValueError("identity URL must use HTTP or HTTPS")
+              authority = parsed.netloc
+              if not authority:
+                  raise ValueError("URL does not contain an authority")
+              if re.search(r"%(?![0-9A-Fa-f]{2})", authority):
+                  raise ValueError("authority contains a malformed percent escape")
+              try:
+                  decoded_authority = urllib.parse.unquote_to_bytes(authority).decode("utf-8")
+              except UnicodeDecodeError as exc:
+                  raise ValueError("authority percent escapes are not valid UTF-8") from exc
+              if any(character in "\\/?#@" for character in decoded_authority):
+                  raise ValueError("decoded authority contains a prohibited delimiter")
+              try:
+                  hostname = parsed.hostname
+                  parsed.port
+              except ValueError as exc:
+                  raise ValueError("URL hostname or port is malformed") from exc
+              if not hostname:
+                  raise ValueError("URL does not contain a hostname")
+              if hostname.startswith("[") and hostname.endswith("]"):
+                  hostname = hostname[1:-1]
+              if ":" in hostname:
+                  return hostname.casefold()
+              if re.search(r"%(?![0-9A-Fa-f]{2})", hostname):
+                  raise ValueError("hostname contains a malformed percent escape")
+              try:
+                  hostname = urllib.parse.unquote_to_bytes(hostname).decode("utf-8")
+              except UnicodeDecodeError as exc:
+                  raise ValueError("hostname percent escapes are not valid UTF-8") from exc
+              if any(
+                  character.isspace()
+                  or ord(character) < 0x20
+                  or character in "%/\\?#@:[]"
+                  for character in hostname
+              ):
+                  raise ValueError("decoded hostname contains a prohibited delimiter")
+              try:
+                  normalized = hostname.encode("idna").decode("ascii").rstrip(".").casefold()
+              except UnicodeError as exc:
+                  raise ValueError("hostname is not valid IDNA") from exc
+              if not normalized or normalized.startswith(".") or ".." in normalized:
+                  raise ValueError("hostname contains an empty DNS label")
+              return normalized
+
+          normalized_fallback_host = normalize_identity_hostname(
+              "https://" + fallback_host + "/"
+          )
+          equivalent_fallback_urls = (
+              "https://SZL-HOLDINGS.GITHUB.IO./",
+              "https://szl-holdings\u3002github\u3002io/",
+              "https://szl-holdings.github.io\u3002/",
+              "https://szl-holdings%2egithub%2eio/",
+              "//szl-holdings.github.io/",
+          )
+          if normalized_fallback_host != fallback_host.casefold() or any(
+              normalize_identity_hostname(url) != normalized_fallback_host
+              for url in equivalent_fallback_urls
+          ):
+              failures.append("identity hostname normalizer must reject equivalent fallback DNS names")
+          if normalize_identity_hostname(
+              "https://szl-holdings.github.io.evil.example/"
+          ) == normalized_fallback_host:
+              failures.append("identity hostname normalizer must preserve DNS label boundaries")
+          try:
+              ipv6_host = normalize_identity_hostname("https://[2001:db8::1]/")
+          except ValueError:
+              failures.append("identity hostname normalizer must allow IPv6 literals")
+          else:
+              if ipv6_host != "2001:db8::1":
+                  failures.append("identity hostname normalizer must preserve IPv6 literals")
+
+          identity_urls = set(
+              re.findall(r'(?:https?:)?//[^\s"\'<>]+', identity_surface, flags=re.IGNORECASE)
+          )
+          identity_urls.update(
+              value.strip()
+              for value in identity_values
+              if re.match(r"(?i)^(?:https?:)?//", value.strip())
+          )
+          identity_hosts = set()
+          for url in identity_urls:
+              try:
+                  normalized_host = normalize_identity_hostname(url)
+              except ValueError as exc:
+                  failures.append(f"identity URL hostname must be valid ({url!r}): {exc}")
+                  continue
+              if normalized_host:
+                  identity_hosts.add(normalized_host)
+          if normalized_fallback_host in identity_hosts:
+              failures.append("stale fallback-host identity is prohibited in canonical metadata")
+
           required = {
               'href="#main-content"': "skip link",
               'aria-controls="primaryNavigation"': "menu ownership",
@@ -159,7 +442,6 @@ jobs:
               "https://alloyszlholdings.com/szl-concierge/pubkey": "unbound public-key route",
               "live projection · one receipt routing": "modeled diagram labeled live",
           }
-          failures = []
           joined = html_text + "\n" + script
           for needle, label in required.items():
               if needle not in joined:

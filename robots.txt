@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://szl-holdings.github.io/sitemap.xml
+Sitemap: https://holdings.a-11-oy.com/sitemap.xml
