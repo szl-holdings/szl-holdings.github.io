@@ -104,6 +104,7 @@ jobs:
           import hashlib
           import html.parser
           import json
+          import re
           import urllib.parse
           import xml.etree.ElementTree as ET
 
@@ -129,7 +130,7 @@ jobs:
                   if href:
                       self.hrefs.append(href)
                   if tag == "link":
-                      rel = values.get("rel", "").split()
+                      rel = [token.casefold() for token in values.get("rel", "").split()]
                       if "stylesheet" in rel and urllib.parse.urlparse(href).path.endswith("styles.css"):
                           self.styles.append(href)
                       if "canonical" in rel:
@@ -195,8 +196,18 @@ jobs:
                   graph = []
               typed = {}
               for node in graph:
-                  if isinstance(node, dict) and isinstance(node.get("@type"), str):
-                      typed.setdefault(node["@type"], []).append(node)
+                  if not isinstance(node, dict):
+                      continue
+                  node_types = node.get("@type", [])
+                  if isinstance(node_types, str):
+                      node_types = [node_types]
+                  if not (
+                      isinstance(node_types, list)
+                      and all(isinstance(node_type, str) for node_type in node_types)
+                  ):
+                      continue
+                  for node_type in node_types:
+                      typed.setdefault(node_type, []).append(node)
               organization_nodes = typed.get("Organization", [])
               website_nodes = typed.get("WebSite", [])
               if len(organization_nodes) != 1:
@@ -252,7 +263,11 @@ jobs:
               + bindings.json_ld
               + [robots_text, sitemap_text]
           )
-          if fallback_host in identity_surface:
+          identity_hosts = {
+              (urllib.parse.urlparse(url).hostname or "").casefold()
+              for url in re.findall(r'https?://[^\s"\'<>]+', identity_surface, flags=re.IGNORECASE)
+          }
+          if fallback_host.casefold() in identity_hosts:
               failures.append("stale fallback-host identity is prohibited in canonical metadata")
 
           required = {
