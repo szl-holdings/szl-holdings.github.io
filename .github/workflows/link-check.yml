@@ -288,11 +288,41 @@ jobs:
               + bindings.json_ld
               + [robots_text, sitemap_text]
           )
+          def normalize_identity_hostname(url):
+              try:
+                  hostname = urllib.parse.urlparse(url).hostname
+              except ValueError:
+                  return None
+              if not hostname:
+                  return None
+              try:
+                  return hostname.encode("idna").decode("ascii").rstrip(".").casefold()
+              except UnicodeError:
+                  return None
+
+          normalized_fallback_host = normalize_identity_hostname(
+              "https://" + fallback_host + "/"
+          )
+          equivalent_fallback_urls = (
+              "https://SZL-HOLDINGS.GITHUB.IO./",
+              "https://szl-holdings\u3002github\u3002io/",
+              "https://szl-holdings.github.io\u3002/",
+          )
+          if normalized_fallback_host != fallback_host.casefold() or any(
+              normalize_identity_hostname(url) != normalized_fallback_host
+              for url in equivalent_fallback_urls
+          ):
+              failures.append("identity hostname normalizer must reject equivalent fallback DNS names")
+          if normalize_identity_hostname(
+              "https://szl-holdings.github.io.evil.example/"
+          ) == normalized_fallback_host:
+              failures.append("identity hostname normalizer must preserve DNS label boundaries")
+
           identity_hosts = {
-              (urllib.parse.urlparse(url).hostname or "").casefold()
+              normalize_identity_hostname(url)
               for url in re.findall(r'https?://[^\s"\'<>]+', identity_surface, flags=re.IGNORECASE)
           }
-          if fallback_host.casefold() in identity_hosts:
+          if normalized_fallback_host in identity_hosts:
               failures.append("stale fallback-host identity is prohibited in canonical metadata")
 
           required = {
