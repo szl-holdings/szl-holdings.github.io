@@ -303,14 +303,30 @@ jobs:
           def normalize_identity_hostname(url):
               try:
                   hostname = urllib.parse.urlparse(url).hostname
-              except ValueError:
-                  return None
+              except ValueError as exc:
+                  raise ValueError("URL hostname is malformed") from exc
               if not hostname:
-                  return None
+                  raise ValueError("URL does not contain a hostname")
+              if re.search(r"%(?![0-9A-Fa-f]{2})", hostname):
+                  raise ValueError("hostname contains a malformed percent escape")
               try:
-                  return hostname.encode("idna").decode("ascii").rstrip(".").casefold()
-              except UnicodeError:
-                  return None
+                  hostname = urllib.parse.unquote_to_bytes(hostname).decode("utf-8")
+              except UnicodeDecodeError as exc:
+                  raise ValueError("hostname percent escapes are not valid UTF-8") from exc
+              if any(
+                  character.isspace()
+                  or ord(character) < 0x20
+                  or character in "%/\\?#@:[]"
+                  for character in hostname
+              ):
+                  raise ValueError("decoded hostname contains a prohibited delimiter")
+              try:
+                  normalized = hostname.encode("idna").decode("ascii").rstrip(".").casefold()
+              except UnicodeError as exc:
+                  raise ValueError("hostname is not valid IDNA") from exc
+              if not normalized or normalized.startswith(".") or ".." in normalized:
+                  raise ValueError("hostname contains an empty DNS label")
+              return normalized
 
           normalized_fallback_host = normalize_identity_hostname(
               "https://" + fallback_host + "/"
@@ -319,6 +335,7 @@ jobs:
               "https://SZL-HOLDINGS.GITHUB.IO./",
               "https://szl-holdings\u3002github\u3002io/",
               "https://szl-holdings.github.io\u3002/",
+              "https://szl-holdings%2egithub%2eio/",
           )
           if normalized_fallback_host != fallback_host.casefold() or any(
               normalize_identity_hostname(url) != normalized_fallback_host
@@ -330,10 +347,15 @@ jobs:
           ) == normalized_fallback_host:
               failures.append("identity hostname normalizer must preserve DNS label boundaries")
 
-          identity_hosts = {
-              normalize_identity_hostname(url)
-              for url in re.findall(r'https?://[^\s"\'<>]+', identity_surface, flags=re.IGNORECASE)
-          }
+          identity_hosts = set()
+          for url in re.findall(r'https?://[^\s"\'<>]+', identity_surface, flags=re.IGNORECASE):
+              try:
+                  normalized_host = normalize_identity_hostname(url)
+              except ValueError as exc:
+                  failures.append(f"identity URL hostname must be valid ({url!r}): {exc}")
+                  continue
+              if normalized_host:
+                  identity_hosts.add(normalized_host)
           if normalized_fallback_host in identity_hosts:
               failures.append("stale fallback-host identity is prohibited in canonical metadata")
 
