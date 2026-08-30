@@ -294,8 +294,26 @@ jobs:
           except ET.ParseError as exc:
               failures.append(f"sitemap.xml must parse: {exc}")
               sitemap_locations = []
-          if sitemap_locations != [origin]:
-              failures.append(f"sitemap.xml must publish exactly the canonical origin; observed {sitemap_locations}")
+          expected_sitemap_locations = [
+              origin,
+              origin + "brain/",
+              origin + "khipu/",
+          ]
+          if sitemap_locations != expected_sitemap_locations:
+              failures.append(
+                  "sitemap.xml must publish the complete ordered canonical route set; "
+                  f"expected {expected_sitemap_locations}; observed {sitemap_locations}"
+              )
+
+          for route in ("brain", "khipu"):
+              route_bindings = AssetBindings()
+              route_bindings.feed(Path(route, "index.html").read_text(encoding="utf-8"))
+              expected_route = origin + route + "/"
+              if route_bindings.canonicals != [expected_route]:
+                  failures.append(
+                      f"{route}/index.html must bind exactly once to {expected_route}; "
+                      f"observed {route_bindings.canonicals}"
+                  )
 
           docs_targets = [href for href in bindings.hrefs if "docs-site" in href]
           if docs_targets != [docs_url] * 4:
