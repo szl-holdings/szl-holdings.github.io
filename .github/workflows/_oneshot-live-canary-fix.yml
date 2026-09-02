@@ -1,0 +1,48 @@
+name: One-shot live canary remediation
+
+on:
+  push:
+    branches:
+      - fix/live-canary-touch-overflow-20260902
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/live-canary-touch-overflow-20260902
+          fetch-depth: 0
+      - name: Patch live accessibility contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          css_path = Path('styles.css')
+          css = css_path.read_text()
+          marker = '/* live-canary accessibility remediation 2026-09-02 */'
+          if marker in css:
+              raise SystemExit('remediation marker already present')
+          css += '''\n\n/* live-canary accessibility remediation 2026-09-02 */\nhtml,body{width:100%;max-width:100%;overflow-x:clip}\n*:where(:not(svg):not(svg *)){min-width:0}\n.nav-links a{display:inline-flex;align-items:center;min-height:44px;padding-top:10px;padding-bottom:10px}\n.nav-cta{min-height:44px}\n.btn{min-height:44px}\n.btn-text{padding-top:10px;padding-bottom:10px}\n.hero,.section,.footer,.nav{max-width:100%}\nimg,canvas,svg,pre{max-width:100%}\n@media(max-width:620px){.hero-cta .btn{min-height:48px}.hero-cta .btn-text{padding-top:12px;padding-bottom:12px}}\n'''
+          css_path.write_text(css)
+
+          index_path = Path('index.html')
+          index = index_path.read_text()
+          old = 'styles.css?v=91e3ac2cc0d4'
+          new = 'styles.css?v=20260902a11y'
+          if old not in index:
+              raise SystemExit(f'expected stylesheet version marker missing: {old}')
+          index_path.write_text(index.replace(old, new, 1))
+          PY
+          rm .github/workflows/_oneshot-live-canary-fix.yml
+          git config user.name 'szl-build-fix[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add styles.css index.html .github/workflows/_oneshot-live-canary-fix.yml
+          git diff --cached --check
+          git commit -s -m 'fix(frontend): satisfy live touch and overflow contracts'
+          git push origin HEAD:fix/live-canary-touch-overflow-20260902
