@@ -1,0 +1,34 @@
+{
+  "observed_at_utc": "2026-09-02T19:40:23Z",
+  "evidence_class": "MEASURED",
+  "observer": "Grok session against public HTTP",
+  "this_repo": "szl-holdings/szl-holdings.github.io",
+  "cname_in_repo": "a-11-oy.com",
+  "apex": {
+    "host": "a-11-oy.com",
+    "path_/": { "status": 200, "front": "cloudflare+github-pages" },
+    "path_/console": { "status": 404, "front": "github-pages", "repair": "console/index.html on this branch" },
+    "path_/api/a11oy/v1/honest": { "status": 404, "front": "github-pages", "repair": "static pointer, not a runtime" }
+  },
+  "runtime": {
+    "url": "https://szlholdings-a11oy.hf.space/",
+    "status": 200,
+    "server": "szl",
+    "note": "Space HTTP 200 is reachability. Not a production certificate."
+  },
+  "proof": {
+    "url": "https://a11oy.net/",
+    "status": 200,
+    "front": "cloudflare+github-pages"
+  },
+  "pplx": {
+    "url": "https://a11oy-verify.pplx.app/",
+    "role": "offline verifier sidecar",
+    "not_product_origin": true
+  },
+  "boundaries": {
+    "this_origin_is_not_runtime": true,
+    "does_not_change_dns": true,
+    "lambda": "Conjecture 1"
+  }
+}
