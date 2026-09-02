@@ -374,3 +374,15 @@ body.menu-open{overflow:hidden}
 .holo-cap{position:absolute;left:0;right:0;bottom:12px;text-align:center;font-family:var(--mono);font-size:11px;
   letter-spacing:.14em;text-transform:uppercase;color:var(--muted);opacity:.7}
 @media(prefers-reduced-motion:reduce){.holo-scan{animation:none}}
+
+
+/* live-canary accessibility remediation 2026-09-02 */
+html,body{width:100%;max-width:100%;overflow-x:clip}
+*:where(:not(svg):not(svg *)){min-width:0}
+.nav-links a{display:inline-flex;align-items:center;min-height:44px;padding-top:10px;padding-bottom:10px}
+.nav-cta{min-height:44px}
+.btn{min-height:44px}
+.btn-text{padding-top:10px;padding-bottom:10px}
+.hero,.section,.footer,.nav{max-width:100%}
+img,canvas,svg,pre{max-width:100%}
+@media(max-width:620px){.hero-cta .btn{min-height:48px}.hero-cta .btn-text{padding-top:12px;padding-bottom:12px}}
