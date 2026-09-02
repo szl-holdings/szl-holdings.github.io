@@ -1,0 +1,29 @@
+{
+  "artifact_kind": "static",
+  "probe_contract": "STATIC_DOCUMENT",
+  "evidence_class": "MEASURED",
+  "surface": "a-11-oy.com",
+  "path": "/api/a11oy/v1/honest.json",
+  "meaning": "This file is a committed static JSON document on GitHub Pages (szl-holdings.github.io). Receiving it proves only that this exact path was served. It is not the runtime doctrine posture, not DSSE-LIVE, and not product readiness.",
+  "runtime_doctrine_posture": "UNAVAILABLE_ON_THIS_ORIGIN",
+  "runtime_url": "https://szlholdings-a11oy.hf.space/api/a11oy/v1/honest",
+  "console_url": "https://szlholdings-a11oy.hf.space/console",
+  "verify_url": "https://szlholdings-a11oy.hf.space/verify",
+  "proof_origin": "https://a11oy.net",
+  "record": "https://a11oy.net/record.json",
+  "doctrine": "v11",
+  "doctrine_state": "LOCKED",
+  "lambda": "Conjecture 1",
+  "lambda_note": "Λ-Aggregator Uniqueness is Conjecture 1 — advisory, never a theorem.",
+  "locked_formula_count": 8,
+  "signer": "unavailable",
+  "dsse_live": "NOT_CLAIMED",
+  "live_chain": "UNAVAILABLE",
+  "product_runtime_readiness": "NOT_MEASURED",
+  "observed_at_utc": "2026-09-02T19:45:00Z",
+  "boundaries": {
+    "this_origin_is_not_runtime": true,
+    "does_not_change_dns": true,
+    "never_a11oy_com": true
+  }
+}
