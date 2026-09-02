@@ -12,7 +12,7 @@ Proof: [a11oy.net](https://a11oy.net)
 <!-- /szl:header -->
 
 Source for the **SZL Holdings** front-door website, served via GitHub Pages at
-**[holdings.a-11-oy.com](https://holdings.a-11-oy.com)** (custom domain set in
+**[a-11-oy.com](https://a-11-oy.com)** (custom domain set in
 [`CNAME`](./CNAME); also reachable at
 [szl-holdings.github.io](https://szl-holdings.github.io/)).
 
@@ -32,7 +32,7 @@ duplicate product or console content.
 | [`styles.css`](./styles.css) | Site styles (KANCHAY palette; no runtime CDN for layout) |
 | [`app.js`](./app.js) | Front-end interactions |
 | [`assets/hero.png`](./assets/hero.png) | Open Graph / Twitter social-preview image |
-| [`CNAME`](./CNAME) | Custom domain: `holdings.a-11-oy.com` |
+| [`CNAME`](./CNAME) | Custom domain: `a-11-oy.com` |
 | [`robots.txt`](./robots.txt) · [`sitemap.xml`](./sitemap.xml) | Crawl + indexing hints |
 | `.nojekyll` | Serve files as-is (skip Jekyll processing) |
 
@@ -60,7 +60,7 @@ on the runner — no external link-checking service.
 ## Related
 
 - **Flagship product:** [a-11-oy.com](https://a-11-oy.com)
-- **Docs:** [szl-holdings.github.io/docs-site](https://szl-holdings.github.io/docs-site/)
+- **Docs:** [a-11-oy.com/docs-site](https://a-11-oy.com/docs-site/)
 - **Org:** [github.com/szl-holdings](https://github.com/szl-holdings)
 
 ## License
