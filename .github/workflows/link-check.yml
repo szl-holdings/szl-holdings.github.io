@@ -33,7 +33,7 @@ jobs:
           import xml.etree.ElementTree as ET
 
           root = pathlib.Path(".")
-          same_origin = {"szl-holdings.github.io", "holdings.a-11-oy.com"}
+          same_origin = {"szl-holdings.github.io", "a-11-oy.com"}
           separately_published_paths = {"/docs-site/"}
           errors = []
 
@@ -182,14 +182,14 @@ jobs:
                       f"Public truth contract FAILED: {asset} must have exactly one active binding "
                       f"{binding}; observed {active}"
                   )
-          origin = "https://holdings.a-11-oy.com/"
+          origin = "https://a-11-oy.com/"
           image_url = origin + "assets/hero.png"
           docs_url = origin + "docs-site/"
           fallback_host = "szl-holdings.github.io"
           failures = []
 
-          if Path("CNAME").read_text(encoding="utf-8").strip() != "holdings.a-11-oy.com":
-              failures.append("CNAME must remain holdings.a-11-oy.com")
+          if Path("CNAME").read_text(encoding="utf-8").strip() != "a-11-oy.com":
+              failures.append("CNAME must remain a-11-oy.com")
           if bindings.canonicals != [origin]:
               failures.append(f"expected exactly one canonical {origin}; observed {bindings.canonicals}")
           for key, expected in {
