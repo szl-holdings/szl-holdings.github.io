@@ -1,0 +1,43 @@
+name: One-shot apex truth contract fix
+
+on:
+  push:
+    branches: [fix/apex-truth-contract-20260902]
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          ref: fix/apex-truth-contract-20260902
+      - name: Align canonical truth contract to apex
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          workflow = Path('.github/workflows/link-check.yml')
+          text = workflow.read_text(encoding='utf-8')
+          old = 'holdings.a-11-oy.com'
+          new = 'a-11-oy.com'
+          if old not in text:
+              raise SystemExit('expected stale holdings canonical not found in link-check workflow')
+          workflow.write_text(text.replace(old, new), encoding='utf-8')
+
+          readme = Path('README.md')
+          rtext = readme.read_text(encoding='utf-8')
+          readme.write_text(rtext.replace(old, new), encoding='utf-8')
+
+          Path('.github/workflows/one-shot-apex-truth-fix.yml').unlink()
+          PY
+          git config user.name "szl-build-fix[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/workflows/link-check.yml README.md .github/workflows/one-shot-apex-truth-fix.yml
+          git diff --cached --check
+          git commit -m "fix(ci): align public truth contract to apex" -m "Signed-off-by: szl-build-fix[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
+          git push origin HEAD:fix/apex-truth-contract-20260902
