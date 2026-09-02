@@ -85,7 +85,5 @@ jobs:
           git config user.email 'stephenlutar2@gmail.com'
           git add -A
           git diff --cached --check
-          git commit -m 'fix(ci): resolve root-relative site paths from repository root
-
-Signed-off-by: Stephen Lutar <stephenlutar2@gmail.com>'
+          git commit -m 'fix(ci): resolve root-relative site paths from repository root' -m 'Signed-off-by: Stephen Lutar <stephenlutar2@gmail.com>'
           git push origin HEAD:feat/responsive-apex-v3
