@@ -1,0 +1,362 @@
+/*
+ * SZL Apex Responsive Experience v3
+ * Mobile-first product-front-door composition for a-11-oy.com.
+ * The apex remains a static front door; dynamic runtime functions live at the
+ * canonical A11oy Space and are linked honestly by the published pages.
+ */
+
+:root {
+  --apex-stage: 100rem;
+  --apex-reading: 70ch;
+  --apex-gutter: clamp(1rem, 2.5vw, 2.8rem);
+  --apex-gap: clamp(.85rem, 1.7vw, 1.5rem);
+  --apex-section: clamp(3.5rem, 8vw, 9rem);
+  --apex-touch: 44px;
+  --apex-touch-coarse: 48px;
+  --apex-safe-top: env(safe-area-inset-top, 0px);
+  --apex-safe-bottom: env(safe-area-inset-bottom, 0px);
+  --apex-h1: clamp(2.5rem, 1.65rem + 4.2vw, 7rem);
+  --apex-h2: clamp(1.75rem, 1.3rem + 2vw, 3.7rem);
+  --apex-h3: clamp(1.18rem, 1rem + .85vw, 1.9rem);
+  --apex-body: clamp(.98rem, .94rem + .18vw, 1.12rem);
+  --apex-progress: 0%;
+}
+
+html {
+  min-inline-size: 20rem;
+  max-inline-size: 100%;
+  overflow-x: clip;
+  scroll-padding-top: calc(4.5rem + var(--apex-safe-top));
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  min-inline-size: 0;
+}
+
+body {
+  max-inline-size: 100%;
+  overflow-x: clip;
+  font-size: var(--apex-body);
+  line-height: 1.58;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  z-index: 9999;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: var(--apex-progress);
+  block-size: 2px;
+  pointer-events: none;
+  background: currentColor;
+  opacity: .72;
+}
+
+:where(main, [role="main"]) {
+  inline-size: min(100%, var(--apex-stage));
+  margin-inline: auto;
+}
+
+:where(.container, .shell, .stage, .page-shell, .site-shell, .section-inner,
+  [data-apex-container]) {
+  inline-size: min(100%, var(--apex-stage));
+  margin-inline: auto;
+  padding-inline: var(--apex-gutter);
+}
+
+:where(article, section, header, footer, nav, aside) {
+  scroll-margin-top: calc(4.5rem + var(--apex-safe-top));
+}
+
+:where(.prose, .copy, .lede, .description, .intro, [data-apex-reading]) {
+  max-inline-size: var(--apex-reading);
+  overflow-wrap: anywhere;
+  text-wrap: pretty;
+}
+
+:where(h1, h2, h3, h4, h5, h6) {
+  max-inline-size: 24ch;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+h1 { font-size: var(--apex-h1); line-height: .96; }
+h2 { font-size: var(--apex-h2); line-height: 1.04; }
+h3 { font-size: var(--apex-h3); line-height: 1.14; }
+
+:where(p, li, dd, dt, figcaption, blockquote) { overflow-wrap: anywhere; }
+
+:where(img, picture, video, canvas, svg, iframe) {
+  display: block;
+  max-inline-size: 100%;
+}
+:where(img, video, canvas, svg) { block-size: auto; }
+
+:where(canvas, iframe, .visual, .hero-visual, .hologram, [data-apex-visual]) {
+  inline-size: 100%;
+  max-inline-size: 100%;
+  aspect-ratio: var(--apex-visual-ratio, 16 / 9);
+  contain: layout paint;
+}
+
+:where(pre, .code-block, .json-block) {
+  max-inline-size: 100%;
+  overflow: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-gutter: stable;
+  -webkit-overflow-scrolling: touch;
+  white-space: pre;
+  tab-size: 2;
+}
+
+:where(code, samp, kbd) { font-variant-ligatures: none; }
+
+:where(.table-wrap, .table-scroll, [data-apex-table-scroll]) {
+  max-inline-size: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-gutter: stable;
+  -webkit-overflow-scrolling: touch;
+}
+
+:where(table) {
+  inline-size: 100%;
+  max-inline-size: 100%;
+  border-collapse: collapse;
+}
+:where(th, td) { overflow-wrap: anywhere; vertical-align: top; }
+
+:where(button, [role="button"], input, select, textarea, summary,
+  a[class*="button"], a[class*="btn"], .chip, .tab, [role="tab"]) {
+  min-block-size: var(--apex-touch);
+  max-inline-size: 100%;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:where(button, [role="button"], a, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: max(2px, .14em) solid currentColor;
+  outline-offset: 3px;
+}
+
+:where(input:not([type="checkbox"]):not([type="radio"]), select, textarea) {
+  inline-size: 100%;
+  max-inline-size: 100%;
+  font: inherit;
+}
+
+:where(dialog, [role="dialog"], .modal, .drawer, .sheet) {
+  max-inline-size: min(calc(100vw - 2 * var(--apex-gutter)), 72rem);
+  max-block-size: min(90dvh, 60rem);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+:where(.grid, .card-grid, .feature-grid, .metric-grid, .product-grid,
+  .surface-grid, [data-apex-grid]) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--apex-grid-min, 17rem)), 1fr));
+  gap: var(--apex-gap);
+  align-items: stretch;
+}
+
+:where(.cluster, .actions, .button-row, .chip-row, .nav-links,
+  [data-apex-cluster]) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(.5rem, 1vw, .9rem);
+  align-items: center;
+}
+
+:where(.hero, .masthead, [data-apex-hero]) {
+  min-block-size: min(82svh, 64rem);
+  padding-block: clamp(5rem, 11vh, 10rem) clamp(3rem, 8vh, 7rem);
+}
+
+:where(.hero-grid, .split, .two-column, [data-apex-split]) {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+  gap: clamp(1.5rem, 4vw, 5rem);
+  align-items: center;
+}
+
+:where(.card, .panel, .tile, .module, .surface, [data-apex-panel]) {
+  container-type: inline-size;
+  border-radius: clamp(12px, 1.1vw, 22px);
+}
+
+:where(header[role="banner"], .site-header, .topbar, .nav-shell) {
+  max-inline-size: 100%;
+  padding-block-start: var(--apex-safe-top);
+}
+
+:where(.fixed-nav, .bottom-nav, .command-dock, [data-apex-dock]) {
+  max-inline-size: calc(100vw - 2 * max(.5rem, env(safe-area-inset-left, 0px)));
+  max-block-size: calc(100dvh - 1rem - var(--apex-safe-top) - var(--apex-safe-bottom));
+}
+
+:where(.status-page, .pointer-page, [data-apex-pointer]) {
+  min-block-size: 100svh;
+  display: grid;
+  place-items: center;
+  padding: max(var(--apex-gutter), var(--apex-safe-top)) var(--apex-gutter) max(var(--apex-gutter), var(--apex-safe-bottom));
+}
+
+:where(.status-page > *, .pointer-page > *, [data-apex-pointer] > *) {
+  inline-size: min(100%, 48rem);
+}
+
+@container (max-width: 28rem) {
+  :where(.card, .panel, .tile, .module, .surface, [data-apex-panel]) {
+    --apex-panel-padding: 1rem;
+  }
+  :where(.card-header, .panel-header, .module-header) {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 47.999rem) {
+  :root {
+    --apex-gutter: clamp(.875rem, 4.5vw, 1.25rem);
+    --apex-gap: .85rem;
+    --apex-section: clamp(3rem, 12vw, 5rem);
+    --apex-visual-ratio: 4 / 3;
+  }
+
+  body { line-height: 1.52; }
+
+  :where(.hero, .masthead, [data-apex-hero]) {
+    min-block-size: auto;
+    padding-block: clamp(4.75rem, 16vw, 7rem) clamp(2.5rem, 10vw, 4rem);
+  }
+
+  :where(.hero-grid, .split, .two-column, [data-apex-split]) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+
+  :where(.hero-copy, .split-copy) { order: 1; }
+  :where(.hero-visual, .split-visual, [data-apex-visual]) { order: 2; }
+
+  :where(.grid, .card-grid, .feature-grid, .metric-grid, .product-grid,
+    .surface-grid, [data-apex-grid]) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  :where(.actions, .button-row, [data-apex-actions]) > :where(a, button) {
+    flex: 1 1 10rem;
+    justify-content: center;
+  }
+
+  :where(.fixed-nav, .bottom-nav, .command-dock, [data-apex-dock]) {
+    inset-inline: max(.5rem, env(safe-area-inset-left, 0px));
+    inline-size: auto;
+    transform: none;
+  }
+}
+
+@media (max-height: 31rem) and (orientation: landscape) {
+  :where(.hero, .masthead, [data-apex-hero]) {
+    min-block-size: auto;
+    padding-block: 4rem 2rem;
+  }
+  :where(.fixed-nav, .bottom-nav, .command-dock, [data-apex-dock]) {
+    max-block-size: calc(100dvh - 1rem);
+    overflow-y: auto;
+  }
+}
+
+@media (min-width: 48rem) and (max-width: 79.999rem) {
+  :root {
+    --apex-stage: 76rem;
+    --apex-grid-min: 15rem;
+  }
+}
+
+@media (min-width: 100rem) {
+  :root {
+    --apex-stage: min(92vw, 120rem);
+    --apex-reading: 76ch;
+    --apex-gutter: clamp(2rem, 3vw, 4.5rem);
+    --apex-gap: clamp(1.25rem, 1.5vw, 2.2rem);
+    --apex-grid-min: 20rem;
+  }
+
+  :where(.hero-grid, .split, .two-column, [data-apex-split]) {
+    grid-template-columns: minmax(32rem, .9fr) minmax(40rem, 1.1fr);
+  }
+
+  :where(.surface-grid[data-apex-theatre], [data-apex-theatre-grid]) {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  :where([data-apex-span="3"]) { grid-column: span 3; }
+  :where([data-apex-span="4"]) { grid-column: span 4; }
+  :where([data-apex-span="6"]) { grid-column: span 6; }
+  :where([data-apex-span="8"]) { grid-column: span 8; }
+  :where([data-apex-span="12"]) { grid-column: 1 / -1; }
+}
+
+@media (min-width: 150rem) {
+  :root {
+    --apex-stage: 136rem;
+    --apex-body: 1.16rem;
+    --apex-grid-min: 22rem;
+  }
+}
+
+@media (pointer: coarse) {
+  :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea) {
+    font-size: max(16px, 1em);
+  }
+  :where(button, [role="button"], summary, a[class*="button"], a[class*="btn"],
+    .chip, .tab, [role="tab"]) {
+    min-block-size: var(--apex-touch-coarse);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :where(.card, .panel, .tile, .module, .surface, [data-apex-panel]) {
+    border-width: max(1px, .08em);
+  }
+}
+
+@media (forced-colors: active) {
+  body::after { background: Highlight; }
+  :where(button, [role="button"], input, select, textarea, summary, a,
+    .card, .panel, .tile, .module, .surface) {
+    forced-color-adjust: auto;
+  }
+}
+
+@media print {
+  :root { --apex-stage: none; }
+  html, body { overflow: visible; }
+  body::after,
+  :where(.fixed-nav, .bottom-nav, .command-dock, [data-apex-dock],
+    canvas[aria-hidden="true"], .ambient-field, .hologram-field) {
+    display: none !important;
+  }
+  :where(main, [role="main"], .container, .shell, .stage) {
+    max-inline-size: none;
+    padding: 0;
+  }
+  :where(a[href])::after { content: " (" attr(href) ")"; font-size: .8em; }
+}

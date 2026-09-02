@@ -1,0 +1,72 @@
+name: Responsive Apex v3 Contract
+
+on:
+  pull_request:
+    paths:
+      - "**/*.html"
+      - "assets/szl-responsive-apex-v3.css"
+      - "assets/szl-responsive-apex-v3.js"
+      - "responsive-experience-v3.json"
+      - "tools/bind_responsive_apex_v3.py"
+      - "tests/test_responsive_apex_v3.py"
+      - ".github/workflows/responsive-apex-v3-contract.yml"
+  push:
+    branches: [main]
+    paths:
+      - "**/*.html"
+      - "assets/szl-responsive-apex-v3.css"
+      - "assets/szl-responsive-apex-v3.js"
+      - "responsive-experience-v3.json"
+      - "tools/bind_responsive_apex_v3.py"
+      - "tests/test_responsive_apex_v3.py"
+      - ".github/workflows/responsive-apex-v3-contract.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    name: Apex mobile-to-theatre responsive contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      - name: Set up Node
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "22"
+
+      - name: Compile and syntax-check controllers
+        run: |
+          python -m py_compile tools/bind_responsive_apex_v3.py tests/test_responsive_apex_v3.py
+          node --check assets/szl-responsive-apex-v3.js
+
+      - name: Run responsive contract
+        run: python tests/test_responsive_apex_v3.py -v
+
+      - name: Verify exact binding when active
+        shell: bash
+        run: |
+          set -euo pipefail
+          state="$(python -c 'import json; print(json.load(open("responsive-experience-v3.json"))["state"])')"
+          if [ "$state" = "BOUND" ]; then
+            python tools/bind_responsive_apex_v3.py --check
+          fi
+
+      - name: Preserve existing public-truth and link contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -x ./scripts/check-links.sh ]; then ./scripts/check-links.sh; fi
+          if [ -f ./scripts/check_public_truth.py ]; then python ./scripts/check_public_truth.py; fi
+          git diff --check

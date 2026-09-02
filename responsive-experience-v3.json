@@ -1,0 +1,115 @@
+{
+  "assets": {
+    "script": "/assets/szl-responsive-apex-v3.js",
+    "style": "/assets/szl-responsive-apex-v3.css"
+  },
+  "documents": [
+    {
+      "mode": "STATIC",
+      "path": "404.html",
+      "result": "bound"
+    },
+    {
+      "mode": "STATIC",
+      "path": "api/a11oy/v1/honest/index.html",
+      "result": "bound"
+    },
+    {
+      "mode": "INTERACTIVE",
+      "path": "brain/index.html",
+      "result": "bound"
+    },
+    {
+      "mode": "STATIC",
+      "path": "console/index.html",
+      "result": "bound"
+    },
+    {
+      "mode": "INTERACTIVE",
+      "path": "index.html",
+      "result": "bound"
+    },
+    {
+      "mode": "INTERACTIVE",
+      "path": "khipu/index.html",
+      "result": "bound"
+    },
+    {
+      "mode": "STATIC",
+      "path": "products/index.html",
+      "result": "bound"
+    },
+    {
+      "mode": "STATIC",
+      "path": "verify/index.html",
+      "result": "bound"
+    }
+  ],
+  "interactive_documents": [
+    "index.html",
+    "brain/index.html",
+    "khipu/index.html"
+  ],
+  "origin": "https://a-11-oy.com",
+  "proof_origin": "https://a11oy.net",
+  "requirements": {
+    "dynamic_progressive_enhancement": true,
+    "external_runtime_dependencies": 0,
+    "forced_colors": true,
+    "horizontal_overflow_px": 0,
+    "increased_contrast": true,
+    "keyboard_focus_visible": true,
+    "minimum_touch_target_coarse_px": 48,
+    "minimum_touch_target_px": 44,
+    "print_mode": true,
+    "reduced_motion": true,
+    "safe_area_aware": true,
+    "static_origin_never_claims_runtime_api": true
+  },
+  "role": "static-product-front-door",
+  "runtime_origin": "https://szlholdings-a11oy.hf.space",
+  "schema": "szl.apex-responsive-experience/v3",
+  "state": "BOUND",
+  "viewports": [
+    [
+      320,
+      568
+    ],
+    [
+      375,
+      812
+    ],
+    [
+      430,
+      932
+    ],
+    [
+      812,
+      375
+    ],
+    [
+      768,
+      1024
+    ],
+    [
+      1280,
+      800
+    ],
+    [
+      1440,
+      900
+    ],
+    [
+      1920,
+      1080
+    ],
+    [
+      2560,
+      1440
+    ],
+    [
+      3440,
+      1440
+    ]
+  ]
+}
