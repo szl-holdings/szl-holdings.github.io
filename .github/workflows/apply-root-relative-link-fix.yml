@@ -34,20 +34,22 @@ jobs:
 
           path = Path('.github/workflows/link-check.yml')
           text = path.read_text(encoding='utf-8')
-          old = '''                  local = p.path
-                  if local and not (htmlfile.parent / local).exists():
-                      errors.append(f"{htmlfile}: local file not found -> {ref}")
-'''
-          new = '''                  local = p.path
-                  if local:
-                      target = (
-                          root / local.lstrip("/")
-                          if local.startswith("/")
-                          else htmlfile.parent / local
-                      )
-                      if not target.exists():
-                          errors.append(f"{htmlfile}: local file not found -> {ref}")
-'''
+          old = (
+              '                  local = p.path\n'
+              '                  if local and not (htmlfile.parent / local).exists():\n'
+              '                      errors.append(f"{htmlfile}: local file not found -> {ref}")\n'
+          )
+          new = (
+              '                  local = p.path\n'
+              '                  if local:\n'
+              '                      target = (\n'
+              '                          root / local.lstrip("/")\n'
+              '                          if local.startswith("/")\n'
+              '                          else htmlfile.parent / local\n'
+              '                      )\n'
+              '                      if not target.exists():\n'
+              '                          errors.append(f"{htmlfile}: local file not found -> {ref}")\n'
+          )
           count = text.count(old)
           if count != 1:
               raise SystemExit(f'expected one root-relative resolver seam, found {count}')
