@@ -1,0 +1,45 @@
+{
+  "observed_at_utc": "2026-09-02T19:45:00Z",
+  "evidence_class": "MEASURED",
+  "observer": "Grok session against public HTTP",
+  "this_repo": "szl-holdings/szl-holdings.github.io",
+  "cname_in_repo": "a-11-oy.com",
+  "apex": {
+    "host": "a-11-oy.com",
+    "path_/": { "status": 200, "front": "cloudflare+github-pages" },
+    "path_/console": { "status": 404, "front": "github-pages", "repair": "console/index.html on this branch" },
+    "path_/verify": { "status": 404, "front": "github-pages", "repair": "verify/index.html on this branch" },
+    "path_/api/a11oy/v1/honest": { "status": 404, "front": "github-pages", "repair": "HTML pointer + STATIC_DOCUMENT /api/a11oy/v1/honest.json" }
+  },
+  "static_contracts_on_this_origin": {
+    "origin_status": "/origin-status.json",
+    "honest_static": "/api/a11oy/v1/honest.json",
+    "note": "These files are committed static documents. They are not runtime doctrine posture."
+  },
+  "runtime": {
+    "url": "https://szlholdings-a11oy.hf.space/",
+    "honest": "https://szlholdings-a11oy.hf.space/api/a11oy/v1/honest",
+    "console": "https://szlholdings-a11oy.hf.space/console",
+    "verify": "https://szlholdings-a11oy.hf.space/verify",
+    "status": 200,
+    "server": "szl",
+    "note": "Space HTTP 200 is reachability. Not a production certificate."
+  },
+  "proof": {
+    "url": "https://a11oy.net/",
+    "record": "https://a11oy.net/record.json",
+    "status": 200,
+    "front": "cloudflare+github-pages",
+    "live_chain": "UNAVAILABLE"
+  },
+  "pplx": {
+    "url": "https://a11oy-verify.pplx.app/",
+    "role": "offline verifier sidecar",
+    "not_product_origin": true
+  },
+  "boundaries": {
+    "this_origin_is_not_runtime": true,
+    "does_not_change_dns": true,
+    "lambda": "Conjecture 1"
+  }
+}
