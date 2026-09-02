@@ -1,0 +1,43 @@
+{
+  "schema": "szl.apex-responsive-experience/v3",
+  "state": "ASSETS_READY",
+  "origin": "https://a-11-oy.com",
+  "role": "static-product-front-door",
+  "runtime_origin": "https://szlholdings-a11oy.hf.space",
+  "proof_origin": "https://a11oy.net",
+  "viewports": [
+    [320, 568],
+    [375, 812],
+    [430, 932],
+    [812, 375],
+    [768, 1024],
+    [1280, 800],
+    [1440, 900],
+    [1920, 1080],
+    [2560, 1440],
+    [3440, 1440]
+  ],
+  "requirements": {
+    "horizontal_overflow_px": 0,
+    "minimum_touch_target_px": 44,
+    "minimum_touch_target_coarse_px": 48,
+    "keyboard_focus_visible": true,
+    "safe_area_aware": true,
+    "reduced_motion": true,
+    "increased_contrast": true,
+    "forced_colors": true,
+    "print_mode": true,
+    "dynamic_progressive_enhancement": true,
+    "external_runtime_dependencies": 0,
+    "static_origin_never_claims_runtime_api": true
+  },
+  "assets": {
+    "style": "/assets/szl-responsive-apex-v3.css",
+    "script": "/assets/szl-responsive-apex-v3.js"
+  },
+  "interactive_documents": [
+    "index.html",
+    "brain/index.html",
+    "khipu/index.html"
+  ]
+}
