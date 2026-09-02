@@ -1,0 +1,33 @@
+{
+  "schema": "szl.product-catalog/v1",
+  "canonical_front_door": "https://a-11-oy.com/products/",
+  "evidence": "https://a11oy.net",
+  "source_org": "https://github.com/szl-holdings",
+  "hub_org": "https://huggingface.co/SZLHOLDINGS",
+  "policy": {
+    "website": "All product and capability showcases live on a-11-oy.com.",
+    "hugging_face": "Only vertical flagship demos remain as Spaces after migration and verification.",
+    "deletion_gate": "Do not delete a legacy Space until its unique product content, source mapping, and evidence links are captured in GitHub and a-11-oy.com."
+  },
+  "vertical_flagships": [
+    {"id":"command","name":"A11oy Command","domain":"Governed AI command and orchestration","github":"szl-holdings/a11oy","hf_target":"SZLHOLDINGS/a11oy","site":"/products/#command","status":"operational"},
+    {"id":"killinchu","name":"Killinchu","domain":"Defense / counter-UAS","github":"szl-holdings/killinchu","hf_target":"SZLHOLDINGS/killinchu","site":"/products/#killinchu","status":"operational"},
+    {"id":"terra","name":"Terra","domain":"Real-estate intelligence","github":"szl-holdings/szl-real-estate","hf_target":"SZLHOLDINGS/terra","site":"/products/#terra","status":"migration"},
+    {"id":"sentra","name":"Sentra","domain":"Cybersecurity / security operations","github":"szl-holdings/szl-defensive-control-plane","hf_target":"SZLHOLDINGS/sentra","site":"/products/#sentra","status":"migration"},
+    {"id":"legal","name":"PRISM Counsel","domain":"Legal matter intelligence","github":"szl-holdings/counsel","hf_target":"SZLHOLDINGS/counsel","site":"/products/#legal","status":"migration"},
+    {"id":"finance","name":"PURIQ Finance","domain":"Financial decision intelligence","github":"szl-holdings/puriq-live","hf_target":"SZLHOLDINGS/finance","site":"/products/#finance","status":"migration"},
+    {"id":"vessels","name":"Vessels","domain":"Maritime intelligence","github":"szl-holdings/szl-fleet-overlay","hf_target":"SZLHOLDINGS/vessels","site":"/products/#vessels","status":"migration"},
+    {"id":"lyte","name":"Lyte","domain":"Business observability","github":"szl-holdings/lyte-lattice","hf_target":"SZLHOLDINGS/lyte","site":"/products/#lyte","status":"migration"},
+    {"id":"insurance","name":"David Leads","domain":"Insurance intelligence","github":"szl-holdings/david-leads","hf_target":"SZLHOLDINGS/david-leads","site":"/products/#insurance","status":"operational"}
+  ],
+  "platform_products": [
+    {"name":"KHIPU","github":"szl-holdings/szl-khipu","site":"/khipu/"},
+    {"name":"IMMUNE","github":"szl-holdings/immune","site":"/products/#immune"},
+    {"name":"A11oy Anatomy","github":"szl-holdings/anatomy","site":"/products/#anatomy"},
+    {"name":"Receipt & Governance","github":"szl-holdings/governance-as-code","site":"/products/#receipts"},
+    {"name":"SZL Kernels","github":"szl-holdings/szl-kernels","site":"/products/#kernels"},
+    {"name":"SZL Forge","github":"szl-holdings/szl-forge","site":"/products/#forge"},
+    {"name":"Model Router","github":"szl-holdings/szl-router","site":"/products/#router"},
+    {"name":"Evidence Studio","github":"szl-holdings/evidence-studio","site":"/products/#evidence"}
+  ]
+}
