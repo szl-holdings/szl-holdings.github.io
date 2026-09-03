@@ -15,6 +15,7 @@ import argparse
 import hashlib
 import json
 import re
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -46,7 +47,7 @@ JS_CANDIDATES = (
 
 
 class MaterializeError(RuntimeError):
-    pass
+    """Materialization or verification failed closed."""
 
 
 def sha256(source: bytes) -> str:
@@ -64,8 +65,10 @@ def exact_source(root: Path, candidates: tuple[Path, ...], kind: str) -> Path:
 
 
 def strip_existing_block(text: str) -> str:
+    # Consume indentation inserted with the prior block as well as its trailing
+    # line break. Leaving that indentation behind adds two spaces per apply.
     pattern = re.compile(
-        re.escape(START) + r".*?" + re.escape(END) + r"\s*",
+        r"[ \t]*" + re.escape(START) + r".*?" + re.escape(END) + r"[ \t]*(?:\r?\n)?",
         re.DOTALL,
     )
     return pattern.sub("", text)
@@ -76,8 +79,7 @@ def bind_index(index: Path) -> None:
     if text.count(START) > 1 or text.count(END) > 1:
         raise MaterializeError("root document contains duplicate asset-block markers")
     text = strip_existing_block(text)
-    lower = text.lower()
-    head = lower.rfind("</head>")
+    head = text.lower().rfind("</head>")
     if head < 0:
         raise MaterializeError("root document has no closing head element")
     text = text[:head] + "  " + BLOCK + "\n" + text[head:]
@@ -109,10 +111,9 @@ def materialize(target: Path, source: Path, source_sha: str) -> dict[str, object
     js_target.write_bytes(javascript)
     bind_index(index)
 
-    generated_at = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
     manifest = {
         "schema": SCHEMA,
-        "generated_at": generated_at,
+        "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "source_repository": "szl-holdings/a11oy",
         "source_revision": source_sha,
         "target_origin": "https://a-11-oy.com",
@@ -135,8 +136,7 @@ def materialize(target: Path, source: Path, source_sha: str) -> dict[str, object
             "token_value_recorded": False,
         },
     }
-    manifest_path = target / MANIFEST
-    manifest_path.write_text(
+    (target / MANIFEST).write_text(
         json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )
     return manifest
