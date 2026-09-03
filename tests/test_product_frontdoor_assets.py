@@ -64,10 +64,12 @@ def test_second_apply_is_idempotent_except_manifest_clock() -> None:
         first_css = (target / module.CSS_DEST).read_bytes()
         first_js = (target / module.JS_DEST).read_bytes()
         module.materialize(target, source, sha)
-        assert (target / "index.html").read_bytes() == first_index
+        final_index = (target / "index.html").read_bytes()
+        assert final_index == first_index
         assert (target / module.CSS_DEST).read_bytes() == first_css
         assert (target / module.JS_DEST).read_bytes() == first_js
-        assert (target / "index.html").read_text(encoding="utf-8").count(module.START) == 1
+        assert final_index.count(module.START.encode()) == 1
+        assert b"    <!-- SZL-PRODUCT-FRONTDOOR-ASSETS-V2:START -->" not in final_index
 
 
 def test_invalid_source_sha_fails_closed() -> None:
