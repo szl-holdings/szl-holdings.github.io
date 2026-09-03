@@ -1,0 +1,72 @@
+name: Product front-door assets contract
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "index.html"
+      - "assets/szl-spectral-v2.css"
+      - "assets/szl-flow-v2.js"
+      - "assets/szl-product-frontdoor-assets-v2.json"
+      - "scripts/materialize_product_frontdoor_assets.py"
+      - "tests/test_product_frontdoor_assets.py"
+      - ".github/workflows/product-frontdoor-assets-contract.yml"
+  push:
+    branches: [main]
+    paths:
+      - "index.html"
+      - "assets/szl-spectral-v2.css"
+      - "assets/szl-flow-v2.js"
+      - "assets/szl-product-frontdoor-assets-v2.json"
+      - "scripts/materialize_product_frontdoor_assets.py"
+      - "tests/test_product_frontdoor_assets.py"
+      - ".github/workflows/product-frontdoor-assets-contract.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  contract:
+    name: Exact source, local assets, honest claims
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      - name: Run materializer contracts
+        run: |
+          python -m pip install --disable-pip-version-check pytest
+          python -m pytest -q tests/test_product_frontdoor_assets.py
+          python -m py_compile scripts/materialize_product_frontdoor_assets.py
+
+      - name: Verify materialized state when present
+        shell: bash
+        run: |
+          if [ -f assets/szl-product-frontdoor-assets-v2.json ]; then
+            python scripts/materialize_product_frontdoor_assets.py --check --report /tmp/frontdoor-assets-check.json
+          fi
+
+      - name: Require local references and forbid runtime CDN ingress
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -f assets/szl-product-frontdoor-assets-v2.json ]; then
+            grep -F '/assets/szl-spectral-v2.css' index.html
+            grep -F '/assets/szl-flow-v2.js' index.html
+            ! grep -R -n -E 'https://(cdn|unpkg|jsdelivr)' assets/szl-spectral-v2.css assets/szl-flow-v2.js
+          fi
+
+      - name: Diff hygiene
+        run: git diff --check
