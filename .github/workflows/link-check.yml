@@ -80,8 +80,14 @@ jobs:
                           errors.append(f"{htmlfile}: in-page anchor has no target -> {ref}")
                       continue
                   local = p.path
-                  if local and not (htmlfile.parent / local).exists():
-                      errors.append(f"{htmlfile}: local file not found -> {ref}")
+                  if local:
+                      target = (
+                          root / local.lstrip("/")
+                          if local.startswith("/")
+                          else htmlfile.parent / local
+                      )
+                      if not target.exists():
+                          errors.append(f"{htmlfile}: local file not found -> {ref}")
 
           if (root / "sitemap.xml").exists():
               try:
