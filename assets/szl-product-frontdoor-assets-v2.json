@@ -1,0 +1,25 @@
+{
+  "assets": {
+    "/assets/szl-flow-v2.js": {
+      "bytes": 15781,
+      "sha256": "24479d551df32a785e2a6967d6611e72b6bf80a99914d9c4022f0f56f26de298",
+      "source_path": "console/assets/szl-flow.js"
+    },
+    "/assets/szl-spectral-v2.css": {
+      "bytes": 20428,
+      "sha256": "c46c57328d6da061e6bf9f73ae1091d43aed834897f79169212cb5005f75ecf9",
+      "source_path": "console/assets/szl-spectral-v2.css"
+    }
+  },
+  "claims": {
+    "dns_or_edge_changed": false,
+    "runtime_health": "NOT_CLAIMED",
+    "static_asset_materialized": true,
+    "token_value_recorded": false
+  },
+  "generated_at": "2026-09-03T01:33:06.774627Z",
+  "schema": "szl.product-frontdoor-assets/v1",
+  "source_repository": "szl-holdings/a11oy",
+  "source_revision": "d5529712597413c8ced461f7fa0762eba7870518",
+  "target_origin": "https://a-11-oy.com"
+}
