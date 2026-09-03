@@ -6,6 +6,8 @@ on:
       - fix/product-frontdoor-spectral-assets-v2
     paths:
       - ".github/workflows/materialize-product-frontdoor-assets.yml"
+      - "scripts/materialize_product_frontdoor_assets.py"
+      - "tests/test_product_frontdoor_assets.py"
 
 permissions:
   contents: write
