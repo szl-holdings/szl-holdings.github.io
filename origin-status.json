@@ -1,7 +1,7 @@
 {
-  "observed_at_utc": "2026-09-04T16:23:55Z",
+  "observed_at_utc": "2026-09-04T16:59:01Z",
   "evidence_class": "MEASURED",
-  "observer": "Grok public HTTP GET plus Hugging Face Spaces API plus GitHub Actions list_workflow_runs",
+  "observer": "Grok public HTTP GET. HF Spaces API 429 this probe. No DNS write.",
   "this_repo": "szl-holdings/szl-holdings.github.io",
   "cname_in_repo": "a-11-oy.com",
   "cname_meaning": "Residual source. Live HTTP for the apex is the Space, not this Pages tree. CNAME not deleted.",
@@ -9,12 +9,12 @@
     "host": "a-11-oy.com",
     "path_/api/build-info": {
       "status": 200,
-      "revision": "f76f09079f5d37ea434435e199e446e1a977088a",
+      "revision": "1e6a80ae1e071f55e0e30c9de37236cccbfc4541",
       "revision_source": "env:SZL_GIT_SHA"
     },
     "path_/api/a11oy/v1/honest": {
       "status": 200,
-      "git_sha_reported": "f76f09079f5d37ea434435e199e446e1a977088a"
+      "git_sha_reported": "1e6a80ae1e071f55e0e30c9de37236cccbfc4541"
     }
   },
   "www": {
@@ -24,17 +24,15 @@
   },
   "huggingface": {
     "space": "SZLHOLDINGS/a11oy",
-    "runtime_stage": "RUNNING_APP_STARTING",
-    "domain_a-11-oy.com": "READY",
-    "runtime_sha": "26a4ddf4d7f9001a6c69f936680b77e06199353f",
-    "lastModified": "2026-09-04T16:22:55.000Z"
+    "runtime_api": "UNAVAILABLE_429",
+    "note": "Unauthenticated HF API rate-limited. Live process reports #1846 via honest/build-info."
   },
   "protected_source": {
-    "a11oy_main": "324bdda368158fc5915838a91f36c49eafd60e66",
-    "live_honest_git_sha": "f76f09079f5d37ea434435e199e446e1a977088a",
-    "lag": "live honest is #1835; protected main is #1841",
-    "hf_sync_in_progress": "33894378952",
-    "hf_sync_pending": "33894778462",
+    "a11oy_main": "7f51d72b82db33f4f06edb6f135ac9e0547102ac",
+    "live_honest_git_sha": "1e6a80ae1e071f55e0e30c9de37236cccbfc4541",
+    "lag": "live honest is #1846; protected main is Menu 48px lock 7f51d72b",
+    "hf_sync_in_progress": "33897673361",
+    "hf_sync_pending": "33898072640",
     "did_not_dispatch": true
   },
   "signing": {
@@ -47,7 +45,7 @@
   "proof": {
     "url": "https://a11oy.net/",
     "origin_drift_prior": "https://a11oy.net/origin-drift-2026-09-04-1612.json",
-    "origin_drift_this": "https://a11oy.net/origin-drift-2026-09-04-1623.json",
+    "origin_drift_this": "https://a11oy.net/origin-drift-2026-09-04-1659.json",
     "live_chain": "UNAVAILABLE"
   },
   "boundaries": {
