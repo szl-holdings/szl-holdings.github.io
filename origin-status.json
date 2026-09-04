@@ -1,38 +1,35 @@
 {
-  "observed_at_utc": "2026-09-04T16:59:01Z",
+  "observed_at_utc": "2026-09-04T17:45:00Z",
   "evidence_class": "MEASURED",
-  "observer": "Grok public HTTP GET. HF Spaces API 429 this probe. No DNS write.",
+  "observer": "Grok public HTTP GET. No DNS write. No second hf-sync dispatch.",
   "this_repo": "szl-holdings/szl-holdings.github.io",
   "cname_in_repo": "a-11-oy.com",
   "cname_meaning": "Residual source. Live HTTP for the apex is the Space, not this Pages tree. CNAME not deleted.",
   "apex": {
     "host": "a-11-oy.com",
-    "path_/api/build-info": {
+    "path_/": {
       "status": 200,
-      "revision": "1e6a80ae1e071f55e0e30c9de37236cccbfc4541",
-      "revision_source": "env:SZL_GIT_SHA"
+      "last_modified": "Fri, 04 Sep 2026 17:30:32 GMT",
+      "site_nav_console_href_count": 2,
+      "note": "Live header still duplicate Command tabs. Source fix is a11oy#1859 on protected main."
     },
     "path_/api/a11oy/v1/honest": {
       "status": 200,
-      "git_sha_reported": "1e6a80ae1e071f55e0e30c9de37236cccbfc4541"
+      "git_sha_reported": "ba32f48b3b7a66ee2d784214f11afdc89276f41b"
     }
   },
   "www": {
     "host": "www.a-11-oy.com",
-    "error": "SSL: TLSV1_ALERT_ACCESS_DENIED",
+    "error": "not re-probed this snapshot; prior TLSV1_ALERT_ACCESS_DENIED",
     "verdict": "UNAVAILABLE"
   },
-  "huggingface": {
-    "space": "SZLHOLDINGS/a11oy",
-    "runtime_api": "UNAVAILABLE_429",
-    "note": "Unauthenticated HF API rate-limited. Live process reports #1846 via honest/build-info."
-  },
   "protected_source": {
-    "a11oy_main": "7f51d72b82db33f4f06edb6f135ac9e0547102ac",
-    "live_honest_git_sha": "1e6a80ae1e071f55e0e30c9de37236cccbfc4541",
-    "lag": "live honest is #1846; protected main is Menu 48px lock 7f51d72b",
-    "hf_sync_in_progress": "33897673361",
-    "hf_sync_pending": "33898072640",
+    "a11oy_main": "4bd00f417fccb55ddf70a97e0a760230b627b627",
+    "header_fix": "592231f98156d3bcda4a092f458aa4cbbcdeb2e4",
+    "live_honest_git_sha": "ba32f48b3b7a66ee2d784214f11afdc89276f41b",
+    "lag": "live honest is ba32f48b; protected main is 4bd00f41 including header fix #1859",
+    "hf_sync_in_progress": "33900554234",
+    "hf_sync_pending": "33901772545",
     "did_not_dispatch": true
   },
   "signing": {
@@ -44,8 +41,8 @@
   },
   "proof": {
     "url": "https://a11oy.net/",
-    "origin_drift_prior": "https://a11oy.net/origin-drift-2026-09-04-1612.json",
-    "origin_drift_this": "https://a11oy.net/origin-drift-2026-09-04-1659.json",
+    "origin_drift_prior": "https://a11oy.net/origin-drift-2026-09-04-1710.json",
+    "origin_drift_this": "https://a11oy.net/origin-drift-2026-09-04-1745.json",
     "live_chain": "UNAVAILABLE"
   },
   "boundaries": {
