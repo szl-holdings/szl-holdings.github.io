@@ -1,5 +1,5 @@
 {
-  "observed_at_utc": "2026-09-04T16:00:09Z",
+  "observed_at_utc": "2026-09-04T16:11:54Z",
   "evidence_class": "MEASURED",
   "observer": "Grok public HTTP GET plus Hugging Face Spaces API",
   "this_repo": "szl-holdings/szl-holdings.github.io",
@@ -12,11 +12,16 @@
     "path_/verify": { "status": 200, "front": "space" },
     "path_/holographic": { "status": 200, "front": "space" },
     "path_/brain": { "status": 200, "front": "space" },
+    "path_/api/build-info": {
+      "status": 200,
+      "revision": "f76f09079f5d37ea434435e199e446e1a977088a",
+      "revision_source": "env:SZL_GIT_SHA"
+    },
     "path_/api/a11oy/v1/honest": {
       "status": 200,
       "ctype": "application/json",
       "front": "space",
-      "git_sha_reported": "11ba481ea79b3f7d74348b740cc3cc2a363a7e23"
+      "git_sha_reported": "f76f09079f5d37ea434435e199e446e1a977088a"
     }
   },
   "www": {
@@ -28,15 +33,20 @@
     "space": "SZLHOLDINGS/a11oy",
     "runtime_stage": "RUNNING",
     "domain_a-11-oy.com": "READY",
-    "runtime_sha": "c45c2e49bbe3840f67218b84565c299e645e9ae1"
+    "runtime_sha": "26a4ddf4d7f9001a6c69f936680b77e06199353f",
+    "lastModified": "2026-09-04T16:10:02.000Z"
   },
   "protected_source": {
     "a11oy_main": "f76f09079f5d37ea434435e199e446e1a977088a",
-    "a11oy_1835": "merged",
-    "note": "Protected main includes Brain Frontier repair. Live Space honest git_sha is not that merge. Republish is sole-writer."
+    "a11oy_1835": "merged_and_live_honest",
+    "hf_sync_run": "33893544615",
+    "note": "Live honest git_sha now equals the #1835 squash. hf-sync 1277 was still in_progress at observe time."
   },
   "signing": {
     "healthz_signer": "ABSENT",
+    "signing_status_honesty": "PARTIAL",
+    "hmac_layer": "placeholder",
+    "non_repudiation": false,
     "dsse_live": "NOT_STAMPED"
   },
   "static_contracts_on_this_origin": {
@@ -47,7 +57,7 @@
   "proof": {
     "url": "https://a11oy.net/",
     "record": "https://a11oy.net/record.json",
-    "origin_drift": "https://a11oy.net/origin-drift-2026-09-04-1600.json",
+    "origin_drift": "https://a11oy.net/origin-drift-2026-09-04-1612.json",
     "live_chain": "UNAVAILABLE"
   },
   "boundaries": {
