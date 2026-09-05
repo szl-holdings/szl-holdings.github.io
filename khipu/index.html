@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>SZL KHIPU — knot · hash · fail closed</title>
-<meta name="description" content="Product hologram of SZL KHIPU. Duals Ari=GreenLight and Kay Pacha=Anatomy. Original cuts only. JS silhouette — live kernels are NumPy on a-11-oy.com/khipu. Conjecture 1 OPEN. Energy UNAVAILABLE.">
-<link rel="canonical" href="https://a-11-oy.com/khipu/">
+<meta name="description" content="Product hologram of SZL KHIPU. Duals Ari=GreenLight and Kay Pacha=Anatomy. Local JavaScript silhouette; the named NumPy runtime is not measured here. Conjecture 1 OPEN. Energy UNAVAILABLE.">
+<link rel="canonical" href="https://holdings.a-11-oy.com/khipu/">
 <style>
 :root{--bg:#05070d;--ink:#e8edf4;--muted:#8b96a6;--line:#1c2430;--gold:#e8c074;--proof:#3af4c8;--block:#c17a72;--panel:#0c1118}
 *{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 ui-sans-serif,system-ui,sans-serif}
@@ -40,21 +40,21 @@ th{color:var(--gold);font-weight:500}
 </head>
 <body>
 <header>
-  <div class="ey">SZL Holdings · a-11-oy.com/khipu · JS silhouette · not NumPy</div>
+  <div class="ey">SZL Holdings · holdings.a-11-oy.com/khipu · JS silhouette · not NumPy</div>
   <h1>Knot the run. Hash the proof. Fail closed.</h1>
-  <p class="lede">Product hologram of SZL KHIPU. Duals <strong>Ari = GreenLight</strong> and <strong>Kay Pacha = Anatomy</strong>. Original cuts only — never a rehost of Qwen, Mixtral, SGLang, FlashAttention, SageAttention, FlexAttention, or vLLM. This page is a JavaScript silhouette. Live frontend + backend is NumPy on the product origin.</p>
+  <p class="lede">Product hologram of SZL KHIPU. Duals <strong>Ari = GreenLight</strong> and <strong>Kay Pacha = Anatomy</strong>. Original cuts only — never a rehost of Qwen, Mixtral, SGLang, FlashAttention, SageAttention, FlexAttention, or vLLM. This page is a local JavaScript silhouette; the named NumPy product runtime is not measured here.</p>
   <span class="chip gold">Conjecture 1 OPEN</span>
   <span class="chip">energy UNAVAILABLE</span>
   <span class="chip">proven_trust false</span>
   <span class="chip">CUDA UNAVAILABLE</span>
-  <span class="chip live">numpy LIVE elsewhere</span>
+  <span class="chip">numpy runtime NOT MEASURED</span>
   <span class="chip">locked-proven 8</span>
   <nav class="links" aria-label="Origins">
     <a href="https://a-11-oy.com/khipu">Product organ · a-11-oy.com/khipu</a>
     <a href="https://a11oy.net/khipu/">Proof RECORD · a11oy.net</a>
     <a href="https://github.com/szl-holdings/szl-khipu">GitHub</a>
     <a href="https://huggingface.co/spaces/SZLHOLDINGS/szl-khipu">Hub Space</a>
-    <a href="https://a-11-oy.com/">Holdings home</a>
+    <a href="https://holdings.a-11-oy.com/">Holdings home</a>
   </nav>
 </header>
 <main>
@@ -145,7 +145,7 @@ function read(){return [...box.querySelectorAll("input")].map(el=>Number(el.valu
 function show(id,obj){document.getElementById(id).textContent=JSON.stringify(obj,null,2)}
 function djb2(s){let h=5381;for(let i=0;i<s.length;i++)h=((h<<5)+h+s.charCodeAt(i))>>>0;return h.toString(16).padStart(8,"0")}
 function mulberry32(a){return function(){let t=a+=0x6D2B79F5;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296}}
-const honesty={proven_trust:false,energy_status:"UNAVAILABLE",conjecture_1:"OPEN",cuda:"UNAVAILABLE",kind:"js-silhouette"};
+const honesty={proven_trust:false,energy_status:"UNAVAILABLE",conjecture_1:"OPEN",cuda:"UNAVAILABLE",kind:"js-silhouette",local_mode:"SIMULATED",external_runtime:"NOT_MEASURED"};
 document.getElementById("score").onclick=()=>{const x=read(),v=wgm(x);show("out-lambda",{value:v,blocked:v===0,reason:v===0?"zero-routed":"advisory pass — uniqueness remains Conjecture 1 OPEN",...honesty})};
 document.getElementById("zero").onclick=()=>{box.querySelector("input").value=0;document.getElementById("score").click()};
 function greenlight(flags){
@@ -155,7 +155,7 @@ function greenlight(flags){
     {id:"energy",ok:flags.stampJoule!==1,detail:flags.stampJoule===1?"BLOCKED · fabricated joule · energy UNAVAILABLE":"energy UNAVAILABLE · never a fabricated joule"}
   ];
   const blocked=checks.some(c=>!c.ok);
-  return {dual:"Ari",painted:checks.filter(c=>!c.ok).length,blocked:blocked?1:0,greenlit:blocked?0:1,provenTrust:false,energy:"UNAVAILABLE",conjecture1:"OPEN",checks,reason:blocked?(checks.find(c=>!c.ok).detail):"GREEN-LIGHT · LIVE bound · proven_trust false · energy UNAVAILABLE",...honesty};
+  return {dual:"Ari",painted:checks.filter(c=>!c.ok).length,blocked:blocked?1:0,greenlit:blocked?0:1,provenTrust:false,energy:"UNAVAILABLE",conjecture1:"OPEN",checks,reason:blocked?(checks.find(c=>!c.ok).detail):"LOCAL CHECK PASS · proven_trust false · energy UNAVAILABLE",...honesty};
 }
 let gl={paintSorry:0,claimProven:0,stampJoule:0};
 function runGL(){show("out-green",greenlight(gl))}
@@ -168,11 +168,11 @@ function anatomy(p){
     let down=false,detail=o.role;
     if(o.id==="heart"&&p.zeroHeart){down=true;detail="DOWN · HEART/YUYAY zeroed"}
     if(p.fabricateJoule){down=true;detail="DOWN · fabricated joule · energy UNAVAILABLE"}
-    return {...o,status:down?"DOWN":"LIVE",detail};
+    return {...o,status:down?"DOWN":"SIMULATED",detail};
   });
   const blocked=organs.some(o=>o.status==="DOWN");
   document.getElementById("org-box").innerHTML=organs.map(o=>`<div class="org${o.status==="DOWN"?" down":""}"><b>${o.name} / ${o.quechua}</b>${o.status}<br>${o.detail}</div>`).join("");
-  return {dual:"Kay Pacha",blocked,liveCount:organs.filter(o=>o.status==="LIVE").length,organs,energy:"UNAVAILABLE",conjecture1:"OPEN",reason:blocked?"body BLOCKED":"body LIVE · proven_trust false · energy UNAVAILABLE",...honesty};
+  return {dual:"Kay Pacha",blocked,simulatedCount:organs.filter(o=>o.status==="SIMULATED").length,organs,energy:"UNAVAILABLE",conjecture1:"OPEN",reason:blocked?"body BLOCKED":"LOCAL SIMULATION PASS · proven_trust false · energy UNAVAILABLE",...honesty};
 }
 document.getElementById("an-run").onclick=()=>show("out-anatomy",anatomy({}));
 document.getElementById("an-heart").onclick=()=>show("out-anatomy",anatomy({zeroHeart:1}));

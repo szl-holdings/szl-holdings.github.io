@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: Apache-2.0
-"""Materialize A11oy's governed visual shell into the static product origin.
+"""Materialize A11oy's governed visual shell into the static company origin.
 
 The custom-domain front door is a separate GitHub Pages deployment rail from
 A11oy's Hugging Face runtime. This tool copies the current source-controlled
@@ -33,6 +33,7 @@ BLOCK = "\n".join(
 CSS_DEST = Path("assets/szl-spectral-v2.css")
 JS_DEST = Path("assets/szl-flow-v2.js")
 MANIFEST = Path("assets/szl-product-frontdoor-assets-v2.json")
+TARGET_ORIGIN = "https://holdings.a-11-oy.com"
 CSS_CANDIDATES = (
     Path("console/assets/szl-spectral-v2.css"),
     Path("console/assets/szl-holo-v2.css"),
@@ -116,7 +117,7 @@ def materialize(target: Path, source: Path, source_sha: str) -> dict[str, object
         "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "source_repository": "szl-holdings/a11oy",
         "source_revision": source_sha,
-        "target_origin": "https://a-11-oy.com",
+        "target_origin": TARGET_ORIGIN,
         "assets": {
             "/assets/szl-spectral-v2.css": {
                 "source_path": css_source.as_posix(),
@@ -149,6 +150,10 @@ def validate(target: Path) -> dict[str, object]:
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     if manifest.get("schema") != SCHEMA:
         raise MaterializeError("front-door asset manifest schema drifted")
+    if manifest.get("target_origin") != TARGET_ORIGIN:
+        raise MaterializeError(
+            f"front-door asset manifest target origin must be {TARGET_ORIGIN}"
+        )
     index = (target / "index.html").read_text(encoding="utf-8")
     if index.count(START) != 1 or index.count(END) != 1:
         raise MaterializeError("root document must contain one exact asset block")
@@ -191,6 +196,7 @@ def main() -> int:
             "mode": mode,
             "status": "PASS",
             "source_revision": manifest.get("source_revision"),
+            "target_origin": manifest.get("target_origin"),
             "assets": manifest.get("assets"),
             "token_value_recorded": False,
         }

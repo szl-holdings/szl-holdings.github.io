@@ -1,4 +1,4 @@
-name: Responsive Apex v3 Contract
+name: Responsive Company Front Door v3 Contract
 
 on:
   pull_request:
@@ -27,7 +27,7 @@ permissions:
 
 jobs:
   contract:
-    name: Apex mobile-to-theatre responsive contract
+    name: Company front door mobile-to-theatre contract
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:

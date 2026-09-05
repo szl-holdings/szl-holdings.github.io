@@ -33,7 +33,7 @@ jobs:
           import xml.etree.ElementTree as ET
 
           root = pathlib.Path(".")
-          same_origin = {"szl-holdings.github.io", "a-11-oy.com"}
+          same_origin = {"szl-holdings.github.io", "holdings.a-11-oy.com"}
           separately_published_paths = {"/docs-site/"}
           errors = []
 
@@ -188,14 +188,32 @@ jobs:
                       f"Public truth contract FAILED: {asset} must have exactly one active binding "
                       f"{binding}; observed {active}"
                   )
-          origin = "https://a-11-oy.com/"
+          origin = "https://holdings.a-11-oy.com/"
+          product_origin = "https://a-11-oy.com/"
           image_url = origin + "assets/hero.png"
           docs_url = origin + "docs-site/"
           fallback_host = "szl-holdings.github.io"
           failures = []
 
-          if Path("CNAME").read_text(encoding="utf-8").strip() != "a-11-oy.com":
-              failures.append("CNAME must remain a-11-oy.com")
+          if Path("CNAME").read_text(encoding="utf-8").strip() != "holdings.a-11-oy.com":
+              failures.append("CNAME must bind the company site to holdings.a-11-oy.com")
+          authority = json.loads(Path("origin-authority.json").read_text(encoding="utf-8"))
+          if (
+              authority.get("schema") != "szl.origin-authority/v1"
+              or authority.get("evidence_class") != "SOURCE_DECLARED"
+              or authority.get("source_contract", {}).get("cname") != "holdings.a-11-oy.com"
+              or authority.get("company_front_door", {}).get("origin") != origin.rstrip("/")
+              or authority.get("product_runtime", {}).get("origin") != product_origin.rstrip("/")
+              or authority.get("company_front_door", {}).get("runtime_health_claimed") is not False
+          ):
+              failures.append("source authority must preserve the separate company and product origins")
+          catalog = json.loads(Path("products/catalog.json").read_text(encoding="utf-8"))
+          if catalog.get("canonical_front_door") != origin + "products/":
+              failures.append("product catalog must bind to the company origin")
+          if catalog.get("product_origin") != product_origin:
+              failures.append("product catalog must retain the separate A11oy product origin")
+          if any(row.get("status") != "listed" for row in catalog.get("vertical_flagships", [])):
+              failures.append("static catalog status must describe listing, not runtime readiness")
           if bindings.canonicals != [origin]:
               failures.append(f"expected exactly one canonical {origin}; observed {bindings.canonicals}")
           for key, expected in {
@@ -268,6 +286,14 @@ jobs:
               website = website_nodes[0] if len(website_nodes) == 1 else {}
               if organization.get("@id") != origin + "#org" or organization.get("url") != origin:
                   failures.append("JSON-LD Organization identity must bind to the canonical origin")
+              organization_same_as = organization.get("sameAs", [])
+              if (
+                  not isinstance(organization_same_as, list)
+                  or product_origin.rstrip("/") not in organization_same_as
+              ):
+                  failures.append(
+                      "JSON-LD Organization sameAs must retain the separate A11oy product origin"
+                  )
               if website.get("@id") != origin + "#site" or website.get("url") != origin:
                   failures.append("JSON-LD WebSite identity must bind to the canonical origin")
               if website.get("publisher") != {"@id": origin + "#org"}:
@@ -304,6 +330,8 @@ jobs:
               origin,
               origin + "brain/",
               origin + "khipu/",
+              origin + "products/",
+              origin + "docs-site/",
           ]
           if sitemap_locations != expected_sitemap_locations:
               failures.append(
@@ -311,7 +339,7 @@ jobs:
                   f"expected {expected_sitemap_locations}; observed {sitemap_locations}"
               )
 
-          for route in ("brain", "khipu"):
+          for route in ("brain", "khipu", "products"):
               route_bindings = AssetBindings()
               route_bindings.feed(Path(route, "index.html").read_text(encoding="utf-8"))
               expected_route = origin + route + "/"
@@ -328,6 +356,8 @@ jobs:
               )
           if "https://github.com/szl-holdings" not in bindings.hrefs:
               failures.append("the explicit GitHub organization source link must remain present")
+          if product_origin + "docs-site/" in bindings.hrefs:
+              failures.append("developer docs must not use the A11oy product origin")
 
           identity_values = (
               bindings.canonicals

@@ -47,6 +47,7 @@ def test_materialization_binds_source_sha_assets_and_root() -> None:
         index = (target / "index.html").read_text(encoding="utf-8")
         assert manifest == verified
         assert verified["source_revision"] == sha
+        assert verified["target_origin"] == module.TARGET_ORIGIN
         assert index.count(module.START) == 1
         assert index.count(module.END) == 1
         assert "/assets/szl-spectral-v2.css" in index
@@ -120,6 +121,22 @@ def test_digest_tampering_breaks_validation() -> None:
             assert "digest mismatch" in str(exc)
         else:
             raise AssertionError("tampered asset passed")
+
+
+def test_wrong_target_origin_fails_closed() -> None:
+    temp, target, source = fixture()
+    with temp:
+        module.materialize(target, source, "1" * 40)
+        manifest_path = target / module.MANIFEST
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        manifest["target_origin"] = "https://a-11-oy.com"
+        manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+        try:
+            module.validate(target)
+        except module.MaterializeError as exc:
+            assert "target origin" in str(exc)
+        else:
+            raise AssertionError("product runtime was accepted as the company asset target")
 
 
 def test_manifest_makes_no_runtime_or_dns_claim() -> None:
