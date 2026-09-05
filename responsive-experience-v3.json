@@ -50,7 +50,8 @@
     "brain/index.html",
     "khipu/index.html"
   ],
-  "origin": "https://a-11-oy.com",
+  "origin": "https://holdings.a-11-oy.com",
+  "product_origin": "https://a-11-oy.com",
   "proof_origin": "https://a11oy.net",
   "requirements": {
     "dynamic_progressive_enhancement": true,
@@ -66,8 +67,8 @@
     "safe_area_aware": true,
     "static_origin_never_claims_runtime_api": true
   },
-  "role": "static-product-front-door",
-  "runtime_origin": "https://szlholdings-a11oy.hf.space",
+  "role": "static-company-front-door",
+  "runtime_origin": "https://a-11-oy.com",
   "schema": "szl.apex-responsive-experience/v3",
   "state": "BOUND",
   "viewports": [

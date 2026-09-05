@@ -1,0 +1,39 @@
+{
+  "schema": "szl.origin-authority/v1",
+  "evidence_class": "SOURCE_DECLARED",
+  "this_repository": "szl-holdings/szl-holdings.github.io",
+  "source_contract": {
+    "cname": "holdings.a-11-oy.com",
+    "merge_is_deployment_proof": false,
+    "deployment_is_public_readback": false
+  },
+  "company_front_door": {
+    "origin": "https://holdings.a-11-oy.com",
+    "deployment_rail": "GitHub Pages",
+    "role": "static company, investor, portfolio, and developer entry point",
+    "runtime_health_claimed": false
+  },
+  "product_runtime": {
+    "origin": "https://a-11-oy.com",
+    "provider_twin": "https://szlholdings-a11oy.hf.space",
+    "deployment_rail": "governed Hugging Face runtime",
+    "role": "A11oy product, console, verifier, doctrine, and API",
+    "health_must_be_measured_separately": true
+  },
+  "proof_registry": {
+    "origin": "https://a11oy.net",
+    "role": "public proof registry",
+    "live_chain_must_be_measured_separately": true
+  },
+  "observations": {
+    "path": "/origin-status.json",
+    "meaning": "Dated observations are independent of this source authority contract and may precede its publication."
+  },
+  "boundaries": {
+    "company_origin_is_not_product_runtime": true,
+    "source_commit_is_not_deployment_proof": true,
+    "http_200_is_not_readiness_proof": true,
+    "does_not_stamp_dsse_live": true,
+    "lambda": "Conjecture 1"
+  }
+}

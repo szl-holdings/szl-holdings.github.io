@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Offline responsive contract for the a-11-oy.com static front door."""
+"""Offline responsive contract for the SZL Holdings static company front door."""
 from __future__ import annotations
 
 import json
@@ -78,9 +78,11 @@ class ResponsiveApexV3Contract(unittest.TestCase):
             self.assertIn(token, self.css)
 
     def test_origin_roles_are_honest(self) -> None:
-        self.assertEqual(self.state["origin"], "https://a-11-oy.com")
-        self.assertEqual(self.state["role"], "static-product-front-door")
-        self.assertEqual(self.state["runtime_origin"], "https://szlholdings-a11oy.hf.space")
+        self.assertEqual(self.state["origin"], "https://holdings.a-11-oy.com")
+        self.assertEqual(self.state["role"], "static-company-front-door")
+        self.assertEqual(self.state["product_origin"], "https://a-11-oy.com")
+        self.assertEqual(self.state["runtime_origin"], "https://a-11-oy.com")
+        self.assertNotEqual(self.state["origin"], self.state["runtime_origin"])
         self.assertTrue(self.state["requirements"]["static_origin_never_claims_runtime_api"])
 
     def test_bound_state_covers_all_html_and_preserves_static_pages(self) -> None:

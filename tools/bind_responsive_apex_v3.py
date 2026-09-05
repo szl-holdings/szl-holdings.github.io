@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Bind the local responsive layer to every published apex HTML document.
+"""Bind the local responsive layer to every published company-front-door document.
 
 All HTML receives the local stylesheet. Only the explicit interactive-document
 allowlist receives the progressive JavaScript viewport controller. Static
@@ -80,10 +80,10 @@ def verify() -> None:
         if not is_bound(rel, text, interactive):
             failures.append(rel)
     if failures:
-        raise RuntimeError("responsive apex binding missing: " + ", ".join(failures))
+        raise RuntimeError("responsive company-front-door binding missing: " + ", ".join(failures))
     state = json.loads(STATE.read_text(encoding="utf-8"))
     if state.get("state") != "BOUND":
-        raise RuntimeError("responsive apex state is not BOUND")
+        raise RuntimeError("responsive company-front-door state is not BOUND")
 
 
 def apply() -> None:
@@ -106,7 +106,7 @@ def main() -> int:
     args = parser.parse_args()
     if args.check:
         verify()
-        print("responsive-apex-v3: BOUND")
+        print("responsive-company-front-door-v3: BOUND")
     else:
         apply()
     return 0
