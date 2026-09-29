@@ -18,6 +18,9 @@
 <style>
 header,main,footer{max-width:920px;margin:0 auto;padding:1.4rem 1.2rem}
 header .eyebrow{margin:0}
+.brand-mark{display:inline-block;margin:0 0 var(--space-8)}
+.brand-mark img{display:block;width:180px;height:auto} /* LOGO_USAGE: horizontal lockup >= 180px wide */
+header .orbit-rule{margin:var(--space-10) 0 0}
 h1{margin:.4rem 0 1rem}
 h2{margin:0 0 .5rem}
 .lede{color:var(--text-sub);max-width:62ch}
@@ -36,6 +39,7 @@ ul.handles{list-style:none;padding:0;margin:.6rem 0 0}
 ul.handles li{border-top:var(--border-hairline) solid var(--border-subtle);padding:.55rem 0}
 ul.handles p{margin:0 0 .25rem}
 .k{font-family:var(--font-mono);font-size:var(--text-xs);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--text-ghost)}
+.panel p a{text-decoration:underline}
 footer{color:var(--text-sub);font-size:var(--text-sm)}
 main:focus{outline:none}
 </style>
@@ -44,6 +48,7 @@ main:focus{outline:none}
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
 <header>
+  <a class="brand-mark" href="/" aria-label="SZL Holdings home"><img src="/assets/szl/logos/szl_logo_horizontal.svg" alt="" width="180" height="68"></a>
   <p class="eyebrow">SZL Holdings · holdings.a-11-oy.com/brain · derived handles</p>
   <h1>The estate, folded. Six organs. Not a repo catalog.</h1>
   <p class="lede">This page is a timestamped public recapture fold on the existing Pages domain. Retrieve is local and fail-closed. Continuous estate monitoring is outside this static snapshot. Nine thousand was never a live graph. Minting is still deny.</p>
@@ -52,6 +57,7 @@ main:focus{outline:none}
   <span class="chip chip-unavailable">9000 UNAVAILABLE</span>
   <span class="chip">9464 UNPUBLISHED</span>
   <span class="chip">ADMIT DENY</span>
+  <div class="orbit-rule" aria-hidden="true"><span class="orbit-rule__node"></span></div>
 </header>
 <main id="main" tabindex="-1">
   <section class="panel card">

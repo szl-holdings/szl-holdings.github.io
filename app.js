@@ -189,7 +189,8 @@
   /* ---------- Kanchay tokens for canvas drawing ---------- */
   // Canvas cannot read var(); resolve the szl-design-system.css scale tokens once and
   // derive translucent tints as 8-digit hex, so no color value is hard-coded here.
-  // The anatomy projection is a dark instrument: silver orbit linework, one coral node.
+  // The anatomy projection is a dark instrument: silver orbit linework and a white receipt;
+  // the page's single coral node is the hero's, so no coral is drawn here.
   var tokenStyle = window.getComputedStyle(document.documentElement);
   function token(name) { return tokenStyle.getPropertyValue(name).trim(); }
   function tint(hex, alpha) {
@@ -201,7 +202,7 @@
   var ORBIT = token("--color-silver-300");
   var ORBIT_SOFT = token("--color-silver-100");
   var ORGAN_CORE = token("--color-silver-100");
-  var RECEIPT_NODE = token("--color-coral-400");
+  var RECEIPT_NODE = token("--color-gray-50");
   var LABEL_INK = token("--color-gray-200");
   var MONO_FACE = token("--font-mono") || "monospace";
 
@@ -249,7 +250,9 @@
       HW = holo.clientWidth; HH = holo.clientHeight;
       holo.width = HW * hdpr; holo.height = HH * hdpr; hx.setTransform(hdpr, 0, 0, hdpr, 0, 0);
     }
-    hresize(); window.addEventListener("resize", hresize);
+    hresize();
+    // Resizing clears the canvas; under reduced motion there is no animation loop to repaint it.
+    window.addEventListener("resize", function () { hresize(); if (reduce) frame(); });
     function rad() { return Math.min(HW * 0.34, 220); }
     function nodeAt(i, rot) {
       var ang = (i / 5) * Math.PI * 2 + rot, rx = rad(), ry = rx * 0.34;
@@ -273,7 +276,7 @@
       var ns = []; for (var i = 0; i < 5; i++) ns.push(nodeAt(i, rot));
       // receipt bus (ring edges)
       for (var e = 0; e < 5; e++) { var a = ns[e], b = ns[(e + 1) % 5]; hline(a.x, a.y, b.x, b.y, 0.16 + 0.24 * ((a.d + b.d) / 2), 1.2); }
-      // one signed receipt traveling the bus: the frame's single coral node
+      // one signed receipt traveling the bus
       var per = reduce ? 0.5 : (ht * 0.004) % 1, seg = per * 5, si = Math.floor(seg), f = seg - si;
       var pa = ns[si % 5], pb = ns[(si + 1) % 5], px = pa.x + (pb.x - pa.x) * f, py = pa.y + (pb.y - pa.y) * f;
       var pg = hx.createRadialGradient(px, py, 0, px, py, 26);

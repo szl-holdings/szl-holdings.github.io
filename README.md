@@ -32,6 +32,7 @@ health.
 | [`styles.css`](./styles.css) | Site layout on the KANCHAY light marketing surface; no runtime CDN, no webfonts |
 | [`assets/szl/`](./assets/szl/) | Vendored SZL KANCHAY v1.1.0 (founder direction): `szl-design-system.css`, the orbit logo and favicons, `SOURCE.json` digests. Byte-for-byte; never edit |
 | [`app.js`](./app.js) | Progressive front-end interactions |
+| [`assets/hero.png`](./assets/hero.png) | Open Graph / Twitter card: the vendored `szl_logo_primary.svg` rendered unmodified on `--color-space-900`, 1200×630 |
 | [`console/index.html`](./console/index.html) | Honest pointer to the separate A11oy console |
 | [`verify/index.html`](./verify/index.html) | Honest pointer to the separate A11oy verifier |
 | [`api/a11oy/v1/honest.json`](./api/a11oy/v1/honest.json) | Static source document, not runtime doctrine |

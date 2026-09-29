@@ -13,6 +13,9 @@
 <style>
 header,main,footer{max-width:980px;margin:0 auto;padding:1.4rem 1.2rem}
 header .eyebrow{margin:0}
+.brand-mark{display:inline-block;margin:0 0 var(--space-8)}
+.brand-mark img{display:block;width:180px;height:auto} /* LOGO_USAGE: horizontal lockup >= 180px wide */
+header .orbit-rule{margin:var(--space-10) 0 0}
 h1{margin:.4rem 0 1rem}
 h2{font-size:var(--text-xl);margin:0 0 .55rem}
 .lede{color:var(--text-sub);max-width:46rem}
@@ -25,12 +28,17 @@ h2{font-size:var(--text-xl);margin:0 0 .55rem}
 .org{border:var(--border-hairline) solid var(--border);border-radius:var(--radius-md);padding:.55rem .7rem;font-family:var(--font-mono);font-size:var(--text-xs);line-height:1.35;color:var(--text-sub)}
 .org b{display:block;font-family:var(--font-display);font-size:var(--text-sm);font-weight:var(--weight-semibold);line-height:1.2;color:var(--text)}
 .org.down{border-color:color-mix(in srgb,var(--color-error) 45%,transparent);color:var(--color-error)}
+/* Code blocks stay dark on the light surface: re-assert the design system's :root operator tokens. */
+[data-surface="light"] .code{--bg:var(--color-space-900);--bg-deep:var(--color-space-900);--surface-alt:var(--color-gray-900);
+  --border:var(--color-gray-600);--text:var(--color-gray-50);--text-sub:var(--color-gray-200);--text-ghost:var(--color-gray-400);
+  --link:var(--color-yuyay-200);--focus:var(--color-yuyay-400);--shadow-focus:0 0 0 3px color-mix(in srgb,var(--focus) 55%,transparent);
+  --premium:var(--color-hatun-300);color-scheme:dark}
 pre.code{white-space:pre-wrap;word-break:break-word;margin:.6rem 0 0}
 .row{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin:.4rem 0}
 .btn.bad{color:var(--color-error);border-color:color-mix(in srgb,var(--color-error) 45%,transparent)}
 .btn.bad:hover{background:color-mix(in srgb,var(--color-error) 6%,transparent)}
 .table{font-family:var(--font-mono)}
-.cut{color:var(--text)}.table td.not{color:var(--color-error)}
+.cut{color:var(--text)}.table td.not{color:var(--text-sub)}
 .links{display:flex;flex-wrap:wrap;gap:.45rem;margin:1rem 0 0}
 footer{color:var(--text-sub);font-size:var(--text-sm)}
 main:focus{outline:none}
@@ -40,6 +48,7 @@ main:focus{outline:none}
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
 <header>
+  <a class="brand-mark" href="/" aria-label="SZL Holdings home"><img src="/assets/szl/logos/szl_logo_horizontal.svg" alt="" width="180" height="68"></a>
   <p class="eyebrow">SZL Holdings · holdings.a-11-oy.com/khipu · JS silhouette · not NumPy</p>
   <h1>Knot the run. Hash the proof. Fail closed.</h1>
   <p class="lede">Product hologram of SZL KHIPU. Duals <strong>Ari = GreenLight</strong> and <strong>Kay Pacha = Anatomy</strong>. Original cuts only — never a rehost of Qwen, Mixtral, SGLang, FlashAttention, SageAttention, FlexAttention, or vLLM. This page is a local JavaScript silhouette; the named NumPy product runtime is not measured here.</p>
@@ -56,23 +65,24 @@ main:focus{outline:none}
     <a class="btn btn-secondary btn-sm" href="https://huggingface.co/spaces/SZLHOLDINGS/szl-khipu">Hub Space</a>
     <a class="btn btn-secondary btn-sm" href="https://holdings.a-11-oy.com/">Holdings home</a>
   </nav>
+  <div class="orbit-rule" aria-hidden="true"><span class="orbit-rule__node"></span></div>
 </header>
 <main id="main" tabindex="-1">
   <section class="panel card" id="lambda">
     <h2>Λ gate — 13 Yuyay axes</h2>
     <p class="lede">Weighted geometric mean. Any zero or non-finite axis fail-closes. Advisory, not a uniqueness proof.</p>
     <div class="axes" id="axes"></div>
-    <div class="row"><button class="btn btn-secondary" id="score">Score Λ</button> <button class="btn btn-secondary bad" id="zero">Zero-route heart</button></div>
+    <div class="row"><button class="btn btn-secondary" id="score">score Λ</button> <button class="btn btn-secondary bad" id="zero">zero-route heart</button></div>
     <pre class="code" id="out-lambda">idle — JS silhouette, not the NumPy kernel</pre>
   </section>
   <section class="panel card" id="greenlight">
     <h2>Ari · GreenLight</h2>
     <p class="lede">Fail-closed promotion. A sorry cannot be painted green. Claiming proven_trust or stamping a joule BLOCKS. Dual of Anatomy.</p>
     <div class="row">
-      <button class="btn btn-secondary" id="gl-run">Evaluate</button>
-      <button class="btn btn-secondary" id="gl-sorry">Paint sorry green</button>
-      <button class="btn btn-secondary bad" id="gl-proven">Claim proven</button>
-      <button class="btn btn-secondary bad" id="gl-joule">Stamp joule</button>
+      <button class="btn btn-secondary" id="gl-run">evaluate</button>
+      <button class="btn btn-secondary" id="gl-sorry">paint sorry green</button>
+      <button class="btn btn-secondary bad" id="gl-proven">claim proven</button>
+      <button class="btn btn-secondary bad" id="gl-joule">stamp joule</button>
     </div>
     <pre class="code" id="out-green">idle</pre>
   </section>
@@ -80,9 +90,9 @@ main:focus{outline:none}
     <h2>Kay Pacha · Anatomy — five organs</h2>
     <p class="lede">HEART/YUYAY · YAWAR · YACHAY · OTel · Khipu skeleton. Any DOWN organ or fabricated joule blocks the body. Not a Three.js rehost. Dual of GreenLight.</p>
     <div class="row">
-      <button class="btn btn-secondary" id="an-run">Evaluate body</button>
-      <button class="btn btn-secondary bad" id="an-heart">Zero HEART</button>
-      <button class="btn btn-secondary bad" id="an-joule">Fabricate joule</button>
+      <button class="btn btn-secondary" id="an-run">evaluate body</button>
+      <button class="btn btn-secondary bad" id="an-heart">zero HEART</button>
+      <button class="btn btn-secondary bad" id="an-joule">fabricate joule</button>
     </div>
     <div class="orgs" id="org-box"></div>
     <pre class="code" id="out-anatomy">idle</pre>
@@ -91,10 +101,10 @@ main:focus{outline:none}
     <h2>PrefixWitness · RouteWitness</h2>
     <p class="lede">Original cuts. A poisoned radix cache fail-closes. An expert swapped after routing fail-closes. Not SGLang. Not Mixtral. No tokens/s claim.</p>
     <div class="row">
-      <button class="btn btn-secondary" id="px-run">Prefix digest</button>
-      <button class="btn btn-secondary bad" id="px-hijack">Hijack cache</button>
-      <button class="btn btn-secondary" id="rt-run">Route digest</button>
-      <button class="btn btn-secondary bad" id="rt-swap">Swap expert</button>
+      <button class="btn btn-secondary" id="px-run">prefix digest</button>
+      <button class="btn btn-secondary bad" id="px-hijack">hijack cache</button>
+      <button class="btn btn-secondary" id="rt-run">route digest</button>
+      <button class="btn btn-secondary bad" id="rt-swap">swap expert</button>
     </div>
     <pre class="code" id="out-prefix">idle</pre>
     <pre class="code" id="out-route">idle</pre>

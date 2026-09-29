@@ -12,7 +12,10 @@
   <link rel="stylesheet" href="/assets/szl/szl-design-system.css">
   <style>
     body { padding: 2rem; }
-    main { max-width: 42rem; margin: 0 auto; }
+    header, main { max-width: 42rem; margin: 0 auto; }
+    .brand-mark { display: inline-block; text-decoration: none; }
+    .brand-mark img { display: block; width: 180px; height: auto; } /* LOGO_USAGE: horizontal lockup >= 180px wide */
+    header .orbit-rule { margin: var(--space-8) 0; }
     h1 { margin: 0 0 1rem; }
     p { color: var(--text-sub); }
     a { text-decoration: underline; }
@@ -20,6 +23,10 @@
   <link rel="stylesheet" href="/assets/szl-responsive-apex-v3.css" data-szl-responsive-apex-v3="style" />
 </head>
 <body>
+  <header>
+    <a class="brand-mark" href="/" aria-label="SZL Holdings home"><img src="/assets/szl/logos/szl_logo_horizontal.svg" alt="" width="180" height="68"></a>
+    <div class="orbit-rule" aria-hidden="true"><span class="orbit-rule__node"></span></div>
+  </header>
   <main>
     <p class="eyebrow">STATIC ORIGIN · NOT RUNTIME</p>
     <h1>/verify is not hosted on this Pages tree.</h1>

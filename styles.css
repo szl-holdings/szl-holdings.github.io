@@ -9,9 +9,6 @@
   --maxw:1160px;
   --control-edge:var(--color-gray-400); /* input edges need >=3:1; --border is decorative on light */
 }
-/* The design system's focus ring is --focus at 55%, which measures 2.3:1 on the light ground.
-   Draw it solid so every focus indicator clears 3:1 (yuyay-600 on --bg: 5.4:1). */
-[data-surface="light"]{--shadow-focus:0 0 0 3px var(--focus)}
 
 /* Code, receipt and instrument blocks stay dark on the light surface ("code blocks stay dark on both").
    The design system flips tokens only at [data-surface="light"], so these islands re-assert its
@@ -24,7 +21,7 @@
   --hairline:color-mix(in srgb,var(--color-silver-500) 38%,transparent);
   --text:var(--color-gray-50); --text-sub:var(--color-gray-200); --text-ghost:var(--color-gray-400);
   --link:var(--color-yuyay-200); --link-hover:var(--color-yuyay-100); --focus:var(--color-yuyay-400);
-  --shadow-focus:0 0 0 3px var(--color-yuyay-400);
+  --shadow-focus:0 0 0 3px color-mix(in srgb,var(--focus) 55%,transparent); /* the base's own formula, recomputed on the island's --focus */
   --premium:var(--color-hatun-300);
   color-scheme:dark;
 }
@@ -54,6 +51,15 @@ body.menu-open{overflow:hidden}
 /* The design-system hero wash is tuned for the dark ground; on the light surface it reads as a
    grey smudge, so the light hero sits on --bg and lets the orbit arc and node carry it. */
 [data-surface="light"] .hero{background:var(--bg)}
+/* Seat the one coral node ON the silver orbit, as in the logo, instead of beside it. Same geometry as
+   the design system's .hero__orbit::before: a w x w/1.9 pill (round caps) at top 8%, right -6%,
+   w = min(54vw,760px), rotated -22deg. The node sits on its upper straight edge at x = -.2w from the
+   centre, i.e. (-.284w, -.169w) after rotation. Only from 960px, where the nav is one row and that
+   point clears both the nav and the headline; below it the design-system default placement stays. */
+@media(min-width:960px){
+  .hero .hero__node{--_orbit-w:min(54vw,760px);
+    top:calc(8% + var(--_orbit-w) * .0941 - 7px);right:calc(-6% + var(--_orbit-w) * .784 - 7px)}
+}
 .hero-inner{position:relative;z-index:2;max-width:900px}
 .hero .eyebrow{margin:0 0 var(--space-6)}
 .hero-title{max-width:16ch;margin:0 0 var(--space-6)}
@@ -302,7 +308,7 @@ main [data-szl-spectral-card="true"].card:hover{border-color:var(--border-subtle
   .stack-k{min-width:0}
 }
 
-/* ---- anatomy projection: a dark instrument (silver orbit, one coral receipt node) ---- */
+/* ---- anatomy projection: a dark instrument (silver orbit linework; the page's one coral node is the hero's) ---- */
 .holo{position:relative;height:clamp(240px,34vw,360px);max-width:760px;margin:0 auto clamp(30px,4vw,48px);
   border:var(--border-hairline) solid var(--border);border-radius:var(--radius-md);overflow:hidden;background:var(--bg)}
 .holo canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
