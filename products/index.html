@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-surface="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -7,40 +7,37 @@
   <meta name="description" content="Source-declared SZL Holdings product catalog. Runtime and deployment evidence remain on each named product and proof origin.">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://holdings.a-11-oy.com/products/">
-  <link rel="icon" href="/assets/kanchay/marks/szl-mark-gold.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/assets/kanchay/kanchay.css">
+  <link rel="icon" href="/assets/szl/logos/szl_favicon_32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/assets/szl/logos/szl_favicon_square.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/szl/logos/szl_favicon_180.png">
+  <link rel="stylesheet" href="/assets/szl/szl-design-system.css">
   <style>
-    body{margin:0;background:var(--color-a11oy-bg);color:var(--color-a11oy-text);font-family:var(--font-sans);-webkit-font-smoothing:antialiased}
     main{max-width:1180px;margin:auto;padding:56px 24px 96px}
     .top{display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap}
-    .brand{font-family:var(--font-display);font-weight:600;letter-spacing:.08em}
-    .ey{color:var(--color-a11oy-gold);font:500 12px var(--font-mono);text-transform:uppercase;letter-spacing:.2em}
-    h1{font-family:var(--font-display);font-weight:300;letter-spacing:-.035em;font-size:clamp(40px,8vw,78px);line-height:.98;max-width:980px;margin:34px 0 18px}
-    h2{font-family:var(--font-display);font-weight:300;letter-spacing:-.025em}
-    p{color:var(--color-a11oy-text-sub);line-height:1.65}
-    .lead{font-size:20px;max-width:850px}
-    .rule{margin:34px 0 60px;border-top:1px solid var(--color-a11oy-border-subtle)}
+    .brand img{width:180px;height:auto}
+    h1{font-size:clamp(40px,8vw,78px);line-height:.98;max-width:980px;margin:34px 0 18px}
+    h2{margin:0 0 var(--space-4)}
+    p{color:var(--text-sub);line-height:1.65}
+    .lead{font-size:var(--text-lg);max-width:850px}
+    .rule{margin:34px 0 60px;border-top:var(--border-hairline) solid var(--border)}
     .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px}
-    .card{display:block;padding:22px;border:1px solid var(--color-a11oy-border-subtle);border-radius:var(--radius-md);background:var(--color-a11oy-surface);color:inherit;text-decoration:none;
-      transition:transform var(--duration-fast) var(--ease-standard),border-color var(--duration-fast) var(--ease-standard),box-shadow var(--duration-fast) var(--ease-standard)}
-    .card:hover{border-color:color-mix(in srgb,var(--color-a11oy-gold) 20%,transparent);box-shadow:var(--shadow-lg);transform:translateY(-1px)}
-    .tag{font:500 11px var(--font-mono);color:var(--color-a11oy-gold);text-transform:uppercase;letter-spacing:.15em}
-    .card h2{margin:10px 0 8px;font-size:25px;font-weight:600;letter-spacing:-.02em;color:var(--color-a11oy-text)}
-    .meta{font:12px var(--font-mono);color:var(--color-a11oy-text-sub)}
+    a.card{display:block;padding:22px;color:inherit;text-decoration:none}
+    a.card:hover{text-decoration:none}
+    .card h2{margin:12px 0 8px;font-size:var(--text-xl);color:var(--text)}
+    .card p{margin:0 0 var(--space-3)}
+    .meta{font-family:var(--font-mono);font-size:var(--text-xs);color:var(--text-ghost)}
     .section{margin-top:64px}
-    .note{padding:18px;border:1px solid var(--color-a11oy-border-subtle);border-radius:var(--radius-md);background:var(--color-a11oy-deep)}
+    .note{padding:22px;background:var(--bg-deep)}
     .links{display:flex;flex-wrap:wrap;gap:0 18px}
-    .links a{display:inline-flex;align-items:center;min-height:var(--szl-touch-target);color:var(--color-a11oy-gold)}
-    .links a:hover{color:var(--gold-bright)}
-    a{color:var(--color-a11oy-text)}
-    strong{color:var(--color-a11oy-text)}
+    .links a{display:inline-flex;align-items:center;min-height:var(--target-size-coarse);text-decoration:underline}
+    strong{color:var(--text)}
   </style>
   <link rel="stylesheet" href="/assets/szl-responsive-apex-v3.css" data-szl-responsive-apex-v3="style" />
 </head>
 <body>
 <main>
   <nav class="top" aria-label="Catalog navigation">
-    <div class="brand">SZL HOLDINGS</div>
+    <div class="brand"><img src="/assets/szl/logos/szl_logo_horizontal.svg" alt="SZL Holdings" width="180" height="68"></div>
     <div class="links">
       <a href="/">Company</a>
       <a href="https://a-11-oy.com/">A11oy product</a>
@@ -48,43 +45,43 @@
     </div>
   </nav>
 
-  <p class="ey">Source-declared product catalog</p>
+  <p class="eyebrow">Source-declared product catalog</p>
   <h1>One portfolio. Explicit evidence boundaries.</h1>
   <p class="lead">This company catalog maps public product names to their source and publication surfaces. It does not assert that a deployment is healthy. The governed A11oy runtime is separately published at <a href="https://a-11-oy.com/">a-11-oy.com</a>; each linked surface retains its own readiness and evidence contract.</p>
   <div class="rule"></div>
 
   <section aria-labelledby="verticals-title">
-    <p class="ey">Vertical products</p>
+    <p class="eyebrow">Vertical products</p>
     <h2 id="verticals-title">Named source and publication targets</h2>
     <div class="grid">
-      <a class="card" id="command" href="https://github.com/szl-holdings/a11oy"><span class="tag">Command · listed</span><h2>A11oy Command</h2><p>Governed AI command, orchestration, receipts, policy, and evidence.</p><div class="meta">Source: szl-holdings/a11oy · Hub target: SZLHOLDINGS/a11oy</div></a>
-      <a class="card" id="killinchu" href="https://github.com/szl-holdings/killinchu"><span class="tag">Defense · listed</span><h2>Killinchu</h2><p>Counter-UAS and governed autonomous-systems intelligence.</p><div class="meta">Source: szl-holdings/killinchu · Hub target: SZLHOLDINGS/killinchu</div></a>
-      <a class="card" id="terra" href="https://github.com/szl-holdings/szl-real-estate"><span class="tag">Real estate · listed</span><h2>Terra</h2><p>Property intelligence, underwriting, ownership, and opportunity workflows.</p><div class="meta">Source: szl-holdings/szl-real-estate · Hub target: SZLHOLDINGS/terra</div></a>
-      <a class="card" id="sentra" href="https://github.com/szl-holdings/szl-defensive-control-plane"><span class="tag">Cybersecurity · listed</span><h2>Sentra</h2><p>Security operations, defensive control plane, and governed response.</p><div class="meta">Source: szl-holdings/szl-defensive-control-plane · Hub target: SZLHOLDINGS/sentra</div></a>
-      <a class="card" id="legal" href="https://github.com/szl-holdings/counsel"><span class="tag">Legal · listed</span><h2>PRISM Counsel</h2><p>Matter intelligence, deadlines, evidence, and legal workflow governance.</p><div class="meta">Source: szl-holdings/counsel · Hub target: SZLHOLDINGS/counsel</div></a>
-      <a class="card" id="finance" href="https://github.com/szl-holdings/puriq-live"><span class="tag">Finance · listed</span><h2>PURIQ Finance</h2><p>Receipted financial decision intelligence and reconstructable decision paths.</p><div class="meta">Source: szl-holdings/puriq-live · Hub target: SZLHOLDINGS/finance</div></a>
-      <a class="card" id="vessels" href="https://github.com/szl-holdings/szl-fleet-overlay"><span class="tag">Maritime · listed</span><h2>Vessels</h2><p>Fleet intelligence, voyage economics, sanctions, and maritime command.</p><div class="meta">Source: szl-holdings/szl-fleet-overlay · Hub target: SZLHOLDINGS/vessels</div></a>
-      <a class="card" id="lyte" href="https://github.com/szl-holdings/lyte-lattice"><span class="tag">Observability · listed</span><h2>Lyte</h2><p>Business observability and governed operational intelligence.</p><div class="meta">Source: szl-holdings/lyte-lattice · Hub target: SZLHOLDINGS/lyte</div></a>
-      <a class="card" id="insurance" href="https://github.com/szl-holdings/david-leads"><span class="tag">Insurance · listed</span><h2>David Leads</h2><p>Insurance intelligence and governed lead decisioning.</p><div class="meta">Source: szl-holdings/david-leads · Hub target: SZLHOLDINGS/david-leads</div></a>
+      <a class="card" id="command" href="https://github.com/szl-holdings/a11oy"><span class="badge">Command · listed</span><h2>A11oy Command</h2><p>Governed AI command, orchestration, receipts, policy, and evidence.</p><div class="meta">Source: szl-holdings/a11oy · Hub target: SZLHOLDINGS/a11oy</div></a>
+      <a class="card" id="killinchu" href="https://github.com/szl-holdings/killinchu"><span class="badge">Defense · listed</span><h2>Killinchu</h2><p>Counter-UAS and governed autonomous-systems intelligence.</p><div class="meta">Source: szl-holdings/killinchu · Hub target: SZLHOLDINGS/killinchu</div></a>
+      <a class="card" id="terra" href="https://github.com/szl-holdings/szl-real-estate"><span class="badge">Real estate · listed</span><h2>Terra</h2><p>Property intelligence, underwriting, ownership, and opportunity workflows.</p><div class="meta">Source: szl-holdings/szl-real-estate · Hub target: SZLHOLDINGS/terra</div></a>
+      <a class="card" id="sentra" href="https://github.com/szl-holdings/szl-defensive-control-plane"><span class="badge">Cybersecurity · listed</span><h2>Sentra</h2><p>Security operations, defensive control plane, and governed response.</p><div class="meta">Source: szl-holdings/szl-defensive-control-plane · Hub target: SZLHOLDINGS/sentra</div></a>
+      <a class="card" id="legal" href="https://github.com/szl-holdings/counsel"><span class="badge">Legal · listed</span><h2>PRISM Counsel</h2><p>Matter intelligence, deadlines, evidence, and legal workflow governance.</p><div class="meta">Source: szl-holdings/counsel · Hub target: SZLHOLDINGS/counsel</div></a>
+      <a class="card" id="finance" href="https://github.com/szl-holdings/puriq-live"><span class="badge">Finance · listed</span><h2>PURIQ Finance</h2><p>Receipted financial decision intelligence and reconstructable decision paths.</p><div class="meta">Source: szl-holdings/puriq-live · Hub target: SZLHOLDINGS/finance</div></a>
+      <a class="card" id="vessels" href="https://github.com/szl-holdings/szl-fleet-overlay"><span class="badge">Maritime · listed</span><h2>Vessels</h2><p>Fleet intelligence, voyage economics, sanctions, and maritime command.</p><div class="meta">Source: szl-holdings/szl-fleet-overlay · Hub target: SZLHOLDINGS/vessels</div></a>
+      <a class="card" id="lyte" href="https://github.com/szl-holdings/lyte-lattice"><span class="badge">Observability · listed</span><h2>Lyte</h2><p>Business observability and governed operational intelligence.</p><div class="meta">Source: szl-holdings/lyte-lattice · Hub target: SZLHOLDINGS/lyte</div></a>
+      <a class="card" id="insurance" href="https://github.com/szl-holdings/david-leads"><span class="badge">Insurance · listed</span><h2>David Leads</h2><p>Insurance intelligence and governed lead decisioning.</p><div class="meta">Source: szl-holdings/david-leads · Hub target: SZLHOLDINGS/david-leads</div></a>
     </div>
   </section>
 
   <section class="section" aria-labelledby="platform-title">
-    <p class="ey">Platform products</p>
+    <p class="eyebrow">Platform products</p>
     <h2 id="platform-title">Shared substrate and operator tools</h2>
     <div class="grid">
-      <a class="card" id="immune" href="https://github.com/szl-holdings/immune"><span class="tag">Safety · source</span><h2>IMMUNE</h2><p>Verifiable AI safety and defensive kernel.</p></a>
-      <a class="card" id="anatomy" href="https://github.com/szl-holdings/anatomy"><span class="tag">Digital twin · source</span><h2>A11oy Anatomy</h2><p>Living map of the governed system.</p></a>
-      <a class="card" id="receipts" href="https://github.com/szl-holdings/governance-as-code"><span class="tag">Governance · source</span><h2>Receipt &amp; Governance</h2><p>GovernedAction, receipts, provenance, and policy as code.</p></a>
-      <a class="card" id="kernels" href="https://github.com/szl-holdings/szl-kernels"><span class="tag">Kernels · source</span><h2>SZL Kernels</h2><p>Shared governed kernels and reusable inference controls.</p></a>
-      <a class="card" id="forge" href="https://github.com/szl-holdings/szl-forge"><span class="tag">Forge · source</span><h2>SZL Forge</h2><p>Build, training, and agent-system production tooling.</p></a>
-      <a class="card" id="router" href="https://github.com/szl-holdings/szl-router"><span class="tag">Routing · source</span><h2>Model Router</h2><p>Model selection and OpenAI-compatible routing.</p></a>
-      <a class="card" id="evidence" href="https://github.com/szl-holdings/evidence-studio"><span class="tag">Evidence · source</span><h2>Evidence Studio</h2><p>Evidence inspection, verification, and diligence tooling.</p></a>
-      <a class="card" id="khipu" href="/khipu/"><span class="tag">Sovereign compute · static silhouette</span><h2>KHIPU</h2><p>Governed inference, consensus, and sovereign compute architecture.</p></a>
+      <a class="card" id="immune" href="https://github.com/szl-holdings/immune"><span class="badge">Safety · source</span><h2>IMMUNE</h2><p>Verifiable AI safety and defensive kernel.</p></a>
+      <a class="card" id="anatomy" href="https://github.com/szl-holdings/anatomy"><span class="badge">Digital twin · source</span><h2>A11oy Anatomy</h2><p>Living map of the governed system.</p></a>
+      <a class="card" id="receipts" href="https://github.com/szl-holdings/governance-as-code"><span class="badge">Governance · source</span><h2>Receipt &amp; Governance</h2><p>GovernedAction, receipts, provenance, and policy as code.</p></a>
+      <a class="card" id="kernels" href="https://github.com/szl-holdings/szl-kernels"><span class="badge">Kernels · source</span><h2>SZL Kernels</h2><p>Shared governed kernels and reusable inference controls.</p></a>
+      <a class="card" id="forge" href="https://github.com/szl-holdings/szl-forge"><span class="badge">Forge · source</span><h2>SZL Forge</h2><p>Build, training, and agent-system production tooling.</p></a>
+      <a class="card" id="router" href="https://github.com/szl-holdings/szl-router"><span class="badge">Routing · source</span><h2>Model Router</h2><p>Model selection and OpenAI-compatible routing.</p></a>
+      <a class="card" id="evidence" href="https://github.com/szl-holdings/evidence-studio"><span class="badge">Evidence · source</span><h2>Evidence Studio</h2><p>Evidence inspection, verification, and diligence tooling.</p></a>
+      <a class="card" id="khipu" href="/khipu/"><span class="badge">Sovereign compute · static silhouette</span><h2>KHIPU</h2><p>Governed inference, consensus, and sovereign compute architecture.</p></a>
     </div>
   </section>
 
-  <section class="section note" aria-labelledby="truth-title">
+  <section class="section note card" aria-labelledby="truth-title">
     <h2 id="truth-title">Catalog truth boundary</h2>
     <p><strong>Listed</strong> means present in this source-controlled catalog. It does not mean deployed, ready, externally attested, or operational. Provider state and runtime health must be witnessed on each named surface.</p>
     <p>Legacy Hugging Face assets are removed only after their unique source, product copy, and evidence links are preserved under an explicit governed migration.</p>

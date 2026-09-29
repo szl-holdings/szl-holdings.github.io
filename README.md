@@ -29,8 +29,8 @@ health.
 |---|---|
 | [`index.html`](./index.html) | Static company, investor, portfolio, and developer landing |
 | [`products/index.html`](./products/index.html) | Source-declared product catalog; not live health |
-| [`styles.css`](./styles.css) | KANCHAY palette; no runtime CDN |
-| [`assets/kanchay/`](./assets/kanchay/) | Vendored SZL Kanchay v1.0.0 export: tokens, components, local fonts, mark (byte-for-byte; `SOURCE.json` holds the digests) |
+| [`styles.css`](./styles.css) | Site layout on the KANCHAY light marketing surface; no runtime CDN, no webfonts |
+| [`assets/szl/`](./assets/szl/) | Vendored SZL KANCHAY v1.1.0 (founder direction): `szl-design-system.css`, the orbit logo and favicons, `SOURCE.json` digests. Byte-for-byte; never edit |
 | [`app.js`](./app.js) | Progressive front-end interactions |
 | [`console/index.html`](./console/index.html) | Honest pointer to the separate A11oy console |
 | [`verify/index.html`](./verify/index.html) | Honest pointer to the separate A11oy verifier |

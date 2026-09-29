@@ -2,8 +2,8 @@
    Original state-of-the-art presentation layer for the A11oy product estate.
    It preserves product-owned layouts and adds a shared holographic interaction field.
    Local-only. No analytics. No runtime CDN. No fabricated operational state.
-   holdings.a-11-oy.com copy: literal colors and faces re-pointed at SZL Kanchay tokens
-   (/assets/kanchay/kanchay.css); see assets/szl-product-frontdoor-assets-v2.json. */
+   holdings.a-11-oy.com copy: literal colors and faces re-pointed at SZL KANCHAY founder tokens
+   (/assets/szl/szl-design-system.css); see assets/szl-product-frontdoor-assets-v2.json. */
 
 :root {
   --szl-spectral-pointer-x: 50%;
@@ -39,7 +39,7 @@
     repeating-radial-gradient(circle at 66% 38%, transparent 0 68px, var(--szl-spectral-line) 69px 70px),
     conic-gradient(from 12deg at 66% 38%, var(--szl-spectral-glow), transparent 17% 76%, var(--szl-spectral-glow-2));
   --szl-spectral-nodes:
-    radial-gradient(circle, color-mix(in srgb, var(--szl-flow-accent) 68%, var(--color-a11oy-text) 8%) 0 1px, transparent 2px);
+    radial-gradient(circle, color-mix(in srgb, var(--szl-flow-accent) 68%, var(--color-white) 8%) 0 1px, transparent 2px);
   --szl-spectral-node-size: 96px 96px;
 }
 
@@ -75,7 +75,7 @@ body[data-szl-spectral="product"] {
 .szl-spectral-mesh {
   background-image: var(--szl-spectral-mesh);
   background-size: var(--szl-spectral-grid-size) var(--szl-spectral-grid-size);
-  mask-image: radial-gradient(ellipse at var(--szl-spectral-pointer-x) var(--szl-spectral-pointer-y), var(--color-a11oy-bg) 0 18%, color-mix(in srgb, var(--color-a11oy-bg) 72%, transparent) 40%, transparent 76%);
+  mask-image: radial-gradient(ellipse at var(--szl-spectral-pointer-x) var(--szl-spectral-pointer-y), var(--color-ink) 0 18%, color-mix(in srgb, var(--color-ink) 72%, transparent) 40%, transparent 76%);
   transform:
     perspective(980px)
     rotateX(calc(58deg + var(--szl-spectral-tilt-y)))
@@ -89,7 +89,7 @@ body[data-szl-spectral="product"] {
 .szl-spectral-orbit {
   inset: -8%;
   background: var(--szl-spectral-orbit);
-  mask-image: radial-gradient(circle at 66% 38%, var(--color-a11oy-bg) 0 8%, color-mix(in srgb, var(--color-a11oy-bg) 88%, transparent) 31%, transparent 68%);
+  mask-image: radial-gradient(circle at 66% 38%, var(--color-ink) 0 8%, color-mix(in srgb, var(--color-ink) 88%, transparent) 31%, transparent 68%);
   transform:
     translate3d(var(--szl-spectral-orbit-shift-x), var(--szl-spectral-orbit-shift-y), 0)
     rotate(var(--szl-spectral-orbit-rotate));
@@ -104,7 +104,7 @@ body[data-szl-spectral="product"] {
   background-position:
     var(--szl-spectral-node-position-x)
     var(--szl-spectral-node-position-y);
-  mask-image: linear-gradient(115deg, transparent 4%, var(--color-a11oy-bg) 28% 72%, transparent 96%);
+  mask-image: linear-gradient(115deg, transparent 4%, var(--color-ink) 28% 72%, transparent 96%);
   opacity: .34;
   transform: translate3d(0, var(--szl-spectral-node-shift-y), 0);
 }
@@ -140,7 +140,7 @@ body[data-szl-spectral="product"] {
       color-mix(in srgb, var(--szl-flow-secondary) 8%, transparent) 50.2%,
       transparent 56%
     );
-  mask-image: linear-gradient(90deg, transparent 3%, var(--color-a11oy-bg) 20% 80%, transparent 97%);
+  mask-image: linear-gradient(90deg, transparent 3%, var(--color-ink) 20% 80%, transparent 97%);
   opacity: .32;
   transform: translate3d(0, -68%, 0);
   animation: szl-spectral-scan 13s cubic-bezier(.45,0,.2,1) infinite;
@@ -318,8 +318,8 @@ body[data-szl-theme="voyage"] {
   border-radius: inherit;
   pointer-events: none;
   background:
-    linear-gradient(105deg, transparent 4%, color-mix(in srgb, var(--color-a11oy-text) 10%, transparent) 18%, transparent 31% 72%, color-mix(in srgb, var(--szl-flow-accent) 12%, transparent));
-  mask-image: linear-gradient(var(--color-a11oy-bg), transparent 54%);
+    linear-gradient(105deg, transparent 4%, color-mix(in srgb, var(--color-white) 10%, transparent) 18%, transparent 31% 72%, color-mix(in srgb, var(--szl-flow-accent) 12%, transparent));
+  mask-image: linear-gradient(var(--color-ink), transparent 54%);
   opacity: .72;
 }
 
@@ -395,7 +395,7 @@ body[data-szl-theme="voyage"] {
   transition: transform .22s cubic-bezier(.2,.75,.2,1), box-shadow .22s ease, border-color .22s ease, filter .22s ease;
   box-shadow:
     0 0 0 1px var(--szl-card-line) inset,
-    0 16px 44px color-mix(in srgb, var(--color-a11oy-bg) 12%, transparent);
+    0 16px 44px color-mix(in srgb, var(--color-ink) 12%, transparent);
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -404,7 +404,7 @@ body[data-szl-theme="voyage"] {
     border-color: color-mix(in srgb, var(--szl-flow-accent) 36%, transparent);
     box-shadow:
       0 0 0 1px color-mix(in srgb, var(--szl-flow-accent) 28%, transparent) inset,
-      0 24px 66px color-mix(in srgb, var(--color-a11oy-bg) 20%, transparent),
+      0 24px 66px color-mix(in srgb, var(--color-ink) 20%, transparent),
       0 0 34px color-mix(in srgb, var(--szl-flow-accent) 6%, transparent);
     filter: saturate(1.04);
   }

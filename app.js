@@ -163,15 +163,15 @@
       var cards = grp.items.map(function (p, i) {
         return '<a class="card reveal" data-d="' + ((i % 4) + 1) + '" href="' + p.href + '" target="_blank" rel="noopener">' +
           '<div class="card-top"><span class="card-name">' + p.name + '</span>' +
-          '<span class="card-lang">' + p.lang + '</span></div>' +
+          '<span class="badge card-lang">' + p.lang + '</span></div>' +
           '<h3>' + p.title + '</h3><p>' + p.desc + '</p>' +
           '<span class="card-link">view →</span></a>';
       }).join("");
       var sec = document.createElement("div");
       sec.className = "eco-group reveal";
       sec.innerHTML =
-        '<div class="eco-group-head"><span class="eco-no">' + grp.no + '</span>' +
-        '<h3>' + grp.g + '</h3><span class="eco-count">' + grp.items.length + '</span></div>' +
+        '<div class="eco-group-head"><span class="badge eco-no">' + grp.no + '</span>' +
+        '<h3>' + grp.g + '</h3><span class="badge eco-count">' + grp.items.length + '</span></div>' +
         '<p class="eco-note">' + grp.note + '</p>' +
         '<div class="grid">' + cards + '</div>';
       groups.appendChild(sec);
@@ -187,8 +187,9 @@
   document.querySelectorAll(".reveal").forEach(function (el) { io.observe(el); });
 
   /* ---------- Kanchay tokens for canvas drawing ---------- */
-  // Canvas cannot read var(); resolve the kanchay.css tokens once and derive
-  // translucent tints as 8-digit hex, so no color value is hard-coded here.
+  // Canvas cannot read var(); resolve the szl-design-system.css scale tokens once and
+  // derive translucent tints as 8-digit hex, so no color value is hard-coded here.
+  // The anatomy projection is a dark instrument: silver orbit linework, one coral node.
   var tokenStyle = window.getComputedStyle(document.documentElement);
   function token(name) { return tokenStyle.getPropertyValue(name).trim(); }
   function tint(hex, alpha) {
@@ -196,11 +197,12 @@
     var a = Math.max(0, Math.min(255, Math.round(alpha * 255)));
     return hex + (a < 16 ? "0" : "") + a.toString(16);
   }
-  var GRID_INK = token("--color-a11oy-text");
-  var SIGNAL = token("--color-ink-signal");
-  var SIGNAL_SOFT = token("--color-yuyay-100");
-  var SIGNAL_CORE = token("--color-yuyay-50");
-  var LABEL_INK = token("--color-a11oy-text-sub");
+  var GRID_INK = token("--color-silver-300");
+  var ORBIT = token("--color-silver-300");
+  var ORBIT_SOFT = token("--color-silver-100");
+  var ORGAN_CORE = token("--color-silver-100");
+  var RECEIPT_NODE = token("--color-coral-400");
+  var LABEL_INK = token("--color-gray-200");
   var MONO_FACE = token("--font-mono") || "monospace";
 
   /* ---------- hero grid canvas ---------- */
@@ -226,9 +228,9 @@
         var ny = (Math.cos(t * 0.005 + i * 2.3) * 0.5 + 0.5) * H;
         var r = 2 + Math.sin(t * 0.03 + i) * 1.2;
         var g = ctx.createRadialGradient(nx, ny, 0, nx, ny, 60);
-        g.addColorStop(0, tint(SIGNAL, 0.45)); g.addColorStop(1, tint(SIGNAL, 0));
+        g.addColorStop(0, tint(ORBIT, 0.45)); g.addColorStop(1, tint(ORBIT, 0));
         ctx.fillStyle = g; ctx.beginPath(); ctx.arc(nx, ny, 60, 0, 6.29); ctx.fill();
-        ctx.fillStyle = tint(SIGNAL, 0.9); ctx.beginPath(); ctx.arc(nx, ny, r, 0, 6.29); ctx.fill();
+        ctx.fillStyle = tint(ORBIT, 0.9); ctx.beginPath(); ctx.arc(nx, ny, r, 0, 6.29); ctx.fill();
       }
       t++; requestAnimationFrame(draw);
     }
@@ -253,37 +255,37 @@
       var ang = (i / 5) * Math.PI * 2 + rot, rx = rad(), ry = rx * 0.34;
       return { x: HW / 2 + Math.cos(ang) * rx, y: HH * 0.52 + Math.sin(ang) * ry, d: (Math.sin(ang) + 1) / 2 };
     }
-    // chromatic holographic double-stroke (proof teal + pale teal offset)
+    // silver double-stroke (orbit linework, light-stop offset)
     function hline(x1, y1, x2, y2, alpha, w) {
       hx.lineWidth = w || 1;
-      hx.strokeStyle = tint(SIGNAL, alpha); hx.beginPath(); hx.moveTo(x1, y1); hx.lineTo(x2, y2); hx.stroke();
-      hx.strokeStyle = tint(SIGNAL_SOFT, alpha * 0.5); hx.beginPath(); hx.moveTo(x1 + 0.9, y1); hx.lineTo(x2 + 0.9, y2); hx.stroke();
+      hx.strokeStyle = tint(ORBIT, alpha); hx.beginPath(); hx.moveTo(x1, y1); hx.lineTo(x2, y2); hx.stroke();
+      hx.strokeStyle = tint(ORBIT_SOFT, alpha * 0.5); hx.beginPath(); hx.moveTo(x1 + 0.9, y1); hx.lineTo(x2 + 0.9, y2); hx.stroke();
     }
     function frame() {
       hx.clearRect(0, 0, HW, HH);
       var rot = reduce ? 0.6 : ht * 0.006, cx = HW / 2, baseY = HH * 0.9;
       // projector base + emitter cone
       var bg = hx.createRadialGradient(cx, baseY, 0, cx, baseY, HW * 0.32);
-      bg.addColorStop(0, tint(SIGNAL, 0.32)); bg.addColorStop(1, tint(SIGNAL, 0));
+      bg.addColorStop(0, tint(ORBIT, 0.24)); bg.addColorStop(1, tint(ORBIT, 0));
       hx.fillStyle = bg; hx.beginPath(); hx.ellipse(cx, baseY, HW * 0.30, 10, 0, 0, 6.29); hx.fill();
       hline(cx - 6, baseY, cx - rad(), HH * 0.52, 0.10, 1);
       hline(cx + 6, baseY, cx + rad(), HH * 0.52, 0.10, 1);
       var ns = []; for (var i = 0; i < 5; i++) ns.push(nodeAt(i, rot));
       // receipt bus (ring edges)
       for (var e = 0; e < 5; e++) { var a = ns[e], b = ns[(e + 1) % 5]; hline(a.x, a.y, b.x, b.y, 0.16 + 0.24 * ((a.d + b.d) / 2), 1.2); }
-      // one signed receipt traveling the bus
+      // one signed receipt traveling the bus: the frame's single coral node
       var per = reduce ? 0.5 : (ht * 0.004) % 1, seg = per * 5, si = Math.floor(seg), f = seg - si;
       var pa = ns[si % 5], pb = ns[(si + 1) % 5], px = pa.x + (pb.x - pa.x) * f, py = pa.y + (pb.y - pa.y) * f;
       var pg = hx.createRadialGradient(px, py, 0, px, py, 26);
-      pg.addColorStop(0, tint(SIGNAL_CORE, 0.95)); pg.addColorStop(1, tint(SIGNAL, 0));
+      pg.addColorStop(0, tint(RECEIPT_NODE, 0.95)); pg.addColorStop(1, tint(RECEIPT_NODE, 0));
       hx.fillStyle = pg; hx.beginPath(); hx.arc(px, py, 26, 0, 6.29); hx.fill();
       // organ nodes, depth-sorted
       ns.map(function (n, i) { return { n: n, i: i }; }).sort(function (A, B) { return A.n.d - B.n.d; }).forEach(function (o) {
         var n = o.n, r = 2.5 + 3.5 * n.d, al = 0.35 + 0.6 * n.d, gr = 22 * n.d + 8;
         var g = hx.createRadialGradient(n.x, n.y, 0, n.x, n.y, gr);
-        g.addColorStop(0, tint(SIGNAL, al * 0.5)); g.addColorStop(1, tint(SIGNAL, 0));
+        g.addColorStop(0, tint(ORBIT, al * 0.35)); g.addColorStop(1, tint(ORBIT, 0));
         hx.fillStyle = g; hx.beginPath(); hx.arc(n.x, n.y, gr, 0, 6.29); hx.fill();
-        hx.fillStyle = tint(SIGNAL_CORE, al); hx.beginPath(); hx.arc(n.x, n.y, r, 0, 6.29); hx.fill();
+        hx.fillStyle = tint(ORGAN_CORE, al); hx.beginPath(); hx.arc(n.x, n.y, r, 0, 6.29); hx.fill();
         if (n.d > 0.55) {
           hx.font = "10px " + MONO_FACE; hx.textAlign = "center";
           hx.fillStyle = tint(LABEL_INK, al * 0.9); hx.fillText(LABELS[o.i], n.x, n.y - 12);
@@ -549,19 +551,19 @@
     if (!receipt || !receipt.signatures || !receipt.signatures[0]) return;
     var sig = receipt.signatures[0];
     var chip = document.createElement("button");
-    chip.type = "button"; chip.className = "receipt-chip";
-    chip.innerHTML = '<span class="dot"></span> verifying receipt\u2026';
+    chip.type = "button"; chip.className = "receipt receipt-chip";
+    chip.innerHTML = '<span class="receipt__dot"></span> verifying receipt\u2026';
     var env = document.createElement("pre");
-    env.className = "receipt-env";
+    env.className = "code receipt-env";
     msgEl.appendChild(chip); msgEl.appendChild(env);
     chip.addEventListener("click", function () { env.classList.toggle("show"); });
     verifyReceipt(receipt, interaction).then(function (r) {
       if (r.ok) {
         chip.classList.add("ok");
-        chip.innerHTML = '<span class="dot"></span> receipt verified \u00b7 ECDSA&nbsp;P-256 \u00b7 key ' + esc(String(sig.keyid || "").slice(0, 8));
+        chip.innerHTML = '<span class="receipt__dot"></span> receipt verified \u00b7 ECDSA&nbsp;P-256 \u00b7 key ' + esc(String(sig.keyid || "").slice(0, 8));
       } else {
         chip.classList.add("bad");
-        chip.innerHTML = '<span class="dot"></span> receipt ' + (r.reason === "no-key" || r.reason === "no-trust-root" ? "unchecked" : "unverified");
+        chip.innerHTML = '<span class="receipt__dot"></span> receipt ' + (r.reason === "no-key" || r.reason === "no-trust-root" ? "unchecked" : "unverified");
       }
       var pj = r.payload ? JSON.stringify(r.payload, null, 2) : "(payload unavailable)";
       env.textContent =
