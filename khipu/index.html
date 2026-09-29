@@ -1,107 +1,117 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-surface="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>SZL KHIPU — knot · hash · fail closed</title>
 <meta name="description" content="Product hologram of SZL KHIPU. Duals Ari=GreenLight and Kay Pacha=Anatomy. Local JavaScript silhouette; the named NumPy runtime is not measured here. Conjecture 1 OPEN. Energy UNAVAILABLE.">
 <link rel="canonical" href="https://holdings.a-11-oy.com/khipu/">
+<link rel="icon" href="/assets/szl/logos/szl_favicon_32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/szl/logos/szl_favicon_square.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/szl/logos/szl_favicon_180.png">
+<link rel="stylesheet" href="/assets/szl/szl-design-system.css">
 <style>
-:root{--bg:#05070d;--ink:#e8edf4;--muted:#8b96a6;--line:#1c2430;--gold:#e8c074;--proof:#3af4c8;--block:#c17a72;--panel:#0c1118}
-*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 ui-sans-serif,system-ui,sans-serif}
-body{min-height:100vh;background-image:linear-gradient(rgba(58,244,200,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(58,244,200,.04) 1px,transparent 1px);background-size:48px 48px}
-a{color:var(--proof)}button,input{font:inherit}button{cursor:pointer;background:transparent;color:var(--proof);border:1px solid #1a5c4e;padding:.45rem .8rem}
-button:hover{background:#0d2a24}button.warn{color:var(--gold);border-color:#5a4a28}button.bad{color:var(--block);border-color:#5a3430}
 header,main,footer{max-width:980px;margin:0 auto;padding:1.4rem 1.2rem}
-.ey{font:11px/1 ui-monospace,Menlo,monospace;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
-h1{font:500 2.3rem/1.1 Georgia,serif;letter-spacing:-.03em;margin:.4rem 0}
-h2{font:500 1.05rem/1.2 Georgia,serif;margin:0 0 .55rem}
-.lede{color:var(--muted);max-width:46rem}
-.chip{display:inline-block;border:1px solid var(--line);padding:.15rem .5rem;margin:.15rem;font:11px ui-monospace,Menlo,monospace;color:var(--muted)}
-.gold{color:var(--gold);border-color:#5a4a28}.live{color:var(--proof);border-color:#1a5c4e}
-.panel{border:1px solid var(--line);background:var(--panel);padding:1rem;margin:1rem 0}
+header .eyebrow{margin:0}
+.brand-mark{display:inline-block;margin:0 0 var(--space-8)}
+.brand-mark img{display:block;width:180px;height:auto} /* LOGO_USAGE: horizontal lockup >= 180px wide */
+header .orbit-rule{margin:var(--space-10) 0 0}
+h1{margin:.4rem 0 1rem}
+h2{font-size:var(--text-xl);margin:0 0 .55rem}
+.lede{color:var(--text-sub);max-width:46rem}
+.chip{margin:.15rem;min-block-size:0}
+.panel{margin:1rem 0;padding:var(--space-5)}
 .axes{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.4rem}
+.axes label{font-family:var(--font-mono);font-size:var(--text-xs);color:var(--text-sub)}
+.axes input[type="range"]{accent-color:var(--text-sub)}
 .orgs{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.5rem}
-.org{border:1px solid var(--line);padding:.55rem .7rem;font:12px/1.35 ui-monospace,Menlo,monospace}
-.org b{display:block;font:500 13px/1.2 Georgia,serif}
-.org.down{border-color:#5a3430;color:var(--block)}
-label{font:12px/1.3 ui-monospace,Menlo,monospace;color:var(--muted)}
-pre{font:12px/1.45 ui-monospace,Menlo,monospace;white-space:pre-wrap;word-break:break-word;margin:.6rem 0 0}
+.org{border:var(--border-hairline) solid var(--border);border-radius:var(--radius-md);padding:.55rem .7rem;font-family:var(--font-mono);font-size:var(--text-xs);line-height:1.35;color:var(--text-sub)}
+.org b{display:block;font-family:var(--font-display);font-size:var(--text-sm);font-weight:var(--weight-semibold);line-height:1.2;color:var(--text)}
+.org.down{border-color:color-mix(in srgb,var(--color-error) 45%,transparent);color:var(--color-error)}
+/* Code blocks stay dark on the light surface: re-assert the design system's :root operator tokens. */
+[data-surface="light"] .code{--bg:var(--color-space-900);--bg-deep:var(--color-space-900);--surface-alt:var(--color-gray-900);
+  --border:var(--color-gray-600);--text:var(--color-gray-50);--text-sub:var(--color-gray-200);--text-ghost:var(--color-gray-400);
+  --link:var(--color-yuyay-200);--focus:var(--color-yuyay-400);--shadow-focus:0 0 0 3px color-mix(in srgb,var(--focus) 55%,transparent);
+  --premium:var(--color-hatun-300);color-scheme:dark}
+pre.code{white-space:pre-wrap;word-break:break-word;margin:.6rem 0 0}
 .row{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin:.4rem 0}
-table{width:100%;border-collapse:collapse;font:12px/1.45 ui-monospace,Menlo,monospace}
-th,td{text-align:left;padding:.35rem 0;border-bottom:1px solid var(--line);color:var(--muted)}
-th{color:var(--gold);font-weight:500}
-.cut{color:var(--ink)}.not{color:var(--block)}
+.btn.bad{color:var(--color-error);border-color:color-mix(in srgb,var(--color-error) 45%,transparent)}
+.btn.bad:hover{background:color-mix(in srgb,var(--color-error) 6%,transparent)}
+.table{font-family:var(--font-mono)}
+.cut{color:var(--text)}.table td.not{color:var(--text-sub)}
 .links{display:flex;flex-wrap:wrap;gap:.45rem;margin:1rem 0 0}
-.links a{border:1px solid var(--line);padding:.35rem .7rem;text-decoration:none;font:12px ui-monospace,Menlo,monospace}
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+footer{color:var(--text-sub);font-size:var(--text-sm)}
+main:focus{outline:none}
 </style>
   <link rel="stylesheet" href="/assets/szl-responsive-apex-v3.css" data-szl-responsive-apex-v3="style" />
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to main content</a>
 <header>
-  <div class="ey">SZL Holdings · holdings.a-11-oy.com/khipu · JS silhouette · not NumPy</div>
+  <a class="brand-mark" href="/" aria-label="SZL Holdings home"><img src="/assets/szl/logos/szl_logo_horizontal.svg" alt="" width="180" height="68"></a>
+  <p class="eyebrow">SZL Holdings · holdings.a-11-oy.com/khipu · JS silhouette · not NumPy</p>
   <h1>Knot the run. Hash the proof. Fail closed.</h1>
   <p class="lede">Product hologram of SZL KHIPU. Duals <strong>Ari = GreenLight</strong> and <strong>Kay Pacha = Anatomy</strong>. Original cuts only — never a rehost of Qwen, Mixtral, SGLang, FlashAttention, SageAttention, FlexAttention, or vLLM. This page is a local JavaScript silhouette; the named NumPy product runtime is not measured here.</p>
-  <span class="chip gold">Conjecture 1 OPEN</span>
-  <span class="chip">energy UNAVAILABLE</span>
+  <span class="chip chip-conjecture">Conjecture 1 OPEN</span>
+  <span class="chip chip-unavailable">energy UNAVAILABLE</span>
   <span class="chip">proven_trust false</span>
-  <span class="chip">CUDA UNAVAILABLE</span>
-  <span class="chip">numpy runtime NOT MEASURED</span>
-  <span class="chip">locked-proven 8</span>
+  <span class="chip chip-unavailable">CUDA UNAVAILABLE</span>
+  <span class="chip chip-unavailable">numpy runtime NOT MEASURED</span>
+  <span class="chip chip-proven">locked-proven 8</span>
   <nav class="links" aria-label="Origins">
-    <a href="https://a-11-oy.com/khipu">Product organ · a-11-oy.com/khipu</a>
-    <a href="https://a11oy.net/khipu/">Proof RECORD · a11oy.net</a>
-    <a href="https://github.com/szl-holdings/szl-khipu">GitHub</a>
-    <a href="https://huggingface.co/spaces/SZLHOLDINGS/szl-khipu">Hub Space</a>
-    <a href="https://holdings.a-11-oy.com/">Holdings home</a>
+    <a class="btn btn-secondary btn-sm" href="https://a-11-oy.com/khipu">Product organ · a-11-oy.com/khipu</a>
+    <a class="btn btn-secondary btn-sm" href="https://a11oy.net/khipu/">Proof RECORD · a11oy.net</a>
+    <a class="btn btn-secondary btn-sm" href="https://github.com/szl-holdings/szl-khipu">GitHub</a>
+    <a class="btn btn-secondary btn-sm" href="https://huggingface.co/spaces/SZLHOLDINGS/szl-khipu">Hub Space</a>
+    <a class="btn btn-secondary btn-sm" href="https://holdings.a-11-oy.com/">Holdings home</a>
   </nav>
+  <div class="orbit-rule" aria-hidden="true"><span class="orbit-rule__node"></span></div>
 </header>
-<main>
-  <section class="panel" id="lambda">
+<main id="main" tabindex="-1">
+  <section class="panel card" id="lambda">
     <h2>Λ gate — 13 Yuyay axes</h2>
     <p class="lede">Weighted geometric mean. Any zero or non-finite axis fail-closes. Advisory, not a uniqueness proof.</p>
     <div class="axes" id="axes"></div>
-    <div class="row"><button id="score">score Λ</button> <button class="bad" id="zero">zero-route heart</button></div>
-    <pre id="out-lambda">idle — JS silhouette, not the NumPy kernel</pre>
+    <div class="row"><button class="btn btn-secondary" id="score">score Λ</button> <button class="btn btn-secondary bad" id="zero">zero-route heart</button></div>
+    <pre class="code" id="out-lambda">idle — JS silhouette, not the NumPy kernel</pre>
   </section>
-  <section class="panel" id="greenlight">
+  <section class="panel card" id="greenlight">
     <h2>Ari · GreenLight</h2>
     <p class="lede">Fail-closed promotion. A sorry cannot be painted green. Claiming proven_trust or stamping a joule BLOCKS. Dual of Anatomy.</p>
     <div class="row">
-      <button id="gl-run">evaluate</button>
-      <button class="warn" id="gl-sorry">paint sorry green</button>
-      <button class="bad" id="gl-proven">claim proven</button>
-      <button class="bad" id="gl-joule">stamp joule</button>
+      <button class="btn btn-secondary" id="gl-run">evaluate</button>
+      <button class="btn btn-secondary" id="gl-sorry">paint sorry green</button>
+      <button class="btn btn-secondary bad" id="gl-proven">claim proven</button>
+      <button class="btn btn-secondary bad" id="gl-joule">stamp joule</button>
     </div>
-    <pre id="out-green">idle</pre>
+    <pre class="code" id="out-green">idle</pre>
   </section>
-  <section class="panel" id="anatomy">
+  <section class="panel card" id="anatomy">
     <h2>Kay Pacha · Anatomy — five organs</h2>
     <p class="lede">HEART/YUYAY · YAWAR · YACHAY · OTel · Khipu skeleton. Any DOWN organ or fabricated joule blocks the body. Not a Three.js rehost. Dual of GreenLight.</p>
     <div class="row">
-      <button id="an-run">evaluate body</button>
-      <button class="bad" id="an-heart">zero HEART</button>
-      <button class="bad" id="an-joule">fabricate joule</button>
+      <button class="btn btn-secondary" id="an-run">evaluate body</button>
+      <button class="btn btn-secondary bad" id="an-heart">zero HEART</button>
+      <button class="btn btn-secondary bad" id="an-joule">fabricate joule</button>
     </div>
     <div class="orgs" id="org-box"></div>
-    <pre id="out-anatomy">idle</pre>
+    <pre class="code" id="out-anatomy">idle</pre>
   </section>
-  <section class="panel" id="prefix">
+  <section class="panel card" id="prefix">
     <h2>PrefixWitness · RouteWitness</h2>
     <p class="lede">Original cuts. A poisoned radix cache fail-closes. An expert swapped after routing fail-closes. Not SGLang. Not Mixtral. No tokens/s claim.</p>
     <div class="row">
-      <button id="px-run">prefix digest</button>
-      <button class="bad" id="px-hijack">hijack cache</button>
-      <button id="rt-run">route digest</button>
-      <button class="bad" id="rt-swap">swap expert</button>
+      <button class="btn btn-secondary" id="px-run">prefix digest</button>
+      <button class="btn btn-secondary bad" id="px-hijack">hijack cache</button>
+      <button class="btn btn-secondary" id="rt-run">route digest</button>
+      <button class="btn btn-secondary bad" id="rt-swap">swap expert</button>
     </div>
-    <pre id="out-prefix">idle</pre>
-    <pre id="out-route">idle</pre>
+    <pre class="code" id="out-prefix">idle</pre>
+    <pre class="code" id="out-route">idle</pre>
   </section>
-  <section class="panel">
+  <section class="panel card">
     <h2>Original cuts — never the leader's code</h2>
-    <table>
+    <table class="table">
       <thead><tr><th>Cut</th><th>Job</th><th>Not</th></tr></thead>
       <tbody>
         <tr><td class="cut">PrefixWitness</td><td>radix-prefix KV digest</td><td class="not">not SGLang</td></tr>
@@ -113,9 +123,9 @@ th{color:var(--gold);font-weight:500}
       </tbody>
     </table>
   </section>
-  <section class="panel">
+  <section class="panel card">
     <h2>Nanos · TRAINING_RECEIPT seed 20260721</h2>
-    <table>
+    <table class="table">
       <thead><tr><th>Nano</th><th>Bound</th><th>Not</th></tr></thead>
       <tbody>
         <tr><td class="cut">TinyKhipu-Nano</td><td>NAVIGATE / ABSTAIN silhouette</td><td class="not">not Qwen · not 1.5B</td></tr>

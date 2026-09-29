@@ -1,65 +1,74 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-surface="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Second brain — SZL Holdings · handles only</title>
 <meta name="description" content="Derived second brain. Handles only. Fail closed. 9000 UNAVAILABLE. Guardian for the SOW sits between CRM and PSA. Minting DENY.">
 <link rel="canonical" href="https://holdings.a-11-oy.com/brain/">
-<meta name="theme-color" content="#05070d">
+<meta name="theme-color" content="#f5f7fa"><!-- --bg on the light surface (--color-gray-50); meta content cannot read CSS variables -->
 <meta property="og:title" content="Second brain — SZL Holdings">
 <meta property="og:description" content="Handles only. Fail closed. Guardian for the SOW. Not a 9000-node graph.">
 <meta property="og:url" content="https://holdings.a-11-oy.com/brain/">
 <meta property="og:image" content="https://holdings.a-11-oy.com/assets/hero.png">
+<link rel="icon" href="/assets/szl/logos/szl_favicon_32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/szl/logos/szl_favicon_square.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/szl/logos/szl_favicon_180.png">
+<link rel="stylesheet" href="/assets/szl/szl-design-system.css">
 <style>
-:root{--bg:#05070d;--ink:#e8edf4;--muted:#8b96a6;--line:#1c2430;--gold:#e8c074;--proof:#3af4c8;--danger:#d4736a}
-*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 ui-sans-serif,system-ui,sans-serif}
-body{min-height:100vh;background-image:linear-gradient(rgba(58,244,200,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(58,244,200,.04) 1px,transparent 1px);background-size:48px 48px}
-a{color:var(--proof)}button,input{font:inherit}
 header,main,footer{max-width:920px;margin:0 auto;padding:1.4rem 1.2rem}
-.ey{font:11px/1 ui-monospace,Menlo,monospace;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
-h1{font:500 2.2rem/1.1 Georgia,serif;letter-spacing:-.03em;margin:.4rem 0 0}
-h2{font:500 1.35rem/1.2 Georgia,serif;margin:0 0 .5rem}
-.lede{color:var(--muted);max-width:62ch}
-.panel{border:1px solid var(--line);background:#0c1118;padding:1rem;margin:1rem 0}
-.chip{display:inline-block;border:1px solid var(--line);padding:.18rem .5rem;margin:.15rem;font:11px ui-monospace,Menlo,monospace;color:var(--muted)}
-.gold{color:var(--gold);border-color:#5a4a28}
-.danger{color:var(--danger);border-color:#5a2e2a}
+header .eyebrow{margin:0}
+.brand-mark{display:inline-block;margin:0 0 var(--space-8)}
+.brand-mark img{display:block;width:180px;height:auto} /* LOGO_USAGE: horizontal lockup >= 180px wide */
+header .orbit-rule{margin:var(--space-10) 0 0}
+h1{margin:.4rem 0 1rem}
+h2{margin:0 0 .5rem}
+.lede{color:var(--text-sub);max-width:62ch}
+.panel{margin:1rem 0;padding:var(--space-5)}
+.chip{margin:.15rem;min-block-size:0}
 .grid{display:grid;gap:.6rem}
 @media(min-width:640px){.grid.four{grid-template-columns:repeat(4,1fr)}.grid.three{grid-template-columns:0.8fr 1.6fr 0.8fr}.grid.two{grid-template-columns:1fr 1fr}}
-.cell{border:1px solid var(--line);padding:.75rem}
-.cell strong{display:block;font:12px/1 ui-monospace,Menlo,monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--proof);margin-bottom:.35rem}
-label{display:block;font:11px/1 ui-monospace,Menlo,monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem}
-input{width:100%;height:44px;background:#080b10;border:1px solid var(--line);color:var(--ink);padding:0 .75rem}
-.miss{color:var(--gold);font-size:.9rem}
+.cell{border:var(--border-hairline) solid var(--border);border-radius:var(--radius-md);padding:.75rem;color:var(--text-sub)}
+.cell strong{display:block;font-family:var(--font-mono);font-size:var(--text-xs);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--text);margin-bottom:.35rem}
+label.eyebrow{display:block;margin-bottom:.4rem}
+.search{width:100%;min-height:var(--target-size-coarse);padding:0 .75rem;background:var(--surface);color:var(--text);
+  border:var(--border-hairline) solid var(--color-gray-400);border-radius:var(--radius-md);font:inherit}
+.search::placeholder{color:var(--text-ghost)}
+.miss{color:var(--text-sub);font-size:var(--text-sm);font-weight:var(--weight-semibold)}
 ul.handles{list-style:none;padding:0;margin:.6rem 0 0}
-ul.handles li{border-top:1px solid var(--line);padding:.55rem 0}
-.k{font:11px ui-monospace,Menlo,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-button{cursor:pointer;background:transparent;color:var(--proof);border:1px solid #1a5c4e;padding:.55rem .9rem;min-height:44px}
+ul.handles li{border-top:var(--border-hairline) solid var(--border-subtle);padding:.55rem 0}
+ul.handles p{margin:0 0 .25rem}
+.k{font-family:var(--font-mono);font-size:var(--text-xs);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--text-ghost)}
+.panel p a{text-decoration:underline}
+footer{color:var(--text-sub);font-size:var(--text-sm)}
+main:focus{outline:none}
 </style>
   <link rel="stylesheet" href="/assets/szl-responsive-apex-v3.css" data-szl-responsive-apex-v3="style" />
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to main content</a>
 <header>
-  <div class="ey">SZL Holdings · holdings.a-11-oy.com/brain · derived handles</div>
+  <a class="brand-mark" href="/" aria-label="SZL Holdings home"><img src="/assets/szl/logos/szl_logo_horizontal.svg" alt="" width="180" height="68"></a>
+  <p class="eyebrow">SZL Holdings · holdings.a-11-oy.com/brain · derived handles</p>
   <h1>The estate, folded. Six organs. Not a repo catalog.</h1>
   <p class="lede">This page is a timestamped public recapture fold on the existing Pages domain. Retrieve is local and fail-closed. Continuous estate monitoring is outside this static snapshot. Nine thousand was never a live graph. Minting is still deny.</p>
-  <span class="chip gold">DERIVED · SNAPSHOT</span>
+  <span class="chip chip-sample">DERIVED · SNAPSHOT</span>
   <span class="chip">HANDLES ONLY</span>
-  <span class="chip danger">9000 UNAVAILABLE</span>
+  <span class="chip chip-unavailable">9000 UNAVAILABLE</span>
   <span class="chip">9464 UNPUBLISHED</span>
   <span class="chip">ADMIT DENY</span>
+  <div class="orbit-rule" aria-hidden="true"><span class="orbit-rule__node"></span></div>
 </header>
-<main>
-  <section class="panel">
-    <label for="q">Retrieve handles</label>
-    <input id="q" type="search" placeholder="organs, Kantata, membrane, pin drift…" autocomplete="off">
+<main id="main" tabindex="-1">
+  <section class="panel card">
+    <label class="eyebrow" for="q">Retrieve handles</label>
+    <input id="q" class="search" type="search" placeholder="organs, Kantata, membrane, pin drift…" autocomplete="off">
     <p class="miss" id="miss" hidden>No handle. Maskaq abstains. Nothing is fabricated LIVE.</p>
     <ul class="handles" id="hits"></ul>
   </section>
 
-  <section class="panel">
-    <span class="chip gold">UNDREAMED</span>
+  <section class="panel card">
+    <span class="chip">UNDREAMED</span>
     <span class="chip">CIRCULATORY</span>
     <span class="chip">NOT A PSA</span>
     <h2>Guardian for the SOW</h2>
@@ -76,7 +85,7 @@ button{cursor:pointer;background:transparent;color:var(--proof);border:1px solid
     </div>
   </section>
 
-  <section class="panel">
+  <section class="panel card">
     <h2>Recapture · 2026-08-29T21:13:43-04:00</h2>
     <p class="lede">Authenticated GitHub: 98 repositories — 93 public, 5 private; 64 active, 34 archived. Hugging Face public catalog: 43 models · 28 datasets · 7 Spaces · 14 kernels · 18 collections · 1 bucket. Queue status is intentionally omitted because it changes continuously. This static page does not claim continuous monitoring, runtime deployment, or new Hub publication.</p>
     <div class="grid two" style="margin-top:.8rem">
@@ -91,7 +100,7 @@ button{cursor:pointer;background:transparent;color:var(--proof);border:1px solid
     </div>
   </section>
 
-  <section class="panel">
+  <section class="panel card">
     <h2>Existing maps · not new Spaces</h2>
     <p><a href="https://huggingface.co/spaces/SZLHOLDINGS/anatomy">SZLHOLDINGS/anatomy</a> · <a href="https://huggingface.co/spaces/SZLHOLDINGS/Khipu-Loom">Khipu-Loom</a> · <a href="https://huggingface.co/spaces/SZLHOLDINGS/holographic">holographic</a></p>
     <p><a href="https://github.com/szl-holdings/.github/blob/main/docs/SECOND_BRAIN_GROWN.md">Source recapture on GitHub</a> · <a href="https://holdings.a-11-oy.com/">Company front door</a> · <a href="https://a-11-oy.com/">A11oy product</a> · <a href="https://a11oy.net">Proof registry</a></p>

@@ -6,8 +6,14 @@
       "source_path": "console/assets/szl-flow.js"
     },
     "/assets/szl-spectral-v2.css": {
-      "bytes": 20428,
-      "sha256": "c46c57328d6da061e6bf9f73ae1091d43aed834897f79169212cb5005f75ecf9",
+      "bytes": 20761,
+      "local_transform": {
+        "description": "Literal colors (#000/rgba masks, white, black shadows) and monospace stacks replaced with SZL KANCHAY founder-direction tokens from /assets/szl/szl-design-system.css; no rule, selector or mechanic changed.",
+        "kind": "kanchay-token-repoint",
+        "upstream_bytes": 20428,
+        "upstream_sha256": "c46c57328d6da061e6bf9f73ae1091d43aed834897f79169212cb5005f75ecf9"
+      },
+      "sha256": "fa6412847b838cab06061c64febd3960f6e50045b7d220b12e73f695359f34c1",
       "source_path": "console/assets/szl-spectral-v2.css"
     }
   },

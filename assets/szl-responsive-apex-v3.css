@@ -3,6 +3,8 @@
  * Mobile-first company-front-door composition for holdings.a-11-oy.com.
  * The apex remains a static front door; dynamic runtime functions live at the
  * canonical A11oy Space and are linked honestly by the published pages.
+ * Panel radius resolves to the SZL KANCHAY founder token --radius-lg
+ * (/assets/szl/szl-design-system.css); the fallback keeps the layer usable without it.
  */
 
 :root {
@@ -188,7 +190,7 @@ h3 { font-size: var(--apex-h3); line-height: 1.14; }
 
 :where(.card, .panel, .tile, .module, .surface, [data-apex-panel]) {
   container-type: inline-size;
-  border-radius: clamp(12px, 1.1vw, 22px);
+  border-radius: var(--radius-lg, clamp(12px, 1.1vw, 22px));
 }
 
 :where(header[role="banner"], .site-header, .topbar, .nav-shell) {

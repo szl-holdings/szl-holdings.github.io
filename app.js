@@ -163,15 +163,15 @@
       var cards = grp.items.map(function (p, i) {
         return '<a class="card reveal" data-d="' + ((i % 4) + 1) + '" href="' + p.href + '" target="_blank" rel="noopener">' +
           '<div class="card-top"><span class="card-name">' + p.name + '</span>' +
-          '<span class="card-lang">' + p.lang + '</span></div>' +
+          '<span class="badge card-lang">' + p.lang + '</span></div>' +
           '<h3>' + p.title + '</h3><p>' + p.desc + '</p>' +
           '<span class="card-link">view →</span></a>';
       }).join("");
       var sec = document.createElement("div");
       sec.className = "eco-group reveal";
       sec.innerHTML =
-        '<div class="eco-group-head"><span class="eco-no">' + grp.no + '</span>' +
-        '<h3>' + grp.g + '</h3><span class="eco-count">' + grp.items.length + '</span></div>' +
+        '<div class="eco-group-head"><span class="badge eco-no">' + grp.no + '</span>' +
+        '<h3>' + grp.g + '</h3><span class="badge eco-count">' + grp.items.length + '</span></div>' +
         '<p class="eco-note">' + grp.note + '</p>' +
         '<div class="grid">' + cards + '</div>';
       groups.appendChild(sec);
@@ -185,6 +185,26 @@
     });
   }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
   document.querySelectorAll(".reveal").forEach(function (el) { io.observe(el); });
+
+  /* ---------- Kanchay tokens for canvas drawing ---------- */
+  // Canvas cannot read var(); resolve the szl-design-system.css scale tokens once and
+  // derive translucent tints as 8-digit hex, so no color value is hard-coded here.
+  // The anatomy projection is a dark instrument: silver orbit linework and a white receipt;
+  // the page's single coral node is the hero's, so no coral is drawn here.
+  var tokenStyle = window.getComputedStyle(document.documentElement);
+  function token(name) { return tokenStyle.getPropertyValue(name).trim(); }
+  function tint(hex, alpha) {
+    if (!/^#[0-9a-f]{6}$/i.test(hex)) return "transparent";
+    var a = Math.max(0, Math.min(255, Math.round(alpha * 255)));
+    return hex + (a < 16 ? "0" : "") + a.toString(16);
+  }
+  var GRID_INK = token("--color-silver-300");
+  var ORBIT = token("--color-silver-300");
+  var ORBIT_SOFT = token("--color-silver-100");
+  var ORGAN_CORE = token("--color-silver-100");
+  var RECEIPT_NODE = token("--color-gray-50");
+  var LABEL_INK = token("--color-gray-200");
+  var MONO_FACE = token("--font-mono") || "monospace";
 
   /* ---------- hero grid canvas ---------- */
   var canvas = document.getElementById("heroGrid");
@@ -200,7 +220,7 @@
     function draw() {
       ctx.clearRect(0, 0, W, H);
       var gap = 46, ox = (t * 0.15) % gap, oy = (t * 0.08) % gap;
-      ctx.strokeStyle = "rgba(28,41,66,0.5)"; ctx.lineWidth = 1;
+      ctx.strokeStyle = tint(GRID_INK, 0.05); ctx.lineWidth = 1;
       for (var x = -gap; x < W + gap; x += gap) { ctx.beginPath(); ctx.moveTo(x + ox, 0); ctx.lineTo(x + ox, H); ctx.stroke(); }
       for (var yy = -gap; yy < H + gap; yy += gap) { ctx.beginPath(); ctx.moveTo(0, yy + oy); ctx.lineTo(W, yy + oy); ctx.stroke(); }
       // pulsing nodes
@@ -209,9 +229,9 @@
         var ny = (Math.cos(t * 0.005 + i * 2.3) * 0.5 + 0.5) * H;
         var r = 2 + Math.sin(t * 0.03 + i) * 1.2;
         var g = ctx.createRadialGradient(nx, ny, 0, nx, ny, 60);
-        g.addColorStop(0, "rgba(58,244,200,0.45)"); g.addColorStop(1, "rgba(58,244,200,0)");
+        g.addColorStop(0, tint(ORBIT, 0.45)); g.addColorStop(1, tint(ORBIT, 0));
         ctx.fillStyle = g; ctx.beginPath(); ctx.arc(nx, ny, 60, 0, 6.29); ctx.fill();
-        ctx.fillStyle = "rgba(58,244,200,0.9)"; ctx.beginPath(); ctx.arc(nx, ny, r, 0, 6.29); ctx.fill();
+        ctx.fillStyle = tint(ORBIT, 0.9); ctx.beginPath(); ctx.arc(nx, ny, r, 0, 6.29); ctx.fill();
       }
       t++; requestAnimationFrame(draw);
     }
@@ -230,24 +250,26 @@
       HW = holo.clientWidth; HH = holo.clientHeight;
       holo.width = HW * hdpr; holo.height = HH * hdpr; hx.setTransform(hdpr, 0, 0, hdpr, 0, 0);
     }
-    hresize(); window.addEventListener("resize", hresize);
+    hresize();
+    // Resizing clears the canvas; under reduced motion there is no animation loop to repaint it.
+    window.addEventListener("resize", function () { hresize(); if (reduce) frame(); });
     function rad() { return Math.min(HW * 0.34, 220); }
     function nodeAt(i, rot) {
       var ang = (i / 5) * Math.PI * 2 + rot, rx = rad(), ry = rx * 0.34;
       return { x: HW / 2 + Math.cos(ang) * rx, y: HH * 0.52 + Math.sin(ang) * ry, d: (Math.sin(ang) + 1) / 2 };
     }
-    // chromatic holographic double-stroke (teal + pale-green offset, purple-free)
+    // silver double-stroke (orbit linework, light-stop offset)
     function hline(x1, y1, x2, y2, alpha, w) {
       hx.lineWidth = w || 1;
-      hx.strokeStyle = "rgba(58,244,200," + alpha + ")"; hx.beginPath(); hx.moveTo(x1, y1); hx.lineTo(x2, y2); hx.stroke();
-      hx.strokeStyle = "rgba(150,255,225," + (alpha * 0.5) + ")"; hx.beginPath(); hx.moveTo(x1 + 0.9, y1); hx.lineTo(x2 + 0.9, y2); hx.stroke();
+      hx.strokeStyle = tint(ORBIT, alpha); hx.beginPath(); hx.moveTo(x1, y1); hx.lineTo(x2, y2); hx.stroke();
+      hx.strokeStyle = tint(ORBIT_SOFT, alpha * 0.5); hx.beginPath(); hx.moveTo(x1 + 0.9, y1); hx.lineTo(x2 + 0.9, y2); hx.stroke();
     }
     function frame() {
       hx.clearRect(0, 0, HW, HH);
       var rot = reduce ? 0.6 : ht * 0.006, cx = HW / 2, baseY = HH * 0.9;
       // projector base + emitter cone
       var bg = hx.createRadialGradient(cx, baseY, 0, cx, baseY, HW * 0.32);
-      bg.addColorStop(0, "rgba(58,244,200,0.32)"); bg.addColorStop(1, "rgba(58,244,200,0)");
+      bg.addColorStop(0, tint(ORBIT, 0.24)); bg.addColorStop(1, tint(ORBIT, 0));
       hx.fillStyle = bg; hx.beginPath(); hx.ellipse(cx, baseY, HW * 0.30, 10, 0, 0, 6.29); hx.fill();
       hline(cx - 6, baseY, cx - rad(), HH * 0.52, 0.10, 1);
       hline(cx + 6, baseY, cx + rad(), HH * 0.52, 0.10, 1);
@@ -258,18 +280,18 @@
       var per = reduce ? 0.5 : (ht * 0.004) % 1, seg = per * 5, si = Math.floor(seg), f = seg - si;
       var pa = ns[si % 5], pb = ns[(si + 1) % 5], px = pa.x + (pb.x - pa.x) * f, py = pa.y + (pb.y - pa.y) * f;
       var pg = hx.createRadialGradient(px, py, 0, px, py, 26);
-      pg.addColorStop(0, "rgba(220,255,245,0.95)"); pg.addColorStop(1, "rgba(58,244,200,0)");
+      pg.addColorStop(0, tint(RECEIPT_NODE, 0.95)); pg.addColorStop(1, tint(RECEIPT_NODE, 0));
       hx.fillStyle = pg; hx.beginPath(); hx.arc(px, py, 26, 0, 6.29); hx.fill();
       // organ nodes, depth-sorted
       ns.map(function (n, i) { return { n: n, i: i }; }).sort(function (A, B) { return A.n.d - B.n.d; }).forEach(function (o) {
         var n = o.n, r = 2.5 + 3.5 * n.d, al = 0.35 + 0.6 * n.d, gr = 22 * n.d + 8;
         var g = hx.createRadialGradient(n.x, n.y, 0, n.x, n.y, gr);
-        g.addColorStop(0, "rgba(58,244,200," + (al * 0.5) + ")"); g.addColorStop(1, "rgba(58,244,200,0)");
+        g.addColorStop(0, tint(ORBIT, al * 0.35)); g.addColorStop(1, tint(ORBIT, 0));
         hx.fillStyle = g; hx.beginPath(); hx.arc(n.x, n.y, gr, 0, 6.29); hx.fill();
-        hx.fillStyle = "rgba(224,255,246," + al + ")"; hx.beginPath(); hx.arc(n.x, n.y, r, 0, 6.29); hx.fill();
+        hx.fillStyle = tint(ORGAN_CORE, al); hx.beginPath(); hx.arc(n.x, n.y, r, 0, 6.29); hx.fill();
         if (n.d > 0.55) {
-          hx.font = "10px 'IBM Plex Mono',ui-monospace,monospace"; hx.textAlign = "center";
-          hx.fillStyle = "rgba(174,220,210," + (al * 0.9) + ")"; hx.fillText(LABELS[o.i], n.x, n.y - 12);
+          hx.font = "10px " + MONO_FACE; hx.textAlign = "center";
+          hx.fillStyle = tint(LABEL_INK, al * 0.9); hx.fillText(LABELS[o.i], n.x, n.y - 12);
         }
       });
       ht++;
@@ -532,19 +554,19 @@
     if (!receipt || !receipt.signatures || !receipt.signatures[0]) return;
     var sig = receipt.signatures[0];
     var chip = document.createElement("button");
-    chip.type = "button"; chip.className = "receipt-chip";
-    chip.innerHTML = '<span class="dot"></span> verifying receipt\u2026';
+    chip.type = "button"; chip.className = "receipt receipt-chip";
+    chip.innerHTML = '<span class="receipt__dot"></span> verifying receipt\u2026';
     var env = document.createElement("pre");
-    env.className = "receipt-env";
+    env.className = "code receipt-env";
     msgEl.appendChild(chip); msgEl.appendChild(env);
     chip.addEventListener("click", function () { env.classList.toggle("show"); });
     verifyReceipt(receipt, interaction).then(function (r) {
       if (r.ok) {
         chip.classList.add("ok");
-        chip.innerHTML = '<span class="dot"></span> receipt verified \u00b7 ECDSA&nbsp;P-256 \u00b7 key ' + esc(String(sig.keyid || "").slice(0, 8));
+        chip.innerHTML = '<span class="receipt__dot"></span> receipt verified \u00b7 ECDSA&nbsp;P-256 \u00b7 key ' + esc(String(sig.keyid || "").slice(0, 8));
       } else {
         chip.classList.add("bad");
-        chip.innerHTML = '<span class="dot"></span> receipt ' + (r.reason === "no-key" || r.reason === "no-trust-root" ? "unchecked" : "unverified");
+        chip.innerHTML = '<span class="receipt__dot"></span> receipt ' + (r.reason === "no-key" || r.reason === "no-trust-root" ? "unchecked" : "unverified");
       }
       var pj = r.payload ? JSON.stringify(r.payload, null, 2) : "(payload unavailable)";
       env.textContent =
