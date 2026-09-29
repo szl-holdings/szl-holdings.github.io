@@ -7,27 +7,33 @@
   <meta name="description" content="Source-declared SZL Holdings product catalog. Runtime and deployment evidence remain on each named product and proof origin.">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://holdings.a-11-oy.com/products/">
+  <link rel="icon" href="/assets/kanchay/marks/szl-mark-gold.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/kanchay/kanchay.css">
   <style>
-    body{margin:0;background:#080c14;color:#eef4fb;font-family:Inter,system-ui,sans-serif}
+    body{margin:0;background:var(--color-a11oy-bg);color:var(--color-a11oy-text);font-family:var(--font-sans);-webkit-font-smoothing:antialiased}
     main{max-width:1180px;margin:auto;padding:56px 24px 96px}
     .top{display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap}
-    .brand{font-weight:800;letter-spacing:.08em}
-    .ey{color:#3af4c8;font:600 12px ui-monospace;text-transform:uppercase;letter-spacing:.12em}
-    h1{font-size:clamp(40px,8vw,78px);line-height:.98;max-width:980px;margin:34px 0 18px}
-    p{color:#aebccf;line-height:1.65}
+    .brand{font-family:var(--font-display);font-weight:600;letter-spacing:.08em}
+    .ey{color:var(--color-a11oy-gold);font:500 12px var(--font-mono);text-transform:uppercase;letter-spacing:.2em}
+    h1{font-family:var(--font-display);font-weight:300;letter-spacing:-.035em;font-size:clamp(40px,8vw,78px);line-height:.98;max-width:980px;margin:34px 0 18px}
+    h2{font-family:var(--font-display);font-weight:300;letter-spacing:-.025em}
+    p{color:var(--color-a11oy-text-sub);line-height:1.65}
     .lead{font-size:20px;max-width:850px}
-    .rule{margin:34px 0 60px;border-top:1px solid #1c2942}
+    .rule{margin:34px 0 60px;border-top:1px solid var(--color-a11oy-border-subtle)}
     .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px}
-    .card{display:block;padding:22px;border:1px solid #1c2942;border-radius:18px;background:#0e1626;color:inherit;text-decoration:none}
-    .card:hover,.card:focus-visible{border-color:#3af4c8}
-    .tag{font:600 11px ui-monospace;color:#3af4c8;text-transform:uppercase}
-    .card h2{margin:10px 0 8px;font-size:25px}
-    .meta{font:12px ui-monospace;color:#7f92aa}
+    .card{display:block;padding:22px;border:1px solid var(--color-a11oy-border-subtle);border-radius:var(--radius-md);background:var(--color-a11oy-surface);color:inherit;text-decoration:none;
+      transition:transform var(--duration-fast) var(--ease-standard),border-color var(--duration-fast) var(--ease-standard),box-shadow var(--duration-fast) var(--ease-standard)}
+    .card:hover{border-color:color-mix(in srgb,var(--color-a11oy-gold) 20%,transparent);box-shadow:var(--shadow-lg);transform:translateY(-1px)}
+    .tag{font:500 11px var(--font-mono);color:var(--color-a11oy-gold);text-transform:uppercase;letter-spacing:.15em}
+    .card h2{margin:10px 0 8px;font-size:25px;font-weight:600;letter-spacing:-.02em;color:var(--color-a11oy-text)}
+    .meta{font:12px var(--font-mono);color:var(--color-a11oy-text-sub)}
     .section{margin-top:64px}
-    .note{padding:18px;border-left:3px solid #3af4c8;background:#0a1019}
-    .links{display:flex;flex-wrap:wrap;gap:18px}
-    .links a{color:#3af4c8}
-    a{color:#eef4fb}
+    .note{padding:18px;border:1px solid var(--color-a11oy-border-subtle);border-radius:var(--radius-md);background:var(--color-a11oy-deep)}
+    .links{display:flex;flex-wrap:wrap;gap:0 18px}
+    .links a{display:inline-flex;align-items:center;min-height:var(--szl-touch-target);color:var(--color-a11oy-gold)}
+    .links a:hover{color:var(--gold-bright)}
+    a{color:var(--color-a11oy-text)}
+    strong{color:var(--color-a11oy-text)}
   </style>
   <link rel="stylesheet" href="/assets/szl-responsive-apex-v3.css" data-szl-responsive-apex-v3="style" />
 </head>

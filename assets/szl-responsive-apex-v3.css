@@ -3,6 +3,8 @@
  * Mobile-first company-front-door composition for holdings.a-11-oy.com.
  * The apex remains a static front door; dynamic runtime functions live at the
  * canonical A11oy Space and are linked honestly by the published pages.
+ * Colors, focus and panel radius resolve to SZL Kanchay tokens
+ * (/assets/kanchay/kanchay.css); fallbacks keep the layer usable without it.
  */
 
 :root {
@@ -54,7 +56,7 @@ body::after {
   inline-size: var(--apex-progress);
   block-size: 2px;
   pointer-events: none;
-  background: currentColor;
+  background: var(--color-a11oy-gold, currentColor);
   opacity: .72;
 }
 
@@ -141,8 +143,8 @@ h3 { font-size: var(--apex-h3); line-height: 1.14; }
 }
 
 :where(button, [role="button"], a, input, select, textarea, summary, [tabindex]):focus-visible {
-  outline: max(2px, .14em) solid currentColor;
-  outline-offset: 3px;
+  outline: var(--border-focus, max(2px, .14em)) solid var(--color-focus, currentColor);
+  outline-offset: 2px;
 }
 
 :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea) {
@@ -188,7 +190,7 @@ h3 { font-size: var(--apex-h3); line-height: 1.14; }
 
 :where(.card, .panel, .tile, .module, .surface, [data-apex-panel]) {
   container-type: inline-size;
-  border-radius: clamp(12px, 1.1vw, 22px);
+  border-radius: var(--radius-md, clamp(12px, 1.1vw, 22px));
 }
 
 :where(header[role="banner"], .site-header, .topbar, .nav-shell) {

@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SZL Holdings — Proof infrastructure for consequential AI</title>
   <meta name="description" content="SZL Holdings builds the proof layer beneath consequential AI: sovereign inference, DSSE-signed receipts, and evidence-scoped formal-methods artifacts. Honest by design." />
-  <meta name="theme-color" content="#080C14" />
+  <meta name="theme-color" content="#0a0f1e" />
   <meta name="author" content="SZL Holdings" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://holdings.a-11-oy.com/" />
-  <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAzMiAzMic+PHJlY3Qgd2lkdGg9JzMyJyBoZWlnaHQ9JzMyJyByeD0nNycgZmlsbD0nIzA4MEMxNCcvPjxyZWN0IHg9JzYnIHk9JzYnIHdpZHRoPScyMCcgaGVpZ2h0PScyMCcgcng9JzUnIGZpbGw9JyMzQUY0QzgnLz48cmVjdCB4PScxMScgeT0nMTEnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcgcng9JzInIGZpbGw9JyMwODBDMTQnLz48L3N2Zz4=" />
+  <link rel="icon" href="/assets/kanchay/marks/szl-mark-gold.svg" type="image/svg+xml" />
   <meta property="og:title" content="SZL Holdings — Proof infrastructure for consequential AI" />
   <meta property="og:description" content="Sovereign inference. DSSE-signed receipts. Machine-checked in Lean 4. receipts.in ≡ receipts.out." />
   <meta property="og:type" content="website" />
@@ -21,10 +21,9 @@
   <meta name="twitter:title" content="SZL Holdings — Proof infrastructure for consequential AI" />
   <meta name="twitter:description" content="Sovereign inference. DSSE-signed receipts. Machine-checked in Lean 4. receipts.in ≡ receipts.out." />
   <meta name="twitter:image" content="https://holdings.a-11-oy.com/assets/hero.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=a991a82510ef" />
+  <link rel="stylesheet" href="/assets/kanchay/kanchay.css" />
+  <link rel="stylesheet" href="/assets/kanchay/kanchay-components.css" />
+  <link rel="stylesheet" href="styles.css?v=78af4671443f" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -58,33 +57,34 @@
   <a class="skip-link" href="#main-content">Skip to main content</a>
   <div class="grain" aria-hidden="true"></div>
 
-  <header class="nav" id="nav">
-    <a class="brand" href="#main-content" aria-label="SZL Holdings home">
-      <span class="brand-mark" aria-hidden="true"></span>
-      <span class="brand-text">SZL<span class="brand-dim">HOLDINGS</span></span>
-    </a>
-    <nav class="nav-links" id="primaryNavigation" aria-label="Primary navigation">
-      <a href="#thesis">Why SZL</a>
-      <a href="#front-door">Surfaces</a>
-      <a href="/products/">Products</a>
-      <a href="#ecosystem">Portfolio</a>
-      <a href="#anatomy">Architecture</a>
-      <a href="#proof">Evidence</a>
-      <a class="nav-cta" href="https://holdings.a-11-oy.com/docs-site/">Developer docs</a>
-    </nav>
-    <button class="nav-toggle" id="navToggle" type="button" aria-label="Open navigation" aria-controls="primaryNavigation" aria-expanded="false">
-      <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
-    </button>
+  <header class="nav kc-site-header" id="nav">
+    <div class="kc-site-inner">
+      <a class="kc-site-brand" href="#main-content" aria-label="SZL Holdings home">
+        <svg class="kc-mark" width="20" height="20" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false"><rect x="1" y="1" width="30" height="30" rx="7" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 9 L23 9 L9 23 L23 23" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" fill="none"/><circle cx="9" cy="9" r="2.1" fill="currentColor"/><circle cx="23" cy="23" r="2.1" fill="currentColor"/></svg>
+        <span class="kc-site-name brand-text">SZL<span class="brand-dim">HOLDINGS</span></span>
+      </a>
+      <nav class="nav-links" id="primaryNavigation" aria-label="Primary navigation">
+        <a href="#thesis">Why SZL</a>
+        <a href="#front-door">Surfaces</a>
+        <a href="/products/">Products</a>
+        <a href="#ecosystem">Portfolio</a>
+        <a href="#anatomy">Architecture</a>
+        <a href="#proof">Evidence</a>
+        <a class="kc-cta nav-cta" href="https://holdings.a-11-oy.com/docs-site/">Developer docs <span aria-hidden="true">→</span></a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Open navigation" aria-controls="primaryNavigation" aria-expanded="false">
+        <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+      </button>
+    </div>
   </header>
 
   <main id="main-content" tabindex="-1">
     <!-- HERO -->
     <section class="hero" id="hero">
       <canvas class="hero-grid" id="heroGrid" aria-hidden="true"></canvas>
-      <div class="hero-glow" aria-hidden="true"></div>
       <img class="hero-lattice" src="assets/hero.png" alt="" aria-hidden="true" />
       <div class="hero-inner">
-        <p class="eyebrow reveal">SZL HOLDINGS · HONEST BY DESIGN</p>
+        <p class="hero-eyebrow reveal"><span class="kc-eyebrow"><span class="kc-eyebrow-dot" aria-hidden="true"></span><span class="kc-eyebrow-text">SZL HOLDINGS · HONEST BY DESIGN</span></span></p>
         <h1 class="hero-title reveal">
           Cryptographic provenance infrastructure for <span class="grad">consequential AI decisions</span>.
         </h1>
@@ -95,9 +95,9 @@
         </p>
         <p class="hero-eq reveal"><code>receipts.in&nbsp;≡&nbsp;receipts.out</code></p>
         <div class="hero-cta reveal">
-          <a class="btn btn-primary" href="https://a-11-oy.com" target="_blank" rel="noopener">Explore a11oy →</a>
-          <a class="btn btn-ghost" href="https://a11oy.net" target="_blank" rel="noopener">Inspect evidence</a>
-          <a class="btn btn-text" href="https://holdings.a-11-oy.com/docs-site/">Build with SZL</a>
+          <a class="kc-btn kc-btn--default kc-btn--lg" href="https://a-11-oy.com" target="_blank" rel="noopener">Explore a11oy →</a>
+          <a class="kc-btn kc-btn--outline kc-btn--lg" href="https://a11oy.net" target="_blank" rel="noopener">Inspect evidence</a>
+          <a class="kc-btn kc-btn--ghost kc-btn--lg" href="https://holdings.a-11-oy.com/docs-site/">Build with SZL</a>
         </div>
         <ul class="hero-stats reveal" aria-label="Operating principles">
           <li><b>Observed</b><span>claims require evidence</span></li>
@@ -323,7 +323,7 @@
           <p><code>vsp-otel</code> defines auditable egress records; signed status depends on the emitted record and configured trust root.</p>
         </li>
       </ol>
-      <a class="btn btn-ghost anatomy-cta reveal" href="https://github.com/szl-holdings/anatomy" target="_blank" rel="noopener">Open the living anatomy →</a>
+      <a class="kc-btn kc-btn--outline kc-btn--lg anatomy-cta reveal" href="https://github.com/szl-holdings/anatomy" target="_blank" rel="noopener">Open the living anatomy →</a>
     </section>
 
     <!-- STANDARDS / FRONTIER -->
@@ -382,13 +382,12 @@
             <li>SLSA L1 honest · L2 roadmap</li>
           </ul>
         </div>
-        <figure class="receipt reveal" aria-label="Receipt verification status">
-          <figcaption class="receipt-bar">
-            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <figure class="receipt kc-output reveal" aria-label="Receipt verification status">
+          <figcaption class="receipt-bar kc-output-label">
             <span class="receipt-title">szl-receipt · DSSE envelope</span>
-            <span class="receipt-badge muted" id="verifyBadge">CHECKING</span>
+            <span class="receipt-badge kc-badge muted" id="verifyBadge">CHECKING</span>
           </figcaption>
-          <pre class="receipt-body" id="receiptBody"></pre>
+          <pre class="receipt-body kc-output-pre" id="receiptBody"></pre>
         </figure>
       </div>
       <div class="verify-strip reveal">
@@ -419,8 +418,8 @@
           <button type="button" class="suggest" data-q="What runs the sovereign inference?">What runs the sovereign inference?</button>
         </div>
         <form class="chat-form" id="chatForm" autocomplete="off">
-          <input id="chatInput" type="text" placeholder="Ask about SZL Holdings, receipts, or the doctrine…" aria-label="Message the sovereign concierge" />
-          <button class="btn btn-primary" type="submit" id="chatSend">Send</button>
+          <input id="chatInput" class="kc-input" type="text" placeholder="Ask about SZL Holdings, receipts, or the doctrine…" aria-label="Message the sovereign concierge" />
+          <button class="kc-btn kc-btn--default kc-btn--lg" type="submit" id="chatSend">Send</button>
         </form>
         <p class="chat-note" id="chatNote">Sovereign-first · honest provenance · no data leaves the substrate unless you arm a fallback.</p>
       </div>
@@ -442,8 +441,8 @@
             should be a theorem — or honestly labeled a conjecture.&rdquo;
           </p>
           <div class="founder-links">
-            <a class="btn btn-ghost" href="https://a-11-oy.com" target="_blank" rel="noopener">a-11-oy.com</a>
-            <a class="btn btn-ghost" href="https://github.com/szl-holdings" target="_blank" rel="noopener">GitHub · szl-holdings</a>
+            <a class="kc-btn kc-btn--outline kc-btn--lg" href="https://a-11-oy.com" target="_blank" rel="noopener">a-11-oy.com</a>
+            <a class="kc-btn kc-btn--outline kc-btn--lg" href="https://github.com/szl-holdings" target="_blank" rel="noopener">GitHub · szl-holdings</a>
           </div>
         </div>
       </div>
@@ -453,7 +452,7 @@
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-brand">
-        <span class="brand-mark" aria-hidden="true"></span>
+        <svg class="kc-mark" width="20" height="20" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false"><rect x="1" y="1" width="30" height="30" rx="7" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 9 L23 9 L9 23 L23 23" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" fill="none"/><circle cx="9" cy="9" r="2.1" fill="currentColor"/><circle cx="23" cy="23" r="2.1" fill="currentColor"/></svg>
         <span class="brand-text">SZL<span class="brand-dim">HOLDINGS</span></span>
       </div>
       <p class="footer-tag">Cryptographic provenance infrastructure for consequential AI decisions. Honest by design.</p>
@@ -469,7 +468,7 @@
     </div>
   </footer>
 
-  <script src="app.js?v=7e1c61c99944"></script>
+  <script src="app.js?v=0336c41f0d91"></script>
   <script src="/assets/szl-responsive-apex-v3.js" defer data-szl-responsive-apex-v3="script"></script>
 </body>
 </html>
