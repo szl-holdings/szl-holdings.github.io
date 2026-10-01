@@ -55,6 +55,35 @@ def sha256(source: bytes) -> str:
     return hashlib.sha256(source).hexdigest()
 
 
+
+# Hosts the governed assets may reference at runtime (first-party product and proof origins).
+FIRST_PARTY_HOSTS = frozenset({"a-11-oy.com", "www.a-11-oy.com", "a11oy.net", "www.a11oy.net"})
+_ABSOLUTE_URL = re.compile(rb"https?://[^\s\"'()<>]+")
+
+
+def _external_dependency_hosts(blob: bytes, *, allow_https_first_party: bool) -> list[str]:
+    """Hostnames of absolute URLs in *blob* that would be external runtime dependencies.
+
+    Decided on the parsed hostname (never a substring): any ``http://`` origin, any CDN or
+    third-party host, and — for CSS — any host at all. First-party ``https://`` origins are
+    admitted for JavaScript only.
+    """
+    from urllib.parse import urlsplit
+
+    flagged: list[str] = []
+    for match in _ABSOLUTE_URL.finditer(blob):
+        url = match.group(0).decode("utf-8", errors="replace")
+        parts = urlsplit(url)
+        host = (parts.hostname or "").lower()
+        if parts.scheme != "https" or not host:
+            flagged.append(host or url)
+            continue
+        if allow_https_first_party and host in FIRST_PARTY_HOSTS:
+            continue
+        flagged.append(host)
+    return flagged
+
+
 def exact_source(root: Path, candidates: tuple[Path, ...], kind: str) -> Path:
     found = [path for path in candidates if (root / path).is_file()]
     if not found:
@@ -100,9 +129,9 @@ def materialize(target: Path, source: Path, source_sha: str) -> dict[str, object
     javascript = (source / js_source).read_bytes()
     if not css.strip() or not javascript.strip():
         raise MaterializeError("governed visual asset source is empty")
-    if b"http://" in css or b"https://cdn" in css or b"unpkg.com" in css or b"jsdelivr" in css:
+    if _external_dependency_hosts(css, allow_https_first_party=False):
         raise MaterializeError("Spectral CSS introduces an external runtime dependency")
-    if b"https://cdn" in javascript or b"unpkg.com" in javascript or b"jsdelivr" in javascript:
+    if _external_dependency_hosts(javascript, allow_https_first_party=True):
         raise MaterializeError("Flow JavaScript introduces an external runtime dependency")
 
     css_target = target / CSS_DEST
