@@ -1,0 +1,28 @@
+{
+  "schema": "szl.public-org-showcase-source/v1",
+  "github_owner": "szl-holdings",
+  "hf_owner": "SZLHOLDINGS",
+  "github_public_repositories": 127,
+  "github_repository_reports": 127,
+  "hf_public_repositories": 114,
+  "hf_public_types": {
+    "model": 46,
+    "dataset": 35,
+    "space": 33
+  },
+  "hf_collected_at_utc": "2026-10-02T21:26:56.885095+00:00",
+  "hf_authentication": "explicitly_disabled",
+  "github_late_additions_checked_at_utc": "2026-10-02T21:51:51.821846+00:00",
+  "source_sha256": {
+    "github-repositories.json": "5d2cc42913e456514ab125f361678edfd3b1aa5f06f8e4725e6d60ddd7967931",
+    "huggingface-repositories.json": "2d431a03533d26abbcdbb9b5339c78e24926eb2be33779c644dd6132c3c970b3",
+    "huggingface-public-only.json": "08aa8a85499226fad4b127018f67143a308b54b7bbcce4e365674d38689c21ab",
+    "github-public-overlay.json": "2a6e3299c674b88b77988a649fd3297ec04fec439994748c2445086939f4d6e4"
+  },
+  "limitations": [
+    "Only records explicitly marked private=false are included.",
+    "Hugging Face collection was anonymous and cannot establish private inventory completeness.",
+    "Listed files and card claims were not independently executed or evaluated.",
+    "A listed repository revision or successful check is not deployment or scientific qualification."
+  ]
+}

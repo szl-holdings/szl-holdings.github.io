@@ -29,6 +29,10 @@ health.
 |---|---|
 | [`index.html`](./index.html) | Static company, investor, portfolio, and developer landing |
 | [`products/index.html`](./products/index.html) | Source-declared product catalog; not live health |
+| [`frontier/index.html`](./frontier/index.html) | Dated public math and model atlas: 39 selected software projects and all 46 public Hub model repositories in the captured snapshot |
+| [`frontier/showcase-public.html`](./frontier/showcase-public.html) | Searchable 241-asset public organization inventory; private assets are excluded |
+| [`frontier/proof-to-code-matrix.csv`](./frontier/proof-to-code-matrix.csv) | Revision-pinned 21-callable formula inventory; proof-to-code mappings remain unverified |
+| [`frontier/build_proof_code_matrix.py`](./frontier/build_proof_code_matrix.py) | Source-only matrix rebuild script; requires clean formula and Lean checkouts at the recorded SHAs |
 | [`styles.css`](./styles.css) | Site layout on the KANCHAY light marketing surface; no runtime CDN, no webfonts |
 | [`assets/szl/`](./assets/szl/) | Vendored SZL KANCHAY v1.1.0 (founder direction): `szl-design-system.css`, the orbit logo and favicons, `SOURCE.json` digests. Byte-for-byte; never edit |
 | [`app.js`](./app.js) | Progressive front-end interactions |
@@ -50,6 +54,8 @@ network-free:
 ```bash
 python3 -m http.server 8000
 ```
+
+The frontier bundle includes a [public source receipt](./frontier/audit-data/public-source-receipt.json) and a separate [proof-to-code review](./frontier/PROOF_TO_CODE.md). It shows repository metadata and reported source status; it does not claim model qualification, deployment, or a proof that Python implementations refine Lean statements. The public boundary is checked by `python3 tests/test_frontier_public_assets.py` in the link workflow.
 
 ## Related
 

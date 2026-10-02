@@ -25,6 +25,16 @@
       "result": "bound"
     },
     {
+      "mode": "STATIC",
+      "path": "frontier/index.html",
+      "result": "bound"
+    },
+    {
+      "mode": "STATIC",
+      "path": "frontier/showcase-public.html",
+      "result": "bound"
+    },
+    {
       "mode": "INTERACTIVE",
       "path": "index.html",
       "result": "bound"
