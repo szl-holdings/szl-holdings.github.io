@@ -73,7 +73,10 @@ def main() -> None:
 
     focused = embedded_json("index.html", "const CATALOG=", ";\nconst $=")
     require(focused.get("schema") == "szl.frontier-public-showcase/v1", "wrong focused schema")
-    require(focused.get("source_receipt_sha256") == hashlib.sha256(receipt_bytes).hexdigest(),
+    # Git stores LF text; Windows working trees may expose CRLF. Bind the
+    # published page to the canonical committed bytes on both platforms.
+    canonical_receipt = receipt_bytes.replace(b"\r\n", b"\n")
+    require(focused.get("source_receipt_sha256") == hashlib.sha256(canonical_receipt).hexdigest(),
             "focused page is not bound to the committed public receipt")
     require(len(focused.get("math", [])) == len(math)
             and len(focused.get("models", [])) == len(models), "focused page count drift")
