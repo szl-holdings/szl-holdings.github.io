@@ -59,7 +59,7 @@ jobs:
               p = urllib.parse.urlparse(u)
               return p.scheme in ("http", "https") and p.netloc not in same_origin
 
-          for htmlfile in sorted(root.glob("*.html")):
+          for htmlfile in sorted(root.glob("*.html")) + sorted((root / "frontier").glob("*.html")):
               ex = Extractor()
               ex.feed(htmlfile.read_text(encoding="utf-8"))
               for ref in ex.refs:
@@ -102,6 +102,9 @@ jobs:
               sys.exit(1)
           print("OK: HTML parses and all local links/assets resolve.")
           PY
+
+      - name: Check frontier public source and privacy boundary
+        run: python3 tests/test_frontier_public_assets.py
 
       - name: Check public truth and accessibility contract
         run: |
@@ -331,6 +334,7 @@ jobs:
               origin + "brain/",
               origin + "khipu/",
               origin + "products/",
+              origin + "frontier/",
               origin + "docs-site/",
           ]
           if sitemap_locations != expected_sitemap_locations:
