@@ -33,7 +33,7 @@ def fixture() -> tuple[tempfile.TemporaryDirectory[str], Path, Path]:
         ":root{--szl-accent:#3af4c8} body{min-width:0}\n", encoding="utf-8"
     )
     (source / "console/assets/szl-flow.js").write_text(
-        "document.documentElement.dataset.szlFlow='true';\n", encoding="utf-8"
+        "document.documentElement.dataset.szlFlow='true';\n", encoding="utf-8", newline="\n"
     )
     return temp, target, source
 
@@ -54,6 +54,7 @@ def test_materialization_binds_source_sha_assets_and_root() -> None:
         assert "/assets/szl-flow-v2.js" in index
         assert (target / module.CSS_DEST).read_text(encoding="utf-8").startswith(":root")
         assert (target / module.JS_DEST).read_text(encoding="utf-8").startswith("document")
+        assert f'integrity="{module.script_integrity((target / module.JS_DEST).read_bytes())}"' in index
 
 
 def test_second_apply_is_idempotent_except_manifest_clock() -> None:
@@ -82,6 +83,42 @@ def test_invalid_source_sha_fails_closed() -> None:
             assert "40-character" in str(exc)
         else:
             raise AssertionError("mutable source ref was accepted")
+
+
+def test_noncanonical_javascript_fails_before_any_output_write() -> None:
+    temp, target, source = fixture()
+    with temp:
+        original = (target / "index.html").read_bytes()
+        (source / "console/assets/szl-flow.js").write_bytes(b"const x = 1;\r\n")
+        try:
+            module.materialize(target, source, "a" * 40)
+        except module.MaterializeError as exc:
+            assert "canonical LF" in str(exc)
+        else:
+            raise AssertionError("CRLF source could change its pin after Git normalization")
+        assert (target / "index.html").read_bytes() == original
+        assert not (target / module.JS_DEST).exists()
+        assert not (target / module.CSS_DEST).exists()
+
+
+def test_missing_or_wrong_integrity_is_not_validated_as_materialized() -> None:
+    temp, target, source = fixture()
+    with temp:
+        module.materialize(target, source, "a" * 40)
+        index = target / "index.html"
+        pinned = index.read_text(encoding="utf-8")
+        token = f' integrity="{module.script_integrity((target / module.JS_DEST).read_bytes())}"'
+        for replacement in ("", ' integrity="sha256-wrong"'):
+            index.write_text(pinned.replace(token, replacement), encoding="utf-8")
+            try:
+                module.validate(target)
+            except module.MaterializeError as exc:
+                assert "integrity binding" in str(exc)
+            else:
+                raise AssertionError("missing/stale integrity was accepted")
+        module.bind_index(index)
+        module.validate(target)
+        assert index.read_text(encoding="utf-8").count(token) == 1
 
 
 def test_missing_assets_fail_closed() -> None:

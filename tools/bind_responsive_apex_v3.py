@@ -8,14 +8,56 @@ pointer and error documents stay scriptless and keep their honest role.
 from __future__ import annotations
 
 import argparse
+import base64
+import hashlib
+from html.parser import HTMLParser
 import json
 from pathlib import Path
+import re
 
 ROOT = Path(__file__).resolve().parents[1]
 STATE = ROOT / "responsive-experience-v3.json"
 STYLE = '<link rel="stylesheet" href="/assets/szl-responsive-apex-v3.css" data-szl-responsive-apex-v3="style" />'
 SCRIPT = '<script src="/assets/szl-responsive-apex-v3.js" defer data-szl-responsive-apex-v3="script"></script>'
 EXCLUDE_PARTS = {".git", ".github", "node_modules", "vendor", "archive", "archives", "fixtures"}
+
+
+def pinned_script() -> str:
+    data = (ROOT / "assets/szl-responsive-apex-v3.js").read_bytes().replace(b"\r\n", b"\n")
+    if b"\r" in data:
+        raise ValueError("responsive script requires canonical LF source bytes")
+    integrity = "sha256-" + base64.b64encode(hashlib.sha256(data).digest()).decode("ascii")
+    return SCRIPT.replace("></script>", f' integrity="{integrity}"></script>')
+
+
+def script_span(text: str) -> tuple[int, int] | None:
+    """Find the real managed element, never marker-like text inside script data."""
+    class Bindings(HTMLParser):
+        def __init__(self) -> None:
+            super().__init__(convert_charrefs=False)
+            self.rows = []
+            # HTMLParser positions count LF, not every Unicode line separator.
+            self.line_offsets = [0] + [match.end() for match in re.finditer("\n", text)]
+
+        def handle_starttag(self, tag, attrs):
+            values = dict(attrs)
+            if tag != "script" or values.get("data-szl-responsive-apex-v3") != "script":
+                return
+            if len(attrs) != len(values) or values.get("src") != "/assets/szl-responsive-apex-v3.js" or "defer" not in values:
+                raise ValueError("malformed responsive script binding")
+            line, column = self.getpos()
+            start = self.line_offsets[line - 1] + column
+            end = start + len(self.get_starttag_text())
+            if text[end:end + len("</script>")] != "</script>":
+                raise ValueError("responsive external script must have an empty body")
+            self.rows.append((start, end + len("</script>")))
+
+    parser = Bindings()
+    parser.feed(text)
+    parser.close()
+    if len(parser.rows) > 1:
+        raise ValueError("duplicate responsive script binding")
+    return parser.rows[0] if parser.rows else None
 
 
 def documents() -> list[Path]:
@@ -31,16 +73,13 @@ def interactive_set() -> set[str]:
     return set(state.get("interactive_documents", []))
 
 
-def remove_fragment(text: str, fragment: str) -> str:
-    for candidate in ("  " + fragment + "\n", fragment + "\n", fragment):
-        text = text.replace(candidate, "")
-    return text
-
-
 def is_bound(rel: str, text: str, interactive: set[str]) -> bool:
     if STYLE not in text:
         return False
-    return (SCRIPT in text) if rel in interactive else (SCRIPT not in text)
+    span = script_span(text)
+    if rel not in interactive:
+        return span is None
+    return span is not None and text[span[0]:span[1]] == pinned_script()
 
 
 def bind(path: Path, interactive: set[str]) -> str:
@@ -54,12 +93,16 @@ def bind(path: Path, interactive: set[str]) -> str:
     if STYLE not in text:
         index = text.lower().rfind("</head>")
         text = text[:index] + "  " + STYLE + "\n" + text[index:]
+    span = script_span(text)
     if rel in interactive:
-        if SCRIPT not in text:
+        expected = pinned_script()
+        if span is not None:
+            text = text[:span[0]] + expected + text[span[1]:]
+        else:
             index = text.lower().rfind("</body>")
-            text = text[:index] + "  " + SCRIPT + "\n" + text[index:]
-    else:
-        text = remove_fragment(text, SCRIPT)
+            text = text[:index] + "  " + expected + "\n" + text[index:]
+    elif span is not None:
+        text = text[:span[0]] + text[span[1]:]
     if text != original:
         path.write_text(text, encoding="utf-8", newline="\n")
         return "bound"
