@@ -60,6 +60,36 @@ The frontier bundle includes a [public source receipt](./frontier/audit-data/pub
 
 The `szl-formulas` software entry now pins the public [model mirror](https://huggingface.co/SZLHOLDINGS/szl-formulas/tree/d3f2dbbb7c59bef13cf1b755edf487bfb2960653) at `d3f2dbbb7c59bef13cf1b755edf487bfb2960653` and the separate [kernel package](https://huggingface.co/kernels/SZLHOLDINGS/szl-formulas/tree/04082bd2f7ca43ce7c00d47069cb5a25d662116c) at `04082bd2f7ca43ce7c00d47069cb5a25d662116c`. Their byte-identical public source bindings name [GitHub source `a3f9dcab6e3564ce384bd3c095f64cc2121059f9`](https://github.com/szl-holdings/szl-formulas/tree/a3f9dcab6e3564ce384bd3c095f64cc2121059f9); all 32 managed-file hash readbacks matched the bindings. This establishes the observed mirror bytes, not runtime behavior, scientific validity, or a proof-to-code refinement. The proof-to-code review remains pinned to its separately inspected source revision.
 
+## Browser policy
+
+Every HTML document in this repository carries an early meta Content Security
+Policy and `no-referrer`. Scripts are restricted to same-origin files where
+needed and exact SHA-256 hashes of inline blocks; scriptless pointer pages
+deny scripts. The company site currently denies fetch/WebSocket connections,
+frames, plugins, workers and native form submission. Live concierge endpoints
+remain disabled in `app.js`; this policy does not enable or certify a backend.
+
+After reviewing HTML/script changes or regenerating the Frontier inventory, run:
+
+```bash
+python3 scripts/bind_browser_policy.py --write
+python3 scripts/bind_browser_policy.py --check
+python3 -m unittest discover -s tests -p test_browser_policy.py
+```
+
+CI only checks; it never rewrites policy to accept changed code. Hashes use
+UTF-8 script text with browser-style newline normalization, without trimming.
+Inline styles remain permitted for the existing layout and generated charts;
+this is not a claim that all inline content is forbidden. Same-origin script
+files are trusted by origin, not individually restricted by their filenames.
+
+This is an HTML meta policy, not an HTTP response-header change. It cannot
+provide `frame-ancestors`, sandbox or report-only enforcement through meta.
+Provider-injected third-party analytics is not allowlisted and may be blocked;
+it is not needed by the source UI. No DNS/edge settings are changed. The separate
+`/docs-site/` project publishes its own HTML and is **not** covered by this
+repository's policy. See the [CSP meta delivery specification](https://www.w3.org/TR/CSP/#meta-element).
+
 ## Related
 
 - **Company and portfolio:** [holdings.a-11-oy.com](https://holdings.a-11-oy.com)

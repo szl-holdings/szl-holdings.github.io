@@ -29,9 +29,17 @@ jobs:
       - name: Test recursive route and fragment guard
         run: python3 -m unittest discover -s tests -p test_site_links.py -v
 
+      - name: Test and verify exact browser policy
+        run: |
+          python3 -m unittest discover -s tests -p test_browser_policy.py -v
+          python3 scripts/bind_browser_policy.py --check
+
       - name: Check every HTML page and its local links/assets
         run: |
           python3 scripts/verify_site_links.py
+
+      - name: Exercise CSP compatibility and enforcement in Chrome
+        run: python3 tests/browser_policy_smoke.py
 
       - name: Check frontier public source and privacy boundary
         run: python3 tests/test_frontier_public_assets.py
