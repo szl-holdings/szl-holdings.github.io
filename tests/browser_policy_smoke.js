@@ -4,7 +4,7 @@
 (async () => {
   const prefix = "/__browser_policy_smoke__/";
   const session = new URL(location.href).searchParams.get("session");
-  const result = { status: "INCOMPLETE", session, routes: [], assertions: [] };
+  const result = { status: "INCOMPLETE", session, routes: [], script_probes: {}, assertions: [] };
   const output = document.getElementById("result");
   const targets = [
     ["root", "/"],
@@ -15,6 +15,9 @@
     ["products", "/products/"],
   ];
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const pinnedRoutes = new Set(["root", "brain", "khipu"]);
+  // A syntactically valid SHA-256 digest that is absent from every page policy.
+  const wrongIntegrity = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
   function assert(condition, name) {
     result.assertions.push({ name, ok: Boolean(condition) });
     if (!condition) throw new Error(name);
@@ -53,9 +56,71 @@
     assert(d.querySelectorAll("#" + grid + " .card").length === original,
       prefixLabel + " clearing search restores cards");
   }
+  function sourcePins(key, w) {
+    const d = w.document;
+    const policies = d.querySelectorAll('meta[http-equiv="Content-Security-Policy"]');
+    assert(policies.length === 1, key + " has exactly one CSP");
+    const directives = policies[0].content.split(";").map((item) => item.trim().split(/\s+/));
+    const scriptSources = directives.filter((item) => item[0] === "script-src");
+    assert(scriptSources.length === 1, key + " has exactly one script-src");
+    const allowed = scriptSources[0].slice(1);
+    assert(allowed.length > 0 && !allowed.includes("'self'") && allowed.every((token) =>
+      token === "'none'" || /^'sha256-[A-Za-z0-9+/]{43}='$/.test(token)),
+    key + " script-src permits only hashes or denies all scripts");
+    assert(!allowed.includes("'" + wrongIntegrity + "'"), key + " wrong-integrity probe is not authorized");
+    const scripts = [...d.querySelectorAll("script[src]")];
+    assert(Boolean(scripts.length) === pinnedRoutes.has(key), key + " external script coverage is explicit");
+    for (const script of scripts) {
+      assert(new URL(script.src).origin === location.origin, key + " approved external script is same-origin");
+      assert(/^sha256-[A-Za-z0-9+/]{43}=$/.test(script.integrity) &&
+        allowed.includes("'" + script.integrity + "'"),
+      key + " external script has one exact CSP-authorized SRI hash: " + new URL(script.src).pathname);
+    }
+    return scripts;
+  }
+  async function scriptProbe(key, w, label, src, integrity, expectCsp) {
+    const d = w.document;
+    const script = d.createElement("script");
+    const violations = [];
+    const onViolation = (event) => {
+      if ((event.effectiveDirective === "script-src" || event.effectiveDirective === "script-src-elem") &&
+          event.blockedURI === src) violations.push(event);
+    };
+    d.addEventListener("securitypolicyviolation", onViolation);
+    try {
+      if (integrity !== null) script.integrity = integrity;
+      script.src = src;
+      const outcome = await new Promise((resolve, reject) => {
+        const timer = setTimeout(() => reject(new Error("Script probe timeout: " + key + " " + label)), 3000);
+        script.onload = () => { clearTimeout(timer); resolve("load"); };
+        script.onerror = () => { clearTimeout(timer); resolve("error"); };
+        d.body.append(script);
+      });
+      assert(outcome === "error", key + " " + label + " raises script error instead of load");
+      if (expectCsp) {
+        await until(() => violations.length > 0, key + " " + label + " CSP violation");
+        assert(violations.every((event) => event.disposition === "enforce"),
+          key + " " + label + " has an enforced script-src violation");
+      } else {
+        await delay(25);
+        assert(violations.length === 0, key + " " + label + " passes CSP before SRI rejects altered bytes");
+      }
+      assert(w.__szlDisallowedExternalScript === 0, key + " " + label + " never executes sentinel bytes");
+      result.script_probes[key].push(label);
+    } finally {
+      d.removeEventListener("securitypolicyviolation", onViolation);
+      script.remove();
+    }
+  }
   async function exercise(key, w) {
     const d = w.document;
+    if (pinnedRoutes.has(key)) {
+      assert(w.__SZL_APEX_RESPONSIVE_V3__ === true, key + " pinned responsive controller executes");
+      assert(d.documentElement.dataset.szlViewport === "compact", key + " pinned responsive controller applies compact viewport");
+    }
     if (key === "root") {
+      assert(w.__SZL_FLOW_SHELL__ === true && d.documentElement.dataset.szlFlowReady === "true",
+        "root pinned flow controller executes and initializes the shell");
       const toggle = d.getElementById("navToggle");
       const menu = d.getElementById("primaryNavigation");
       assert(w.innerWidth < 861 && w.getComputedStyle(toggle).display !== "none", "root mobile viewport");
@@ -107,6 +172,17 @@
     assert(/^[0-9a-f]{32}$/.test(session || ""), "fresh test session exists");
     const control = await fetch(endpoint("connect", "control"));
     assert(control.ok && (await control.json()).sentinel === "reachable", "sentinel is reachable from unprotected parent");
+    window.__szlDisallowedExternalScript = 0;
+    const controlScript = document.createElement("script");
+    await new Promise((resolve, reject) => {
+      const timer = setTimeout(() => reject(new Error("Control script timeout")), 3000);
+      controlScript.onload = () => { clearTimeout(timer); resolve(); };
+      controlScript.onerror = () => { clearTimeout(timer); reject(new Error("Control script failed")); };
+      controlScript.src = endpoint("script_no_integrity", "control");
+      document.body.append(controlScript);
+    });
+    assert(window.__szlDisallowedExternalScript === 1, "same-origin sentinel bytes execute in unprotected parent");
+    controlScript.remove();
     for (const [key, path] of targets) {
       const frame = document.createElement("iframe");
       frame.width = "390";
@@ -123,6 +199,7 @@
       const d = w.document;
       assert(new URL(w.location.href).pathname === path, key + " loaded exact target without redirect");
       assert(d.querySelectorAll("main").length === 1, key + " has one main landmark");
+      const approvedScripts = sourcePins(key, w);
       const errors = [];
       const onError = (event) => { if (event.message) errors.push(event.message); };
       const onRejection = (event) => errors.push(String(event.reason));
@@ -150,6 +227,19 @@
       injected.remove();
       handler.remove();
 
+      result.script_probes[key] = [];
+      w.__szlDisallowedExternalScript = 0;
+      await scriptProbe(key, w, "no_integrity", endpoint("script_no_integrity", key), null, true);
+      await scriptProbe(key, w, "wrong_integrity", endpoint("script_wrong_integrity", key), wrongIntegrity, true);
+      if (pinnedRoutes.has(key)) {
+        // Use the exact approved URL, including its original query. Cache behavior
+        // is irrelevant: error + enforced CSP event must replace a load event.
+        await scriptProbe(key, w, "approved_source_no_integrity", approvedScripts[0].src, null, true);
+        // An authorized hash admits this same-origin request, but its different
+        // response bytes must fail SRI before the executable sentinel can run.
+        await scriptProbe(key, w, "tampered_bytes", endpoint("script_tampered", key), approvedScripts[0].integrity, false);
+      }
+
       let rejected = false;
       await Promise.race([
         w.fetch(endpoint("connect", key)).then(() => {}, () => { rejected = true; }),
@@ -169,6 +259,15 @@
       assert(observations[key].connect.length === 0, key + " forbidden fetch never reaches server");
       assert(observations[key].image.length === 1 && observations[key].image[0] === null,
         key + " allowed child image omits Referer");
+      assert(observations[key].script_no_integrity.length === 0 &&
+        observations[key].script_wrong_integrity.length === 0,
+      key + " unapproved same-origin scripts never reach server");
+      assert(observations[key].script_tampered.length === (pinnedRoutes.has(key) ? 1 : 0),
+        key + " altered-byte script has exactly the expected server request count");
+      if (pinnedRoutes.has(key)) {
+        assert(observations[key].script_tampered[0] === null,
+          key + " SRI-rejected script request omits Referer");
+      }
       result.routes.push(key);
       frame.remove();
     }

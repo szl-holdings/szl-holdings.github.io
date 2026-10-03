@@ -9,6 +9,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 
 SCRIPT = Path(__file__).resolve().parents[1] / "scripts" / "bind_browser_policy.py"
@@ -23,6 +24,22 @@ def page(body="", head=""):
 
 
 class BrowserPolicy(unittest.TestCase):
+    def setUp(self):
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        self.root = Path(temporary.name)
+        self.asset = self.root / "app.js"
+        self.asset.write_bytes(b"window.approved = true;\n")
+
+    def bind(self, text, document="index.html"):
+        return POLICY.bind(text, root=self.root, page=Path(document))
+
+    def cli(self, *arguments):
+        return subprocess.run(
+            [sys.executable, "-B", str(SCRIPT), "--root", str(self.root), *arguments],
+            capture_output=True, text=True,
+        )
+
     def test_static_page_denies_script_and_network(self):
         result = POLICY.bind(page("<main>Static pointer</main>"))
         for directive in ("default-src 'none'", "script-src 'none'", "connect-src 'none'", "form-action 'none'", "object-src 'none'", "worker-src 'none'"):
@@ -37,10 +54,160 @@ class BrowserPolicy(unittest.TestCase):
         self.assertNotIn("script-src 'self'", result)
         self.assertNotIn("unsafe-eval", result)
 
-    def test_external_local_script_gets_self_only(self):
-        result = POLICY.bind(page('<script src="/app.js?v=hash" defer></script>'))
-        self.assertIn("script-src 'self';", result)
-        self.assertNotIn("sha256-", result)
+    def test_external_local_script_gets_exact_sri_and_hash_only_policy(self):
+        expected = "sha256-" + base64.b64encode(hashlib.sha256(self.asset.read_bytes()).digest()).decode()
+        result = self.bind(page('<script src="/app.js?v=hash" defer></script>'))
+        self.assertIn("script-src '" + expected + "';", result)
+        self.assertIn('<script src="/app.js?v=hash" defer integrity="' + expected + '"></script>', result)
+        self.assertNotIn("script-src 'self'", result)
+        self.assertNotIn("crossorigin", result)
+
+    def test_external_scripts_require_explicit_root_and_page_context(self):
+        text = page('<script src="app.js"></script>')
+        for context in ({}, {"root": self.root}, {"page": self.root / "index.html"}):
+            with self.subTest(context=context), self.assertRaisesRegex(ValueError, "explicit root and page"):
+                POLICY.bind(text, **context)
+
+    def test_script_source_mapping_is_relative_to_document_or_site_root(self):
+        nested = self.root / "nested"
+        nested.mkdir()
+        (nested / "local.js").write_bytes(b"window.nested = true;\n")
+        for source, target in (
+            ("local.js?v=1&kind=local", nested / "local.js"),
+            ("../app.js?v=2", self.asset),
+            ("/app.js?version=3", self.asset),
+            ("/nested/local.js", nested / "local.js"),
+        ):
+            with self.subTest(source=source):
+                result = self.bind(page(f'<script src="{source}"></script>'), "nested/index.html")
+                self.assertIn(f'src="{source}"', result)
+                self.assertIn('integrity="' + POLICY.script_integrity(target) + '"', result)
+
+    def test_only_integrity_attribute_is_changed_and_script_bodies_are_preserved(self):
+        inline = "\nconst evidence = {text: 'keep < & > λ', value: 3};\n"
+        raw = '<SCRIPT data-note="integrity=not-an-attribute >"\n SRC=app.js INTEGRITY = \'old\' defer></SCRIPT>'
+        result = self.bind(page(raw + '<script type="application/ld+json">' + inline + '</script>'))
+        expected_tag = raw.replace("INTEGRITY = 'old'", 'integrity="' + POLICY.script_integrity(self.asset) + '"')
+        self.assertIn(expected_tag, result)
+        self.assertIn('<script type="application/ld+json">' + inline + '</script>', result)
+        self.assertIn(POLICY.script_hash(inline), result)
+        self.assertEqual(self.bind(result), result)
+
+    def test_multiple_external_script_spans_are_updated_without_reordering(self):
+        text = page('<script src="app.js" defer></script>\n<!-- keep -->\n<script async src="app.js?v=2" integrity=old></script>')
+        result = self.bind(text)
+        integrity = POLICY.script_integrity(self.asset)
+        self.assertIn(f'<script src="app.js" defer integrity="{integrity}"></script>\n<!-- keep -->\n<script async src="app.js?v=2" integrity="{integrity}"></script>', result)
+        self.assertEqual(result.count("'" + integrity + "'"), 1)
+        self.assertEqual(self.bind(result), result)
+
+    def test_crlf_script_checkout_hashes_match_lf_source_but_lone_cr_fails(self):
+        markup = page('<script src="app.js"></script>')
+        self.asset.write_bytes(b"first();\nsecond();\n")
+        lf = self.bind(markup)
+        self.asset.write_bytes(b"first();\r\nsecond();\r\n")
+        self.assertEqual(self.bind(markup), lf)
+        self.assertEqual(POLICY.canonical_script_bytes(self.asset), b"first();\nsecond();\n")
+        self.asset.write_bytes(b"first();\rsecond();\n")
+        with self.assertRaisesRegex(ValueError, "lone CR"):
+            self.bind(markup)
+
+    def test_external_script_must_be_utf8(self):
+        self.asset.write_bytes(b"\xff")
+        with self.assertRaises(UnicodeError):
+            self.bind(page('<script src="app.js"></script>'))
+
+    def test_missing_nonregular_and_escaping_script_files_fail_closed(self):
+        (self.root / "directory").mkdir()
+        for source in ("missing.js", "directory", "../app.js", "../../app.js", "/../app.js"):
+            with self.subTest(source=source), self.assertRaisesRegex(ValueError, "regular file|escapes"):
+                self.bind(page(f'<script src="{source}"></script>'))
+        with self.assertRaisesRegex(ValueError, "escapes"):
+            self.bind(page('<script src="app.js"></script>'), self.root.parent / "outside.html")
+
+    def test_ambiguous_encoded_or_malformed_script_urls_fail_closed(self):
+        for source in (
+            "/%2e%2e/app.js", "%2E./app.js", "/nested/%2e%2e/app.js",
+            "/%2fapp.js", "/nested%5capp.js", "/%252e%252e/app.js", "app.js%00",
+            "app.js:stream", "app.js#fragment", "app.js#", "?v=1", "app%Q0.js",
+            "app%.js", " app.js", "app.js ", "app\t.js", "///app.js",
+        ):
+            with self.subTest(source=source), self.assertRaises(ValueError):
+                self.bind(page(f'<script src="{source}"></script>'))
+
+    def test_symlink_component_is_rejected_even_when_target_would_remain_in_root(self):
+        linked = self.root / "linked.js"
+        linked.write_bytes(self.asset.read_bytes())
+        original_is_link = POLICY.is_link
+        with mock.patch.object(POLICY, "is_link", side_effect=lambda path: path == linked or original_is_link(path)):
+            with self.assertRaisesRegex(ValueError, "symlinks"):
+                self.bind(page('<script src="linked.js"></script>'))
+
+    def test_windows_reparse_points_are_rejected_without_new_pathlib_helpers(self):
+        path = mock.Mock()
+        path.is_symlink.return_value = False
+        path.is_junction.return_value = False
+        path.lstat.return_value.st_file_attributes = POLICY.stat.FILE_ATTRIBUTE_REPARSE_POINT
+        self.assertTrue(POLICY.is_link(path))
+        path.lstat.return_value.st_file_attributes = 0
+        self.assertFalse(POLICY.is_link(path))
+
+    def test_real_file_and_directory_symlinks_are_rejected(self):
+        linked = self.root / "linked.js"
+        directory = self.root / "linked-directory"
+        try:
+            linked.symlink_to(self.asset)
+            directory.symlink_to(self.root, target_is_directory=True)
+        except OSError as exc:
+            self.skipTest(f"Host does not permit symlink creation: {exc}")
+        for source in ("linked.js", "linked-directory/app.js"):
+            with self.subTest(source=source), self.assertRaisesRegex(ValueError, "symlinks"):
+                self.bind(page(f'<script src="{source}"></script>'))
+
+    def test_duplicate_integrity_and_self_closing_scripts_are_rejected(self):
+        for raw in (
+            '<script src="app.js" integrity="one" INTEGRITY="two"></script>',
+            '<script src="app.js" />',
+        ):
+            with self.subTest(raw=raw), self.assertRaises(ValueError):
+                self.bind(page(raw))
+
+    def test_cli_requires_explicit_write_to_rebind_missing_wrong_or_stale_sri(self):
+        document = self.root / "index.html"
+        original = page('<script src="app.js"></script>')
+        document.write_text(original, encoding="utf-8", newline="\n")
+        before = document.read_bytes()
+        self.assertEqual(self.cli("--check").returncode, 1)
+        self.assertEqual(document.read_bytes(), before)
+        self.assertEqual(self.cli("--write").returncode, 0)
+        bound = document.read_bytes()
+        self.assertEqual(self.cli("--check").returncode, 0)
+        integrity = POLICY.script_integrity(self.asset).encode()
+        for altered in (
+            bound.replace(b' integrity="' + integrity + b'"', b""),
+            bound.replace(b'integrity="' + integrity + b'"', b'integrity="sha256-wrong"'),
+        ):
+            document.write_bytes(altered)
+            with self.subTest(altered=altered[-100:]):
+                self.assertEqual(self.cli("--check").returncode, 1)
+                self.assertEqual(document.read_bytes(), altered)
+                self.assertEqual(self.cli("--write").returncode, 0)
+                self.assertEqual(document.read_bytes(), bound)
+        self.asset.write_bytes(b"window.approved = 'changed';\n")
+        self.assertEqual(self.cli("--check").returncode, 1)
+        self.assertEqual(document.read_bytes(), bound)
+        self.assertEqual(self.cli("--write").returncode, 0)
+        self.assertNotEqual(document.read_bytes(), bound)
+        self.assertEqual(self.cli("--check").returncode, 0)
+
+    def test_cli_write_validates_every_document_before_writing_any(self):
+        good = self.root / "a.html"
+        bad = self.root / "z.html"
+        good.write_text(page('<script src="app.js"></script>'), encoding="utf-8")
+        bad.write_text(page('<script src="https://example.invalid/a.js"></script>'), encoding="utf-8")
+        before = {path: path.read_bytes() for path in (good, bad, self.asset)}
+        self.assertEqual(self.cli("--write").returncode, 1)
+        self.assertEqual({path: path.read_bytes() for path in before}, before)
 
     def test_root_json_ld_is_hashed_and_preserved(self):
         data = '<script type="application/ld+json">{"name":"SZL"}</script>'
@@ -49,7 +216,7 @@ class BrowserPolicy(unittest.TestCase):
         self.assertIn(POLICY.script_hash('{"name":"SZL"}'), result)
 
     def test_policy_precedes_resources_after_charset(self):
-        result = POLICY.bind(page(head='<link rel="stylesheet" href="site.css"><script src="app.js"></script>'))
+        result = self.bind(page(head='<link rel="stylesheet" href="site.css"><script src="app.js"></script>'))
         self.assertLess(result.index('charset="utf-8"'), result.index(POLICY.START))
         self.assertLess(result.index(POLICY.END), result.index('<link'))
         self.assertLess(result.index(POLICY.END), result.index('<script'))

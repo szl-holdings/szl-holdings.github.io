@@ -3,8 +3,11 @@
 from __future__ import annotations
 
 import json
+import importlib.util
 import re
+import tempfile
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -13,6 +16,10 @@ JS = ROOT / "assets" / "szl-responsive-apex-v3.js"
 STATE = ROOT / "responsive-experience-v3.json"
 STYLE_MARKER = 'data-szl-responsive-apex-v3="style"'
 SCRIPT_MARKER = 'data-szl-responsive-apex-v3="script"'
+SPEC = importlib.util.spec_from_file_location("responsive_binder", ROOT / "tools/bind_responsive_apex_v3.py")
+assert SPEC and SPEC.loader
+BINDER = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(BINDER)
 
 
 class ResponsiveApexV3Contract(unittest.TestCase):
@@ -106,6 +113,45 @@ class ResponsiveApexV3Contract(unittest.TestCase):
         self.assertEqual(self.css.count("{"), self.css.count("}"))
         self.assertLessEqual(len(self.css.encode("utf-8")), 30000)
         self.assertLessEqual(len(self.js.encode("utf-8")), 8000)
+
+    def test_generator_replaces_old_pin_once_and_is_idempotent(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "assets").mkdir()
+            (root / "assets/szl-responsive-apex-v3.js").write_bytes(b"const reviewed = true;\n")
+            page = root / "index.html"
+            page.write_text('<html><head></head><body>' + BINDER.SCRIPT + '</body></html>', encoding="utf-8")
+            with patch.object(BINDER, "ROOT", root):
+                BINDER.bind(page, {"index.html"})
+                bound = page.read_bytes()
+                text = bound.decode("utf-8")
+                self.assertTrue(BINDER.is_bound("index.html", text, {"index.html"}))
+                self.assertEqual(text.count(SCRIPT_MARKER), 1)
+                self.assertIn('integrity="sha256-', text)
+                BINDER.bind(page, {"index.html"})
+                self.assertEqual(page.read_bytes(), bound)
+                (root / "assets/szl-responsive-apex-v3.js").write_bytes(b"const reviewed = false;\n")
+                self.assertFalse(BINDER.is_bound("index.html", text, {"index.html"}))
+                BINDER.bind(page, {"index.html"})
+                changed = page.read_text(encoding="utf-8")
+                self.assertNotEqual(changed, text)
+                self.assertEqual(changed.count(SCRIPT_MARKER), 1)
+                self.assertTrue(BINDER.is_bound("index.html", changed, {"index.html"}))
+                BINDER.bind(page, set())
+                self.assertIsNone(BINDER.script_span(page.read_text(encoding="utf-8")))
+
+    def test_managed_script_detection_ignores_script_data_and_refuses_duplicates(self) -> None:
+        self.assertIsNone(BINDER.script_span('<script>const text = ' + repr(BINDER.SCRIPT.replace('</script>', '<\\/script>')) + ';</script>'))
+        with self.assertRaisesRegex(ValueError, "duplicate"):
+            BINDER.script_span(BINDER.SCRIPT + BINDER.SCRIPT)
+
+    def test_managed_script_offsets_use_only_lf_line_boundaries(self) -> None:
+        for separator in ("\u2028", "\u2029", "\f", "\v", "\r"):
+            with self.subTest(separator=repr(separator)):
+                text = "<p>a" + separator + "b\nc</p>\n" + BINDER.SCRIPT
+                start, end = BINDER.script_span(text)
+                self.assertEqual(text[start:end], BINDER.SCRIPT)
+                self.assertEqual(text[:start], "<p>a" + separator + "b\nc</p>\n")
 
 
 if __name__ == "__main__":

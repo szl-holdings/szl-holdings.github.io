@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <!-- szl:browser-policy v1 -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; form-action 'none'; connect-src 'none'; script-src 'self' 'sha256-3Ewbdn9yhpiHp0OY3TzsSpRsvXiZxztHnaicBvLpXPg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; media-src 'none'; manifest-src 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; form-action 'none'; connect-src 'none'; script-src 'sha256-3Ewbdn9yhpiHp0OY3TzsSpRsvXiZxztHnaicBvLpXPg=' 'sha256-IUIKX7d8oLIS6STuJf0fn9mQvwtLEoU7EQumfcDwaw8='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; media-src 'none'; manifest-src 'self'">
 <meta name="referrer" content="no-referrer">
 <!-- /szl:browser-policy -->
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -144,6 +144,6 @@ q.addEventListener("input", () => {
   render(found, found.length === 0);
 });
 </script>
-  <script src="/assets/szl-responsive-apex-v3.js" defer data-szl-responsive-apex-v3="script"></script>
+  <script src="/assets/szl-responsive-apex-v3.js" defer data-szl-responsive-apex-v3="script" integrity="sha256-IUIKX7d8oLIS6STuJf0fn9mQvwtLEoU7EQumfcDwaw8="></script>
 </body>
 </html>

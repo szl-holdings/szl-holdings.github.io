@@ -63,8 +63,8 @@ The `szl-formulas` software entry now pins the public [model mirror](https://hug
 ## Browser policy
 
 Every HTML document in this repository carries an early meta Content Security
-Policy and `no-referrer`. Scripts are restricted to same-origin files where
-needed and exact SHA-256 hashes of inline blocks; scriptless pointer pages
+Policy and `no-referrer`. Scripts are restricted to exact SHA-256 hashes of
+reviewed external files and inline blocks; scriptless pointer pages
 deny scripts. The company site currently denies fetch/WebSocket connections,
 frames, plugins, workers and native form submission. Live concierge endpoints
 remain disabled in `app.js`; this policy does not enable or certify a backend.
@@ -77,15 +77,37 @@ python3 scripts/bind_browser_policy.py --check
 python3 -m unittest discover -s tests -p test_browser_policy.py
 ```
 
-CI only checks; it never rewrites policy to accept changed code. Hashes use
+CI only checks; it never rewrites policy to accept changed code. Inline hashes use
 UTF-8 script text with browser-style newline normalization, without trimming.
+External scripts carry one matching `integrity` attribute: the browser must verify
+the fetched bytes, not just the script's origin. The three published JavaScript
+files are LF-bound through `.gitattributes`; the generator accounts for pre-existing
+Windows CRLF text checkouts, while served bodies must match the actual LF source
+blobs. Never hash an edge-transformed or minified body as if it were the reviewed
+source. The Flow materializer refuses non-LF JavaScript input before writing.
 Inline styles remain permitted for the existing layout and generated charts;
-this is not a claim that all inline content is forbidden. Same-origin script
-files are trusted by origin, not individually restricted by their filenames.
+this is not a claim that all inline content is forbidden. There is no `script-src
+'self'` or `strict-dynamic` fallback: a newly inserted same-origin script without
+an authorized integrity hash is denied. Hashes authorize exact content, not a
+particular filename or origin; they cannot protect a policy document that an
+attacker can rewrite.
+
+After either asset generator runs, repeat the browser-policy commands above so
+both external pins and the document's allowed hashes agree. A changed asset with
+stale HTML intentionally fails closed. Keep asset URLs immutable across content
+changes or verify deployment/cache coherence; this release changes no JavaScript
+body. The hosted Chrome suite tests approved interactions, missing/wrong integrity,
+unapproved same-origin scripts, and modified response bodies. It is not a claim of
+browser execution coverage for Firefox or Safari. External CSP hashes require
+Chrome 59+, Firefox 116+, or Safari 15.6+ (conservative compatibility floor);
+older browsers may retain static content but lose progressive interactions.
+See [CSP external hash sources](https://www.w3.org/TR/CSP/#external-hash)
+and [Subresource Integrity](https://www.w3.org/TR/SRI/).
 
 This is an HTML meta policy, not an HTTP response-header change. It cannot
 provide `frame-ancestors`, sandbox or report-only enforcement through meta.
-Provider-injected third-party analytics is not allowlisted and may be blocked;
+Delivery-layer scripts absent from the reviewed hash list are not allowlisted,
+even when same-origin, and may be blocked;
 it is not needed by the source UI. No DNS/edge settings are changed. The separate
 `/docs-site/` project publishes its own HTML and is **not** covered by this
 repository's policy. See the [CSP meta delivery specification](https://www.w3.org/TR/CSP/#meta-element).

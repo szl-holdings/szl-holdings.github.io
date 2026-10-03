@@ -12,10 +12,12 @@ mutation.
 from __future__ import annotations
 
 import argparse
+import base64
 import hashlib
 import json
 import re
 import sys
+from html.parser import HTMLParser
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -53,6 +55,12 @@ class MaterializeError(RuntimeError):
 
 def sha256(source: bytes) -> str:
     return hashlib.sha256(source).hexdigest()
+
+
+def script_integrity(source: bytes) -> str:
+    if b"\r" in source:
+        raise MaterializeError("Flow source must use canonical LF bytes before materialization")
+    return "sha256-" + base64.b64encode(hashlib.sha256(source).digest()).decode("ascii")
 
 
 
@@ -112,7 +120,9 @@ def bind_index(index: Path) -> None:
     head = text.lower().rfind("</head>")
     if head < 0:
         raise MaterializeError("root document has no closing head element")
-    text = text[:head] + "  " + BLOCK + "\n" + text[head:]
+    integrity = script_integrity((index.parent / JS_DEST).read_bytes())
+    block = BLOCK.replace('data-szl-product-asset="flow-v2">', f'data-szl-product-asset="flow-v2" integrity="{integrity}">')
+    text = text[:head] + "  " + block + "\n" + text[head:]
     index.write_text(text, encoding="utf-8", newline="\n")
 
 
@@ -129,6 +139,7 @@ def materialize(target: Path, source: Path, source_sha: str) -> dict[str, object
     javascript = (source / js_source).read_bytes()
     if not css.strip() or not javascript.strip():
         raise MaterializeError("governed visual asset source is empty")
+    script_integrity(javascript)  # Reject noncanonical bytes before writing any output.
     if _external_dependency_hosts(css, allow_https_first_party=False):
         raise MaterializeError("Spectral CSS introduces an external runtime dependency")
     if _external_dependency_hosts(javascript, allow_https_first_party=True):
@@ -186,6 +197,21 @@ def validate(target: Path) -> dict[str, object]:
     index = (target / "index.html").read_text(encoding="utf-8")
     if index.count(START) != 1 or index.count(END) != 1:
         raise MaterializeError("root document must contain one exact asset block")
+    class FlowBindings(HTMLParser):
+        def __init__(self):
+            super().__init__()
+            self.pins = []
+
+        def handle_starttag(self, tag, attrs):
+            values = dict(attrs)
+            if tag == "script" and values.get("src") == "/assets/szl-flow-v2.js":
+                if len(attrs) != len(values):
+                    raise MaterializeError("duplicate attributes on Flow script")
+                self.pins.append(values.get("integrity"))
+
+    bindings = FlowBindings()
+    bindings.feed(index)
+    bindings.close()
     for url, metadata in (manifest.get("assets") or {}).items():
         relative = Path(str(url).lstrip("/"))
         path = target / relative
@@ -198,6 +224,8 @@ def validate(target: Path) -> dict[str, object]:
             raise MaterializeError(f"manifest byte count mismatch: {url}")
         if str(url) not in index:
             raise MaterializeError(f"root document does not reference manifest asset: {url}")
+    if bindings.pins != [script_integrity((target / JS_DEST).read_bytes())]:
+        raise MaterializeError("Flow script must have one exact integrity binding")
     return manifest
 
 
