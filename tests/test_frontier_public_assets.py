@@ -66,6 +66,15 @@ def main() -> None:
               and re.fullmatch(r"[0-9a-f]{40}", row.get("sha", ""))
               for row in overlay["additions"]),
             "Hub additions escaped the reviewed public, pinned scope")
+    replacements = overlay.get("replacements", [])
+    require(len(replacements) == 1
+            and replacements[0].get("type") == "model"
+            and replacements[0].get("id") == "SZLHOLDINGS/szl-formulas"
+            and replacements[0].get("private") is False
+            and replacements[0].get("is_kernel") is True
+            and replacements[0].get("replaces_sha") == "937c8460ed1a77bb817be41cd8a1c39369ffb8bd"
+            and replacements[0].get("sha") == "355695fe22ec9361283cf19790166cf0d2093bcd",
+            "formula software mirror revision changed without review")
 
     math = rows("math-software.csv")
     models = rows("models.csv")
@@ -73,6 +82,9 @@ def main() -> None:
     proof = rows("proof-to-code-matrix.csv")
     require(len(math) == 39 and len(models) == 46 and len(assets) == 243,
             "CSV counts do not match the reviewed snapshot")
+    formula_rows = [row for row in models if row["id"] == "SZLHOLDINGS/szl-formulas"]
+    require(len(formula_rows) == 1 and formula_rows[0]["revision"] == replacements[0]["sha"],
+            "model export does not use the published formula mirror revision")
     require(len(proof) == 21, "proof-to-code matrix must contain 21 callables")
     for name, entries, owner in (("math", math, "szl-holdings"),
                                  ("models", models, "SZLHOLDINGS")):
@@ -111,10 +123,20 @@ def main() -> None:
                 and re.fullmatch(r"[0-9a-f]{40}", row.get("revision", ""))
                 for row in full["assets"]),
             "full page embeds a private, off-owner, or unpinned record")
+    require(all(row.get("file_count") is None
+                and row.get("tensor_artifact") is None
+                and row.get("numeric_archives") is None
+                and row.get("evidence_files") is None
+                for row in full["assets"]
+                if row["kind"].startswith("HF ") and row.get("files_coverage") == "UNKNOWN"),
+            "unknown Hub file coverage was presented as a complete inventory")
     csv_assets = {(row["kind"], row["id"]): row for row in assets}
     page_assets = {(row["kind"], row["id"]): row for row in full["assets"]}
     require(len(csv_assets) == len(assets) and set(csv_assets) == set(page_assets),
             "downloadable inventory differs from embedded public assets")
+    require(page_assets[("HF Model", "SZLHOLDINGS/szl-formulas")]["revision"]
+            == replacements[0]["sha"],
+            "searchable atlas does not use the published formula mirror revision")
     org_card = page_assets.get(("HF Space", "SZLHOLDINGS/README"))
     require(org_card is not None
             and org_card["category"] == "Organization profile card (static Space)"
@@ -155,7 +177,7 @@ def main() -> None:
     # Free-text sections are pinned so a future refresh requires review before publication.
     for field, expected in (
         ("findings", "8e2511f47e4ec6bcfda63fa2d799748b59d88e42e5c97a53c2bf0db8aed08dd1"),
-        ("coverage", "f475459e5f32af0cf850fb88b5f3a8300be899680d98f1a58b572e61b2ad0987"),
+        ("coverage", "d04ac54011a07354a082d3f2a82cf987f2b5edc166bac2c3c2d51499c6e39744"),
     ):
         canonical = json.dumps(full[field], sort_keys=True, ensure_ascii=False,
                                separators=(",", ":")).encode("utf-8")

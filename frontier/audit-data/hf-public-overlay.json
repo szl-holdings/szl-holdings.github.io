@@ -3,7 +3,104 @@
   "owner": "SZLHOLDINGS",
   "base_public_count": 114,
   "observed_public_count": 116,
-  "checked_at_utc": "2026-10-03T00:16:14.419683+00:00",
+  "checked_at_utc": "2026-10-03T00:33:34.660537+00:00",
+  "replacements": [
+    {
+      "id": "SZLHOLDINGS/szl-formulas",
+      "type": "model",
+      "owner": "SZLHOLDINGS",
+      "private": false,
+      "public_only": true,
+      "sha": "355695fe22ec9361283cf19790166cf0d2093bcd",
+      "downloads": 0,
+      "likes": 0,
+      "tags": [
+        "kernels",
+        "kernel",
+        "governance",
+        "formulas",
+        "proof-status",
+        "lean4",
+        "lambda-aggregate",
+        "doi:10.5281/zenodo.19944926",
+        "license:apache-2.0",
+        "region:us"
+      ],
+      "pipeline_tag": null,
+      "library_name": "kernels",
+      "last_modified": "2026-10-02T23:52:39.000Z",
+      "gated": false,
+      "card": {
+        "library_name": "kernels",
+        "license": "apache-2.0",
+        "tags": [
+          "kernel",
+          "governance",
+          "formulas",
+          "proof-status",
+          "lean4",
+          "lambda-aggregate",
+          "doi:10.5281/zenodo.19944926"
+        ],
+        "szl-review": {
+          "artifact_class": "SOFTWARE_KERNEL",
+          "maturity": "SOFTWARE_LIMITED",
+          "trained_weights_present": false,
+          "evaluation": "HISTORICAL_RECORDS_NOT_RERUN",
+          "source_mirror_parity": "NOT_VERIFIED_THIS_REVIEW",
+          "reviewed_at": "2026-09-30"
+        }
+      },
+      "files": [
+        ".gitattributes",
+        "BENCH.laptop-blackwell.json",
+        "LICENSE",
+        "MODEL_PROVENANCE.json",
+        "OPERATIONAL.json",
+        "PROMOTION_READINESS_AUDIT.json",
+        "README.md",
+        "SECURITY.md",
+        "SZL_ESTATE_MANAGED.json",
+        "SZL_SOURCE_BINDING.json",
+        "TRAINING_RECEIPT.json",
+        "bom/model-bom.cdx.json",
+        "build.toml",
+        "build/torch-cpu/metadata.json",
+        "build/torch-cpu/szl_formulas/__init__.py",
+        "build/torch-cpu/szl_formulas/_aggregators.py",
+        "build/torch-cpu/szl_formulas/_composer.py",
+        "build/torch-cpu/szl_formulas/_formulas.py",
+        "build/torch-cpu/szl_formulas/atlas.py",
+        "build/torch-cpu/szl_formulas/formula_atlas.v1.json",
+        "build/torch-cpu/szl_formulas/metadata.json",
+        "build/torch-universal/metadata.json",
+        "build/torch-universal/szl_formulas/__init__.py",
+        "build/torch-universal/szl_formulas/_aggregators.py",
+        "build/torch-universal/szl_formulas/_composer.py",
+        "build/torch-universal/szl_formulas/_formulas.py",
+        "build/torch-universal/szl_formulas/atlas.py",
+        "build/torch-universal/szl_formulas/formula_atlas.v1.json",
+        "build/torch-universal/szl_formulas/metadata.json",
+        "card/holo-banner.svg",
+        "scripts/eval.py",
+        "scripts/forge.py",
+        "tests/test_formulas.py"
+      ],
+      "is_kernel": true,
+      "has_weight_files": false,
+      "numeric_archives": [],
+      "sdk": null,
+      "runtime": {
+        "stage": "UNKNOWN",
+        "reason": "public repository info only; runtime not probed"
+      },
+      "url": "https://huggingface.co/SZLHOLDINGS/szl-formulas",
+      "public_api_url": "https://huggingface.co/api/models/SZLHOLDINGS/szl-formulas",
+      "observed_at_utc": "2026-10-03T00:33:34.660537+00:00",
+      "readme": "---\nlibrary_name: kernels\nlicense: apache-2.0\ntags:\n- kernel\n- governance\n- formulas\n- proof-status\n- lean4\n- lambda-aggregate\n- doi:10.5281/zenodo.19944926\nszl-review:\n  artifact_class: SOFTWARE_KERNEL\n  maturity: SOFTWARE_LIMITED\n  trained_weights_present: false\n  evaluation: HISTORICAL_RECORDS_NOT_RERUN\n  source_mirror_parity: NOT_VERIFIED_THIS_REVIEW\n  reviewed_at: \"2026-09-30\"\n---\n\n<p align=\"center\"><img src=\"https://raw.githubusercontent.com/szl-holdings/szl-forge/main/szl-formulas/card/holo-banner.svg\" alt=\"szl-formulas software provenance illustration\" width=\"100%\"/></p>\n\n# szl-formulas\n\n**Formula implementations with their declared proof scope intact**\n\n**Software kernel · limited maturity · Apache-2.0 declared · no trained weights in the reviewed tree**\n\nA Python formula registry and composition package. The reviewed Hub package declares 21 registry entries and separately preserves eight named canonical proof identifiers.\n\n## Artifact and source identity\n\n- Model-type card mirror: [reviewed tree](https://huggingface.co/SZLHOLDINGS/szl-formulas/tree/5e4519bb648c47bc7eb4aea4ba5fe80d92570883), revision `5e4519bb648c47bc7eb4aea4ba5fe80d92570883`\n- First-class kernel package: [reviewed tree](https://huggingface.co/kernels/SZLHOLDINGS/szl-formulas/tree/636339753ea625bd27fd35a992699dba635c1cbb), revision `636339753ea625bd27fd35a992699dba635c1cbb`\n- Declared canonical GitHub source: [observed source tree](https://github.com/szl-holdings/szl-formulas/tree/65c800b59249f27559de575bc66f5054fa585fa5), revision `65c800b59249f27559de575bc66f5054fa585fa5`\n- Source paths: `torch-ext/szl_formulas/` and `build/torch-universal/szl_formulas/` in the canonical repository\n- Inspection date: 2026-09-30 UTC\n\nThese are distinct repository revisions. The source repository is reachable; this review does not establish byte-for-byte parity, a reproducible build, approved publication, or the identity of a deployed process. Use the release's source binding and publication receipt to establish that chain.\n\nThe reviewed mirror contains Python source, build metadata and historical evidence records. Its listed tree contains no `model.joblib`, `.safetensors`, `.gguf`, `.onnx`, `.pt`, `.pth` or `.bin` model artifact. Historical surrogate descriptions in [MODEL_PROVENANCE.json](https://huggingface.co/SZLHOLDINGS/szl-formulas/blob/5e4519bb648c47bc7eb4aea4ba5fe80d92570883/MODEL_PROVENANCE.json) and [TRAINING_RECEIPT.json](https://huggingface.co/SZLHOLDINGS/szl-formulas/blob/5e4519bb648c47bc7eb4aea4ba5fe80d92570883/TRAINING_RECEIPT.json) do not establish present downloadable weights. Surrogate replay is blocked by the missing artifact. Do not load executable pickle/joblib artifacts from this card mirror.\n\n## Intended use\n\nResearch and inspection of numerical formula implementations and their declared proof-status metadata. Follow each claim to the exact formal source and assumptions before citing it.\n\n## Public interface\n\nregistry_count; lambda_aggregate; LOCKED_PROVEN_FORMULA_IDS; run_governed_loop; PROOF_STATUS; proof_status; selfcheck\n\n## Usage after publication verification\n\nThe example below is source-informed and was **not executed in this card review**. Install the client and dependencies qualified by the relevant release. Loading remote kernel Python is code execution. Review the exact package and use the immutable **kernel-package** revision from verified publication evidence. Do not substitute the model-mirror SHA or GitHub source SHA.\n\n```python\nimport os\nimport re\nfrom kernels import get_kernel\n\nrevision = os.environ.get(\"SZL_VERIFIED_KERNEL_REVISION\", \"\")\nif re.fullmatch(r\"[0-9a-f]{40}\", revision) is None:\n    raise ValueError(\"Set the kernel revision from verified publication evidence\")\n\nkernel = get_kernel(\n    \"SZLHOLDINGS/szl-formulas\", revision=revision, trust_remote_code=True\n)\nprint(kernel.registry_count())\nprint(sorted(kernel.LOCKED_PROVEN_FORMULA_IDS))\nprint(kernel.lambda_status())\n# Counts and labels do not prove a registry-to-formal-theorem mapping.\n```\n\nThe revision-format check is input validation only. It does not verify signatures, provenance, dependencies or runtime compatibility. A self-check exercises its programmed assertions; it is not product qualification.\n\n## Evidence and evaluation limits\n\n[BENCH.laptop-blackwell.json](https://huggingface.co/SZLHOLDINGS/szl-formulas/blob/5e4519bb648c47bc7eb4aea4ba5fe80d92570883/BENCH.laptop-blackwell.json), [TRAINING_RECEIPT.json](https://huggingface.co/SZLHOLDINGS/szl-formulas/blob/5e4519bb648c47bc7eb4aea4ba5fe80d92570883/TRAINING_RECEIPT.json), and [PROMOTION_READINESS_AUDIT.json](https://huggingface.co/SZLHOLDINGS/szl-formulas/blob/5e4519bb648c47bc7eb4aea4ba5fe80d92570883/PROMOTION_READINESS_AUDIT.json) retain owner-produced historical records. Each result applies only to its stated artifact, inputs, environment and date. This review did not rerun those tests, import the kernel, verify signatures, download weights, or benchmark throughput, energy or end-to-end behavior. Historical surrogate fidelity must not be presented as current kernel quality or current model availability.\n\n## Limitations\n\nThe eight F-identifiers are a separate canonical set. A mapping from those identifiers to the 21 registry function names is not established, so this is not a claim that eight of these 21 implementations are proved. A PROOF_STATUS label is a declaration at its stated scope, not verification of this Python implementation. The Lambda aggregate remains advisory and uniqueness remains an open conjecture. The package does not establish CUDA acceleration, model accuracy, or safety.\n\nLambda uniqueness remains Conjecture 1, open and advisory. Receipt consistency, signatures and proof labels do not establish model accuracy, system safety, or certification. Preserve missing, failed, historical, and unverified states in downstream displays.\n\n## License\n\nThe reviewed [LICENSE](https://huggingface.co/SZLHOLDINGS/szl-formulas/blob/5e4519bb648c47bc7eb4aea4ba5fe80d92570883/LICENSE) contains the Apache License 2.0 text, matching the card declaration. This observation does not independently establish rights to every artifact, training-data permission, or downstream-use clearance. Preserve upstream notices and check dependency licenses separately.\n\n## Citation and verification\n\nCite the exact artifact URL, revision, evidence file, date, and test scope relevant to the claim. Prefer immutable links above over branch links or a live status badge. Report an evidence gap as an evidence gap.\n",
+      "replaces_sha": "937c8460ed1a77bb817be41cd8a1c39369ffb8bd"
+    }
+  ],
   "additions": [
     {
       "id": "SZLHOLDINGS/szl-science-forum-corpus",
@@ -58,7 +155,7 @@
       },
       "url": "https://huggingface.co/datasets/SZLHOLDINGS/szl-science-forum-corpus",
       "public_api_url": "https://huggingface.co/api/datasets/SZLHOLDINGS/szl-science-forum-corpus",
-      "observed_at_utc": "2026-10-03T00:16:14.419683+00:00",
+      "observed_at_utc": "2026-10-03T00:33:34.660537+00:00",
       "readme": "---\nlicense: apache-2.0\nlanguage:\n  - en\npretty_name: SZL Science Forum Insight Index (operator-authored pilot)\ntags:\n  - provenance\n  - science-workflows\n  - metadata-only\n---\n\n# Dataset card: operator-authored pilot\n\nThis is a **one-topic, metadata-and-original-summary** pilot from the SZL operator's own [Claude Science Product Feedback topic](https://ai4science.discourse.group/t/three-testable-science-skills-and-provenance-aware-github-imports/426). It contains no copied forum post body, private message, user profile, or third-party member text. It is not a full forum scrape, representative sample, model-training dataset, or scientific benchmark.\n\n`sources.public.jsonl` identifies the operator's topic and records four manually assigned candidate needs. `needs.json` counts independent admitted topics, which is one here. `hypotheses.json` lists proposed experiments with their evidence state. `graph.json` links the source, needs, and hypotheses. `second_brain.candidates.jsonl` has a shape compatible with Second Brain corpus admission but has not been admitted to Second Brain or Anatomy. `manifest.json` fixes the build date and hashes every generated file.\n\nThe Apache-2.0 license covers original SZL annotations and code only. It grants no rights to linked forum posts or external material. Expansion requires documented access, author/operator reuse permission, privacy review, and an exact source manifest. Model training is explicitly unauthorized in the manifest.\n\nSource and methodology: [GitHub project](https://github.com/szl-holdings/szl-science-forum-corpus), [acquisition gate](https://github.com/szl-holdings/szl-science-forum-corpus/blob/main/docs/ACQUISITION_AND_RIGHTS.md), [research protocol](https://github.com/szl-holdings/szl-science-forum-corpus/blob/main/docs/RESEARCH_PROTOCOL.md).\n"
     },
     {
@@ -120,13 +217,14 @@
       },
       "url": "https://huggingface.co/spaces/SZLHOLDINGS/README",
       "public_api_url": "https://huggingface.co/api/spaces/SZLHOLDINGS/README",
-      "observed_at_utc": "2026-10-03T00:16:14.419683+00:00",
+      "observed_at_utc": "2026-10-03T00:33:34.660537+00:00",
       "readme": "---\ntitle: SZL — Governed AI Command Fabric\nemoji: 🛡️\ncolorFrom: gray\ncolorTo: gray\nsdk: static\nshort_description: Governed AI routing, kernels, and verifiable outcomes.\nthumbnail: https://huggingface.co/spaces/SZLHOLDINGS/README/resolve/main/assets/evidence-lattice-v2.webp\npinned: true\nlicense: apache-2.0\n---\n\n<!-- markdownlint-disable MD013 MD033 MD041 -->\n\n<p align=\"center\">\n  <img src=\"https://huggingface.co/spaces/SZLHOLDINGS/README/resolve/main/assets/estate-command-system.svg\"\n       alt=\"SZL governed AI command fabric\" width=\"100%\" />\n</p>\n\n# Governed AI. Inference. Command systems.\n\n[**Product**](https://a-11-oy.com) · [**Proof**](https://a11oy.net) · [**Source**](https://github.com/szl-holdings) · [**Artifacts**](https://huggingface.co/SZLHOLDINGS)\n\n## Choose a path\n\n**Understand:** A11oy. **Route:** SZL Router. **Explore:** SZL Atlas. **Build:** GitHub. **Verify:** the [trust boundary](https://github.com/szl-holdings/.github/blob/main/TRUST.md) and served [`deployment.json`](https://szlholdings-readme.static.hf.space/deployment.json).\n\n## Inference flagship\n\n<!-- SZL_LLM_ROUTER_FLAGSHIP:BEGIN -->\n## SZL LLM Router · Flagship Inference Control Plane\n\n<img src=\"https://raw.githubusercontent.com/szl-holdings/.github/main/profile/assets/hf-card-router.svg\" alt=\"SZL Router flagship\" width=\"100%\" />\n\nOpenAI-compatible `/v1/chat/completions`: owned-compute preference, explicit hosted fallback, route provenance and inspectable receipts.\n\n`szl-auto` · `szl-fast` · `szl-large` · `szl-coder`\n\n[**Launch**](https://huggingface.co/spaces/SZLHOLDINGS/llm-router-live) · [**Gateway source**](https://github.com/szl-holdings/szl-router) · [**A11oy integration**](https://a-11-oy.com/code)\n\nRuntime states: `LIVE`, `CONFIGURED_UNVERIFIED`, `OFFLINE_UNTIL_KEYED`, `UNAVAILABLE`. A running Space proves neither provider configuration nor authorization. Credentials, private addresses and topology stay private. Model output never creates execution authority.\n<!-- SZL_LLM_ROUTER_FLAGSHIP:END -->\n\n## Cyber-physical flagship: Killinchu\n\nCounter-UAS and maritime intelligence with governed decisions and DSSE Khipu receipt evidence. Public effectors remain **SIMULATED**; human authority binds engagement.\n\n[**Launch /elite**](https://szlholdings-killinchu.hf.space/elite) · [**Space**](https://huggingface.co/spaces/SZLHOLDINGS/killinchu) · [**Source**](https://github.com/szl-holdings/killinchu) · [**OSINT corpus**](https://huggingface.co/datasets/SZLHOLDINGS/killinchu-osint-corpus)\n\nInspect the Space's self-reported `/api/killinchu/v1/honest`; self-reporting is not independent qualification.\n\n## Install\n\n`pip install szl-receipts` · [manifest](https://github.com/szl-holdings/szlholdings.com/blob/main/pypi/pypi-packages.v1.json) · [listing](https://pypi.org/user/betterwithage/)\n\n## Estate map\n\nThree commercial flagships: **A11oy, Killinchu, Forge**. One inference flagship: **SZL Router**.\n\nFive public domain bodies: **Terra, Killinchu, PRISM Counsel, PURIQ Finance, LYTE**.\n\nSix internal engines: **CHAPAQ (folded into Killinchu), Lyte, Killinchu, Finance, Terra, Counsel**.\n\n**HISTORICAL estate-alignment v1:** 17 public Spaces, 45 models, 34 datasets; 16 portfolio Spaces plus 1 inventory-only Space.\n\n## Current state\n\n**21 public Spaces, 46 models, 35 datasets**, observed **2026-09-10T03:20:41Z** under anonymous public-only `hf-public-author-membership/v1`. Kernels count once as model repositories. Private assets, collections and buckets are excluded. Hub inventory is registry evidence, not availability, operational readiness, or publication policy.\n\n[**Inventory binding**](https://github.com/szl-holdings/.github/blob/main/profile/public-inventory.json) · [**Admitted source manifest**](https://github.com/szl-holdings/a11oy/blob/4c6621b17ba452d5af7aa2460462fdfbe513509f/docs/huggingface-ecosystem-manifest.json)\n\nListing **2026-10-01**: 33/50/35 Spaces/models/datasets (09-25: 23/49/35).\n\n`SZLHOLDINGS/SZLHOLDINGS` is **HISTORICAL**. Λ uniqueness remains **Conjecture 1 — open**. HTTP 200 is not a production certificate.\n\n<img src=\"https://huggingface.co/spaces/SZLHOLDINGS/README/resolve/main/assets/evidence-lattice-v2.webp\" alt=\"A bounded signal path entering a verification lattice\" width=\"100%\" />\n\n## Reproduce and verify\n\n```bash\npreview_dir=\"$(mktemp -d)\"\npython .github/scripts/hf_static_space_deploy.py \\\n  --repo-root . \\\n  --manifest huggingface/org-card.manifest.json \\\n  --source-sha \"$(git rev-parse HEAD)\" \\\n  --materialize \"$preview_dir\"\npython -m http.server 8000 --directory \"$preview_dir\"\n```\n"
     }
   ],
   "limitations": [
     "Exact public repository API reads; no private Hugging Face inventory is included.",
     "README text and file names were observed, not executed or evaluated.",
+    "The szl-formulas model-type entry is software; this overlay updates its public Hub revision after governed mirror publication.",
     "SZLHOLDINGS/README is an organization-card Space, not a product runtime."
   ]
 }
