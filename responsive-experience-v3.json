@@ -26,6 +26,11 @@
     },
     {
       "mode": "STATIC",
+      "path": "estate/index.html",
+      "result": "bound"
+    },
+    {
+      "mode": "STATIC",
       "path": "frontier/index.html",
       "result": "bound"
     },
