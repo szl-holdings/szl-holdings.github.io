@@ -44,6 +44,14 @@ jobs:
       - name: Check frontier public source and privacy boundary
         run: python3 tests/test_frontier_public_assets.py
 
+      - name: Set up Node for offline estate filter contract
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "24"
+
+      - name: Check public estate snapshot and local search
+        run: python3 -m unittest discover -s tests -p test_estate_public_snapshot.py -v
+
       - name: Check public truth and accessibility contract
         run: |
           python3 - <<'PY'
