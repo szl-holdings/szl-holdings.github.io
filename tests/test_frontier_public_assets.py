@@ -47,14 +47,15 @@ def main() -> None:
     require(receipt.get("github_owner") == "szl-holdings", "wrong GitHub owner")
     require(receipt.get("hf_owner") == "SZLHOLDINGS", "wrong Hub owner")
     require(receipt.get("github_public_repositories") == 127, "GitHub snapshot count changed")
-    require(receipt.get("hf_public_types") == {"model": 46, "dataset": 36, "space": 34},
+    require(receipt.get("hf_public_repositories") == 117, "Hub snapshot total changed")
+    require(receipt.get("hf_public_types") == {"model": 47, "dataset": 36, "space": 34},
             "Hub snapshot count changed")
     overlay_bytes = (FRONTIER / "audit-data" / "hf-public-overlay.json").read_bytes()
     overlay = json.loads(overlay_bytes)
     require(overlay.get("schema") == "szl.hf-public-overlay/v1"
             and overlay.get("owner") == "SZLHOLDINGS"
             and overlay.get("base_public_count") == 114
-            and overlay.get("observed_public_count") == 116,
+            and overlay.get("observed_public_count") == 117,
             "Hub public addition provenance changed")
     require(receipt.get("source_sha256", {}).get("hf-public-overlay.json")
             == hashlib.sha256(overlay_bytes.replace(b"\r\n", b"\n")).hexdigest(),
@@ -62,6 +63,7 @@ def main() -> None:
     require({(row.get("type"), row.get("id")) for row in overlay.get("additions", [])} == {
         ("dataset", "SZLHOLDINGS/szl-science-forum-corpus"),
         ("space", "SZLHOLDINGS/README"),
+        ("model", "SZLHOLDINGS/szl-receiptagent-qwen35-0.8b-v3-authenticated"),
     } and all(row.get("private") is False and row.get("public_only") is True
               and re.fullmatch(r"[0-9a-f]{40}", row.get("sha", ""))
               for row in overlay["additions"]),
@@ -80,11 +82,17 @@ def main() -> None:
     models = rows("models.csv")
     assets = rows("assets-inventory.csv")
     proof = rows("proof-to-code-matrix.csv")
-    require(len(math) == 39 and len(models) == 46 and len(assets) == 243,
+    require(len(math) == 39 and len(models) == 47 and len(assets) == 244,
             "CSV counts do not match the reviewed snapshot")
     formula_rows = [row for row in models if row["id"] == "SZLHOLDINGS/szl-formulas"]
     require(len(formula_rows) == 1 and formula_rows[0]["revision"] == replacements[0]["sha"],
             "model export does not use the published formula mirror revision")
+    scaffold_id = "SZLHOLDINGS/szl-receiptagent-qwen35-0.8b-v3-authenticated"
+    scaffold_rows = [row for row in models if row["id"] == scaffold_id]
+    require(len(scaffold_rows) == 1
+            and scaffold_rows[0]["artifact_class"] == "Repository scaffold"
+            and scaffold_rows[0]["promotion"] == "Promotion not established",
+            "empty model repository was presented as qualified weights")
     require(len(proof) == 21, "proof-to-code matrix must contain 21 callables")
     for name, entries, owner in (("math", math, "szl-holdings"),
                                  ("models", models, "SZLHOLDINGS")):
@@ -137,6 +145,13 @@ def main() -> None:
     require(page_assets[("HF Model", "SZLHOLDINGS/szl-formulas")]["revision"]
             == replacements[0]["sha"],
             "searchable atlas does not use the published formula mirror revision")
+    scaffold = page_assets.get(("HF Model", scaffold_id))
+    require(scaffold is not None
+            and scaffold["category"] == "Repository scaffold"
+            and scaffold["file_count"] == 1
+            and scaffold["tensor_artifact"] is False
+            and scaffold["publication_eligible"] is False,
+            "empty model repository gained an unsupported artifact or promotion claim")
     org_card = page_assets.get(("HF Space", "SZLHOLDINGS/README"))
     require(org_card is not None
             and org_card["category"] == "Organization profile card (static Space)"

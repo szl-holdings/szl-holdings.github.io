@@ -2,8 +2,8 @@
   "schema": "szl.hf-public-overlay/v1",
   "owner": "SZLHOLDINGS",
   "base_public_count": 114,
-  "observed_public_count": 116,
-  "checked_at_utc": "2026-10-03T00:33:34.660537+00:00",
+  "observed_public_count": 117,
+  "checked_at_utc": "2026-10-03T01:06:23.968464+00:00",
   "replacements": [
     {
       "id": "SZLHOLDINGS/szl-formulas",
@@ -219,6 +219,40 @@
       "public_api_url": "https://huggingface.co/api/spaces/SZLHOLDINGS/README",
       "observed_at_utc": "2026-10-03T00:33:34.660537+00:00",
       "readme": "---\ntitle: SZL — Governed AI Command Fabric\nemoji: 🛡️\ncolorFrom: gray\ncolorTo: gray\nsdk: static\nshort_description: Governed AI routing, kernels, and verifiable outcomes.\nthumbnail: https://huggingface.co/spaces/SZLHOLDINGS/README/resolve/main/assets/evidence-lattice-v2.webp\npinned: true\nlicense: apache-2.0\n---\n\n<!-- markdownlint-disable MD013 MD033 MD041 -->\n\n<p align=\"center\">\n  <img src=\"https://huggingface.co/spaces/SZLHOLDINGS/README/resolve/main/assets/estate-command-system.svg\"\n       alt=\"SZL governed AI command fabric\" width=\"100%\" />\n</p>\n\n# Governed AI. Inference. Command systems.\n\n[**Product**](https://a-11-oy.com) · [**Proof**](https://a11oy.net) · [**Source**](https://github.com/szl-holdings) · [**Artifacts**](https://huggingface.co/SZLHOLDINGS)\n\n## Choose a path\n\n**Understand:** A11oy. **Route:** SZL Router. **Explore:** SZL Atlas. **Build:** GitHub. **Verify:** the [trust boundary](https://github.com/szl-holdings/.github/blob/main/TRUST.md) and served [`deployment.json`](https://szlholdings-readme.static.hf.space/deployment.json).\n\n## Inference flagship\n\n<!-- SZL_LLM_ROUTER_FLAGSHIP:BEGIN -->\n## SZL LLM Router · Flagship Inference Control Plane\n\n<img src=\"https://raw.githubusercontent.com/szl-holdings/.github/main/profile/assets/hf-card-router.svg\" alt=\"SZL Router flagship\" width=\"100%\" />\n\nOpenAI-compatible `/v1/chat/completions`: owned-compute preference, explicit hosted fallback, route provenance and inspectable receipts.\n\n`szl-auto` · `szl-fast` · `szl-large` · `szl-coder`\n\n[**Launch**](https://huggingface.co/spaces/SZLHOLDINGS/llm-router-live) · [**Gateway source**](https://github.com/szl-holdings/szl-router) · [**A11oy integration**](https://a-11-oy.com/code)\n\nRuntime states: `LIVE`, `CONFIGURED_UNVERIFIED`, `OFFLINE_UNTIL_KEYED`, `UNAVAILABLE`. A running Space proves neither provider configuration nor authorization. Credentials, private addresses and topology stay private. Model output never creates execution authority.\n<!-- SZL_LLM_ROUTER_FLAGSHIP:END -->\n\n## Cyber-physical flagship: Killinchu\n\nCounter-UAS and maritime intelligence with governed decisions and DSSE Khipu receipt evidence. Public effectors remain **SIMULATED**; human authority binds engagement.\n\n[**Launch /elite**](https://szlholdings-killinchu.hf.space/elite) · [**Space**](https://huggingface.co/spaces/SZLHOLDINGS/killinchu) · [**Source**](https://github.com/szl-holdings/killinchu) · [**OSINT corpus**](https://huggingface.co/datasets/SZLHOLDINGS/killinchu-osint-corpus)\n\nInspect the Space's self-reported `/api/killinchu/v1/honest`; self-reporting is not independent qualification.\n\n## Install\n\n`pip install szl-receipts` · [manifest](https://github.com/szl-holdings/szlholdings.com/blob/main/pypi/pypi-packages.v1.json) · [listing](https://pypi.org/user/betterwithage/)\n\n## Estate map\n\nThree commercial flagships: **A11oy, Killinchu, Forge**. One inference flagship: **SZL Router**.\n\nFive public domain bodies: **Terra, Killinchu, PRISM Counsel, PURIQ Finance, LYTE**.\n\nSix internal engines: **CHAPAQ (folded into Killinchu), Lyte, Killinchu, Finance, Terra, Counsel**.\n\n**HISTORICAL estate-alignment v1:** 17 public Spaces, 45 models, 34 datasets; 16 portfolio Spaces plus 1 inventory-only Space.\n\n## Current state\n\n**21 public Spaces, 46 models, 35 datasets**, observed **2026-09-10T03:20:41Z** under anonymous public-only `hf-public-author-membership/v1`. Kernels count once as model repositories. Private assets, collections and buckets are excluded. Hub inventory is registry evidence, not availability, operational readiness, or publication policy.\n\n[**Inventory binding**](https://github.com/szl-holdings/.github/blob/main/profile/public-inventory.json) · [**Admitted source manifest**](https://github.com/szl-holdings/a11oy/blob/4c6621b17ba452d5af7aa2460462fdfbe513509f/docs/huggingface-ecosystem-manifest.json)\n\nListing **2026-10-01**: 33/50/35 Spaces/models/datasets (09-25: 23/49/35).\n\n`SZLHOLDINGS/SZLHOLDINGS` is **HISTORICAL**. Λ uniqueness remains **Conjecture 1 — open**. HTTP 200 is not a production certificate.\n\n<img src=\"https://huggingface.co/spaces/SZLHOLDINGS/README/resolve/main/assets/evidence-lattice-v2.webp\" alt=\"A bounded signal path entering a verification lattice\" width=\"100%\" />\n\n## Reproduce and verify\n\n```bash\npreview_dir=\"$(mktemp -d)\"\npython .github/scripts/hf_static_space_deploy.py \\\n  --repo-root . \\\n  --manifest huggingface/org-card.manifest.json \\\n  --source-sha \"$(git rev-parse HEAD)\" \\\n  --materialize \"$preview_dir\"\npython -m http.server 8000 --directory \"$preview_dir\"\n```\n"
+    },
+    {
+      "id": "SZLHOLDINGS/szl-receiptagent-qwen35-0.8b-v3-authenticated",
+      "type": "model",
+      "owner": "SZLHOLDINGS",
+      "private": false,
+      "public_only": true,
+      "sha": "af86a187f507a5423f5236c7cf77cf48ca67d077",
+      "downloads": 0,
+      "likes": 0,
+      "tags": [
+        "region:us"
+      ],
+      "pipeline_tag": null,
+      "library_name": null,
+      "last_modified": "2026-10-03T00:12:14Z",
+      "gated": false,
+      "card": null,
+      "files": [
+        ".gitattributes"
+      ],
+      "is_kernel": false,
+      "has_weight_files": false,
+      "numeric_archives": [],
+      "sdk": null,
+      "runtime": {
+        "stage": "UNKNOWN",
+        "reason": "public model repository metadata only; serving not probed"
+      },
+      "url": "https://huggingface.co/SZLHOLDINGS/szl-receiptagent-qwen35-0.8b-v3-authenticated",
+      "public_api_url": "https://huggingface.co/api/models/SZLHOLDINGS/szl-receiptagent-qwen35-0.8b-v3-authenticated",
+      "observed_at_utc": "2026-10-03T01:06:23.968464+00:00",
+      "readme": null,
+      "artifact_observation": "PINNED_TREE_ONLY_NO_MODEL_FILES"
     }
   ],
   "limitations": [

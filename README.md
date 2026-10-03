@@ -29,9 +29,9 @@ health.
 |---|---|
 | [`index.html`](./index.html) | Static company, investor, portfolio, and developer landing |
 | [`products/index.html`](./products/index.html) | Source-declared product catalog; not live health |
-| [`frontier/index.html`](./frontier/index.html) | Dated public math and model atlas: 39 selected software projects and all 46 public Hub model repositories in the captured snapshot |
-| [`frontier/showcase-public.html`](./frontier/showcase-public.html) | Searchable 243-asset public organization inventory: 127 GitHub repositories, 46 Hub model-type repositories, 36 datasets, and 34 Spaces; private assets are excluded |
-| [`frontier/audit-data/hf-public-overlay.json`](./frontier/audit-data/hf-public-overlay.json) | Revision-pinned public Hub additions and `szl-formulas` software mirror refresh checked after the base census; `SZLHOLDINGS/README` is an organization card represented by a static Space |
+| [`frontier/index.html`](./frontier/index.html) | Dated public math and model atlas: 39 selected software projects and all 47 public Hub model repositories in the captured snapshot |
+| [`frontier/showcase-public.html`](./frontier/showcase-public.html) | Searchable 244-asset public organization inventory: 127 GitHub repositories, 47 Hub model-type repositories, 36 datasets, and 34 Spaces; private assets are excluded |
+| [`frontier/audit-data/hf-public-overlay.json`](./frontier/audit-data/hf-public-overlay.json) | Revision-pinned public Hub additions and `szl-formulas` software mirror refresh checked after the base census; the new ReceiptAgent ID is labeled as a one-file repository scaffold, and `SZLHOLDINGS/README` is an organization card represented by a static Space |
 | [`frontier/proof-to-code-matrix.csv`](./frontier/proof-to-code-matrix.csv) | Revision-pinned 21-callable formula inventory; proof-to-code mappings remain unverified |
 | [`frontier/build_proof_code_matrix.py`](./frontier/build_proof_code_matrix.py) | Source-only matrix rebuild script; requires clean formula and Lean checkouts at the recorded SHAs |
 | [`styles.css`](./styles.css) | Site layout on the KANCHAY light marketing surface; no runtime CDN, no webfonts |
