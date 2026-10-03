@@ -75,8 +75,20 @@ def main() -> None:
             and replacements[0].get("private") is False
             and replacements[0].get("is_kernel") is True
             and replacements[0].get("replaces_sha") == "937c8460ed1a77bb817be41cd8a1c39369ffb8bd"
-            and replacements[0].get("sha") == "355695fe22ec9361283cf19790166cf0d2093bcd",
+            and replacements[0].get("sha") == "d3f2dbbb7c59bef13cf1b755edf487bfb2960653",
             "formula software mirror revision changed without review")
+    binding = replacements[0].get("publication_binding", {})
+    require(binding.get("source_repository") == "szl-holdings/szl-formulas"
+            and binding.get("source_revision") == "a3f9dcab6e3564ce384bd3c095f64cc2121059f9"
+            and binding.get("model_revision") == replacements[0]["sha"]
+            and binding.get("previous_published_overlay_revision")
+            == "355695fe22ec9361283cf19790166cf0d2093bcd"
+            and binding.get("kernel_revision") == "04082bd2f7ca43ce7c00d47069cb5a25d662116c"
+            and binding.get("binding_sha256")
+            == "35ccd96b50d2547ec462d596d13cc27a3010e60e85633ff4365be1f29226b18f"
+            and binding.get("managed_file_hashes_matched") == 32
+            and binding.get("managed_file_hashes_checked") == 32,
+            "formula mirror lacks the exact public source and kernel binding receipt")
 
     math = rows("math-software.csv")
     models = rows("models.csv")
