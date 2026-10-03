@@ -16,6 +16,7 @@ PUBLIC_FILES = {
     "index.html", "showcase-public.html", "math-software.csv", "models.csv",
     "assets-inventory.csv", "PROOF_TO_CODE.md", "proof-to-code-matrix.csv",
     "build_proof_code_matrix.py", "audit-data/public-source-receipt.json",
+    "audit-data/hf-public-overlay.json",
 }
 
 
@@ -46,14 +47,31 @@ def main() -> None:
     require(receipt.get("github_owner") == "szl-holdings", "wrong GitHub owner")
     require(receipt.get("hf_owner") == "SZLHOLDINGS", "wrong Hub owner")
     require(receipt.get("github_public_repositories") == 127, "GitHub snapshot count changed")
-    require(receipt.get("hf_public_types") == {"model": 46, "dataset": 35, "space": 33},
+    require(receipt.get("hf_public_types") == {"model": 46, "dataset": 36, "space": 34},
             "Hub snapshot count changed")
+    overlay_bytes = (FRONTIER / "audit-data" / "hf-public-overlay.json").read_bytes()
+    overlay = json.loads(overlay_bytes)
+    require(overlay.get("schema") == "szl.hf-public-overlay/v1"
+            and overlay.get("owner") == "SZLHOLDINGS"
+            and overlay.get("base_public_count") == 114
+            and overlay.get("observed_public_count") == 116,
+            "Hub public addition provenance changed")
+    require(receipt.get("source_sha256", {}).get("hf-public-overlay.json")
+            == hashlib.sha256(overlay_bytes.replace(b"\r\n", b"\n")).hexdigest(),
+            "Hub public additions do not match the source receipt")
+    require({(row.get("type"), row.get("id")) for row in overlay.get("additions", [])} == {
+        ("dataset", "SZLHOLDINGS/szl-science-forum-corpus"),
+        ("space", "SZLHOLDINGS/README"),
+    } and all(row.get("private") is False and row.get("public_only") is True
+              and re.fullmatch(r"[0-9a-f]{40}", row.get("sha", ""))
+              for row in overlay["additions"]),
+            "Hub additions escaped the reviewed public, pinned scope")
 
     math = rows("math-software.csv")
     models = rows("models.csv")
     assets = rows("assets-inventory.csv")
     proof = rows("proof-to-code-matrix.csv")
-    require(len(math) == 39 and len(models) == 46 and len(assets) == 241,
+    require(len(math) == 39 and len(models) == 46 and len(assets) == 243,
             "CSV counts do not match the reviewed snapshot")
     require(len(proof) == 21, "proof-to-code matrix must contain 21 callables")
     for name, entries, owner in (("math", math, "szl-holdings"),
@@ -97,6 +115,11 @@ def main() -> None:
     page_assets = {(row["kind"], row["id"]): row for row in full["assets"]}
     require(len(csv_assets) == len(assets) and set(csv_assets) == set(page_assets),
             "downloadable inventory differs from embedded public assets")
+    org_card = page_assets.get(("HF Space", "SZLHOLDINGS/README"))
+    require(org_card is not None
+            and org_card["category"] == "Organization profile card (static Space)"
+            and org_card["status"] == "Public source observed; product runtime not probed",
+            "organization profile card was presented as a product runtime")
     require(all(csv_assets[key]["status"] == page_assets[key]["status"]
                 and csv_assets[key]["revision"] == page_assets[key]["revision"]
                 for key in page_assets), "downloadable inventory status or revision differs from page")
