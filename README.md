@@ -58,6 +58,8 @@ python3 -m http.server 8000
 
 The frontier bundle includes a [public source receipt](./frontier/audit-data/public-source-receipt.json) and a separate [proof-to-code review](./frontier/PROOF_TO_CODE.md). It shows repository metadata and reported source status; it does not claim model qualification, deployment, or a proof that Python implementations refine Lean statements. The public boundary is checked by `python3 tests/test_frontier_public_assets.py` in the link workflow.
 
+The `szl-formulas` software entry now pins the public [model mirror](https://huggingface.co/SZLHOLDINGS/szl-formulas/tree/d3f2dbbb7c59bef13cf1b755edf487bfb2960653) at `d3f2dbbb7c59bef13cf1b755edf487bfb2960653` and the separate [kernel package](https://huggingface.co/kernels/SZLHOLDINGS/szl-formulas/tree/04082bd2f7ca43ce7c00d47069cb5a25d662116c) at `04082bd2f7ca43ce7c00d47069cb5a25d662116c`. Their byte-identical public source bindings name [GitHub source `a3f9dcab6e3564ce384bd3c095f64cc2121059f9`](https://github.com/szl-holdings/szl-formulas/tree/a3f9dcab6e3564ce384bd3c095f64cc2121059f9); all 32 managed-file hash readbacks matched the bindings. This establishes the observed mirror bytes, not runtime behavior, scientific validity, or a proof-to-code refinement. The proof-to-code review remains pinned to its separately inspected source revision.
+
 ## Related
 
 - **Company and portfolio:** [holdings.a-11-oy.com](https://holdings.a-11-oy.com)

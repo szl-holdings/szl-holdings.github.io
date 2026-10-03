@@ -3,7 +3,7 @@
   "owner": "SZLHOLDINGS",
   "base_public_count": 114,
   "observed_public_count": 117,
-  "checked_at_utc": "2026-10-03T01:06:23.968464+00:00",
+  "checked_at_utc": "2026-10-03T01:33:32.421240+00:00",
   "replacements": [
     {
       "id": "SZLHOLDINGS/szl-formulas",
@@ -11,7 +11,7 @@
       "owner": "SZLHOLDINGS",
       "private": false,
       "public_only": true,
-      "sha": "355695fe22ec9361283cf19790166cf0d2093bcd",
+      "sha": "d3f2dbbb7c59bef13cf1b755edf487bfb2960653",
       "downloads": 0,
       "likes": 0,
       "tags": [
@@ -28,7 +28,7 @@
       ],
       "pipeline_tag": null,
       "library_name": "kernels",
-      "last_modified": "2026-10-02T23:52:39.000Z",
+      "last_modified": "2026-10-03T01:25:26.000Z",
       "gated": false,
       "card": {
         "library_name": "kernels",
@@ -96,9 +96,21 @@
       },
       "url": "https://huggingface.co/SZLHOLDINGS/szl-formulas",
       "public_api_url": "https://huggingface.co/api/models/SZLHOLDINGS/szl-formulas",
-      "observed_at_utc": "2026-10-03T00:33:34.660537+00:00",
+      "observed_at_utc": "2026-10-03T01:33:32.421240+00:00",
       "readme": "---\nlibrary_name: kernels\nlicense: apache-2.0\ntags:\n- kernel\n- governance\n- formulas\n- proof-status\n- lean4\n- lambda-aggregate\n- doi:10.5281/zenodo.19944926\nszl-review:\n  artifact_class: SOFTWARE_KERNEL\n  maturity: SOFTWARE_LIMITED\n  trained_weights_present: false\n  evaluation: HISTORICAL_RECORDS_NOT_RERUN\n  source_mirror_parity: NOT_VERIFIED_THIS_REVIEW\n  reviewed_at: \"2026-09-30\"\n---\n\n<p align=\"center\"><img src=\"https://raw.githubusercontent.com/szl-holdings/szl-forge/main/szl-formulas/card/holo-banner.svg\" alt=\"szl-formulas software provenance illustration\" width=\"100%\"/></p>\n\n# szl-formulas\n\n**Formula implementations with their declared proof scope intact**\n\n**Software kernel · limited maturity · Apache-2.0 declared · no trained weights in the reviewed tree**\n\nA Python formula registry and composition package. The reviewed Hub package declares 21 registry entries and separately preserves eight named canonical proof identifiers.\n\n## Artifact and source identity\n\n- Model-type card mirror: [reviewed tree](https://huggingface.co/SZLHOLDINGS/szl-formulas/tree/5e4519bb648c47bc7eb4aea4ba5fe80d92570883), revision `5e4519bb648c47bc7eb4aea4ba5fe80d92570883`\n- First-class kernel package: [reviewed tree](https://huggingface.co/kernels/SZLHOLDINGS/szl-formulas/tree/636339753ea625bd27fd35a992699dba635c1cbb), revision `636339753ea625bd27fd35a992699dba635c1cbb`\n- Declared canonical GitHub source: [observed source tree](https://github.com/szl-holdings/szl-formulas/tree/65c800b59249f27559de575bc66f5054fa585fa5), revision `65c800b59249f27559de575bc66f5054fa585fa5`\n- Source paths: `torch-ext/szl_formulas/` and `build/torch-universal/szl_formulas/` in the canonical repository\n- Inspection date: 2026-09-30 UTC\n\nThese are distinct repository revisions. The source repository is reachable; this review does not establish byte-for-byte parity, a reproducible build, approved publication, or the identity of a deployed process. Use the release's source binding and publication receipt to establish that chain.\n\nThe reviewed mirror contains Python source, build metadata and historical evidence records. Its listed tree contains no `model.joblib`, `.safetensors`, `.gguf`, `.onnx`, `.pt`, `.pth` or `.bin` model artifact. Historical surrogate descriptions in [MODEL_PROVENANCE.json](https://huggingface.co/SZLHOLDINGS/szl-formulas/blob/5e4519bb648c47bc7eb4aea4ba5fe80d92570883/MODEL_PROVENANCE.json) and [TRAINING_RECEIPT.json](https://huggingface.co/SZLHOLDINGS/szl-formulas/blob/5e4519bb648c47bc7eb4aea4ba5fe80d92570883/TRAINING_RECEIPT.json) do not establish present downloadable weights. Surrogate replay is blocked by the missing artifact. Do not load executable pickle/joblib artifacts from this card mirror.\n\n## Intended use\n\nResearch and inspection of numerical formula implementations and their declared proof-status metadata. Follow each claim to the exact formal source and assumptions before citing it.\n\n## Public interface\n\nregistry_count; lambda_aggregate; LOCKED_PROVEN_FORMULA_IDS; run_governed_loop; PROOF_STATUS; proof_status; selfcheck\n\n## Usage after publication verification\n\nThe example below is source-informed and was **not executed in this card review**. Install the client and dependencies qualified by the relevant release. Loading remote kernel Python is code execution. Review the exact package and use the immutable **kernel-package** revision from verified publication evidence. Do not substitute the model-mirror SHA or GitHub source SHA.\n\n```python\nimport os\nimport re\nfrom kernels import get_kernel\n\nrevision = os.environ.get(\"SZL_VERIFIED_KERNEL_REVISION\", \"\")\nif re.fullmatch(r\"[0-9a-f]{40}\", revision) is None:\n    raise ValueError(\"Set the kernel revision from verified publication evidence\")\n\nkernel = get_kernel(\n    \"SZLHOLDINGS/szl-formulas\", revision=revision, trust_remote_code=True\n)\nprint(kernel.registry_count())\nprint(sorted(kernel.LOCKED_PROVEN_FORMULA_IDS))\nprint(kernel.lambda_status())\n# Counts and labels do not prove a registry-to-formal-theorem mapping.\n```\n\nThe revision-format check is input validation only. It does not verify signatures, provenance, dependencies or runtime compatibility. A self-check exercises its programmed assertions; it is not product qualification.\n\n## Evidence and evaluation limits\n\n[BENCH.laptop-blackwell.json](https://huggingface.co/SZLHOLDINGS/szl-formulas/blob/5e4519bb648c47bc7eb4aea4ba5fe80d92570883/BENCH.laptop-blackwell.json), [TRAINING_RECEIPT.json](https://huggingface.co/SZLHOLDINGS/szl-formulas/blob/5e4519bb648c47bc7eb4aea4ba5fe80d92570883/TRAINING_RECEIPT.json), and [PROMOTION_READINESS_AUDIT.json](https://huggingface.co/SZLHOLDINGS/szl-formulas/blob/5e4519bb648c47bc7eb4aea4ba5fe80d92570883/PROMOTION_READINESS_AUDIT.json) retain owner-produced historical records. Each result applies only to its stated artifact, inputs, environment and date. This review did not rerun those tests, import the kernel, verify signatures, download weights, or benchmark throughput, energy or end-to-end behavior. Historical surrogate fidelity must not be presented as current kernel quality or current model availability.\n\n## Limitations\n\nThe eight F-identifiers are a separate canonical set. A mapping from those identifiers to the 21 registry function names is not established, so this is not a claim that eight of these 21 implementations are proved. A PROOF_STATUS label is a declaration at its stated scope, not verification of this Python implementation. The Lambda aggregate remains advisory and uniqueness remains an open conjecture. The package does not establish CUDA acceleration, model accuracy, or safety.\n\nLambda uniqueness remains Conjecture 1, open and advisory. Receipt consistency, signatures and proof labels do not establish model accuracy, system safety, or certification. Preserve missing, failed, historical, and unverified states in downstream displays.\n\n## License\n\nThe reviewed [LICENSE](https://huggingface.co/SZLHOLDINGS/szl-formulas/blob/5e4519bb648c47bc7eb4aea4ba5fe80d92570883/LICENSE) contains the Apache License 2.0 text, matching the card declaration. This observation does not independently establish rights to every artifact, training-data permission, or downstream-use clearance. Preserve upstream notices and check dependency licenses separately.\n\n## Citation and verification\n\nCite the exact artifact URL, revision, evidence file, date, and test scope relevant to the claim. Prefer immutable links above over branch links or a live status badge. Report an evidence gap as an evidence gap.\n",
-      "replaces_sha": "937c8460ed1a77bb817be41cd8a1c39369ffb8bd"
+      "replaces_sha": "937c8460ed1a77bb817be41cd8a1c39369ffb8bd",
+      "publication_binding": {
+        "source_repository": "szl-holdings/szl-formulas",
+        "source_revision": "a3f9dcab6e3564ce384bd3c095f64cc2121059f9",
+        "model_revision": "d3f2dbbb7c59bef13cf1b755edf487bfb2960653",
+        "kernel_revision": "04082bd2f7ca43ce7c00d47069cb5a25d662116c",
+        "binding_sha256": "35ccd96b50d2547ec462d596d13cc27a3010e60e85633ff4365be1f29226b18f",
+        "managed_file_hashes_checked": 32,
+        "managed_file_hashes_matched": 32,
+        "checked_at_utc": "2026-10-03T01:33:32.421240+00:00",
+        "evidence_limit": "Public exact-revision binding and managed bytes matched; runtime and scientific claims were not replayed.",
+        "previous_published_overlay_revision": "355695fe22ec9361283cf19790166cf0d2093bcd"
+      }
     }
   ],
   "additions": [

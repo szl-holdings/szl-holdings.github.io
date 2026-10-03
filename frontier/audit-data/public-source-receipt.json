@@ -11,7 +11,7 @@
     "space": 34
   },
   "hf_collected_at_utc": "2026-10-02T21:26:56.885095+00:00",
-  "hf_public_overlay_checked_at_utc": "2026-10-03T01:06:23.968464+00:00",
+  "hf_public_overlay_checked_at_utc": "2026-10-03T01:33:32.421240+00:00",
   "hf_authentication": "explicitly_disabled",
   "github_late_additions_checked_at_utc": "2026-10-02T21:51:51.821846+00:00",
   "source_sha256": {
@@ -19,7 +19,7 @@
     "huggingface-repositories.json": "2d431a03533d26abbcdbb9b5339c78e24926eb2be33779c644dd6132c3c970b3",
     "huggingface-public-only.json": "08aa8a85499226fad4b127018f67143a308b54b7bbcce4e365674d38689c21ab",
     "github-public-overlay.json": "2a6e3299c674b88b77988a649fd3297ec04fec439994748c2445086939f4d6e4",
-    "hf-public-overlay.json": "e81c4cfc33dba57adc70a02a2e012554039c97bafb0d9a0e78a4174ee90770cc"
+    "hf-public-overlay.json": "f86622fde80692513e583fc9e0085416762394030426add451e966e6a8e3a5c3"
   },
   "limitations": [
     "Only records explicitly marked private=false are included.",
