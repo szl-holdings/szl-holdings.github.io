@@ -29,6 +29,8 @@ health.
 |---|---|
 | [`index.html`](./index.html) | Static company, investor, portfolio, and developer landing |
 | [`products/index.html`](./products/index.html) | Source-declared product catalog; not live health |
+| [`estate/index.html`](./estate/index.html) | Searchable 5 October 2026 public snapshot: 127 GitHub repositories, 47 model repositories, 37 datasets and 34 Spaces; exact source links and declared gates |
+| [`scripts/build_estate_public_snapshot.py`](./scripts/build_estate_public_snapshot.py) | Offline rebuild from an explicit completed audit and UTC collection timestamp; excludes private or unknown-privacy rows and rejects missing source revisions |
 | [`frontier/index.html`](./frontier/index.html) | Dated public math and model atlas: 39 selected software projects and all 47 public Hub model repositories in the captured snapshot |
 | [`frontier/showcase-public.html`](./frontier/showcase-public.html) | Searchable 244-asset public organization inventory: 127 GitHub repositories, 47 Hub model-type repositories, 36 datasets, and 34 Spaces; private assets are excluded |
 | [`frontier/audit-data/hf-public-overlay.json`](./frontier/audit-data/hf-public-overlay.json) | Revision-pinned public Hub additions and `szl-formulas` software mirror refresh checked after the base census; the new ReceiptAgent ID is labeled as a one-file repository scaffold, and `SZLHOLDINGS/README` is an organization card represented by a static Space |
@@ -59,6 +61,66 @@ python3 -m http.server 8000
 The frontier bundle includes a [public source receipt](./frontier/audit-data/public-source-receipt.json) and a separate [proof-to-code review](./frontier/PROOF_TO_CODE.md). It shows repository metadata and reported source status; it does not claim model qualification, deployment, or a proof that Python implementations refine Lean statements. The public boundary is checked by `python3 tests/test_frontier_public_assets.py` in the link workflow.
 
 The `szl-formulas` software entry now pins the public [model mirror](https://huggingface.co/SZLHOLDINGS/szl-formulas/tree/d3f2dbbb7c59bef13cf1b755edf487bfb2960653) at `d3f2dbbb7c59bef13cf1b755edf487bfb2960653` and the separate [kernel package](https://huggingface.co/kernels/SZLHOLDINGS/szl-formulas/tree/04082bd2f7ca43ce7c00d47069cb5a25d662116c) at `04082bd2f7ca43ce7c00d47069cb5a25d662116c`. Their byte-identical public source bindings name [GitHub source `a3f9dcab6e3564ce384bd3c095f64cc2121059f9`](https://github.com/szl-holdings/szl-formulas/tree/a3f9dcab6e3564ce384bd3c095f64cc2121059f9); all 32 managed-file hash readbacks matched the bindings. This establishes the observed mirror bytes, not runtime behavior, scientific validity, or a proof-to-code refinement. The proof-to-code review remains pinned to its separately inspected source revision.
+
+## Refreshing the public estate snapshot
+
+Keep the raw audit outside this publication repository. The generator accepts only
+literal `private: false` records in `szl-holdings` and `SZLHOLDINGS`, constructs
+canonical links at exact revisions, and retains bounded CI and model promotion
+limits. A missing public revision stops generation. The current snapshot was
+generated from the completed 5 October audit at `2026-10-05T12:43:48.724254+00:00`.
+The earlier `/frontier/` inventory retains its own separately recorded scope.
+
+The CLI requires a private `public-source-binding.json` at the **audit root**,
+beside `audit-receipt.json`, `execution-source-binding.json`, `execution/`,
+`github-request-ledger.jsonl` and `audit-data/`. It accepts the root or its
+`audit-data/` directory. The binding contract is:
+
+- Schema `szl.estate-audit-source-binding/v1`, literal `signed: false`, canonical
+  `scope` (`github: ["szl-holdings"]`, `huggingface: ["SZLHOLDINGS"]`).
+- `observed_at` must exactly equal `estate-summary.json.generated_at` and
+  `audit-receipt.json.generated_at`. The receipt must bind the summary SHA-256.
+  A future date is refused. Optional `--observed-at` asserts that exact value;
+  it cannot override the collected date.
+- `input_sha256` maps normalized audit-root-relative paths to exact byte hashes:
+  both repository lists, every GitHub source report (including private reports),
+  the summary, audit receipt, execution source binding, request ledger, and all
+  eight execution files named by the collector source binding. The generator
+  hashes each input once and parses those same cached bytes.
+- `counts.raw` and `counts.public` contain all four repository-kind counts.
+  They must match the census lists; raw counts must also match the receipt and
+  summary coverage, including full GitHub inspection coverage.
+- `completion.collector` requires `completed: true`, `exit_code: 0`,
+  `evidence_class: "DECLARED"` and `command: "estate_agent.py all --output ."`.
+  `completion.github` requires complete enumeration and inspection plus
+  `pagination` (`per_page: 100`, terminal page, terminal short-page row count).
+  The bound ledger must record every successful page in order before the audit
+  date. `completion.huggingface` requires complete enumeration and
+  `iterators_exhausted: ["model", "dataset", "space"]`.
+
+Create the completion declaration only from an observed successful collector
+exit and terminal pagination/iterator exhaustion, never from counts alone. The
+binding is unsigned local evidence, not authentication or an independent witness.
+Hash/count validation is MEASURED locally; completion remains an unsigned
+DECLARED observation. Keep the binding and raw audit private. The public snapshot
+retains its closed field allowlist and includes neither private identifiers nor
+private counts or paths. Provider repository/runtime metadata is DECLARED; the
+published owner report of Khipu's 2/6 abstention remains REPORTED and BLOCKED.
+
+```bash
+python3 scripts/build_estate_public_snapshot.py --audit-dir /path/to/completed-audit
+python3 scripts/bind_browser_policy.py --check
+python3 -m unittest discover -s tests -p 'test*estate*py'
+```
+
+The dated snapshot test pins its timestamp and public counts. Update those
+assertions with the regenerated snapshot, then keep the homepage count consistent.
+The generator's independent tests cover privacy exclusion, invalid revision
+rejection, incomplete/hash-mismatched bindings, date conflicts, future dates,
+untrusted HTML escaping and exact-source CI failures. Its code preserves
+the existing page styles, scripts and browser policy. See the
+[source validation receipt](./estate/snapshot-receipt.json) for this refresh's local
+checks; publication and live readback require separate evidence.
 
 ## Browser policy
 
