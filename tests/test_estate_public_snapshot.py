@@ -22,7 +22,7 @@ PAGE = ROOT / "estate" / "index.html"
 EXPECTED_COUNTS = {
     "GitHub": 127,
     "HF Model": 47,
-    "HF Dataset": 36,
+    "HF Dataset": 37,
     "HF Space": 34,
 }
 ASSET_FIELDS = {
@@ -68,12 +68,12 @@ class PublicSnapshotTests(unittest.TestCase):
             "schema", "observed_at", "counts", "limitations", "assets",
         })
         self.assertEqual(data["schema"], "szl.public-estate-snapshot/v1")
-        self.assertEqual(data["observed_at"], "2026-10-03T05:19:29Z")
+        self.assertEqual(data["observed_at"], "2026-10-05T12:43:48.724254+00:00")
         self.assertEqual(data["counts"], EXPECTED_COUNTS)
-        self.assertEqual(len(data["assets"]), 244)
+        self.assertEqual(len(data["assets"]), 245)
         self.assertEqual(Counter(a["kind"] for a in data["assets"]), EXPECTED_COUNTS)
         self.assertEqual(
-            len({(a["kind"], a["id"]) for a in data["assets"]}), 244
+            len({(a["kind"], a["id"]) for a in data["assets"]}), 245
         )
         self.assertTrue(all(set(a) == ASSET_FIELDS for a in data["assets"]))
         self.assertTrue(all(a["private"] is False for a in data["assets"]))

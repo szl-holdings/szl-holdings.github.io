@@ -1,0 +1,73 @@
+{
+  "schema": "szl.public-estate-refresh-receipt/v1",
+  "evidence_class": "MEASURED",
+  "observed_at": "2026-10-05T12:43:48.724254+00:00",
+  "validated_at_utc": "2026-10-05T12:50:01.319383+00:00",
+  "source_base": "1962d66593c70dd7fcb9cff2920bb194a775d7e8",
+  "public_counts": {
+    "GitHub": 127,
+    "HF Dataset": 37,
+    "HF Model": 47,
+    "HF Space": 34
+  },
+  "public_asset_count": 245,
+  "signed": false,
+  "files": [
+    {
+      "path": "scripts/build_estate_public_snapshot.py",
+      "lf_normalized_sha256": "4e67db90474b1c29ea5eb1869f65b2e89e782965ede53157327e049ba3db7956"
+    },
+    {
+      "path": "tests/test_build_estate_public_snapshot.py",
+      "lf_normalized_sha256": "365840f315371a07451b70c8f88e93bd583fd6fc64d1b5379cc5fbcea3ac14d4"
+    },
+    {
+      "path": "tests/test_estate_public_snapshot.py",
+      "lf_normalized_sha256": "225d60e7e474fe9b68ddb0032f898941260c9e6ce1d3499aeb5b0aed6d48bf71"
+    },
+    {
+      "path": "estate/public-snapshot.json",
+      "lf_normalized_sha256": "8f77d201a3c597f9f1a37d6ac0f833c84ae21ef545e03184a58e74ffdf20e4a4"
+    },
+    {
+      "path": "estate/index.html",
+      "lf_normalized_sha256": "7467f3d978cbfa0be50f985c6d30981e71fddaf1ccea5433d109876e67ca8803"
+    },
+    {
+      "path": "index.html",
+      "lf_normalized_sha256": "1d491a02e83770b650c5c913e4676f8eddc46ae475e52ae84f19f16d84ff5895"
+    }
+  ],
+  "checks": [
+    {
+      "command": "py -3 -m unittest discover -s tests -p 'test_*.py'",
+      "exit_code": 0,
+      "tests_run": 79,
+      "passed": 78,
+      "skipped": 1,
+      "skip_reason": "Windows host does not permit symlink creation"
+    },
+    {
+      "command": "py -3 scripts/bind_browser_policy.py --check",
+      "exit_code": 0,
+      "html_documents": 11,
+      "updated": 0
+    },
+    {
+      "command": "py -3 scripts/verify_site_links.py",
+      "exit_code": 0,
+      "html_documents": 11
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "limitations": [
+    "Unsigned local validation record; GitHub CI and provider publication are separate observations.",
+    "Browser automation transport unavailable; visual browser verification NOT RUN locally. The existing hosted Chrome gate is retained.",
+    "Only explicit public organization rows are projected. Raw audit and private-derived counts remain outside this repository.",
+    "CI observations cover collected exact revisions and bounded workflow history; absent checks remain UNKNOWN.",
+    "Provider RUNTIME_ERROR is retained; this snapshot performs no runtime recovery, model inference or held-out qualification."
+  ]
+}
