@@ -6,9 +6,11 @@ data stays outside the site. Only literal private=False rows in the canonical
 organizations enter the closed public field allowlist. Every included asset
 must have an exact source SHA; missing revisions stop the complete build.
 
-Example (the timestamp must come from the completed audit):
-  py -3 scripts/build_estate_public_snapshot.py --audit-dir <audit-directory> \
-      --observed-at 2026-10-05T12:45:00Z
+The CLI requires an unsigned private public-source-binding.json at audit root.
+It verifies complete collection assertions and the hashes/counts of the source
+bytes before deriving the observation time from the bound summary and receipt.
+Example:
+  py -3 scripts/build_estate_public_snapshot.py --audit-dir <audit-directory>
 
 The existing page is the visual template. Its CSS, JavaScript and CSP are kept
 intact. Run scripts/bind_browser_policy.py --check after generation.
@@ -18,7 +20,8 @@ from __future__ import annotations
 import argparse
 import calendar
 from collections import Counter
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
+import hashlib
 import html
 import json
 from pathlib import Path
@@ -28,6 +31,17 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA = "szl.public-estate-snapshot/v1"
+BINDING_SCHEMA = "szl.estate-audit-source-binding/v1"
+SCOPE = {"github": ["szl-holdings"], "huggingface": ["SZLHOLDINGS"]}
+BASE_INPUTS = frozenset({
+    "audit-data/github-repositories.json", "audit-data/huggingface-repositories.json",
+    "audit-data/estate-summary.json", "audit-receipt.json",
+    "execution-source-binding.json", "github-request-ledger.jsonl",
+})
+EXECUTION_NAMES = frozenset({
+    "estate_agent.py", "audit_estate.py", "enrich_estate.py", "audit_controls.py",
+    "review_models.py", "review_datasets.py", "build_showcase.py", "audit_guard.py",
+})
 KINDS = ("GitHub", "HF Model", "HF Dataset", "HF Space")
 ASSET_FIELDS = frozenset({
     "id", "kind", "url", "revision", "archived", "category", "ci",
@@ -40,7 +54,7 @@ LIMITATIONS = (
     "Dated public source and provider metadata snapshot; not a live monitor.",
     "GitHub CI summaries cover the bounded latest 100 default-branch runs, grouped by workflow. Only runs matching the collected SHA count; older runs and absent workflows remain UNKNOWN.",
     "Listed model files are artifact metadata, not evidence of trained weight quality, held-out evaluation, authorization, or production readiness.",
-    "A provider revision or REPORTED RUNNING Space does not establish source/runtime parity; runtime behavior NOT RUN.",
+    "A provider revision or DECLARED RUNNING Space does not establish source/runtime parity; runtime behavior NOT RUN.",
     "Model inference, model weights and dataset rows NOT RUN in this inventory.",
     "DECLARED Khipu promotion gate remains BLOCKED: REPORTED 2/6 abstention; publication_eligible=false pending a fresh held-out gate.",
 )
@@ -71,13 +85,18 @@ def canonical_id(value: object, pattern: re.Pattern[str], owner: str) -> str | N
     return value
 
 
-def load_audit(audit_dir: Path) -> tuple[list[dict], dict[str, dict], list[dict]]:
+def load_audit(audit_dir: Path, verified_bytes: dict[str, bytes] | None = None) -> tuple[list[dict], dict[str, dict], list[dict]]:
     data_dir = audit_dir if (audit_dir / "github-repositories.json").is_file() else audit_dir / "audit-data"
+
+    def read(name: str) -> object:
+        # When bound, never reread a file after checking its hash.
+        raw = verified_bytes["audit-data/" + name] if verified_bytes is not None else (data_dir / name).read_bytes()
+        return json.loads(raw)
 
     def read_rows(name: str) -> list[dict]:
         try:
-            value = json.loads((data_dir / name).read_text(encoding="utf-8"))
-        except (OSError, json.JSONDecodeError) as error:
+            value = read(name)
+        except (OSError, KeyError, UnicodeDecodeError, json.JSONDecodeError) as error:
             raise ValueError(f"Required raw audit file unavailable or invalid: {name}") from error
         if not isinstance(value, list) or not all(isinstance(row, dict) for row in value):
             raise ValueError(f"Raw audit file must contain a list of objects: {name}")
@@ -93,16 +112,166 @@ def load_audit(audit_dir: Path) -> tuple[list[dict], dict[str, dict], list[dict]
         if name is None:
             continue
         path = data_dir / ("repo--" + name.replace("/", "--") + ".json")
-        if not path.is_file():
+        if verified_bytes is None and not path.is_file():
             continue  # build_snapshot rejects its missing source revision.
         try:
-            report = json.loads(path.read_text(encoding="utf-8"))
-        except (OSError, json.JSONDecodeError) as error:
+            report = read(path.name)
+        except (OSError, KeyError, UnicodeDecodeError, json.JSONDecodeError) as error:
             raise ValueError(f"Raw source report invalid for public asset {name}") from error
         if not isinstance(report, dict) or report.get("full_name") != name:
             raise ValueError(f"Raw source report identity mismatch for public asset {name}")
         reports[name] = report
     return github, reports, hf
+
+
+def load_bound_audit(audit_dir: Path, observed_override: str | None = None,
+                     *, now: datetime | None = None) -> tuple[list[dict], dict[str, dict], list[dict], str]:
+    """Enforce the unsigned local collection contract; this is not authentication.
+
+    Completion is a collector observation, not inferred from matching counts.
+    Source hashes and counts are independently checked locally. The private
+    binding, report paths, raw counts and collector identity are never published.
+    """
+    audit_root = audit_dir.parent if audit_dir.name == "audit-data" else audit_dir
+
+    def parse(raw: bytes, label: str) -> dict:
+        try:
+            value = json.loads(raw)
+        except (UnicodeDecodeError, json.JSONDecodeError) as error:
+            raise ValueError(f"Invalid bound audit JSON: {label}") from error
+        if not isinstance(value, dict):
+            raise ValueError(f"Bound audit object required: {label}")
+        return value
+
+    try:
+        binding = parse((audit_root / "public-source-binding.json").read_bytes(), "source binding")
+    except OSError as error:
+        raise ValueError("Completed audit requires audit-root public-source-binding.json") from error
+    if binding.get("schema") != BINDING_SCHEMA or binding.get("signed") is not False or binding.get("scope") != SCOPE:
+        raise ValueError("Unsupported unsigned source binding or canonical scope")
+    completion = binding.get("completion")
+    if not isinstance(completion, dict):
+        raise ValueError("Collector completion evidence is required")
+    collector = completion.get("collector", {})
+    gh_completion = completion.get("github", {})
+    hf_completion = completion.get("huggingface", {})
+    if not all(isinstance(value, dict) for value in (collector, gh_completion, hf_completion)):
+        raise ValueError("Invalid collector coverage evidence")
+    if (collector.get("completed") is not True or type(collector.get("exit_code")) is not int
+            or collector["exit_code"] != 0 or collector.get("evidence_class") != "DECLARED"
+            or collector.get("command") != "estate_agent.py all --output ."
+            or gh_completion.get("enumeration_complete") is not True
+            or gh_completion.get("inspection_complete") is not True
+            or hf_completion.get("enumeration_complete") is not True
+            or hf_completion.get("iterators_exhausted") != ["model", "dataset", "space"]):
+        raise ValueError("Complete collector execution, GitHub pagination and HF iterator exhaustion are required")
+    inputs = binding.get("input_sha256")
+    if not isinstance(inputs, dict) or not BASE_INPUTS.issubset(inputs):
+        raise ValueError("Source binding lacks required audit inputs")
+    cached = {}
+    for name, digest in inputs.items():
+        if (not isinstance(name, str) or not re.fullmatch(r"[A-Za-z0-9_.-]+(?:/[A-Za-z0-9_.-]+)*", name)
+                or any(part in {".", ".."} for part in name.split("/"))
+                or not isinstance(digest, str) or not re.fullmatch(r"[0-9a-f]{64}", digest)):
+            raise ValueError("Invalid relative input path or SHA-256 in source binding")
+        target = (audit_root / name).resolve()
+        if not target.is_relative_to(audit_root.resolve()):
+            raise ValueError("Bound input escapes audit root")
+        raw = target.read_bytes()
+        if hashlib.sha256(raw).hexdigest() != digest:
+            raise ValueError(f"Bound audit input SHA-256 mismatch: {name}")
+        cached[name] = raw
+    summary = parse(cached["audit-data/estate-summary.json"], "summary")
+    receipt = parse(cached["audit-receipt.json"], "receipt")
+    observed_at = summary.get("generated_at")
+    stamp = observed_datetime(observed_at)
+    if (binding.get("observed_at") != observed_at or receipt.get("generated_at") != observed_at
+            or (observed_override is not None and observed_override != observed_at)):
+        raise ValueError("Observation timestamp must exactly match bound summary and receipt")
+    if stamp > (now if now is not None else datetime.now(timezone.utc)):
+        raise ValueError("Audit observation timestamp is in the future")
+    if (receipt.get("schema") != "szl.local-estate-audit/v1" or receipt.get("signed") is not False
+            or receipt.get("source_summary_sha256") != inputs["audit-data/estate-summary.json"]):
+        raise ValueError("Unsigned audit receipt does not bind the collected summary")
+    execution = parse(cached["execution-source-binding.json"], "execution source binding")
+    if execution.get("schema") != "szl.audit-execution-source-binding/v1" or execution.get("scope") != SCOPE:
+        raise ValueError("Collector source binding scope mismatch")
+    execution_files = execution.get("files")
+    if not isinstance(execution_files, list) or not all(isinstance(row, dict) for row in execution_files):
+        raise ValueError("Collector source file bindings are required")
+    code_hashes = {row.get("name"): row.get("execution_sha256") for row in execution_files
+                   if isinstance(row.get("name"), str)}
+    if len(code_hashes) != len(execution_files) or set(code_hashes) != EXECUTION_NAMES - {"audit_guard.py"}:
+        raise ValueError("Collector source file coverage mismatch")
+    code_hashes["audit_guard.py"] = execution.get("guard_sha256")
+    if any(inputs.get("execution/" + name) != digest or "execution/" + name not in cached
+           for name, digest in code_hashes.items()):
+        raise ValueError("Collector executable bytes do not match execution source binding")
+    github, reports, hf = load_audit(audit_root, cached)
+    names = []
+    for row in github:
+        name = canonical_id(row.get("full_name"), GITHUB_ID, "szl-holdings")
+        if name is None or name in names:
+            raise ValueError("Raw GitHub census is duplicated or outside canonical scope")
+        names.append(name)
+    hf_seen = set()
+    for row in hf:
+        name = canonical_id(row.get("id"), HF_ID, "SZLHOLDINGS")
+        repo_type = row.get("type")
+        if not isinstance(repo_type, str) or repo_type not in {"model", "dataset", "space"}:
+            raise ValueError("Raw HF census has an unsupported repository type")
+        key = (repo_type, name)
+        if name is None or key in hf_seen:
+            raise ValueError("Raw HF census is duplicated or outside canonical scope")
+        hf_seen.add(key)
+    report_inputs = {"audit-data/repo--" + name.replace("/", "--") + ".json" for name in names}
+    expected_inputs = BASE_INPUTS | report_inputs | {"execution/" + name for name in EXECUTION_NAMES}
+    if set(inputs) != expected_inputs:
+        raise ValueError("Source binding does not cover exactly the complete census and collector inputs")
+    for name in names:
+        path = "audit-data/repo--" + name.replace("/", "--") + ".json"
+        if parse(cached[path], "source report").get("full_name") != name:
+            raise ValueError("Bound source report identity mismatch")
+    raw_counts = {"GitHub": len(github), **{
+        kind: sum(row["type"] == repo_type for row in hf)
+        for kind, repo_type in zip(KINDS[1:], ("model", "dataset", "space"))}}
+    public_counts = {"GitHub": sum(row.get("private") is False for row in github), **{
+        kind: sum(row["type"] == repo_type and row.get("private") is False for row in hf)
+        for kind, repo_type in zip(KINDS[1:], ("model", "dataset", "space"))}}
+    counts = binding.get("counts")
+    coverage = summary.get("coverage")
+    def exact_counts(value: object, expected: dict[str, int]) -> bool:
+        return (isinstance(value, dict) and value == expected
+                and all(type(count) is int for count in value.values()))
+
+    if (not isinstance(counts, dict) or counts.get("raw") != raw_counts
+            or not exact_counts(counts.get("raw"), raw_counts)
+            or not exact_counts(counts.get("public"), public_counts)
+            or not exact_counts(receipt.get("counts"), raw_counts)
+            or not isinstance(coverage, dict) or coverage.get("github") != len(github)
+            or coverage.get("github_inspected") != len(github) or coverage.get("hf") != len(hf)
+            or any(type(coverage.get(key)) is not int for key in ("github", "github_inspected", "hf"))):
+        raise ValueError("Bound audit counts or full inspection coverage mismatch")
+    pagination = gh_completion.get("pagination")
+    if not isinstance(pagination, dict):
+        raise ValueError("Terminal GitHub pagination observation required")
+    per_page, terminal_page, terminal_rows = (pagination.get(key) for key in ("per_page", "terminal_page", "terminal_rows"))
+    if (any(type(value) is not int for value in (per_page, terminal_page, terminal_rows))
+            or per_page != 100 or terminal_page < 1 or not 0 <= terminal_rows < per_page
+            or (terminal_page - 1) * per_page + terminal_rows != len(github)):
+        raise ValueError("GitHub census does not match observed terminal pagination")
+    try:
+        ledger = [json.loads(line) for line in cached["github-request-ledger.jsonl"].decode("utf-8-sig").splitlines() if line.strip()]
+    except (UnicodeDecodeError, json.JSONDecodeError) as error:
+        raise ValueError("Invalid bound GitHub pagination ledger") from error
+    prefix = "orgs/szl-holdings/repos?type=all&per_page=100&page="
+    pages = [row for row in ledger if isinstance(row, dict) and str(row.get("path", "")).startswith(prefix)]
+    if (len(pages) != terminal_page or any(row.get("path") != prefix + str(index)
+            or row.get("status") != 200 or type(row.get("returncode")) is not int
+            or row["returncode"] != 0 or row.get("rate_failure") is not False
+            or observed_datetime(row.get("at")) > stamp for index, row in enumerate(pages, 1))):
+        raise ValueError("Successful terminal GitHub pagination is not established by bound request ledger")
+    return github, reports, hf, observed_at
 
 
 def summarize_ci(asset_id: str, revision: str, report: dict) -> tuple[str, str]:
@@ -173,7 +342,7 @@ def provider_state(row: dict, asset_id: str) -> str:
         stage = runtime.get("stage") or "UNKNOWN"
         hardware = runtime.get("hardware")
         hardware_note = f"; {hardware}" if isinstance(hardware, str) and hardware not in {"", "None", "UNKNOWN"} else ""
-        return gate + f"REPORTED {stage}{hardware_note}; source/runtime parity UNKNOWN; runtime behavior NOT RUN"
+        return gate + f"DECLARED {stage}{hardware_note}; source/runtime parity UNKNOWN; runtime behavior NOT RUN"
     if row["type"] == "dataset":
         return gate + "UNKNOWN: dataset suitability and evaluation; rows NOT RUN"
     return gate + "UNKNOWN: artifact quality and held-out evaluation; listed files do not establish trained weights"
@@ -235,7 +404,7 @@ def build_snapshot(github: list[dict], reports: dict[str, dict], hf: list[dict],
 def render_card(asset: dict) -> str:
     escape = lambda value: html.escape(str(value), quote=True)
     search = " ".join(str(asset[key]) for key in ("id", "kind", "category", "state", "ci")).lower()
-    label = "MEASURED exact-source CI metadata:" if asset["kind"] == "GitHub" else "REPORTED provider repository metadata:"
+    label = "MEASURED exact-source CI metadata:" if asset["kind"] == "GitHub" else "DECLARED provider repository metadata:"
     archived = " · Archived source" if asset["archived"] else ""
     run = (f'  <a href="{escape(asset["ciUrl"])}" target="_blank" rel="noopener noreferrer">Observed workflow run</a>'
            if asset["ciUrl"] else "")
@@ -289,14 +458,14 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--audit-dir", type=Path, required=True,
                         help="Completed local audit directory or its audit-data/ directory")
-    parser.add_argument("--observed-at", required=True,
-                        help="Completed audit observation timestamp in ISO 8601 UTC")
+    parser.add_argument("--observed-at",
+                        help="Optional assertion; must exactly match the bound completed audit timestamp")
     parser.add_argument("--site-dir", type=Path, default=ROOT,
                         help="Site checkout with existing estate/index.html (default: this checkout)")
     args = parser.parse_args(argv)
     try:
-        github, reports, hf = load_audit(args.audit_dir)
-        snapshot = build_snapshot(github, reports, hf, args.observed_at)
+        github, reports, hf, observed_at = load_bound_audit(args.audit_dir, args.observed_at)
+        snapshot = build_snapshot(github, reports, hf, observed_at)
         page_path = args.site_dir / "estate" / "index.html"
         page = render_page(page_path.read_text(encoding="utf-8"), snapshot)
         serialized = json.dumps(snapshot, indent=2, sort_keys=True, ensure_ascii=False) + "\n"

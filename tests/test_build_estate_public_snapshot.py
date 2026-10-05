@@ -2,11 +2,17 @@
 from __future__ import annotations
 
 import importlib.util
+from contextlib import redirect_stderr, redirect_stdout
+from datetime import datetime, timezone
+import hashlib
+from html.parser import HTMLParser
+import io
 import json
 from pathlib import Path
 import re
 import tempfile
 import unittest
+from unittest.mock import patch
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -38,6 +44,29 @@ def hf_row(name="atlas", **extra):
 def report(**extra):
     return {"commit_sha": SHA, "latest_by_workflow": [],
             "workflow_history_window": 0, **extra}
+
+
+class ScriptCapture(HTMLParser):
+    """Compare parsed script elements, including mixed-case HTML tag names."""
+    def __init__(self, source):
+        super().__init__(convert_charrefs=False)
+        self.scripts = []
+        self.current = None
+        self.feed(source)
+        self.close()
+
+    def handle_starttag(self, tag, attrs):
+        if tag == "script":
+            self.current = (tuple(attrs), [])
+
+    def handle_data(self, data):
+        if self.current is not None:
+            self.current[1].append(data)
+
+    def handle_endtag(self, tag):
+        if tag == "script" and self.current is not None:
+            self.scripts.append((self.current[0], "".join(self.current[1])))
+            self.current = None
 
 
 class PublicBuilderTests(unittest.TestCase):
@@ -141,23 +170,24 @@ class PublicBuilderTests(unittest.TestCase):
         self.assertIn("2/6", result["SZL-Khipu-1.5B"]["state"])
         self.assertIn("BLOCKED", result["SZL-Khipu-1.5B"]["state"])
         self.assertIn("rows NOT RUN", result["dataset"]["state"])
-        self.assertIn("REPORTED RUNNING", result["space"]["state"])
+        self.assertIn("DECLARED RUNNING", result["space"]["state"])
         self.assertIn("source/runtime parity UNKNOWN", result["space"]["state"])
 
     def test_html_escaping_and_browser_policy_preserved(self):
-        attack = 'Python </p><script>alert("x")</script> & "quoted"'
+        attack = 'Python </p><ScRiPt>alert("x")</sCrIpT> & "quoted"'
         snapshot = self.project([github_row(language=attack)],
                                 reports={"szl-holdings/atlas": report()})
         template = (ROOT / "estate" / "index.html").read_text(encoding="utf-8")
         rendered = builder.render_page(template, snapshot)
-        self.assertNotIn('<script>alert("x")</script>', rendered)
-        self.assertIn("&lt;script&gt;", rendered)
+        self.assertNotIn('<ScRiPt>alert("x")</sCrIpT>', rendered)
+        self.assertIn("&lt;ScRiPt&gt;", rendered)
         self.assertIn("&amp;", rendered)
         self.assertIn("&quot;quoted&quot;", rendered)
         self.assertIn('datetime="' + OBSERVED + '"', rendered)
         self.assertIn("1 public assets in this snapshot", rendered)
-        self.assertEqual(re.findall(r'<script.*?</script>', rendered, re.S),
-                         re.findall(r'<script.*?</script>', template, re.S))
+        self.assertEqual(ScriptCapture(rendered).scripts, ScriptCapture(template).scripts)
+        self.assertEqual(ScriptCapture('<ScRiPt>alert("x")</sCrIpT>').scripts,
+                         [((), 'alert("x")')])
         self.assertEqual(rendered.split('</head>')[0], template.split('</head>')[0])
         self.assertNotIn("fetch(", rendered)
         self.assertNotIn("innerHTML", rendered)
@@ -177,6 +207,163 @@ class PublicBuilderTests(unittest.TestCase):
                 builder.load_audit(audit_dir)
             (data_dir / "huggingface-repositories.json").write_text("[]", encoding="utf-8")
             self.assertEqual(builder.load_audit(audit_dir), ([], {}, []))
+
+
+class BoundAuditTests(unittest.TestCase):
+    """SIMULATED collector assertions exercise the unsigned source contract."""
+    def setUp(self):
+        self.temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temporary.cleanup)
+        self.audit = Path(self.temporary.name) / "audit"
+        self.site = Path(self.temporary.name) / "site"
+        (self.audit / "audit-data").mkdir(parents=True)
+        (self.audit / "execution").mkdir()
+        (self.site / "estate").mkdir(parents=True)
+        self.template = (ROOT / "estate" / "index.html").read_text(encoding="utf-8")
+        (self.site / "estate" / "index.html").write_text(self.template, encoding="utf-8")
+        self.observed = "2020-01-01T12:45:00Z"
+        github = [github_row(), github_row("private-fixture", private=True)]
+        self.write("audit-data/github-repositories.json", github)
+        self.write("audit-data/huggingface-repositories.json", [hf_row()])
+        for row in github:
+            self.write("audit-data/repo--" + row["full_name"].replace("/", "--") + ".json",
+                       report(full_name=row["full_name"]))
+        self.counts = {"GitHub": 2, "HF Model": 1, "HF Dataset": 0, "HF Space": 0}
+        self.summary = {"generated_at": self.observed,
+                        "coverage": {"github": 2, "github_inspected": 2, "hf": 1}}
+        self.write("audit-data/estate-summary.json", self.summary)
+        self.receipt = {"schema": "szl.local-estate-audit/v1", "signed": False,
+                        "generated_at": self.observed, "counts": self.counts,
+                        "source_summary_sha256": self.digest("audit-data/estate-summary.json")}
+        self.write("audit-receipt.json", self.receipt)
+        for name in builder.EXECUTION_NAMES:
+            (self.audit / "execution" / name).write_bytes(b"# SIMULATED fixture\n")
+        self.write("execution-source-binding.json", {
+            "schema": "szl.audit-execution-source-binding/v1", "scope": builder.SCOPE,
+            "files": [{"name": name, "execution_sha256": self.digest("execution/" + name)}
+                      for name in sorted(builder.EXECUTION_NAMES - {"audit_guard.py"})],
+            "guard_sha256": self.digest("execution/audit_guard.py")})
+        self.write("github-request-ledger.jsonl", {
+            "at": self.observed, "path": "orgs/szl-holdings/repos?type=all&per_page=100&page=1",
+            "status": 200, "returncode": 0, "rate_failure": False})
+        self.binding = {"schema": builder.BINDING_SCHEMA, "signed": False,
+                        "scope": builder.SCOPE, "observed_at": self.observed,
+                        "counts": {"raw": self.counts, "public": {**self.counts, "GitHub": 1}},
+                        "completion": {
+                            "collector": {"completed": True, "exit_code": 0, "evidence_class": "DECLARED",
+                                          "command": "estate_agent.py all --output ."},
+                            "github": {"enumeration_complete": True, "inspection_complete": True,
+                                       "pagination": {"per_page": 100, "terminal_page": 1, "terminal_rows": 2}},
+                            "huggingface": {"enumeration_complete": True,
+                                            "iterators_exhausted": ["model", "dataset", "space"]}}}
+        self.rebind()
+
+    def write(self, name, value):
+        (self.audit / name).write_text(json.dumps(value) + "\n", encoding="utf-8")
+
+    def digest(self, name):
+        return hashlib.sha256((self.audit / name).read_bytes()).hexdigest()
+
+    def rebind(self):
+        self.binding["input_sha256"] = {
+            path.relative_to(self.audit).as_posix(): hashlib.sha256(path.read_bytes()).hexdigest()
+            for path in self.audit.rglob("*") if path.is_file() and path.name != "public-source-binding.json"}
+        self.write("public-source-binding.json", self.binding)
+
+    def cli(self, *extra):
+        with redirect_stdout(io.StringIO()), redirect_stderr(io.StringIO()):
+            return builder.main(["--audit-dir", str(self.audit), "--site-dir", str(self.site), *extra])
+
+    def assert_refused_without_output(self, *extra):
+        self.assertEqual(self.cli(*extra), 1)
+        self.assertFalse((self.site / "estate" / "public-snapshot.json").exists())
+        self.assertEqual((self.site / "estate" / "index.html").read_text(encoding="utf-8"), self.template)
+
+    def test_cli_derives_time_and_retains_public_only_projection(self):
+        self.assertEqual(self.cli(), 0)
+        snapshot = json.loads((self.site / "estate" / "public-snapshot.json").read_bytes())
+        self.assertEqual(snapshot["observed_at"], self.observed)
+        self.assertEqual(snapshot["counts"], self.binding["counts"]["public"])
+        self.assertNotIn("private-fixture", json.dumps(snapshot))
+        self.assertNotIn("input_sha256", snapshot)
+        self.assertEqual(builder.load_bound_audit(self.audit / "audit-data")[-1], self.observed)
+
+    def test_missing_manifest_refuses_partial_input(self):
+        (self.audit / "public-source-binding.json").unlink()
+        self.assert_refused_without_output("--observed-at", self.observed)
+
+    def test_incomplete_collection_and_failed_collector_are_refused(self):
+        for section, key, value in [("collector", "completed", False), ("collector", "exit_code", 1),
+                                    ("collector", "exit_code", False), ("github", "enumeration_complete", False),
+                                    ("github", "inspection_complete", False),
+                                    ("huggingface", "iterators_exhausted", ["model", "dataset"])]:
+            with self.subTest(section=section, key=key):
+                original = self.binding["completion"][section][key]
+                self.binding["completion"][section][key] = value
+                self.rebind()
+                self.assert_refused_without_output()
+                self.binding["completion"][section][key] = original
+
+    def test_hash_mismatch_is_refused_before_output(self):
+        self.write("audit-data/github-repositories.json", [])
+        self.assert_refused_without_output()
+
+    def test_partial_census_cannot_pass_with_rehashed_inputs(self):
+        self.write("audit-data/github-repositories.json", [github_row()])
+        self.rebind()
+        self.assert_refused_without_output()
+
+    def test_scope_and_inspection_count_mismatch_are_refused(self):
+        self.binding["scope"] = {"github": ["other-org"], "huggingface": ["SZLHOLDINGS"]}
+        self.rebind()
+        self.assert_refused_without_output()
+        self.binding["scope"] = builder.SCOPE
+        self.summary["coverage"]["github_inspected"] = 1
+        self.write("audit-data/estate-summary.json", self.summary)
+        self.receipt["source_summary_sha256"] = self.digest("audit-data/estate-summary.json")
+        self.write("audit-receipt.json", self.receipt)
+        self.rebind()
+        self.assert_refused_without_output()
+
+    def test_override_and_receipt_timestamp_conflicts_are_refused(self):
+        self.assert_refused_without_output("--observed-at", "2020-01-01T12:45:01Z")
+        self.receipt["generated_at"] = "2020-01-01T12:45:01Z"
+        self.write("audit-receipt.json", self.receipt)
+        self.rebind()
+        self.assert_refused_without_output()
+
+    def test_future_audit_date_is_refused_even_when_all_bindings_agree(self):
+        self.observed = "2099-01-01T12:45:00Z"
+        self.summary["generated_at"] = self.observed
+        self.write("audit-data/estate-summary.json", self.summary)
+        self.receipt.update(generated_at=self.observed,
+                            source_summary_sha256=self.digest("audit-data/estate-summary.json"))
+        self.write("audit-receipt.json", self.receipt)
+        self.binding["observed_at"] = self.observed
+        self.rebind()
+        self.assert_refused_without_output()
+
+    def test_pagination_failure_and_nonterminal_page_are_refused(self):
+        self.write("github-request-ledger.jsonl", {"at": self.observed,
+                   "path": "orgs/szl-holdings/repos?type=all&per_page=100&page=1",
+                   "status": 403, "returncode": 1, "rate_failure": True})
+        self.rebind()
+        self.assert_refused_without_output()
+        self.binding["completion"]["github"]["pagination"]["terminal_rows"] = 100
+        self.rebind()
+        self.assert_refused_without_output()
+
+    def test_verified_inputs_are_read_once_and_parsed_from_cached_bytes(self):
+        reads = []
+        original_read = Path.read_bytes
+        def read_once(path):
+            reads.append(path.resolve())
+            self.assertEqual(reads.count(path.resolve()), 1, "Input reread after hash verification")
+            return original_read(path)
+        with patch.object(Path, "read_bytes", read_once):
+            github, reports, hf, stamp = builder.load_bound_audit(
+                self.audit, now=datetime(2020, 1, 2, tzinfo=timezone.utc))
+        self.assertEqual((len(github), len(reports), len(hf), stamp), (2, 1, 1, self.observed))
 
 
 if __name__ == "__main__":

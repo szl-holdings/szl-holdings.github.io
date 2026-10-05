@@ -2753,7 +2753,7 @@
       "private": false,
       "revision": "cc9214315db74cd2fe9f546ae777186093e1a9eb",
       "sourceUrl": "https://huggingface.co/spaces/SZLHOLDINGS/a11oy/tree/cc9214315db74cd2fe9f546ae777186093e1a9eb",
-      "state": "REPORTED RUNTIME_ERROR; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
+      "state": "DECLARED RUNTIME_ERROR; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
       "url": "https://huggingface.co/spaces/SZLHOLDINGS/a11oy"
     },
     {
@@ -2766,7 +2766,7 @@
       "private": false,
       "revision": "89f5a02f3d5bfa4eaa0172cc41fae9205859bd7c",
       "sourceUrl": "https://huggingface.co/spaces/SZLHOLDINGS/ayllu/tree/89f5a02f3d5bfa4eaa0172cc41fae9205859bd7c",
-      "state": "REPORTED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
+      "state": "DECLARED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
       "url": "https://huggingface.co/spaces/SZLHOLDINGS/ayllu"
     },
     {
@@ -2779,7 +2779,7 @@
       "private": false,
       "revision": "8b94ff05aac5f86624ec0070ac972c0ec55154e8",
       "sourceUrl": "https://huggingface.co/spaces/SZLHOLDINGS/counsel/tree/8b94ff05aac5f86624ec0070ac972c0ec55154e8",
-      "state": "REPORTED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
+      "state": "DECLARED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
       "url": "https://huggingface.co/spaces/SZLHOLDINGS/counsel"
     },
     {
@@ -2792,7 +2792,7 @@
       "private": false,
       "revision": "b7c335a5f6cfa76ea757dac5c4171532917375dc",
       "sourceUrl": "https://huggingface.co/spaces/SZLHOLDINGS/david-leads/tree/b7c335a5f6cfa76ea757dac5c4171532917375dc",
-      "state": "REPORTED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
+      "state": "DECLARED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
       "url": "https://huggingface.co/spaces/SZLHOLDINGS/david-leads"
     },
     {
@@ -2805,7 +2805,7 @@
       "private": false,
       "revision": "00231a42f0598c002666cb1f49f612ca380550c3",
       "sourceUrl": "https://huggingface.co/spaces/SZLHOLDINGS/finance/tree/00231a42f0598c002666cb1f49f612ca380550c3",
-      "state": "REPORTED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
+      "state": "DECLARED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
       "url": "https://huggingface.co/spaces/SZLHOLDINGS/finance"
     },
     {
@@ -2818,7 +2818,7 @@
       "private": false,
       "revision": "0033e0220aa77f158cb392936fd25a5da8758285",
       "sourceUrl": "https://huggingface.co/spaces/SZLHOLDINGS/foundation-confirmation-v2/tree/0033e0220aa77f158cb392936fd25a5da8758285",
-      "state": "REPORTED RUNNING; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
+      "state": "DECLARED RUNNING; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
       "url": "https://huggingface.co/spaces/SZLHOLDINGS/foundation-confirmation-v2"
     },
     {
@@ -2831,7 +2831,7 @@
       "private": false,
       "revision": "e296dad2966a19580b4dc206b32fb016a9715575",
       "sourceUrl": "https://huggingface.co/spaces/SZLHOLDINGS/gdw-frontier/tree/e296dad2966a19580b4dc206b32fb016a9715575",
-      "state": "REPORTED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
+      "state": "DECLARED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
       "url": "https://huggingface.co/spaces/SZLHOLDINGS/gdw-frontier"
     },
     {
@@ -2844,7 +2844,7 @@
       "private": false,
       "revision": "44ee94b034ed2aa0796fb00f9f7eeb6b7e22e7d4",
       "sourceUrl": "https://huggingface.co/spaces/SZLHOLDINGS/governed-receipt-verifier/tree/44ee94b034ed2aa0796fb00f9f7eeb6b7e22e7d4",
-      "state": "REPORTED RUNNING; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
+      "state": "DECLARED RUNNING; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
       "url": "https://huggingface.co/spaces/SZLHOLDINGS/governed-receipt-verifier"
     },
     {
@@ -2857,7 +2857,7 @@
       "private": false,
       "revision": "3867b4bded1206f7886e74d8748085de240a5427",
       "sourceUrl": "https://huggingface.co/spaces/SZLHOLDINGS/holographic-unify/tree/3867b4bded1206f7886e74d8748085de240a5427",
-      "state": "REPORTED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
+      "state": "DECLARED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
       "url": "https://huggingface.co/spaces/SZLHOLDINGS/holographic-unify"
     },
     {
@@ -2870,7 +2870,7 @@
       "private": false,
       "revision": "003b3762f7cf1a9cd34eab29b2cfe0ac903cc6e8",
       "sourceUrl": "https://huggingface.co/spaces/SZLHOLDINGS/immune/tree/003b3762f7cf1a9cd34eab29b2cfe0ac903cc6e8",
-      "state": "REPORTED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
+      "state": "DECLARED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
       "url": "https://huggingface.co/spaces/SZLHOLDINGS/immune"
     },
     {
@@ -2883,7 +2883,7 @@
       "private": false,
       "revision": "f9be95e3e02e442298d27981ad9e54058b0521ec",
       "sourceUrl": "https://huggingface.co/spaces/SZLHOLDINGS/immune-lattice/tree/f9be95e3e02e442298d27981ad9e54058b0521ec",
-      "state": "REPORTED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
+      "state": "DECLARED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
       "url": "https://huggingface.co/spaces/SZLHOLDINGS/immune-lattice"
     },
     {
@@ -2896,7 +2896,7 @@
       "private": false,
       "revision": "23f58c54fc0eab4d87e910d6408f1748c6797a54",
       "sourceUrl": "https://huggingface.co/spaces/SZLHOLDINGS/killinchu/tree/23f58c54fc0eab4d87e910d6408f1748c6797a54",
-      "state": "REPORTED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
+      "state": "DECLARED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
       "url": "https://huggingface.co/spaces/SZLHOLDINGS/killinchu"
     },
     {
@@ -2909,7 +2909,7 @@
       "private": false,
       "revision": "5c4ec00943123e159395a2f9c84fff66dbfb459f",
       "sourceUrl": "https://huggingface.co/spaces/SZLHOLDINGS/llm-router-live/tree/5c4ec00943123e159395a2f9c84fff66dbfb459f",
-      "state": "REPORTED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
+      "state": "DECLARED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
       "url": "https://huggingface.co/spaces/SZLHOLDINGS/llm-router-live"
     },
     {
@@ -2922,7 +2922,7 @@
       "private": false,
       "revision": "23be6e83f7252f1951a0580693c1a9261073306e",
       "sourceUrl": "https://huggingface.co/spaces/SZLHOLDINGS/lyte/tree/23be6e83f7252f1951a0580693c1a9261073306e",
-      "state": "REPORTED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
+      "state": "DECLARED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
       "url": "https://huggingface.co/spaces/SZLHOLDINGS/lyte"
     },
     {
@@ -2935,7 +2935,7 @@
       "private": false,
       "revision": "392846cde80c7fba22b0ae0aaa3d1a17f5694527",
       "sourceUrl": "https://huggingface.co/spaces/SZLHOLDINGS/oac-system-health-lab/tree/392846cde80c7fba22b0ae0aaa3d1a17f5694527",
-      "state": "REPORTED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
+      "state": "DECLARED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
       "url": "https://huggingface.co/spaces/SZLHOLDINGS/oac-system-health-lab"
     },
     {
@@ -2948,7 +2948,7 @@
       "private": false,
       "revision": "4c43d85d03bd42828b93cf45adb274f7e5213ec5",
       "sourceUrl": "https://huggingface.co/spaces/SZLHOLDINGS/prove-it/tree/4c43d85d03bd42828b93cf45adb274f7e5213ec5",
-      "state": "REPORTED RUNNING; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
+      "state": "DECLARED RUNNING; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
       "url": "https://huggingface.co/spaces/SZLHOLDINGS/prove-it"
     },
     {
@@ -2961,7 +2961,7 @@
       "private": false,
       "revision": "7cd34c6cbfb4594561ee30e2d7b272add875ce1e",
       "sourceUrl": "https://huggingface.co/spaces/SZLHOLDINGS/README/tree/7cd34c6cbfb4594561ee30e2d7b272add875ce1e",
-      "state": "REPORTED RUNNING; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
+      "state": "DECLARED RUNNING; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
       "url": "https://huggingface.co/spaces/SZLHOLDINGS/README"
     },
     {
@@ -2974,7 +2974,7 @@
       "private": false,
       "revision": "3addf6d6a346e1b36947960e9b770adb6dff29dc",
       "sourceUrl": "https://huggingface.co/spaces/SZLHOLDINGS/sentra/tree/3addf6d6a346e1b36947960e9b770adb6dff29dc",
-      "state": "REPORTED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
+      "state": "DECLARED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
       "url": "https://huggingface.co/spaces/SZLHOLDINGS/sentra"
     },
     {
@@ -2987,7 +2987,7 @@
       "private": false,
       "revision": "14989638a271d168f2f2ee6569c768cc275b8255",
       "sourceUrl": "https://huggingface.co/spaces/SZLHOLDINGS/szl-atelier/tree/14989638a271d168f2f2ee6569c768cc275b8255",
-      "state": "REPORTED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
+      "state": "DECLARED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
       "url": "https://huggingface.co/spaces/SZLHOLDINGS/szl-atelier"
     },
     {
@@ -3000,7 +3000,7 @@
       "private": false,
       "revision": "97acd8c474daa66535ad540ef8335ac00cd462ba",
       "sourceUrl": "https://huggingface.co/spaces/SZLHOLDINGS/szl-bench-suite/tree/97acd8c474daa66535ad540ef8335ac00cd462ba",
-      "state": "REPORTED RUNNING; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
+      "state": "DECLARED RUNNING; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
       "url": "https://huggingface.co/spaces/SZLHOLDINGS/szl-bench-suite"
     },
     {
@@ -3013,7 +3013,7 @@
       "private": false,
       "revision": "003bed82d99c5c6870cf9c9e5f24a54293bf23e3",
       "sourceUrl": "https://huggingface.co/spaces/SZLHOLDINGS/szl-brand-campaign/tree/003bed82d99c5c6870cf9c9e5f24a54293bf23e3",
-      "state": "REPORTED RUNNING; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
+      "state": "DECLARED RUNNING; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
       "url": "https://huggingface.co/spaces/SZLHOLDINGS/szl-brand-campaign"
     },
     {
@@ -3026,7 +3026,7 @@
       "private": false,
       "revision": "0f85a27c7718404a4eda1ed1dae835de235f3a1a",
       "sourceUrl": "https://huggingface.co/spaces/SZLHOLDINGS/szl-command-lab/tree/0f85a27c7718404a4eda1ed1dae835de235f3a1a",
-      "state": "REPORTED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
+      "state": "DECLARED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
       "url": "https://huggingface.co/spaces/SZLHOLDINGS/szl-command-lab"
     },
     {
@@ -3039,7 +3039,7 @@
       "private": false,
       "revision": "db7ad3ae2ba3f9d4da6dc44863f5947e57a2044e",
       "sourceUrl": "https://huggingface.co/spaces/SZLHOLDINGS/szl-constellation/tree/db7ad3ae2ba3f9d4da6dc44863f5947e57a2044e",
-      "state": "REPORTED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
+      "state": "DECLARED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
       "url": "https://huggingface.co/spaces/SZLHOLDINGS/szl-constellation"
     },
     {
@@ -3052,7 +3052,7 @@
       "private": false,
       "revision": "116e16044f2d6697c72c45c7ebf5f353d9b5c8e1",
       "sourceUrl": "https://huggingface.co/spaces/SZLHOLDINGS/szl-forge-lab/tree/116e16044f2d6697c72c45c7ebf5f353d9b5c8e1",
-      "state": "REPORTED RUNNING; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
+      "state": "DECLARED RUNNING; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
       "url": "https://huggingface.co/spaces/SZLHOLDINGS/szl-forge-lab"
     },
     {
@@ -3065,7 +3065,7 @@
       "private": false,
       "revision": "2a0dc535956a2e7cf55947afa15752f46500d486",
       "sourceUrl": "https://huggingface.co/spaces/SZLHOLDINGS/szl-foundation-confirmation/tree/2a0dc535956a2e7cf55947afa15752f46500d486",
-      "state": "REPORTED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
+      "state": "DECLARED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
       "url": "https://huggingface.co/spaces/SZLHOLDINGS/szl-foundation-confirmation"
     },
     {
@@ -3078,7 +3078,7 @@
       "private": false,
       "revision": "94a1ea1059a150c92602a113a0d49b3fe51454ef",
       "sourceUrl": "https://huggingface.co/spaces/SZLHOLDINGS/szl-frontier/tree/94a1ea1059a150c92602a113a0d49b3fe51454ef",
-      "state": "REPORTED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
+      "state": "DECLARED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
       "url": "https://huggingface.co/spaces/SZLHOLDINGS/szl-frontier"
     },
     {
@@ -3091,7 +3091,7 @@
       "private": false,
       "revision": "69299621dc146244ce177f7f5f22e4c7de513a6d",
       "sourceUrl": "https://huggingface.co/spaces/SZLHOLDINGS/szl-khipu/tree/69299621dc146244ce177f7f5f22e4c7de513a6d",
-      "state": "REPORTED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
+      "state": "DECLARED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
       "url": "https://huggingface.co/spaces/SZLHOLDINGS/szl-khipu"
     },
     {
@@ -3104,7 +3104,7 @@
       "private": false,
       "revision": "dd3869d8b2a669ab3ebf93e8d0ee099c679a5734",
       "sourceUrl": "https://huggingface.co/spaces/SZLHOLDINGS/szl-marketing-1.1/tree/dd3869d8b2a669ab3ebf93e8d0ee099c679a5734",
-      "state": "REPORTED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
+      "state": "DECLARED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
       "url": "https://huggingface.co/spaces/SZLHOLDINGS/szl-marketing-1.1"
     },
     {
@@ -3117,7 +3117,7 @@
       "private": false,
       "revision": "44f0dceaf8610ae9b7253733c835d8129f60c6e1",
       "sourceUrl": "https://huggingface.co/spaces/SZLHOLDINGS/szl-model-inference-lab/tree/44f0dceaf8610ae9b7253733c835d8129f60c6e1",
-      "state": "REPORTED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
+      "state": "DECLARED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
       "url": "https://huggingface.co/spaces/SZLHOLDINGS/szl-model-inference-lab"
     },
     {
@@ -3130,7 +3130,7 @@
       "private": false,
       "revision": "41c111440ce928a4f2c57d1e0eca0df148461973",
       "sourceUrl": "https://huggingface.co/spaces/SZLHOLDINGS/szl-typesafe-triage/tree/41c111440ce928a4f2c57d1e0eca0df148461973",
-      "state": "REPORTED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
+      "state": "DECLARED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
       "url": "https://huggingface.co/spaces/SZLHOLDINGS/szl-typesafe-triage"
     },
     {
@@ -3143,7 +3143,7 @@
       "private": false,
       "revision": "f1f2133e8d82991304195b2dbc5cdb3c27698e3b",
       "sourceUrl": "https://huggingface.co/spaces/SZLHOLDINGS/terra/tree/f1f2133e8d82991304195b2dbc5cdb3c27698e3b",
-      "state": "REPORTED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
+      "state": "DECLARED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
       "url": "https://huggingface.co/spaces/SZLHOLDINGS/terra"
     },
     {
@@ -3156,7 +3156,7 @@
       "private": false,
       "revision": "9a094766b514568fc42e65d036fc70f79976c5e1",
       "sourceUrl": "https://huggingface.co/spaces/SZLHOLDINGS/the-grid/tree/9a094766b514568fc42e65d036fc70f79976c5e1",
-      "state": "REPORTED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
+      "state": "DECLARED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
       "url": "https://huggingface.co/spaces/SZLHOLDINGS/the-grid"
     },
     {
@@ -3169,7 +3169,7 @@
       "private": false,
       "revision": "ec57f0bb2b1b998758130e3f934c66caa9cc9a8b",
       "sourceUrl": "https://huggingface.co/spaces/SZLHOLDINGS/vertical-services/tree/ec57f0bb2b1b998758130e3f934c66caa9cc9a8b",
-      "state": "REPORTED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
+      "state": "DECLARED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
       "url": "https://huggingface.co/spaces/SZLHOLDINGS/vertical-services"
     },
     {
@@ -3182,7 +3182,7 @@
       "private": false,
       "revision": "e463677bc88e75e7dbdd1b44dcb23aee5c333cb9",
       "sourceUrl": "https://huggingface.co/spaces/SZLHOLDINGS/yarqa/tree/e463677bc88e75e7dbdd1b44dcb23aee5c333cb9",
-      "state": "REPORTED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
+      "state": "DECLARED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
       "url": "https://huggingface.co/spaces/SZLHOLDINGS/yarqa"
     }
   ],
@@ -3196,7 +3196,7 @@
     "Dated public source and provider metadata snapshot; not a live monitor.",
     "GitHub CI summaries cover the bounded latest 100 default-branch runs, grouped by workflow. Only runs matching the collected SHA count; older runs and absent workflows remain UNKNOWN.",
     "Listed model files are artifact metadata, not evidence of trained weight quality, held-out evaluation, authorization, or production readiness.",
-    "A provider revision or REPORTED RUNNING Space does not establish source/runtime parity; runtime behavior NOT RUN.",
+    "A provider revision or DECLARED RUNNING Space does not establish source/runtime parity; runtime behavior NOT RUN.",
     "Model inference, model weights and dataset rows NOT RUN in this inventory.",
     "DECLARED Khipu promotion gate remains BLOCKED: REPORTED 2/6 abstention; publication_eligible=false pending a fresh held-out gate."
   ],

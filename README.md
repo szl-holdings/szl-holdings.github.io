@@ -71,8 +71,44 @@ limits. A missing public revision stops generation. The current snapshot was
 generated from the completed 5 October audit at `2026-10-05T12:43:48.724254+00:00`.
 The earlier `/frontier/` inventory retains its own separately recorded scope.
 
+The CLI requires a private `public-source-binding.json` at the **audit root**,
+beside `audit-receipt.json`, `execution-source-binding.json`, `execution/`,
+`github-request-ledger.jsonl` and `audit-data/`. It accepts the root or its
+`audit-data/` directory. The binding contract is:
+
+- Schema `szl.estate-audit-source-binding/v1`, literal `signed: false`, canonical
+  `scope` (`github: ["szl-holdings"]`, `huggingface: ["SZLHOLDINGS"]`).
+- `observed_at` must exactly equal `estate-summary.json.generated_at` and
+  `audit-receipt.json.generated_at`. The receipt must bind the summary SHA-256.
+  A future date is refused. Optional `--observed-at` asserts that exact value;
+  it cannot override the collected date.
+- `input_sha256` maps normalized audit-root-relative paths to exact byte hashes:
+  both repository lists, every GitHub source report (including private reports),
+  the summary, audit receipt, execution source binding, request ledger, and all
+  eight execution files named by the collector source binding. The generator
+  hashes each input once and parses those same cached bytes.
+- `counts.raw` and `counts.public` contain all four repository-kind counts.
+  They must match the census lists; raw counts must also match the receipt and
+  summary coverage, including full GitHub inspection coverage.
+- `completion.collector` requires `completed: true`, `exit_code: 0`,
+  `evidence_class: "DECLARED"` and `command: "estate_agent.py all --output ."`.
+  `completion.github` requires complete enumeration and inspection plus
+  `pagination` (`per_page: 100`, terminal page, terminal short-page row count).
+  The bound ledger must record every successful page in order before the audit
+  date. `completion.huggingface` requires complete enumeration and
+  `iterators_exhausted: ["model", "dataset", "space"]`.
+
+Create the completion declaration only from an observed successful collector
+exit and terminal pagination/iterator exhaustion, never from counts alone. The
+binding is unsigned local evidence, not authentication or an independent witness.
+Hash/count validation is MEASURED locally; completion remains an unsigned
+DECLARED observation. Keep the binding and raw audit private. The public snapshot
+retains its closed field allowlist and includes neither private identifiers nor
+private counts or paths. Provider repository/runtime metadata is DECLARED; the
+published owner report of Khipu's 2/6 abstention remains REPORTED and BLOCKED.
+
 ```bash
-python3 scripts/build_estate_public_snapshot.py --audit-dir /path/to/completed-audit/audit-data --observed-at 2026-10-05T12:43:48.724254+00:00
+python3 scripts/build_estate_public_snapshot.py --audit-dir /path/to/completed-audit
 python3 scripts/bind_browser_policy.py --check
 python3 -m unittest discover -s tests -p 'test*estate*py'
 ```
@@ -80,7 +116,8 @@ python3 -m unittest discover -s tests -p 'test*estate*py'
 The dated snapshot test pins its timestamp and public counts. Update those
 assertions with the regenerated snapshot, then keep the homepage count consistent.
 The generator's independent tests cover privacy exclusion, invalid revision
-rejection, untrusted HTML escaping and exact-source CI failures. Its code preserves
+rejection, incomplete/hash-mismatched bindings, date conflicts, future dates,
+untrusted HTML escaping and exact-source CI failures. Its code preserves
 the existing page styles, scripts and browser policy. See the
 [source validation receipt](./estate/snapshot-receipt.json) for this refresh's local
 checks; publication and live readback require separate evidence.

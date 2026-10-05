@@ -2,7 +2,7 @@
   "schema": "szl.public-estate-refresh-receipt/v1",
   "evidence_class": "MEASURED",
   "observed_at": "2026-10-05T12:43:48.724254+00:00",
-  "validated_at_utc": "2026-10-05T12:50:01.319383+00:00",
+  "validated_at_utc": "2026-10-05T14:05:26.148601+00:00",
   "source_base": "1962d66593c70dd7fcb9cff2920bb194a775d7e8",
   "public_counts": {
     "GitHub": 127,
@@ -15,11 +15,11 @@
   "files": [
     {
       "path": "scripts/build_estate_public_snapshot.py",
-      "lf_normalized_sha256": "4e67db90474b1c29ea5eb1869f65b2e89e782965ede53157327e049ba3db7956"
+      "lf_normalized_sha256": "40e73c02c1808dc0d37f0753e1460ae63d0d6b91396c722c9e332b9db0e2f47f"
     },
     {
       "path": "tests/test_build_estate_public_snapshot.py",
-      "lf_normalized_sha256": "365840f315371a07451b70c8f88e93bd583fd6fc64d1b5379cc5fbcea3ac14d4"
+      "lf_normalized_sha256": "1b98aced73204cb14a4756905a99318941da8de2efeb3749fdc582adf14ad571"
     },
     {
       "path": "tests/test_estate_public_snapshot.py",
@@ -27,23 +27,37 @@
     },
     {
       "path": "estate/public-snapshot.json",
-      "lf_normalized_sha256": "8f77d201a3c597f9f1a37d6ac0f833c84ae21ef545e03184a58e74ffdf20e4a4"
+      "lf_normalized_sha256": "c686cbeacce9d3b8a2e55a064777042a3fe966bc8d699d8bdbf40912a01e81b7"
     },
     {
       "path": "estate/index.html",
-      "lf_normalized_sha256": "7467f3d978cbfa0be50f985c6d30981e71fddaf1ccea5433d109876e67ca8803"
+      "lf_normalized_sha256": "602abbfcc12eb80fbcb5063e4ae79e672e0effb46b828968d37e135d7113f3f0"
     },
     {
       "path": "index.html",
       "lf_normalized_sha256": "1d491a02e83770b650c5c913e4676f8eddc46ae475e52ae84f19f16d84ff5895"
+    },
+    {
+      "path": "README.md",
+      "lf_normalized_sha256": "3900ee2e1e61136a52d74f67568fea8ad8ea21bd9fe18fe43e874b25f05a3f23"
+    },
+    {
+      "path": ".github/workflows/link-check.yml",
+      "lf_normalized_sha256": "d51a74e93f92c51630ae22ca9c98999f63a4d67395ac701e56ac7fc7ee32a9e8"
     }
   ],
   "checks": [
     {
+      "command": "py -3 scripts/build_estate_public_snapshot.py --audit-dir <private-completed-audit>",
+      "exit_code": 0,
+      "public_asset_count": 245,
+      "observation_timestamp_derived_from_binding": true
+    },
+    {
       "command": "py -3 -m unittest discover -s tests -p 'test_*.py'",
       "exit_code": 0,
-      "tests_run": 79,
-      "passed": 78,
+      "tests_run": 89,
+      "passed": 88,
       "skipped": 1,
       "skip_reason": "Windows host does not permit symlink creation"
     },
@@ -59,6 +73,10 @@
       "html_documents": 11
     },
     {
+      "command": "forbidden-domain workflow-equivalent rg scan",
+      "exit_code": 0
+    },
+    {
       "command": "git diff --check",
       "exit_code": 0
     }
@@ -68,6 +86,15 @@
     "Browser automation transport unavailable; visual browser verification NOT RUN locally. The existing hosted Chrome gate is retained.",
     "Only explicit public organization rows are projected. Raw audit and private-derived counts remain outside this repository.",
     "CI observations cover collected exact revisions and bounded workflow history; absent checks remain UNKNOWN.",
-    "Provider RUNTIME_ERROR is retained; this snapshot performs no runtime recovery, model inference or held-out qualification."
-  ]
+    "Provider RUNTIME_ERROR is retained; this snapshot performs no runtime recovery, model inference or held-out qualification.",
+    "Private audit binding is unsigned; hash/count validation does not authenticate the collector or create an independent witness. Incomplete, conflicting or future-dated bindings are rejected before output writes."
+  ],
+  "private_audit_binding": {
+    "schema": "szl.estate-audit-source-binding/v1",
+    "sha256": "1c4750e370fee20d81568a5050290b31c31181f79f4c450182a003fe47161c1b",
+    "signed": false,
+    "completion_evidence_class": "DECLARED",
+    "local_byte_and_count_validation": "MEASURED",
+    "independent_witness": "UNKNOWN"
+  }
 }
