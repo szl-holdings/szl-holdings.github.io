@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import importlib.util
+import copy
 from contextlib import redirect_stderr, redirect_stdout
 from datetime import datetime, timezone
 import hashlib
@@ -44,6 +45,36 @@ def hf_row(name="atlas", **extra):
 def report(**extra):
     return {"commit_sha": SHA, "latest_by_workflow": [],
             "workflow_history_window": 0, **extra}
+
+
+def exhibit_manifest():
+    return {
+        "schema": "szl.public-research-exhibits/v1",
+        "evidence_class": "DECLARED",
+        "exhibits": [{
+            "id": "receipt-example", "title": "Receipt source",
+            "summary": "Inspect a source-only research example.",
+            "limitations": "Runtime behavior and independent replay UNKNOWN.",
+            "source_ids": [{"kind": "GitHub", "id": "szl-holdings/atlas"}],
+        }],
+    }
+
+
+def exhibit_template():
+    template = (ROOT / "estate" / "index.html").read_text(encoding="utf-8")
+    if '<!-- estate-exhibits:start -->' not in template:
+        template = template.replace(
+            '    <div class="stats"',
+            '<!-- estate-exhibits:start --><!-- estate-exhibits:end -->\n    <div class="stats"',
+            1,
+        )
+    if 'id="estate-category"' not in template:
+        template = template.replace(
+            '    <div class="filters"',
+            '<select id="estate-category"><option value="">All categories</option></select>\n    <div class="filters"',
+            1,
+        )
+    return template
 
 
 class ScriptCapture(HTMLParser):
@@ -209,6 +240,147 @@ class PublicBuilderTests(unittest.TestCase):
             self.assertEqual(builder.load_audit(audit_dir), ([], {}, []))
 
 
+class ResearchExhibitTests(unittest.TestCase):
+    """SIMULATED source bindings protect the reviewed public curator manifest."""
+
+    def setUp(self):
+        self.snapshot = builder.build_snapshot(
+            [github_row()], {"szl-holdings/atlas": report()},
+            [hf_row("SZL-Khipu-1.5B")], OBSERVED,
+        )
+        self.manifest = exhibit_manifest()
+
+    def test_curated_links_are_immutable_snapshot_links_and_failed_state_is_retained(self):
+        self.manifest["exhibits"][0]["source_ids"].append(
+            {"kind": "HF Model", "id": "SZLHOLDINGS/SZL-Khipu-1.5B"}
+        )
+        rendered = builder.render_exhibits(self.manifest, self.snapshot)
+        for asset in self.snapshot["assets"]:
+            self.assertIn('href="' + asset["sourceUrl"] + '"', rendered)
+            self.assertIn(html_escape(asset["state"]), rendered)
+        self.assertIn("promotion gate BLOCKED", rendered)
+        self.assertIn("publication_eligible=false", rendered)
+        self.assertIn("Runtime behavior and independent replay UNKNOWN.", rendered)
+        self.assertIn("DECLARED", rendered)
+
+    def test_missing_wrong_kind_and_nonliteral_public_sources_are_refused(self):
+        reference = self.manifest["exhibits"][0]["source_ids"][0]
+        for update in ({"id": "szl-holdings/missing"}, {"kind": "HF Model"}):
+            manifest = copy.deepcopy(self.manifest)
+            manifest["exhibits"][0]["source_ids"][0].update(update)
+            with self.assertRaises(ValueError):
+                builder.render_exhibits(manifest, self.snapshot)
+        for private in (True, None, "false", 0):
+            snapshot = copy.deepcopy(self.snapshot)
+            snapshot["assets"][0]["private"] = private
+            with self.assertRaises(ValueError):
+                builder.render_exhibits(self.manifest, snapshot)
+        self.assertEqual(reference["id"], "szl-holdings/atlas")
+
+    def test_closed_manifest_rejects_raw_fields_external_urls_and_unsupported_class(self):
+        for location, key, value in (
+            ("manifest", "local_path", "C:/private"),
+            ("exhibit", "url", "https://untrusted.example"),
+            ("source", "revision", SHA),
+            ("source", "sourceUrl", "https://untrusted.example"),
+        ):
+            manifest = copy.deepcopy(self.manifest)
+            target = {"manifest": manifest, "exhibit": manifest["exhibits"][0],
+                      "source": manifest["exhibits"][0]["source_ids"][0]}[location]
+            target[key] = value
+            with self.subTest(location=location, key=key), self.assertRaises(ValueError):
+                builder.render_exhibits(manifest, self.snapshot)
+        for evidence_class in ("MEASURED", "REPORTED", None):
+            manifest = copy.deepcopy(self.manifest)
+            manifest["evidence_class"] = evidence_class
+            with self.assertRaises(ValueError):
+                builder.render_exhibits(manifest, self.snapshot)
+
+    def test_source_url_revision_and_duplicate_bindings_are_refused(self):
+        for changes in ({"sourceUrl": "https://untrusted.example"},
+                        {"sourceUrl": "https://github.com/szl-holdings/atlas/tree/main"},
+                        {"revision": "main"}, {"revision": OTHER_SHA}):
+            snapshot = copy.deepcopy(self.snapshot)
+            snapshot["assets"][0].update(changes)
+            with self.assertRaises(ValueError):
+                builder.render_exhibits(self.manifest, snapshot)
+        snapshot = copy.deepcopy(self.snapshot)
+        snapshot["assets"].append(snapshot["assets"][0])
+        with self.assertRaises(ValueError):
+            builder.render_exhibits(self.manifest, snapshot)
+        manifest = copy.deepcopy(self.manifest)
+        manifest["exhibits"][0]["source_ids"] *= 2
+        with self.assertRaises(ValueError):
+            builder.render_exhibits(manifest, self.snapshot)
+        manifest = copy.deepcopy(self.manifest)
+        manifest["exhibits"] *= 2
+        with self.assertRaises(ValueError):
+            builder.render_exhibits(manifest, self.snapshot)
+
+    def test_curator_text_is_escaped_without_adding_script_or_link_elements(self):
+        manifest = copy.deepcopy(self.manifest)
+        attack = '</p><ScRiPt>alert("x")</sCrIpT> & "quoted"'
+        manifest["exhibits"][0]["title"] = attack
+        manifest["exhibits"][0]["summary"] = attack
+        manifest["exhibits"][0]["limitations"] = attack
+        rendered = builder.render_exhibits(manifest, self.snapshot)
+        self.assertNotIn('<ScRiPt>', rendered)
+        self.assertIn("&lt;ScRiPt&gt;", rendered)
+        self.assertIn("&amp;", rendered)
+        self.assertIn("&quot;quoted&quot;", rendered)
+        self.assertEqual(ScriptCapture(rendered).scripts, [])
+        self.assertEqual(rendered.count("href="), 1)
+        for value in ("", None, "control\x00text", "line\nfeed", "x" * 2001):
+            manifest["exhibits"][0]["summary"] = value
+            with self.assertRaises(ValueError):
+                builder.render_exhibits(manifest, self.snapshot)
+
+    def test_rendering_preserves_scripts_and_requires_unique_exhibit_boundaries(self):
+        template = exhibit_template()
+        rendered = builder.render_page(template, self.snapshot, exhibits=self.manifest)
+        self.assertIn('id="exhibit-receipt-example"', rendered)
+        self.assertEqual(ScriptCapture(rendered).scripts, ScriptCapture(template).scripts)
+        self.assertEqual(rendered, builder.render_page(rendered, self.snapshot, exhibits=self.manifest))
+        for changed in (template.replace('<!-- estate-exhibits:start -->', ''),
+                        template.replace('<!-- estate-exhibits:end -->', ''),
+                        template + '<!-- estate-exhibits:start -->'):
+            with self.assertRaises(ValueError):
+                builder.render_page(changed, self.snapshot, exhibits=self.manifest)
+
+    def test_category_options_and_card_attributes_escape_and_regenerate(self):
+        template = exhibit_template()
+        snapshot = copy.deepcopy(self.snapshot)
+        snapshot["assets"][0]["category"] = 'Kernel / "software" & <review>'
+        snapshot["assets"][1]["category"] = snapshot["assets"][0]["category"]
+        rendered = builder.render_page(template, snapshot)
+        category = html_escape(snapshot["assets"][0]["category"])
+        self.assertEqual(rendered.count('data-category="' + category + '"'), 2)
+        self.assertEqual(rendered.count('<option value="' + category + '">'), 1)
+        self.assertNotIn('<review>', rendered)
+        snapshot["assets"][0]["category"] = "A category"
+        snapshot["assets"][1]["category"] = "Z category"
+        updated = builder.render_page(rendered, snapshot)
+        self.assertNotIn('<option value="' + category + '">', updated)
+        self.assertLess(updated.index('<option value="A category">'),
+                        updated.index('<option value="Z category">'))
+        self.assertEqual(updated, builder.render_page(updated, snapshot))
+
+    def test_manifest_loader_rejects_ambiguous_json(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "exhibits.json"
+            path.write_text(json.dumps(self.manifest), encoding="utf-8")
+            self.assertEqual(builder.load_exhibits(path), self.manifest)
+            for text in ('{"schema":"one","schema":"two"}', "[]", "{broken"):
+                path.write_text(text, encoding="utf-8")
+                with self.assertRaises(ValueError):
+                    builder.load_exhibits(path)
+
+
+def html_escape(value):
+    import html
+    return html.escape(value, quote=True)
+
+
 class BoundAuditTests(unittest.TestCase):
     """SIMULATED collector assertions exercise the unsigned source contract."""
     def setUp(self):
@@ -219,8 +391,9 @@ class BoundAuditTests(unittest.TestCase):
         (self.audit / "audit-data").mkdir(parents=True)
         (self.audit / "execution").mkdir()
         (self.site / "estate").mkdir(parents=True)
-        self.template = (ROOT / "estate" / "index.html").read_text(encoding="utf-8")
+        self.template = exhibit_template()
         (self.site / "estate" / "index.html").write_text(self.template, encoding="utf-8")
+        (self.site / "estate" / "exhibits.json").write_text(json.dumps(exhibit_manifest()), encoding="utf-8")
         self.observed = "2020-01-01T12:45:00Z"
         github = [github_row(), github_row("private-fixture", private=True)]
         self.write("audit-data/github-repositories.json", github)
@@ -291,6 +464,15 @@ class BoundAuditTests(unittest.TestCase):
     def test_missing_manifest_refuses_partial_input(self):
         (self.audit / "public-source-binding.json").unlink()
         self.assert_refused_without_output("--observed-at", self.observed)
+
+    def test_missing_or_invalid_curator_manifest_refuses_before_either_output(self):
+        manifest_path = self.site / "estate" / "exhibits.json"
+        manifest_path.unlink()
+        self.assert_refused_without_output()
+        invalid = exhibit_manifest()
+        invalid["exhibits"][0]["source_ids"][0]["id"] = "szl-holdings/missing"
+        manifest_path.write_text(json.dumps(invalid), encoding="utf-8")
+        self.assert_refused_without_output()
 
     def test_incomplete_collection_and_failed_collector_are_refused(self):
         for section, key, value in [("collector", "completed", False), ("collector", "exit_code", 1),

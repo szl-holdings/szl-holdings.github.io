@@ -8,6 +8,7 @@ HTML/JSON drift.
 from __future__ import annotations
 
 import json
+import html
 import re
 import subprocess
 import unittest
@@ -20,10 +21,10 @@ ROOT = Path(__file__).resolve().parents[1]
 SNAPSHOT = ROOT / "estate" / "public-snapshot.json"
 PAGE = ROOT / "estate" / "index.html"
 EXPECTED_COUNTS = {
-    "GitHub": 127,
+    "GitHub": 128,
     "HF Model": 47,
     "HF Dataset": 37,
-    "HF Space": 34,
+    "HF Space": 36,
 }
 ASSET_FIELDS = {
     "id", "kind", "url", "revision", "archived", "category", "ci",
@@ -44,6 +45,7 @@ class CardParser(HTMLParser):
                 "kind": values.get("data-kind") or "",
                 "id": values.get("data-id") or "",
                 "search": values.get("data-search") or "",
+                "category": values.get("data-category") or "",
             }
         if tag == "a" and self.current is not None:
             classes = (values.get("class") or "").split()
@@ -68,12 +70,12 @@ class PublicSnapshotTests(unittest.TestCase):
             "schema", "observed_at", "counts", "limitations", "assets",
         })
         self.assertEqual(data["schema"], "szl.public-estate-snapshot/v1")
-        self.assertEqual(data["observed_at"], "2026-10-05T12:43:48.724254+00:00")
+        self.assertEqual(data["observed_at"], "2026-10-06T03:50:43.441667+00:00")
         self.assertEqual(data["counts"], EXPECTED_COUNTS)
-        self.assertEqual(len(data["assets"]), 245)
+        self.assertEqual(len(data["assets"]), 248)
         self.assertEqual(Counter(a["kind"] for a in data["assets"]), EXPECTED_COUNTS)
         self.assertEqual(
-            len({(a["kind"], a["id"]) for a in data["assets"]}), 245
+            len({(a["kind"], a["id"]) for a in data["assets"]}), 248
         )
         self.assertTrue(all(set(a) == ASSET_FIELDS for a in data["assets"]))
         self.assertTrue(all(a["private"] is False for a in data["assets"]))
@@ -115,6 +117,7 @@ class PublicSnapshotTests(unittest.TestCase):
                 "kind": a["kind"],
                 "id": a["id"],
                 "sourceUrl": a["sourceUrl"],
+                "category": a["category"],
                 "search": " ".join(
                     str(a[key]) for key in ("id", "kind", "category", "state", "ci")
                 ).lower(),
@@ -132,6 +135,56 @@ class PublicSnapshotTests(unittest.TestCase):
         self.assertNotIn("fetch(", self.html)
         self.assertNotIn("innerHTML", self.html)
 
+    def test_artifact_category_selector_covers_public_snapshot(self) -> None:
+        selector = re.search(r'<select id="estate-category">(.*?)</select>', self.html, re.S)
+        self.assertIsNotNone(selector)
+        values = [html.unescape(value) for value in re.findall(r'<option value="([^"]*)">', selector.group(1))]
+        self.assertEqual(values, [""] + sorted({a["category"] for a in self.snapshot["assets"]}, key=str.casefold))
+        parser = CardParser()
+        parser.feed(self.html)
+        self.assertEqual([c["category"] for c in parser.cards], [a["category"] for a in self.snapshot["assets"]])
+
+    def test_committed_kernel_registry_is_public_and_does_not_inflate_inventory(self) -> None:
+        kernels = json.loads((ROOT / 'estate/kernel-distributions.json').read_text(encoding='utf-8'))
+        self.assertEqual(set(kernels), {'schema', 'observed_at', 'limitations', 'distributions'})
+        self.assertEqual(kernels['schema'], 'szl.public-kernel-distributions/v1')
+        self.assertEqual(kernels['observed_at'], '2026-10-06T03:55:21.332428+00:00')
+        self.assertEqual(len(kernels['distributions']), 14)
+        mirrors = {a['id']: a for a in self.snapshot['assets'] if a['kind'] == 'HF Model'}
+        links = []
+        for row in kernels['distributions']:
+            self.assertEqual(set(row), {'id', 'revision', 'private', 'url', 'sourceUrl',
+                                       'modelMirrorRevision', 'modelMirrorSourceUrl', 'parity'})
+            self.assertIs(row['private'], False)
+            self.assertEqual(row['parity'], 'UNKNOWN')
+            self.assertRegex(row['id'], r'\ASZLHOLDINGS/[A-Za-z0-9_.-]+\Z')
+            self.assertRegex(row['revision'], r'\A[0-9a-f]{40}\Z')
+            self.assertEqual(row['url'], 'https://huggingface.co/kernels/' + row['id'])
+            self.assertEqual(row['sourceUrl'], row['url'] + '/tree/' + row['revision'])
+            self.assertEqual(row['modelMirrorRevision'], mirrors[row['id']]['revision'])
+            self.assertEqual(row['modelMirrorSourceUrl'], mirrors[row['id']]['sourceUrl'])
+            links.append(row['sourceUrl'])
+        self.assertEqual(len(set(links)), 14)
+        self.assertEqual(re.findall(r'<a class="kernel-source" href="([^"]+)"', self.html), links)
+        region = self.html.split('<!-- estate-kernels:start -->')[1].split('<!-- estate-kernels:end -->')[0]
+        self.assertNotIn('data-estate-asset', region)
+        self.assertNotIn('<script', region)
+
+    def test_committed_exhibits_remain_source_only_and_preserve_failed_states(self) -> None:
+        manifest = json.loads((ROOT / 'estate/exhibits.json').read_text(encoding='utf-8'))
+        self.assertEqual(manifest['evidence_class'], 'DECLARED')
+        self.assertEqual(len(manifest['exhibits']), 3)
+        by_id = {(a['kind'], a['id']): a for a in self.snapshot['assets']}
+        region = self.html.split('<!-- estate-exhibits:start -->')[1].split('<!-- estate-exhibits:end -->')[0]
+        self.assertEqual(region.count('class="asset research-exhibit"'), 3)
+        for exhibit in manifest['exhibits']:
+            for ref in exhibit['source_ids']:
+                asset = by_id[(ref['kind'], ref['id'])]
+                self.assertIs(asset['private'], False)
+                self.assertIn(html.escape(asset['sourceUrl'], quote=True), region)
+                self.assertIn(html.escape(asset['state'], quote=True), region)
+        self.assertNotIn('data-estate-asset', region)
+
     def test_filter_behavior_without_a_network_or_browser_dependency(self) -> None:
         match = re.search(r'<script id="estate-filter">(.*?)</script>', self.html, re.S)
         self.assertIsNotNone(match)
@@ -141,13 +194,15 @@ const vm = require('node:vm');
 const script = JSON.parse(require('node:fs').readFileSync(0, 'utf8')).script;
 const search = {value: '', handlers: {}, addEventListener(k, f) {this.handlers[k] = f;}};
 const kind = {value: '', handlers: {}, addEventListener(k, f) {this.handlers[k] = f;}};
+const category = {value: '', handlers: {}, addEventListener(k, f) {this.handlers[k] = f;}};
 const count = {textContent: ''};
 const cards = [
-  {dataset: {kind: 'GitHub', search: 'immune security failure'}, hidden: false},
-  {dataset: {kind: 'HF Model', search: 'forge receipt agent'}, hidden: false},
-  {dataset: {kind: 'HF Dataset', search: 'training corpus'}, hidden: false},
+  {dataset: {kind: 'GitHub', category: 'Python', search: 'immune security failure'}, hidden: false},
+  {dataset: {kind: 'HF Model', category: 'Tensor / GGUF artifact', search: 'forge receipt agent'}, hidden: false},
+  {dataset: {kind: 'HF Dataset', category: 'Dataset repository', search: 'training corpus'}, hidden: false},
+  {dataset: {kind: 'HF Model', category: 'Kernel / software', search: 'kernel source'}, hidden: false},
 ];
-const elements = {'estate-search': search, 'estate-kind': kind, 'estate-count': count};
+const elements = {'estate-search': search, 'estate-kind': kind, 'estate-category': category, 'estate-count': count};
 const document = {
   getElementById(id) {return elements[id];},
   querySelectorAll(selector) {
@@ -156,15 +211,23 @@ const document = {
   },
 };
 vm.runInNewContext(script, {document});
-assert.deepEqual(cards.map(c => c.hidden), [false, false, false]);
-assert.match(count.textContent, /^3 matching/);
+assert.deepEqual(cards.map(c => c.hidden), [false, false, false, false]);
+assert.match(count.textContent, /^4 matching/);
 search.value = 'immUNE'; search.handlers.input();
-assert.deepEqual(cards.map(c => c.hidden), [false, true, true]);
+assert.deepEqual(cards.map(c => c.hidden), [false, true, true, true]);
 kind.value = 'HF Model'; kind.handlers.change();
-assert.deepEqual(cards.map(c => c.hidden), [true, true, true]);
+assert.deepEqual(cards.map(c => c.hidden), [true, true, true, true]);
 search.value = ''; search.handlers.input();
-assert.deepEqual(cards.map(c => c.hidden), [true, false, true]);
+assert.deepEqual(cards.map(c => c.hidden), [true, false, true, false]);
+assert.match(count.textContent, /^2 matching/);
+category.value = 'Kernel / software'; category.handlers.change();
+assert.deepEqual(cards.map(c => c.hidden), [true, true, true, false]);
 assert.match(count.textContent, /^1 matching/);
+search.value = 'receipt'; search.handlers.input();
+assert.deepEqual(cards.map(c => c.hidden), [true, true, true, true]);
+assert.match(count.textContent, /^0 matching/);
+category.value = ''; category.handlers.change();
+assert.deepEqual(cards.map(c => c.hidden), [true, false, true, true]);
 """
         result = subprocess.run(
             ["node", "-e", probe],

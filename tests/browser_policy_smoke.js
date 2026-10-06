@@ -13,6 +13,7 @@
     ["frontier", "/frontier/"],
     ["showcase", "/frontier/showcase-public.html"],
     ["products", "/products/"],
+    ["estate", "/estate/"],
   ];
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   const pinnedRoutes = new Set(["root", "brain", "khipu"]);
@@ -165,6 +166,41 @@
     } else if (key === "products") {
       assert(d.querySelectorAll("a.card").length > 0 && d.body.textContent.includes("does not assert that a deployment is healthy"),
         "products remains a readable source-declared catalog");
+    } else if (key === "estate") {
+      const cards = [...d.querySelectorAll("[data-estate-asset]")];
+      const visible = () => cards.filter((card) => !card.hidden);
+      const count = d.getElementById("estate-count");
+      const kind = d.getElementById("estate-kind");
+      const category = d.getElementById("estate-category");
+      const select = (input, value) => {
+        input.value = value;
+        input.dispatchEvent(new w.Event("change", { bubbles: true }));
+      };
+      const agrees = (label) => assert(Number.parseInt(count.textContent, 10) === visible().length, label);
+      assert(cards.length > 0 && visible().length === cards.length, "estate initializes all inventory cards");
+      agrees("estate initial live count agrees");
+      assert(d.querySelectorAll(".research-exhibit").length === 3, "estate has three source-linked exhibits");
+      assert(d.querySelectorAll(".kernel-distributions a.kernel-source").length > 0,
+        "estate lists separate immutable Kernel Hub distributions");
+      type(w, "estate-search", "__szl_browser_policy_no_match_8cf065cb__");
+      assert(visible().length === 0, "estate unmatched search yields zero");
+      agrees("estate zero-match live count agrees");
+      type(w, "estate-search", "");
+      select(kind, "HF Model");
+      select(category, "Kernel / software");
+      assert(visible().length > 0 && visible().every((card) =>
+        card.dataset.kind === "HF Model" && card.dataset.category === "Kernel / software"),
+      "estate kind and category filters intersect");
+      agrees("estate combined filter live count agrees");
+      type(w, "estate-search", visible()[0].dataset.id);
+      assert(visible().length === 1, "estate search intersects selected kind and category");
+      agrees("estate exact search live count agrees");
+      type(w, "estate-search", "");
+      select(kind, "");
+      select(category, "");
+      assert(visible().length === cards.length, "estate clearing all filters restores inventory only");
+      agrees("estate restored count excludes exhibits and distributions");
+      assert(d.documentElement.scrollWidth <= w.innerWidth + 1, "estate compact viewport has no horizontal overflow");
     }
   }
 

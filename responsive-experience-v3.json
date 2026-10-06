@@ -7,57 +7,57 @@
     {
       "mode": "STATIC",
       "path": "404.html",
-      "result": "bound"
+      "result": "present"
     },
     {
       "mode": "STATIC",
       "path": "api/a11oy/v1/honest/index.html",
-      "result": "bound"
+      "result": "present"
     },
     {
       "mode": "INTERACTIVE",
       "path": "brain/index.html",
-      "result": "bound"
+      "result": "present"
     },
     {
       "mode": "STATIC",
       "path": "console/index.html",
-      "result": "bound"
+      "result": "present"
     },
     {
       "mode": "STATIC",
       "path": "estate/index.html",
-      "result": "bound"
+      "result": "present"
     },
     {
       "mode": "STATIC",
       "path": "frontier/index.html",
-      "result": "bound"
+      "result": "present"
     },
     {
       "mode": "STATIC",
       "path": "frontier/showcase-public.html",
-      "result": "bound"
+      "result": "present"
     },
     {
       "mode": "INTERACTIVE",
       "path": "index.html",
-      "result": "bound"
+      "result": "present"
     },
     {
       "mode": "INTERACTIVE",
       "path": "khipu/index.html",
-      "result": "bound"
+      "result": "present"
     },
     {
       "mode": "STATIC",
       "path": "products/index.html",
-      "result": "bound"
+      "result": "present"
     },
     {
       "mode": "STATIC",
       "path": "verify/index.html",
-      "result": "bound"
+      "result": "present"
     }
   ],
   "interactive_documents": [
