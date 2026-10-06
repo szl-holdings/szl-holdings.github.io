@@ -55,6 +55,12 @@ jobs:
       - name: Test public estate generator privacy and revision gate
         run: python3 -m unittest discover -s tests -p test_build_estate_public_snapshot.py -v
 
+      - name: Test first-class kernel namespace projection
+        run: python3 -m unittest discover -s tests -p test_build_kernel_public_snapshot.py -v
+
+      - name: Check public model and dataset contract reports
+        run: python3 -m unittest discover -s tests -p test_hf_contract_reports.py -v
+
       - name: Check public truth and accessibility contract
         run: |
           python3 - <<'PY'

@@ -29,8 +29,12 @@ health.
 |---|---|
 | [`index.html`](./index.html) | Static company, investor, portfolio, and developer landing |
 | [`products/index.html`](./products/index.html) | Source-declared product catalog; not live health |
-| [`estate/index.html`](./estate/index.html) | Searchable 5 October 2026 public snapshot: 127 GitHub repositories, 47 model repositories, 37 datasets and 34 Spaces; exact source links and declared gates |
+| [`estate/index.html`](./estate/index.html) | Searchable 6 October UTC / 5 October local public snapshot: 128 GitHub repositories, 47 model repositories, 37 datasets and 36 Spaces; category filters, three research exhibits and exact source links |
 | [`scripts/build_estate_public_snapshot.py`](./scripts/build_estate_public_snapshot.py) | Offline rebuild from an explicit completed audit and UTC collection timestamp; excludes private or unknown-privacy rows and rejects missing source revisions |
+| [`estate/kernel-distributions.json`](./estate/kernel-distributions.json) | Separate census of 14 public Kernel Hub packages with exact package and model-mirror revisions; parity remains UNKNOWN |
+| [`estate/exhibits.json`](./estate/exhibits.json) | Three DECLARED source-only research exhibits; immutable links resolve only from the public snapshot |
+| [`estate/model-contracts.csv`](./estate/model-contracts.csv) · [`estate/dataset-readiness.csv`](./estate/dataset-readiness.csv) | Public-only metadata contract review of all 47 model and 37 dataset repositories, matched to snapshot revisions |
+| [`estate/CURATION_PLAN.md`](./estate/CURATION_PLAN.md) | ROADMAP for reproducible contributions, outside replay and a focused launch |
 | [`frontier/index.html`](./frontier/index.html) | Dated public math and model atlas: 39 selected software projects and all 47 public Hub model repositories in the captured snapshot |
 | [`frontier/showcase-public.html`](./frontier/showcase-public.html) | Searchable 244-asset public organization inventory: 127 GitHub repositories, 47 Hub model-type repositories, 36 datasets, and 34 Spaces; private assets are excluded |
 | [`frontier/audit-data/hf-public-overlay.json`](./frontier/audit-data/hf-public-overlay.json) | Revision-pinned public Hub additions and `szl-formulas` software mirror refresh checked after the base census; the new ReceiptAgent ID is labeled as a one-file repository scaffold, and `SZLHOLDINGS/README` is an organization card represented by a static Space |
@@ -68,7 +72,7 @@ Keep the raw audit outside this publication repository. The generator accepts on
 literal `private: false` records in `szl-holdings` and `SZLHOLDINGS`, constructs
 canonical links at exact revisions, and retains bounded CI and model promotion
 limits. A missing public revision stops generation. The current snapshot was
-generated from the completed 5 October audit at `2026-10-05T12:43:48.724254+00:00`.
+generated from the completed 5 October local audit at `2026-10-06T03:50:43.441667+00:00`.
 The earlier `/frontier/` inventory retains its own separately recorded scope.
 
 The CLI requires a private `public-source-binding.json` at the **audit root**,
@@ -121,6 +125,31 @@ untrusted HTML escaping and exact-source CI failures. Its code preserves
 the existing page styles, scripts and browser policy. See the
 [source validation receipt](./estate/snapshot-receipt.json) for this refresh's local
 checks; publication and live readback require separate evidence.
+
+The category selector distinguishes model artifacts, numeric fixtures, training
+recipes and kernel software. Curator text in `estate/exhibits.json` is escaped;
+its closed schema allows source references, never arbitrary links or private rows.
+The repository generator updates only `time#estate-observed-at`, preserving the
+separate Kernel Hub observation time and section.
+
+Refresh the Kernel Hub section separately from the repository census. Its offline
+generator requires an explicitly hash-pinned private namespace receipt, complete
+anonymous pagination and exact raw namespace/model inventory byte hashes:
+
+```bash
+python3 scripts/build_kernel_public_snapshot.py --audit-dir /path/to/completed-audit --receipt-sha256 <reviewed-receipt-sha256>
+python3 scripts/bind_browser_policy.py --write
+python3 scripts/bind_browser_policy.py --check
+python3 -m unittest discover -s tests -p 'test_*.py'
+```
+
+The `estate-kernels` and `estate-exhibits` markers must each occur once. Kernel
+distribution links and model mirrors are separately pinned. Their cards do not
+inflate the repository count; matching IDs or revisions do not attest byte parity.
+Public CSV reports are metadata-only and must match the public snapshot IDs and
+revisions. Keep internal reports and raw audit files outside this repository.
+The existing hosted Chrome gate also exercises estate search, combined filters,
+compact layout and CSP enforcement on the committed page.
 
 ## Browser policy
 

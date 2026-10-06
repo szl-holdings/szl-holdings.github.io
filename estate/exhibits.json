@@ -1,0 +1,35 @@
+{
+  "schema": "szl.public-research-exhibits/v1",
+  "evidence_class": "DECLARED",
+  "exhibits": [
+    {
+      "id": "receipt-verification",
+      "title": "Inspect receipt verification software",
+      "summary": "Explore the source for receipt construction and verification, then inspect its tests and contracts. The research question is how a verifier records the evidence available for a proposed action.",
+      "limitations": "This is a source-only exhibit. Runtime replay and independent verification are UNKNOWN. Signature validity depends on the key binding and does not establish that a claim is true or that an action is authorized.",
+      "source_ids": [
+        {"kind": "GitHub", "id": "szl-holdings/szl-receipt"}
+      ]
+    },
+    {
+      "id": "formal-math-and-code",
+      "title": "Compare formal mathematics with executable source",
+      "summary": "Read the formal statements in lutar-lean beside the executable formula library in szl-formulas. Inspect their hypotheses and implementation contracts before proposing a correspondence between a theorem and a callable.",
+      "limitations": "This is a source-only comparison. Proof-to-implementation correspondence and fresh proof or numerical replay are UNKNOWN. Lambda uniqueness remains Conjecture 1; the eight locked formula IDs do not certify every implementation.",
+      "source_ids": [
+        {"kind": "GitHub", "id": "szl-holdings/lutar-lean"},
+        {"kind": "GitHub", "id": "szl-holdings/szl-formulas"}
+      ]
+    },
+    {
+      "id": "proposal-only-receiptagent",
+      "title": "Inspect proposal-only Forge and ReceiptAgent",
+      "summary": "Explore the Forge fine-tuning tooling and the ReceiptAgent repository as a proposal-only research workflow. Forge uses QLoRA on an open base; a model proposal must be evaluated by a separate governed decision layer.",
+      "limitations": "This is a source-only exhibit. Inference, held-out evaluation and independent replay are UNKNOWN here. Model output grants no tool execution or authorization. A GGUF derivative requires its own conversion and equivalence evidence; listed files do not establish a qualified release.",
+      "source_ids": [
+        {"kind": "GitHub", "id": "szl-holdings/szl-forge"},
+        {"kind": "HF Model", "id": "SZLHOLDINGS/SZL-Forge-1.5B-ReceiptAgent"}
+      ]
+    }
+  ]
+}

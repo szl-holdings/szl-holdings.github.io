@@ -48,6 +48,8 @@ ASSET_FIELDS = frozenset({
     "state", "sourceUrl", "ciUrl", "private",
 })
 SHA = re.compile(r"[0-9a-f]{40}\Z")
+EXHIBITS_SCHEMA = "szl.public-research-exhibits/v1"
+EXHIBIT_FIELDS = frozenset({"id", "title", "summary", "limitations", "source_ids"})
 GITHUB_ID = re.compile(r"szl-holdings/[A-Za-z0-9_.-]+\Z")
 HF_ID = re.compile(r"SZLHOLDINGS/[A-Za-z0-9_.-]+\Z")
 LIMITATIONS = (
@@ -408,7 +410,7 @@ def render_card(asset: dict) -> str:
     archived = " · Archived source" if asset["archived"] else ""
     run = (f'  <a href="{escape(asset["ciUrl"])}" target="_blank" rel="noopener noreferrer">Observed workflow run</a>'
            if asset["ciUrl"] else "")
-    return f'''<article class="asset" data-estate-asset data-kind="{escape(asset["kind"])}" data-id="{escape(asset["id"])}" data-search="{escape(search)}">
+    return f'''<article class="asset" data-estate-asset data-kind="{escape(asset["kind"])}" data-category="{escape(asset["category"])}" data-id="{escape(asset["id"])}" data-search="{escape(search)}">
   <p class="asset-kind">{escape(asset["kind"])}{archived}</p>
   <h2><a class="source-link" href="{escape(asset["sourceUrl"])}" target="_blank" rel="noopener noreferrer">{escape(asset["id"])}</a></h2>
   <p class="asset-category">{escape(asset["category"])}</p>
@@ -416,6 +418,112 @@ def render_card(asset: dict) -> str:
   <p class="asset-revision">Source revision <code>{escape(asset["revision"][:12])}</code></p>
 {run}
 </article>'''
+
+
+def load_exhibits(path: Path) -> dict:
+    """Read reviewed curator text, rejecting duplicate keys before validation."""
+    def unique_object(pairs: list[tuple[str, object]]) -> dict:
+        result = {}
+        for key, value in pairs:
+            if key in result:
+                raise ValueError("Duplicate key in research exhibit manifest")
+            result[key] = value
+        return result
+
+    try:
+        value = json.loads(path.read_bytes(), object_pairs_hook=unique_object)
+    except (UnicodeDecodeError, json.JSONDecodeError) as error:
+        raise ValueError("Invalid research exhibit JSON") from error
+    if not isinstance(value, dict):
+        raise ValueError("Research exhibit manifest must be an object")
+    return value
+
+
+def render_exhibits(manifest: dict, snapshot: dict) -> str:
+    """Bind reviewed plain text to public source rows; this runs no software."""
+    def closed(value: object, fields: set | frozenset, label: str) -> dict:
+        if not isinstance(value, dict) or set(value) != fields:
+            raise ValueError(f"Research exhibit {label} field allowlist mismatch")
+        return value
+
+    def plain_text(value: object, label: str, maximum: int = 2000) -> str:
+        if (not isinstance(value, str) or not value.strip() or len(value) > maximum
+                or any(ord(character) < 32 or ord(character) == 127 for character in value)):
+            raise ValueError(f"Research exhibit {label} must be bounded plain text")
+        return value
+
+    closed(manifest, {"schema", "evidence_class", "exhibits"}, "manifest")
+    if manifest["schema"] != EXHIBITS_SCHEMA or manifest["evidence_class"] != "DECLARED":
+        raise ValueError("Research exhibits require the DECLARED curator schema")
+    exhibits = manifest["exhibits"]
+    if not isinstance(exhibits, list) or not 1 <= len(exhibits) <= 10:
+        raise ValueError("Research exhibit list must contain one to ten reviewed entries")
+    assets = snapshot.get("assets")
+    if not isinstance(assets, list):
+        raise ValueError("Research exhibits require a public snapshot asset list")
+    by_id = {}
+    for asset in assets:
+        if (not isinstance(asset, dict) or not isinstance(asset.get("kind"), str)
+                or not isinstance(asset.get("id"), str)):
+            raise ValueError("Research exhibit source identity invalid")
+        key = (asset["kind"], asset["id"])
+        if key in by_id:
+            raise ValueError("Research exhibit snapshot has duplicate source identities")
+        by_id[key] = asset
+    seen = set()
+    cards = []
+    escape = lambda value: html.escape(value, quote=True)
+    for exhibit in exhibits:
+        closed(exhibit, EXHIBIT_FIELDS, "entry")
+        exhibit_id = exhibit["id"]
+        if (not isinstance(exhibit_id, str) or not re.fullmatch(r"[a-z][a-z0-9-]{0,63}", exhibit_id)
+                or exhibit_id in seen):
+            raise ValueError("Research exhibit IDs must be unique bounded identifiers")
+        seen.add(exhibit_id)
+        title = plain_text(exhibit["title"], "title", 160)
+        summary = plain_text(exhibit["summary"], "summary")
+        limitations = plain_text(exhibit["limitations"], "limitations")
+        sources = exhibit["source_ids"]
+        if not isinstance(sources, list) or not 1 <= len(sources) <= 4:
+            raise ValueError("Research exhibit requires one to four snapshot source IDs")
+        source_rows = []
+        source_seen = set()
+        for source in sources:
+            closed(source, {"kind", "id"}, "source reference")
+            kind, source_id = source["kind"], source["id"]
+            if not isinstance(kind, str) or not isinstance(source_id, str):
+                raise ValueError("Research exhibit source reference must use strings")
+            key = (kind, source_id)
+            if key in source_seen or key not in by_id:
+                raise ValueError("Research exhibit source absent or repeated in public snapshot")
+            source_seen.add(key)
+            asset = by_id[key]
+            if set(asset) != ASSET_FIELDS or asset["private"] is not False or kind not in KINDS:
+                raise ValueError("Research exhibit source must be an allowlisted literal-public snapshot row")
+            pattern, owner = (GITHUB_ID, "szl-holdings") if kind == "GitHub" else (HF_ID, "SZLHOLDINGS")
+            if canonical_id(source_id, pattern, owner) != source_id:
+                raise ValueError("Research exhibit source outside canonical scope")
+            revision = exact_revision(asset["revision"], source_id)
+            prefix = {"GitHub": "https://github.com/", "HF Model": "https://huggingface.co/",
+                      "HF Dataset": "https://huggingface.co/datasets/", "HF Space": "https://huggingface.co/spaces/"}[kind]
+            if asset["sourceUrl"] != prefix + source_id + "/tree/" + revision:
+                raise ValueError("Research exhibit link does not match immutable snapshot source")
+            state = plain_text(asset["state"], "snapshot state")
+            source_rows.append(
+                f'      <li><a href="{escape(asset["sourceUrl"])}" target="_blank" rel="noopener noreferrer">{escape(source_id)}</a>'
+                f'<p class="exhibit-state"><strong>Snapshot state:</strong> {escape(state)}</p></li>'
+            )
+        cards.append(
+            f'  <article class="asset research-exhibit" id="exhibit-{exhibit_id}">\n'
+            f'    <p class="eyebrow">DECLARED research exhibit</p>\n'
+            f'    <h3>{escape(title)}</h3>\n    <p>{escape(summary)}</p>\n'
+            '    <ul class="exhibit-sources">\n' + "\n".join(source_rows) + '\n    </ul>\n'
+            f'    <p class="exhibit-limit"><strong>Limit:</strong> {escape(limitations)}</p>\n  </article>'
+        )
+    return ('\n<section class="research-exhibits" aria-labelledby="estate-exhibits-title">\n'
+            '  <h2 id="estate-exhibits-title">Research exhibits: start with the source</h2>\n'
+            '  <p>DECLARED curator selections from this dated public snapshot. Each exhibit links to exact source; inclusion establishes no runtime or independent evaluation.</p>\n'
+            '  <div class="grid">\n' + "\n".join(cards) + '\n  </div>\n</section>\n')
 
 
 def replace_once(text: str, pattern: str, replacement: str) -> str:
@@ -433,17 +541,29 @@ def replace_region(text: str, start: str, end: str, content: str) -> str:
     return text[:start_index] + content + text[end_index:]
 
 
-def render_page(template: str, snapshot: dict) -> str:
+def render_page(template: str, snapshot: dict, exhibits: dict | None = None) -> str:
     stamp = observed_datetime(snapshot["observed_at"])
     date_label = f"{stamp.day} {calendar.month_name[stamp.month]} {stamp.year}, {stamp:%H:%M} UTC"
-    page = replace_once(template, r'<time datetime="[^"]+">[^<]*</time>',
-                        f'<time datetime="{snapshot["observed_at"]}">{date_label}</time>')
+    page = replace_once(template, r'<time id="estate-observed-at" datetime="[^"]+">[^<]*</time>',
+                        f'<time id="estate-observed-at" datetime="{snapshot["observed_at"]}">{date_label}</time>')
     labels = ("GitHub repositories", "HF model repositories", "HF dataset repositories", "HF Spaces")
     stats = "\n" + "\n".join(
         f'      <div class="stat"><strong>{snapshot["counts"][kind]}</strong><span>{label}</span></div>'
         for kind, label in zip(KINDS, labels)) + "\n    </div>\n"
     page = replace_region(page, '    <div class="stats" aria-label="Public snapshot counts">',
                           '    <div class="filters"', stats)
+    categories = {asset["category"] for asset in snapshot["assets"]
+                  if isinstance(asset.get("category"), str) and asset["category"]}
+    if any(not isinstance(asset.get("category"), str) or not asset["category"] for asset in snapshot["assets"]):
+        raise ValueError("Public artifact categories must be nonempty strings")
+    options = '<option value="">All categories</option>' + "".join(
+        f'<option value="{html.escape(category, quote=True)}">{html.escape(category)}</option>'
+        for category in sorted(categories, key=lambda value: (value.casefold(), value)))
+    page = replace_once(page, r'<select id="estate-category"[^>]*>.*?</select>',
+                        '<select id="estate-category">' + options + '</select>')
+    if exhibits is not None:
+        page = replace_region(page, '<!-- estate-exhibits:start -->',
+                              '<!-- estate-exhibits:end -->', render_exhibits(exhibits, snapshot))
     page = replace_once(page, r'<p class="count" id="estate-count" role="status" aria-live="polite">[^<]*</p>',
                         f'<p class="count" id="estate-count" role="status" aria-live="polite">{len(snapshot["assets"])} public assets in this snapshot</p>')
     cards = "\n".join(render_card(asset) for asset in snapshot["assets"]) + "\n"
@@ -467,7 +587,8 @@ def main(argv: list[str] | None = None) -> int:
         github, reports, hf, observed_at = load_bound_audit(args.audit_dir, args.observed_at)
         snapshot = build_snapshot(github, reports, hf, observed_at)
         page_path = args.site_dir / "estate" / "index.html"
-        page = render_page(page_path.read_text(encoding="utf-8"), snapshot)
+        exhibits = load_exhibits(args.site_dir / "estate" / "exhibits.json")
+        page = render_page(page_path.read_text(encoding="utf-8"), snapshot, exhibits=exhibits)
         serialized = json.dumps(snapshot, indent=2, sort_keys=True, ensure_ascii=False) + "\n"
         # Validate every input and page boundary before either output is changed.
         (args.site_dir / "estate" / "public-snapshot.json").write_text(serialized, encoding="utf-8", newline="\n")

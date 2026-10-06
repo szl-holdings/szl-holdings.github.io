@@ -1,0 +1,153 @@
+{
+  "distributions": [
+    {
+      "id": "SZLHOLDINGS/governed-inference-meter",
+      "modelMirrorRevision": "5049f8ec259a5356d5b8eeaf11b85d3e9c1fea74",
+      "modelMirrorSourceUrl": "https://huggingface.co/SZLHOLDINGS/governed-inference-meter/tree/5049f8ec259a5356d5b8eeaf11b85d3e9c1fea74",
+      "parity": "UNKNOWN",
+      "private": false,
+      "revision": "b76a57e1b74dd6dc9f7e1c59d7a857f56469d673",
+      "sourceUrl": "https://huggingface.co/kernels/SZLHOLDINGS/governed-inference-meter/tree/b76a57e1b74dd6dc9f7e1c59d7a857f56469d673",
+      "url": "https://huggingface.co/kernels/SZLHOLDINGS/governed-inference-meter"
+    },
+    {
+      "id": "SZLHOLDINGS/szl-block-kv",
+      "modelMirrorRevision": "b5e86e4038e630eda94e3bd83cee1c5729d6d826",
+      "modelMirrorSourceUrl": "https://huggingface.co/SZLHOLDINGS/szl-block-kv/tree/b5e86e4038e630eda94e3bd83cee1c5729d6d826",
+      "parity": "UNKNOWN",
+      "private": false,
+      "revision": "54a19796ee2c4f761c9482f77dd1f989a773e17f",
+      "sourceUrl": "https://huggingface.co/kernels/SZLHOLDINGS/szl-block-kv/tree/54a19796ee2c4f761c9482f77dd1f989a773e17f",
+      "url": "https://huggingface.co/kernels/SZLHOLDINGS/szl-block-kv"
+    },
+    {
+      "id": "SZLHOLDINGS/szl-blocked",
+      "modelMirrorRevision": "911a87be9e1889eac81c24dda8eb4c3f55b9440e",
+      "modelMirrorSourceUrl": "https://huggingface.co/SZLHOLDINGS/szl-blocked/tree/911a87be9e1889eac81c24dda8eb4c3f55b9440e",
+      "parity": "UNKNOWN",
+      "private": false,
+      "revision": "3be2b2a7448406efaaf6d5036e1eae92e3a46929",
+      "sourceUrl": "https://huggingface.co/kernels/SZLHOLDINGS/szl-blocked/tree/3be2b2a7448406efaaf6d5036e1eae92e3a46929",
+      "url": "https://huggingface.co/kernels/SZLHOLDINGS/szl-blocked"
+    },
+    {
+      "id": "SZLHOLDINGS/szl-formulas",
+      "modelMirrorRevision": "2363023fee676d20480ff015ea8687a0313e42dc",
+      "modelMirrorSourceUrl": "https://huggingface.co/SZLHOLDINGS/szl-formulas/tree/2363023fee676d20480ff015ea8687a0313e42dc",
+      "parity": "UNKNOWN",
+      "private": false,
+      "revision": "5cac04af95c9d205e80154458257a0182bba3ba3",
+      "sourceUrl": "https://huggingface.co/kernels/SZLHOLDINGS/szl-formulas/tree/5cac04af95c9d205e80154458257a0182bba3ba3",
+      "url": "https://huggingface.co/kernels/SZLHOLDINGS/szl-formulas"
+    },
+    {
+      "id": "SZLHOLDINGS/szl-governed-norm",
+      "modelMirrorRevision": "5abbd073ff159385be1f4e51c9fee4613cf52513",
+      "modelMirrorSourceUrl": "https://huggingface.co/SZLHOLDINGS/szl-governed-norm/tree/5abbd073ff159385be1f4e51c9fee4613cf52513",
+      "parity": "UNKNOWN",
+      "private": false,
+      "revision": "dc3adf2be8a5f877b1269406d22609cb42122bc5",
+      "sourceUrl": "https://huggingface.co/kernels/SZLHOLDINGS/szl-governed-norm/tree/dc3adf2be8a5f877b1269406d22609cb42122bc5",
+      "url": "https://huggingface.co/kernels/SZLHOLDINGS/szl-governed-norm"
+    },
+    {
+      "id": "SZLHOLDINGS/szl-govsign",
+      "modelMirrorRevision": "db2c14ef08ee20edfd5aada53ac2b11e02583107",
+      "modelMirrorSourceUrl": "https://huggingface.co/SZLHOLDINGS/szl-govsign/tree/db2c14ef08ee20edfd5aada53ac2b11e02583107",
+      "parity": "UNKNOWN",
+      "private": false,
+      "revision": "fb01398843fc67e6b5059f4c1fc27ca4411fc5f9",
+      "sourceUrl": "https://huggingface.co/kernels/SZLHOLDINGS/szl-govsign/tree/fb01398843fc67e6b5059f4c1fc27ca4411fc5f9",
+      "url": "https://huggingface.co/kernels/SZLHOLDINGS/szl-govsign"
+    },
+    {
+      "id": "SZLHOLDINGS/szl-invariants",
+      "modelMirrorRevision": "7897123905a17539fc421bd5bffead93d7ad7748",
+      "modelMirrorSourceUrl": "https://huggingface.co/SZLHOLDINGS/szl-invariants/tree/7897123905a17539fc421bd5bffead93d7ad7748",
+      "parity": "UNKNOWN",
+      "private": false,
+      "revision": "78d04afef253e526326d6b0f4e944fa3d4b1990c",
+      "sourceUrl": "https://huggingface.co/kernels/SZLHOLDINGS/szl-invariants/tree/78d04afef253e526326d6b0f4e944fa3d4b1990c",
+      "url": "https://huggingface.co/kernels/SZLHOLDINGS/szl-invariants"
+    },
+    {
+      "id": "SZLHOLDINGS/szl-kernels",
+      "modelMirrorRevision": "72df0342e34a1f198dd9c428cca072e9b1389ccd",
+      "modelMirrorSourceUrl": "https://huggingface.co/SZLHOLDINGS/szl-kernels/tree/72df0342e34a1f198dd9c428cca072e9b1389ccd",
+      "parity": "UNKNOWN",
+      "private": false,
+      "revision": "53a6acfc468f1611b3d665c3deea2efaca7bcaf3",
+      "sourceUrl": "https://huggingface.co/kernels/SZLHOLDINGS/szl-kernels/tree/53a6acfc468f1611b3d665c3deea2efaca7bcaf3",
+      "url": "https://huggingface.co/kernels/SZLHOLDINGS/szl-kernels"
+    },
+    {
+      "id": "SZLHOLDINGS/szl-lambda-gate",
+      "modelMirrorRevision": "f0c518b22f488e9f008deed27765c9fced32001e",
+      "modelMirrorSourceUrl": "https://huggingface.co/SZLHOLDINGS/szl-lambda-gate/tree/f0c518b22f488e9f008deed27765c9fced32001e",
+      "parity": "UNKNOWN",
+      "private": false,
+      "revision": "41a1ebe6a8ac505299bb4e8fc018911d9c462b72",
+      "sourceUrl": "https://huggingface.co/kernels/SZLHOLDINGS/szl-lambda-gate/tree/41a1ebe6a8ac505299bb4e8fc018911d9c462b72",
+      "url": "https://huggingface.co/kernels/SZLHOLDINGS/szl-lambda-gate"
+    },
+    {
+      "id": "SZLHOLDINGS/szl-maskmod",
+      "modelMirrorRevision": "654a01aaaf86d06471f019cf2f84305703ccc260",
+      "modelMirrorSourceUrl": "https://huggingface.co/SZLHOLDINGS/szl-maskmod/tree/654a01aaaf86d06471f019cf2f84305703ccc260",
+      "parity": "UNKNOWN",
+      "private": false,
+      "revision": "66107f821c597aef71555cd2a1d4014228f95f1b",
+      "sourceUrl": "https://huggingface.co/kernels/SZLHOLDINGS/szl-maskmod/tree/66107f821c597aef71555cd2a1d4014228f95f1b",
+      "url": "https://huggingface.co/kernels/SZLHOLDINGS/szl-maskmod"
+    },
+    {
+      "id": "SZLHOLDINGS/szl-ouroboros",
+      "modelMirrorRevision": "8c868cbf5689eb0cfecb6c670a3efa6ed6cc03cd",
+      "modelMirrorSourceUrl": "https://huggingface.co/SZLHOLDINGS/szl-ouroboros/tree/8c868cbf5689eb0cfecb6c670a3efa6ed6cc03cd",
+      "parity": "UNKNOWN",
+      "private": false,
+      "revision": "194970667faa1292ce09c7ae5880a1918f5cddeb",
+      "sourceUrl": "https://huggingface.co/kernels/SZLHOLDINGS/szl-ouroboros/tree/194970667faa1292ce09c7ae5880a1918f5cddeb",
+      "url": "https://huggingface.co/kernels/SZLHOLDINGS/szl-ouroboros"
+    },
+    {
+      "id": "SZLHOLDINGS/szl-provctl",
+      "modelMirrorRevision": "3e1f9d3c67940b1ef2db2efe44c6acf1653ff264",
+      "modelMirrorSourceUrl": "https://huggingface.co/SZLHOLDINGS/szl-provctl/tree/3e1f9d3c67940b1ef2db2efe44c6acf1653ff264",
+      "parity": "UNKNOWN",
+      "private": false,
+      "revision": "424418b95e5d3403278c53189403e098662d4a3b",
+      "sourceUrl": "https://huggingface.co/kernels/SZLHOLDINGS/szl-provctl/tree/424418b95e5d3403278c53189403e098662d4a3b",
+      "url": "https://huggingface.co/kernels/SZLHOLDINGS/szl-provctl"
+    },
+    {
+      "id": "SZLHOLDINGS/szl-receipt-attn",
+      "modelMirrorRevision": "e1383537e2dd74316a07fcbb683352af62dd24b0",
+      "modelMirrorSourceUrl": "https://huggingface.co/SZLHOLDINGS/szl-receipt-attn/tree/e1383537e2dd74316a07fcbb683352af62dd24b0",
+      "parity": "UNKNOWN",
+      "private": false,
+      "revision": "013dc8a884faa3ae9ac6a0835c5233440132ca3a",
+      "sourceUrl": "https://huggingface.co/kernels/SZLHOLDINGS/szl-receipt-attn/tree/013dc8a884faa3ae9ac6a0835c5233440132ca3a",
+      "url": "https://huggingface.co/kernels/SZLHOLDINGS/szl-receipt-attn"
+    },
+    {
+      "id": "SZLHOLDINGS/YARQA-ATTN",
+      "modelMirrorRevision": "d6aeb4f24655c07acc155eed7acade5ad249724f",
+      "modelMirrorSourceUrl": "https://huggingface.co/SZLHOLDINGS/YARQA-ATTN/tree/d6aeb4f24655c07acc155eed7acade5ad249724f",
+      "parity": "UNKNOWN",
+      "private": false,
+      "revision": "4e0828e517e84377d0024ab3f9d0cdab7d31520d",
+      "sourceUrl": "https://huggingface.co/kernels/SZLHOLDINGS/YARQA-ATTN/tree/4e0828e517e84377d0024ab3f9d0cdab7d31520d",
+      "url": "https://huggingface.co/kernels/SZLHOLDINGS/YARQA-ATTN"
+    }
+  ],
+  "limitations": [
+    "MEASURED enumeration and source-byte validation are metadata observations; kernel imports, numerical replay, timing, energy, quality and independent evaluation NOT RUN.",
+    "Public Kernel Hub distribution surfaces are counted separately from model repositories. Same-ID distribution and model surfaces are not additional model SKUs.",
+    "Kernel and model mirror revisions are separate metadata. Revision agreement does not establish byte parity; parity remains UNKNOWN without a separate byte attestation.",
+    "Anonymous public namespace enumeration excludes private distributions. Missing or nonpublic model mirror links remain unset.",
+    "Unsigned local receipt and hash validation do not authenticate the collector or provide an independent witness."
+  ],
+  "observed_at": "2026-10-06T03:55:21.332428+00:00",
+  "schema": "szl.public-kernel-distributions/v1"
+}
