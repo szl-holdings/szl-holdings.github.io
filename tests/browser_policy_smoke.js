@@ -164,6 +164,18 @@
       filter(w, "model-search", "model-grid", "model-count", "frontier models");
     } else if (key === "showcase") {
       filter(w, "query", "grid", "count", "showcase");
+      const total = d.querySelectorAll("#grid .card").length;
+      d.getElementById("attention").click();
+      const attentionCards = [...d.querySelectorAll("#grid .card")];
+      const attentionText = attentionCards.map((card) => card.textContent.toLowerCase()).join("\n");
+      assert(attentionCards.length > 0 && attentionCards.length < total,
+        "showcase attention filter is selective");
+      for (const marker of ["unobserved", "paused", "no_app_file", "quality unverified", "repository scaffold"]) {
+        assert(attentionText.includes(marker), "showcase attention filter retains " + marker);
+      }
+      d.getElementById("attention").click();
+      assert(d.querySelectorAll("#grid .card").length === total,
+        "showcase clearing attention restores all cards");
     } else if (key === "products") {
       assert(d.querySelectorAll("a.card").length > 0 && d.body.textContent.includes("does not assert that a deployment is healthy"),
         "products remains a readable source-declared catalog");
