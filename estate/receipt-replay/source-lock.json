@@ -1,0 +1,28 @@
+{
+  "commit": "1467fcbd1ff57b955d588c73e64a541ebc16770f",
+  "dependencies": {
+    "cffi": "2.1.1",
+    "cryptography": "50.0.1",
+    "in-toto-attestation": "0.9.3",
+    "protobuf": "7.36.2",
+    "pycparser": "3.0"
+  },
+  "dependency_lock_sha256": "00e08219a5f82ba2b9ac4b0c6deb6f0e432fe278613c3bc4074addf87fb9f988",
+  "files": {
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "pyproject.toml": "d6f57fd051f8db5cab8b4026394940ac42ac49f7504488ecdb25a48abd9b5adb",
+    "src/szl_receipt/__init__.py": "171c743adfcbe64a26b1996930895563b10e82e6095bbe44ec9cdf4d2d3c5a52",
+    "src/szl_receipt/_canonical.py": "296a8168c8a458d81cd607e105392d0b0554cca7ba53f6aebc98bf2c50614085",
+    "src/szl_receipt/_intoto.py": "f60f001fb448d616d4e933edd1452d8a88906e68f2883df7b8d383df19396e90",
+    "src/szl_receipt/_sign.py": "ba49c68ec91bd01ee4fd7424d8f9fcb6651942191a56e5bc238c55fa8a8c0fcf",
+    "src/szl_receipt/attest.py": "dbb1f00391bdfd9e89e18809afe5bda87f3068900e29209a432c05e77db0bfa2",
+    "src/szl_receipt/governed_action.py": "d0c16c04851e79aeb621a6af74ef32b5aaf247a5d70115c670eefb782c829f91",
+    "src/szl_receipt/lambda_gate.py": "42c5e5df4a2d37045b8ec47048f15fc11c0d4868fa1a72ca0d90f1c844832798",
+    "src/szl_receipt/pci.py": "211fa342189be0747ad7dd1eff9ec49fdc7f9a5a81c1b82a317adc4e491a1bd5",
+    "src/szl_receipt/receipt.py": "5e4294cb81d795c0ea6aecd8fa8c5a47f62260dd25a227a462bacfbfc322d869",
+    "src/szl_receipt/sdk.py": "387137ce8fec023e07a03a6a7ebe1fc15817b67a47ec68e17d6eba003aa0d5ed"
+  },
+  "minimum_python": "3.11",
+  "repository": "https://github.com/szl-holdings/szl-receipt",
+  "schema": "szl.receipt-replay-source-lock/v1"
+}

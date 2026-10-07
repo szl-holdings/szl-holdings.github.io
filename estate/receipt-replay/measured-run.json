@@ -1,0 +1,137 @@
+{
+  "bundle_hashes": {
+    "replay.py": "554344e9f1fc0d65065917430614b51f12f3b1f9bc5748fd44cc085ef77751be",
+    "requirements.lock": "00e08219a5f82ba2b9ac4b0c6deb6f0e432fe278613c3bc4074addf87fb9f988",
+    "sample-input.json": "0a74c526872907b87d6b7676be0a0ecd0c8780cb643c615cfc4dfc9aa1be6306",
+    "source-lock.json": "e590d54e19acb59d10268256a9755b557d76edc1719ca9f3f726a1733461146b"
+  },
+  "cases": [
+    {
+      "checks": {
+        "expected_admission_status": true,
+        "expected_signature_validity": true,
+        "required_reasons_present": true
+      },
+      "envelope_sha256": "1b80c7dae24823bcfe0dc2a9a989da289e27481a7cee8b25dd9d9db2be6aa5e5",
+      "fixture_evidence_class": "SAMPLE",
+      "id": "complete_signed",
+      "key_trust": "SAMPLE_LOCAL",
+      "payload_sha256": "716f001884209488439b0948815d50273d20abbd28173f0ff58a48f452539dce",
+      "reasons": [],
+      "signature_valid": true,
+      "status": "PASS",
+      "verification_evidence_class": "MEASURED"
+    },
+    {
+      "checks": {
+        "expected_admission_status": true,
+        "expected_signature_validity": true,
+        "required_reasons_present": true
+      },
+      "envelope_sha256": "4e58740571f0c571d8e0ed3970a50983bbd012e96df36addc4eb171865e4c632",
+      "fixture_evidence_class": "SAMPLE",
+      "id": "tampered_payload",
+      "key_trust": "SAMPLE_LOCAL",
+      "payload_sha256": "eb0ddf46ef0c6ceb339758424224cafe5beeca227b757783d12cd7c5f00d3bb4",
+      "reasons": [
+        "signature-mismatch"
+      ],
+      "signature_valid": false,
+      "status": "INCOMPLETE",
+      "verification_evidence_class": "MEASURED"
+    },
+    {
+      "checks": {
+        "expected_admission_status": true,
+        "expected_signature_validity": true,
+        "required_reasons_present": true
+      },
+      "envelope_sha256": "5950befe50cc9f11647ffc9a27ec2305aedc4c7d94f8d718e4bdc2682d513787",
+      "fixture_evidence_class": "SAMPLE",
+      "id": "incomplete_signed",
+      "key_trust": "SAMPLE_LOCAL",
+      "payload_sha256": "207ec946ab80a99cb32594129739a981ff1405c9ff903f5a2d68f6cc48e7fbac",
+      "reasons": [
+        "evidence-missing:runtime_witness",
+        "evidence-role-set-mismatch",
+        "missing-subject:runtime_witness"
+      ],
+      "signature_valid": true,
+      "status": "INCOMPLETE",
+      "verification_evidence_class": "MEASURED"
+    },
+    {
+      "checks": {
+        "expected_admission_status": true,
+        "expected_signature_validity": true,
+        "required_reasons_present": true
+      },
+      "envelope_sha256": "f0bf23a60b1dd0a898a3092cdaaf9a583cdadd4a881355ff84d8f4359488ef36",
+      "fixture_evidence_class": "SAMPLE",
+      "id": "unsigned_honest",
+      "key_trust": "SAMPLE_LOCAL",
+      "payload_sha256": "814124fc99743dad51b5ed07cbf349db4244e683b1c02114bab64b27e4ee45ea",
+      "reasons": [
+        "dsse-signature-count-not-one",
+        "signature-not-present"
+      ],
+      "signature_valid": false,
+      "status": "INCOMPLETE",
+      "verification_evidence_class": "MEASURED"
+    }
+  ],
+  "conformance_checks": {
+    "passed": 12,
+    "total": 12
+  },
+  "conformant": true,
+  "effects_performed": [],
+  "energy_joules": "UNAVAILABLE",
+  "evidence_class": "MEASURED",
+  "external_services_called": [],
+  "hardware_measurement": "UNAVAILABLE",
+  "independent_replay": "NOT RUN",
+  "key_generation": {
+    "in_memory": true,
+    "performed": true,
+    "persisted_private_key_material": false,
+    "trust": "SAMPLE_LOCAL"
+  },
+  "observed_at": "2026-10-07T16:33:06.126105Z",
+  "production_authorization": "BLOCKED",
+  "production_runtime_status": "UNKNOWN",
+  "runtime": {
+    "dependencies": {
+      "cffi": "2.1.1",
+      "cryptography": "50.0.1",
+      "in-toto-attestation": "0.9.3",
+      "protobuf": "7.36.2",
+      "pycparser": "3.0"
+    },
+    "implementation": "CPython",
+    "installed_dependency_byte_integrity": "UNKNOWN",
+    "operating_system": "Windows",
+    "python": "3.11.9"
+  },
+  "schema": "szl.receipt-replay-result/v1",
+  "scope": "local verifier conformance over SAMPLE fixtures",
+  "source": {
+    "byte_binding": "MEASURED",
+    "commit": "1467fcbd1ff57b955d588c73e64a541ebc16770f",
+    "files": {
+      "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "pyproject.toml": "d6f57fd051f8db5cab8b4026394940ac42ac49f7504488ecdb25a48abd9b5adb",
+      "src/szl_receipt/__init__.py": "171c743adfcbe64a26b1996930895563b10e82e6095bbe44ec9cdf4d2d3c5a52",
+      "src/szl_receipt/_canonical.py": "296a8168c8a458d81cd607e105392d0b0554cca7ba53f6aebc98bf2c50614085",
+      "src/szl_receipt/_intoto.py": "f60f001fb448d616d4e933edd1452d8a88906e68f2883df7b8d383df19396e90",
+      "src/szl_receipt/_sign.py": "ba49c68ec91bd01ee4fd7424d8f9fcb6651942191a56e5bc238c55fa8a8c0fcf",
+      "src/szl_receipt/attest.py": "dbb1f00391bdfd9e89e18809afe5bda87f3068900e29209a432c05e77db0bfa2",
+      "src/szl_receipt/governed_action.py": "d0c16c04851e79aeb621a6af74ef32b5aaf247a5d70115c670eefb782c829f91",
+      "src/szl_receipt/lambda_gate.py": "42c5e5df4a2d37045b8ec47048f15fc11c0d4868fa1a72ca0d90f1c844832798",
+      "src/szl_receipt/pci.py": "211fa342189be0747ad7dd1eff9ec49fdc7f9a5a81c1b82a317adc4e491a1bd5",
+      "src/szl_receipt/receipt.py": "5e4294cb81d795c0ea6aecd8fa8c5a47f62260dd25a227a462bacfbfc322d869",
+      "src/szl_receipt/sdk.py": "387137ce8fec023e07a03a6a7ebe1fc15817b67a47ec68e17d6eba003aa0d5ed"
+    },
+    "repository": "https://github.com/szl-holdings/szl-receipt"
+  }
+}

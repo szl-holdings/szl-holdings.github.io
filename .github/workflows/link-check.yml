@@ -68,6 +68,11 @@ jobs:
       - name: Check public model and dataset contract reports
         run: python3 -m unittest discover -s tests -p test_hf_contract_reports.py -v
 
+      - name: Verify the source-bound replay download
+        run: |
+          python3 -m unittest discover -s tests -p test_receipt_replay_download.py -v
+          python3 scripts/build_receipt_replay_bundle.py --check
+
       - name: Check public truth and accessibility contract
         run: |
           python3 - <<'PY'
@@ -473,3 +478,45 @@ jobs:
               raise SystemExit("Public truth contract FAILED:\n - " + "\n - ".join(failures))
           print(f"OK: {len(required)} required and {len(prohibited)} prohibited truth checks passed.")
           PY
+
+  receipt-replay:
+    name: Replay source-bound SAMPLE receipt cases
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      SZL_REPLAY_SOURCE_DIR: ${{ github.workspace }}/receipt-source
+    steps:
+      - name: Harden runner
+        uses: step-security/harden-runner@e14015d583714f6e62063499dc959a02595150a1
+        with:
+          egress-policy: audit
+      - name: Checkout tutorial source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Checkout immutable canonical verifier
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          repository: szl-holdings/szl-receipt
+          ref: 1467fcbd1ff57b955d588c73e64a541ebc16770f
+          path: receipt-source
+          persist-credentials: false
+      - name: Python 3.12
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.12'
+      - name: Install reviewed dependency bytes
+        run: |
+          python -I -m venv "$RUNNER_TEMP/receipt-replay-venv"
+          "$RUNNER_TEMP/receipt-replay-venv/bin/python" -I -m pip --isolated install --require-hashes --only-binary=:all: -r estate/receipt-replay/requirements.lock
+      - name: Exercise source and import rejection controls
+        run: '"$RUNNER_TEMP/receipt-replay-venv/bin/python" -I tests/test_receipt_replay_contract.py --source-dir "$SZL_REPLAY_SOURCE_DIR"'
+      - name: Run all four SAMPLE cases
+        run: '"$RUNNER_TEMP/receipt-replay-venv/bin/python" -I estate/receipt-replay/replay.py --source-dir "$SZL_REPLAY_SOURCE_DIR" --output "$RUNNER_TEMP/receipt-replay-ci.json"'
+      - name: Retain bounded CI replay evidence
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: receipt-replay-sample-evidence
+          path: ${{ runner.temp }}/receipt-replay-ci.json
+          if-no-files-found: error
+          retention-days: 30

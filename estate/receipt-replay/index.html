@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en" data-surface="light">
+<head>
+  <meta charset="utf-8">
+<!-- szl:browser-policy v1 -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; form-action 'none'; connect-src 'none'; script-src 'none'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; media-src 'none'; manifest-src 'self'">
+<meta name="referrer" content="no-referrer">
+<!-- /szl:browser-policy -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Replay a receipt verification — SZL Holdings</title>
+  <meta name="description" content="Run four bounded receipt verification cases against pinned SZL source: signed, tampered, missing witness and unsigned. Inspect the limits and reproduce the result.">
+  <link rel="canonical" href="https://holdings.a-11-oy.com/estate/receipt-replay/">
+  <link rel="icon" href="/assets/szl/logos/szl_favicon_32.png" sizes="32x32" type="image/png">
+  <link rel="stylesheet" href="/assets/szl/szl-design-system.css">
+  <style>
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-body);line-height:1.6}
+    a{color:var(--link);text-underline-offset:.18em}a:focus-visible,summary:focus-visible{outline:3px solid var(--focus);outline-offset:4px}
+    .shell{width:min(100% - 2rem,68rem);margin-inline:auto}.top{border-bottom:1px solid var(--border);background:var(--surface)}
+    .top-inner{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;padding-block:1rem}.brand img{display:block;width:180px;height:auto}
+    nav{display:flex;gap:1.2rem;flex-wrap:wrap}main{padding-block:clamp(2rem,5vw,4rem)}.eyebrow{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-sub);font-weight:700}
+    h1{font-size:clamp(2.3rem,6vw,4.8rem);line-height:1.08;max-width:17ch;margin:.5rem 0 1.3rem}h2{font-size:1.65rem;line-height:1.2;margin:0 0 1rem}h3{font-size:1.05rem;margin:.4rem 0}
+    .intro{max-width:72ch;color:var(--text-sub);font-size:1.1rem}.actions{display:flex;flex-wrap:wrap;gap:.8rem;margin-block:1.5rem}.button{padding:.7rem 1rem;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);font-weight:700}
+    section{margin-block:2.6rem}.cases{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.case,.note{border:1px solid var(--border);border-radius:var(--radius-md);padding:1.25rem;background:var(--surface)}
+    .case p:last-child,.note p:last-child{margin-bottom:0}.outcome{font-size:.8rem;font-weight:700;letter-spacing:.05em;color:var(--text-sub)}.note{margin-block:1.5rem}
+    code{font-family:var(--font-mono);overflow-wrap:anywhere}pre{font-family:var(--font-mono);font-size:.83rem;overflow:auto;max-width:100%;padding:1.2rem;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface)}pre code{overflow-wrap:normal}
+    li{margin-block:.5rem}.steps{max-width:80ch}.revision{font-size:.85rem;overflow-wrap:anywhere;color:var(--text-sub)}details{margin-block:1.2rem}summary{cursor:pointer;font-weight:700}footer{border-top:1px solid var(--border);padding:1.5rem 0;color:var(--text-sub)}
+    @media(max-width:40rem){.cases{grid-template-columns:1fr}.top-inner{align-items:flex-start}}
+  </style>
+  <link rel="stylesheet" href="/assets/szl-responsive-apex-v3.css" data-szl-responsive-apex-v3="style" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to replay guide</a>
+  <header class="top"><div class="shell top-inner">
+    <a class="brand" href="/" aria-label="SZL Holdings home"><img src="/assets/szl/logos/szl_logo_horizontal.svg" alt="SZL Holdings" width="180" height="68"></a>
+    <nav aria-label="Site"><a href="/estate/">Software catalog</a><a href="https://a-11-oy.com">Product</a><a href="https://a11oy.net">Proof</a></nav>
+  </div></header>
+  <main class="shell" id="main" tabindex="-1">
+    <p class="eyebrow">Receipt verification · a reproducible SAMPLE</p>
+    <h1>Inspect the receipt. Try to break it.</h1>
+    <p class="intro">Run a complete signed record, change its payload, remove a required witness, and try it without a signature. One pinned verifier makes the decision in each case. You can inspect the code, reproduce the results, and see exactly what they establish.</p>
+    <div class="actions"><a class="button" href="receipt-replay.zip" download>Download the replay bundle</a><a class="button" href="#run">Run the examples</a><a class="button" href="measured-run.json">Inspect the recorded run</a></div>
+    <p class="revision">Canonical verifier source: <a href="https://github.com/szl-holdings/szl-receipt/tree/1467fcbd1ff57b955d588c73e64a541ebc16770f">szl-holdings/szl-receipt @ 1467fcbd1ff57b955d588c73e64a541ebc16770f</a>. Contract: GovernedAction v1.</p>
+    <div class="note" role="note"><p><strong>SAMPLE inputs; actual cryptographic checks.</strong> Subjects, actor, policy, witness and timestamps are synthetic. The replay generates an ephemeral ECDSA P-256 key in memory and runs the canonical signer and verifier. It never saves a key or contacts a provider. A SAMPLE pass establishes signature math and internal consistency; signer trust, external evidence and authorization remain UNKNOWN.</p></div>
+    <section aria-labelledby="cases-title">
+      <h2 id="cases-title">Four cases. Keep each outcome visible.</h2>
+      <div class="cases">
+        <article class="case" data-replay-case="complete"><p class="outcome">SAMPLE · EXPECTED PASS</p><h3>Complete signed record</h3><p>Seven required subjects and internally consistent sample evidence. The signature is actually generated and checked. This is a bounded sample result.</p></article>
+        <article class="case" data-replay-case="tampered"><p class="outcome">SAMPLE · EXPECTED INCOMPLETE</p><h3>Changed payload</h3><p>Change the action identifier while keeping the original signature. A structurally valid payload still fails with <code>signature-mismatch</code>.</p></article>
+        <article class="case" data-replay-case="missing-witness"><p class="outcome">SAMPLE · EXPECTED INCOMPLETE</p><h3>Missing witness</h3><p>Sign a record after removing its runtime witness. A valid signature cannot supply missing evidence. The required witness stays absent.</p></article>
+        <article class="case" data-replay-case="unsigned"><p class="outcome">SAMPLE · EXPECTED INCOMPLETE</p><h3>No signing key</h3><p>Emit without a private key. The signatures array stays empty, and the verifier refuses admission. No synthetic signature is substituted.</p></article>
+      </div>
+    </section>
+    <section id="run" aria-labelledby="run-title">
+      <h2 id="run-title">Run from inspected source</h2>
+      <div class="steps"><p>Use Git and CPython 3.11 or 3.12. Download and extract the bundle into a new directory, review <a href="replay.py">the runner</a> and <a href="source-lock.json">its source lock</a>, then run these PowerShell commands from that directory:</p></div>
+      <pre><code>git -c core.autocrlf=false clone --no-checkout https://github.com/szl-holdings/szl-receipt.git receipt-source
+git -C receipt-source -c core.autocrlf=false checkout --detach 1467fcbd1ff57b955d588c73e64a541ebc16770f
+py -3.11 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install --require-hashes --only-binary=:all: -r requirements.lock
+.\.venv\Scripts\python.exe -I replay.py --source-dir receipt-source --output my-run.json</code></pre>
+      <p>The runner checks the exact source revision, every package module and the dependency versions before importing the verifier. A changed source file or an unexpected module stops the replay.</p>
+      <details><summary>Linux or macOS commands</summary><pre><code>git -c core.autocrlf=false clone --no-checkout https://github.com/szl-holdings/szl-receipt.git receipt-source
+git -C receipt-source -c core.autocrlf=false checkout --detach 1467fcbd1ff57b955d588c73e64a541ebc16770f
+python3.12 -m venv .venv
+.venv/bin/python -m pip install --require-hashes --only-binary=:all: -r requirements.lock
+.venv/bin/python -I replay.py --source-dir receipt-source --output my-run.json</code></pre></details>
+      <div class="note"><p><strong>Exit status belongs to the harness.</strong> Exit 0 means all four cases returned their expected result, including the three refusals. It does not change an INCOMPLETE case into PASS. ECDSA keys and signed envelope bytes vary on every execution; source and fixture hashes and expected outcomes are reproducible.</p></div>
+    </section>
+    <section aria-labelledby="evidence-title">
+      <h2 id="evidence-title">Read the evidence before extending the claim</h2>
+      <ul>
+        <li><a href="measured-run.json">Recorded local run</a>: actual outcomes, reasons, input/source hashes, runtime versions and limits.</li>
+        <li><a href="bundle-manifest.json">Bundle manifest</a>: exact download bytes. Hashes establish integrity; the manifest is repository-declared, not an independent signer identity.</li>
+        <li><a href="source-lock.json">Canonical source lock</a> and <a href="requirements.lock">dependency lock</a>: inspect exactly what the runner loads.</li>
+        <li><a href="README.md">Full reproduction instructions</a>: inspect scope and compare a new report with the recorded outcomes.</li>
+      </ul>
+      <p>Freshness is evaluated against the SAMPLE record's fixed assessment time. The run cannot establish today's deployment state. PyPI <code>szl-receipt-dsse==0.3.3</code> is a separate published distribution; equivalence to this source revision remains UNKNOWN.</p>
+      <p>Provider operations, model inference, real-world witness execution, energy measurement and independent outside replay were NOT RUN. Production readiness and action authorization are UNKNOWN.</p>
+      <p>Built with the existing <a href="https://github.com/szl-holdings/szl-receipt/blob/1467fcbd1ff57b955d588c73e64a541ebc16770f/LICENSE">Apache-2.0 canonical library</a>, maintained <a href="https://cryptography.io/en/latest/">cryptography</a> and <a href="https://github.com/in-toto/attestation">in-toto attestation</a>. DSSE follows its <a href="https://github.com/secure-systems-lab/dsse/blob/master/protocol.md">published protocol</a>. These prior contributions retain their attribution.</p>
+    </section>
+  </main>
+  <footer><div class="shell">Control before action. Evidence after. <a href="/estate/">Return to all public software</a>.</div></footer>
+</body>
+</html>

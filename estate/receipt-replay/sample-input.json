@@ -1,0 +1,183 @@
+{
+  "cases": [
+    {
+      "expected_status": "PASS",
+      "id": "complete_signed",
+      "required_reasons": [],
+      "signature_valid": true
+    },
+    {
+      "expected_status": "INCOMPLETE",
+      "id": "tampered_payload",
+      "required_reasons": [
+        "signature-mismatch"
+      ],
+      "signature_valid": false
+    },
+    {
+      "expected_status": "INCOMPLETE",
+      "id": "incomplete_signed",
+      "required_reasons": [
+        "evidence-missing:runtime_witness",
+        "evidence-role-set-mismatch",
+        "missing-subject:runtime_witness"
+      ],
+      "signature_valid": true
+    },
+    {
+      "expected_status": "INCOMPLETE",
+      "id": "unsigned_honest",
+      "required_reasons": [
+        "signature-not-present",
+        "dsse-signature-count-not-one"
+      ],
+      "signature_valid": false
+    }
+  ],
+  "description": "Synthetic subject and evidence assertions exercise the verifier contract; they are not provider observations, authenticated identities, external witness evidence, or authorization. No effects are requested or performed.",
+  "evidence_class": "SAMPLE",
+  "inputs": {
+    "action": {
+      "id": "sample-local-replay",
+      "kind": "sample-verification",
+      "requestedAt": "2026-10-07T11:58:00Z"
+    },
+    "actor": {
+      "authenticated": true,
+      "id": "sample-producer",
+      "type": "service"
+    },
+    "assessed_at": "2026-10-07T12:00:00Z",
+    "evidence": {
+      "deployment": {
+        "maxAgeSeconds": 600,
+        "observedAt": "2026-10-07T11:59:00Z",
+        "source": "sample://fixture/deployment",
+        "status": "VERIFIED"
+      },
+      "domain": {
+        "links": [
+          "deployment"
+        ],
+        "maxAgeSeconds": 600,
+        "observedAt": "2026-10-07T11:59:00Z",
+        "source": "sample://fixture/domain",
+        "status": "VERIFIED"
+      },
+      "durable_receipt": {
+        "links": [
+          "github_source",
+          "huggingface_repository",
+          "runtime_artifact",
+          "deployment",
+          "domain",
+          "runtime_witness"
+        ],
+        "maxAgeSeconds": 600,
+        "observedAt": "2026-10-07T11:59:00Z",
+        "source": "sample://fixture/durable_receipt",
+        "status": "VERIFIED"
+      },
+      "github_source": {
+        "maxAgeSeconds": 600,
+        "observedAt": "2026-10-07T11:59:00Z",
+        "source": "sample://fixture/github_source",
+        "status": "VERIFIED"
+      },
+      "huggingface_repository": {
+        "maxAgeSeconds": 600,
+        "observedAt": "2026-10-07T11:59:00Z",
+        "source": "sample://fixture/huggingface_repository",
+        "status": "VERIFIED"
+      },
+      "runtime_artifact": {
+        "maxAgeSeconds": 600,
+        "observedAt": "2026-10-07T11:59:00Z",
+        "source": "sample://fixture/runtime_artifact",
+        "status": "VERIFIED"
+      },
+      "runtime_witness": {
+        "authority": "sample-outside-seat",
+        "independent": true,
+        "maxAgeSeconds": 600,
+        "observedAt": "2026-10-07T11:59:00Z",
+        "source": "sample://fixture/runtime_witness",
+        "status": "VERIFIED"
+      }
+    },
+    "obligations": [
+      {
+        "evidenceSubjects": [
+          "github_source",
+          "huggingface_repository",
+          "runtime_witness"
+        ],
+        "id": "sample-source-binding",
+        "status": "SATISFIED"
+      }
+    ],
+    "policy": {
+      "decision": "ALLOW",
+      "digest": {
+        "sha256": "ad64808bc9bbf584c61ed1415b94075b36e4da4d7e51f22e649eac21f910f489"
+      },
+      "evaluated": true,
+      "id": "sample-only-policy"
+    },
+    "side_effects": [],
+    "subject_roles": {
+      "deployment": "sample:deployment",
+      "domain": "sample:domain",
+      "durable_receipt": "sample:durable_receipt",
+      "github_source": "sample:github_source",
+      "huggingface_repository": "sample:huggingface_repository",
+      "runtime_artifact": "sample:runtime_artifact",
+      "runtime_witness": "sample:runtime_witness"
+    },
+    "subjects": [
+      {
+        "digest": {
+          "gitCommit": "76bb273b8c1c89bc1b6cdc4377a14d8cf2821d14"
+        },
+        "name": "sample:github_source"
+      },
+      {
+        "digest": {
+          "gitCommit": "76bb273b8c1c89bc1b6cdc4377a14d8cf2821d14"
+        },
+        "name": "sample:huggingface_repository"
+      },
+      {
+        "digest": {
+          "sha256": "3b36e145e2c120d453f948ec596cbbd376e56e5a30a7448e0f9abad2b31198d0"
+        },
+        "name": "sample:runtime_artifact"
+      },
+      {
+        "digest": {
+          "sha256": "3b36e145e2c120d453f948ec596cbbd376e56e5a30a7448e0f9abad2b31198d0"
+        },
+        "name": "sample:deployment"
+      },
+      {
+        "digest": {
+          "sha256": "0d2158adb735a95c2bb7a86755ec2d132a4ecfece79f42b8824ef99a3c87fe8f"
+        },
+        "name": "sample:domain"
+      },
+      {
+        "digest": {
+          "sha256": "ac0a2cbb1fdc4a42f9bbec1909dd1dce2061ea4a846ea9219a066bdfa5dad8f1"
+        },
+        "name": "sample:durable_receipt"
+      },
+      {
+        "digest": {
+          "gitCommit": "76bb273b8c1c89bc1b6cdc4377a14d8cf2821d14"
+        },
+        "name": "sample:runtime_witness"
+      }
+    ]
+  },
+  "schema": "szl.receipt-replay-fixtures/v1"
+}

@@ -1,0 +1,36 @@
+{
+  "schema": "szl.receipt-replay-bundle/v1",
+  "evidence_class": "DECLARED",
+  "source_revision": "1467fcbd1ff57b955d588c73e64a541ebc16770f",
+  "authority": "Repository-declared integrity; independent identity UNKNOWN",
+  "files": {
+    "LICENSE": {
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "bytes": 11357
+    },
+    "README.md": {
+      "sha256": "7386ee1da9fd035493e9d45cbe761e37bfcc0f7e25b3ad296ef59d3ad56e03ad",
+      "bytes": 4818
+    },
+    "replay.py": {
+      "sha256": "554344e9f1fc0d65065917430614b51f12f3b1f9bc5748fd44cc085ef77751be",
+      "bytes": 14936
+    },
+    "requirements.lock": {
+      "sha256": "00e08219a5f82ba2b9ac4b0c6deb6f0e432fe278613c3bc4074addf87fb9f988",
+      "bytes": 13187
+    },
+    "sample-input.json": {
+      "sha256": "0a74c526872907b87d6b7676be0a0ecd0c8780cb643c615cfc4dfc9aa1be6306",
+      "bytes": 5197
+    },
+    "source-lock.json": {
+      "sha256": "e590d54e19acb59d10268256a9755b557d76edc1719ca9f3f726a1733461146b",
+      "bytes": 1671
+    },
+    "measured-run.json": {
+      "sha256": "ec31349c083ed013dbced63219e9679a7aa97286f1305df884768403c7272129",
+      "bytes": 5450
+    }
+  }
+}
