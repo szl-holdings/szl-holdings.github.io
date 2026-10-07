@@ -95,7 +95,8 @@ class PublicCatalogTests(unittest.TestCase):
         self.assertIn('&lt;img', rendered)
         template = (ROOT / 'estate/index.html').read_text(encoding='utf-8')
         page = builder.render_page(template, catalog)
-        self.assertEqual(re.findall(r'<script.*?</script>', template, re.S), re.findall(r'<script.*?</script>', page, re.S))
+        script_pattern = r'<script\b[^>]*>.*?</script\s*>'
+        self.assertEqual(re.findall(script_pattern, template, re.S | re.I), re.findall(script_pattern, page, re.S | re.I))
         self.assertEqual(re.findall(r'<meta http-equiv="Content-Security-Policy"[^>]+>', template), re.findall(r'<meta http-equiv="Content-Security-Policy"[^>]+>', page))
         self.assertEqual(page.count('data-estate-asset '), 282)
 

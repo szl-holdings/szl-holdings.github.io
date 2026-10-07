@@ -2,7 +2,6 @@
 from __future__ import annotations
 import copy
 from contextlib import redirect_stderr, redirect_stdout
-from datetime import datetime, timezone
 import hashlib, importlib.util, io, json
 from pathlib import Path
 import tempfile, unittest
