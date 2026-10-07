@@ -8,7 +8,7 @@
     "public-snapshot.json": "24036dd0c22d66eec291851e30ad2d13e55946368f1ff99080418aeb15e103ba",
     "kernel-distributions.json": "298466da9f5d8102e65017bbc9919f5de308c025e4cb164522181a063c6190f7",
     "pypi-packages.json": "ff80979ded90364bc3122cc7b98c2fa51ec6578e6b5f98c4f973b17e119cc2a4",
-    "catalog-membership.json": "bc588d15924bee5b94ea6b2f53de461c82538b12e63e79a1143d9f3ceb6b5916"
+    "catalog-membership.json": "f8a95cb90e753f369c06923d380c2e08868fd0560c8f07ba55403752cd9709ac"
   },
   "counts": {
     "GitHub": 128,

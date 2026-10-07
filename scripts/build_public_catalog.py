@@ -230,6 +230,8 @@ def render_page(template: str, catalog: dict) -> str:
 
 def generate(root: Path) -> tuple[dict, str]:
     raw = {name: (root / "estate" / name).read_bytes() for name in INPUTS}
+    if any(b"\r" in value for value in raw.values()):
+        raise ValueError("Public catalog input bytes must use LF line endings")
     values = {name: read_json(value) for name, value in raw.items()}
     hashes = {name: hashlib.sha256(value).hexdigest() for name, value in raw.items()}
     catalog = build_catalog(*(values[name] for name in INPUTS), hashes)

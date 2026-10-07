@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import re
 import sys
+import tempfile
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -102,6 +103,18 @@ class PublicCatalogTests(unittest.TestCase):
         catalog, page = builder.generate(ROOT)
         self.assertEqual(catalog, json.loads((ROOT / 'estate/public-catalog.json').read_bytes()))
         self.assertEqual(page, (ROOT / 'estate/index.html').read_text(encoding='utf-8'))
+
+    def test_crlf_input_fails_before_a_normalized_git_blob_can_change_its_hash(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / 'estate').mkdir()
+            for name, value in self.raw.items():
+                (root / 'estate' / name).write_bytes(value.replace(b'\r\n', b'\n'))
+            name = 'catalog-membership.json'
+            target = root / 'estate' / name
+            target.write_bytes(target.read_bytes().replace(b'\n', b'\r\n'))
+            with self.assertRaisesRegex(ValueError, 'LF line endings'):
+                builder.generate(root)
 
 
 if __name__ == '__main__': unittest.main()

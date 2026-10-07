@@ -42,6 +42,8 @@ node --check tests/browser_policy_smoke.js
 
 `--check` validates committed public inputs and deterministic output without
 network requests. New membership without a matching immutable source row fails.
+The byte-bound JSON inputs require LF line endings on every platform; the
+generator rejects CRLF before hashing, and Git attributes retain LF on checkout.
 Unknown fields, duplicate identities, private rows, future dates, mutable source
 links and malformed artifact hashes fail instead of producing partial output.
 
