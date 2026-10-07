@@ -62,6 +62,7 @@ class PublicSnapshotTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.snapshot = json.loads(SNAPSHOT.read_text(encoding="utf-8"))
+        cls.catalog = json.loads((ROOT / "estate/public-catalog.json").read_text(encoding="utf-8"))
         cls.html = PAGE.read_text(encoding="utf-8")
 
     def test_only_allowlisted_public_assets_and_counts(self) -> None:
@@ -109,7 +110,7 @@ class PublicSnapshotTests(unittest.TestCase):
                     self.assertEqual(asset["ciUrl"], "")
                 self.assertEqual(asset["sourceUrl"], base + "/tree/" + revision)
 
-    def test_page_cards_equal_snapshot_and_keep_browser_policy(self) -> None:
+    def test_page_cards_equal_public_catalog_and_keep_browser_policy(self) -> None:
         parser = CardParser()
         parser.feed(self.html)
         expected = [
@@ -119,10 +120,10 @@ class PublicSnapshotTests(unittest.TestCase):
                 "sourceUrl": a["sourceUrl"],
                 "category": a["category"],
                 "search": " ".join(
-                    str(a[key]) for key in ("id", "kind", "category", "state", "ci")
+                    str(a[key]) for key in ("id", "kind", "category", "state", "summary")
                 ).lower(),
             }
-            for a in self.snapshot["assets"]
+            for a in self.catalog["assets"]
         ]
         self.assertEqual(parser.cards, expected)
         self.assertIn('href="public-snapshot.json"', self.html)
@@ -139,10 +140,10 @@ class PublicSnapshotTests(unittest.TestCase):
         selector = re.search(r'<select id="estate-category">(.*?)</select>', self.html, re.S)
         self.assertIsNotNone(selector)
         values = [html.unescape(value) for value in re.findall(r'<option value="([^"]*)">', selector.group(1))]
-        self.assertEqual(values, [""] + sorted({a["category"] for a in self.snapshot["assets"]}, key=str.casefold))
+        self.assertEqual(values, [""] + sorted({a["category"] for a in self.catalog["assets"]}, key=str.casefold))
         parser = CardParser()
         parser.feed(self.html)
-        self.assertEqual([c["category"] for c in parser.cards], [a["category"] for a in self.snapshot["assets"]])
+        self.assertEqual([c["category"] for c in parser.cards], [a["category"] for a in self.catalog["assets"]])
 
     def test_committed_kernel_registry_is_public_and_does_not_inflate_inventory(self) -> None:
         kernels = json.loads((ROOT / 'estate/kernel-distributions.json').read_text(encoding='utf-8'))
@@ -165,7 +166,7 @@ class PublicSnapshotTests(unittest.TestCase):
             self.assertEqual(row['modelMirrorSourceUrl'], mirrors[row['id']]['sourceUrl'])
             links.append(row['sourceUrl'])
         self.assertEqual(len(set(links)), 14)
-        self.assertEqual(re.findall(r'<a class="kernel-source" href="([^"]+)"', self.html), links)
+        self.assertEqual(re.findall(r'<a class="source-link kernel-source" href="([^"]+)"', self.html), links)
         region = self.html.split('<!-- estate-kernels:start -->')[1].split('<!-- estate-kernels:end -->')[0]
         self.assertNotIn('data-estate-asset', region)
         self.assertNotIn('<script', region)

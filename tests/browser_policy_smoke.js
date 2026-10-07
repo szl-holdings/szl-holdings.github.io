@@ -180,12 +180,24 @@
       assert(cards.length > 0 && visible().length === cards.length, "estate initializes all inventory cards");
       agrees("estate initial live count agrees");
       assert(d.querySelectorAll(".research-exhibit").length === 3, "estate has three source-linked exhibits");
-      assert(d.querySelectorAll(".kernel-distributions a.kernel-source").length > 0,
+      assert(d.querySelectorAll('[data-kind="HF Kernel"] a.kernel-source').length > 0,
         "estate lists separate immutable Kernel Hub distributions");
       type(w, "estate-search", "__szl_browser_policy_no_match_8cf065cb__");
       assert(visible().length === 0, "estate unmatched search yields zero");
       agrees("estate zero-match live count agrees");
       type(w, "estate-search", "");
+      for (const assetType of ["GitHub", "HF Model", "HF Dataset", "HF Space", "HF Kernel", "PyPI"]) {
+        select(kind, assetType);
+        assert(visible().length > 0 && visible().every((card) => card.dataset.kind === assetType), "estate filters " + assetType);
+        agrees("estate count for " + assetType);
+      }
+      select(kind, "PyPI");
+      select(category, "Python package");
+      type(w, "estate-search", "szl-receipt-dsse");
+      assert(visible().length === 1 && visible()[0].textContent.includes("py -m pip install szl-receipt-dsse=="), "estate PyPI search exposes a pinned release recipe");
+      agrees("estate pinned package recipe count");
+      type(w, "estate-search", "");
+      select(category, "");
       select(kind, "HF Model");
       select(category, "Kernel / software");
       assert(visible().length > 0 && visible().every((card) =>
@@ -199,7 +211,7 @@
       select(kind, "");
       select(category, "");
       assert(visible().length === cards.length, "estate clearing all filters restores inventory only");
-      agrees("estate restored count excludes exhibits and distributions");
+      agrees("estate restored count includes all six namespaces and excludes curated exhibits");
       assert(d.documentElement.scrollWidth <= w.innerWidth + 1, "estate compact viewport has no horizontal overflow");
     }
   }

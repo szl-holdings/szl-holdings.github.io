@@ -1,0 +1,1313 @@
+{
+  "schema": "szl.public-catalog-membership/v1",
+  "observed_at": "2026-10-07T15:18:34.605555+00:00",
+  "evidence_class": "MEASURED",
+  "scope": "Anonymous public enumeration only; source states and runtime NOT RUN.",
+  "assets": [
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/.github",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/a-11-oy.github.io",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/a11oy",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/a11oy-factory",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/a11oy-net",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/anatomy",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/ayllu",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/ayllu-hf-space",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/ci-witness-action",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/cosmos",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/counsel",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/david-leads",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/developers",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/docs-site",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/energy-attest-holo",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/evidence-doctrine",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/evidence-studio",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/evidence-typed-formula-governance",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/fail-closed-governed-ai-services",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/frontier-bench",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/governance-as-code",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/governed-inference-meter",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/governed-norm-holo",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/governed-receipt-spec",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/hatun-mcp",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/holographic-unify",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/immune",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/immune-lattice",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/khipu-consensus",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/khipu-lab",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/khipu-pages",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/khipu-sda-core",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/khipu-x1",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/killinchu",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/lambda-gate-holo",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/lean-kernel",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/lutar-lean",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/lyte-lattice",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/lyte-services",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/nexus",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/ouroboros",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/platform",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/puriq-live",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/quant-curve",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/receipt-chain-live",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/registry-mirror",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/retrieval-bench",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/sda",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-atelier",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-block-kv",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-blocked",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-brand",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-build-env",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-calibration",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-ci-witness",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-command-lab",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-constellation",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-cookbook",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-crosscheck",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-doctrine",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-drift",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-eclipse",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-energy-attest",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-engine-bench",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-evidence-core",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-evidence-litellm",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-evidence-mandate",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-experiments",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-fleet-overlay",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-forge",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-formula-ledger",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-formulas",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-frontier",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-gov",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-governed-norm",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-govsign",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-gpu-bridge",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-guardrail-receipt",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-holdings.github.io",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-invariants",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-kernels",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-kernels-live",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-khipu",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-lake",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-lambda-gate",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-maskmod",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-mesh",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-microscopy-pilot",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-nemo",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-openshell-receipts",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-organ-integrity",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-otel-mesh",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-ouroboros",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-papers",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-pin",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-platform",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-provctl",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-provctl-live",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-quant",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-quant-bench",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-quant-witness",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-real-estate",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-receipt",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-receipt-attn",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-retrieval-bench",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-router",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-runbook-catalog",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-science-forum-corpus",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-second-brain",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-seismic-review",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-serve",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-skills",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-sovereign-os",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-substrate",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-telemetry",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-trust",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-typesafe-triage",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-uds-deployment",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-vertical-forge",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szl-wave1-report",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/szlholdings.com",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/the-grid",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/uds-bundles",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/vertical-services",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/vsp-otel",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/warhacker-demo",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/yarqa",
+      "private": false
+    },
+    {
+      "kind": "GitHub",
+      "id": "szl-holdings/YARQA-ATTN",
+      "private": false
+    },
+    {
+      "kind": "HF Dataset",
+      "id": "SZLHOLDINGS/a11oy-verifiable-corpus",
+      "private": false
+    },
+    {
+      "kind": "HF Dataset",
+      "id": "SZLHOLDINGS/alloy-sovereign-eval-runs",
+      "private": false
+    },
+    {
+      "kind": "HF Dataset",
+      "id": "SZLHOLDINGS/canonical-formulas-v1",
+      "private": false
+    },
+    {
+      "kind": "HF Dataset",
+      "id": "SZLHOLDINGS/doctrine-v10-v11",
+      "private": false
+    },
+    {
+      "kind": "HF Dataset",
+      "id": "SZLHOLDINGS/energy-attested-runs",
+      "private": false
+    },
+    {
+      "kind": "HF Dataset",
+      "id": "SZLHOLDINGS/governed-agent-bench",
+      "private": false
+    },
+    {
+      "kind": "HF Dataset",
+      "id": "SZLHOLDINGS/governed-receipts-bench",
+      "private": false
+    },
+    {
+      "kind": "HF Dataset",
+      "id": "SZLHOLDINGS/k-verify-benchmark-v1",
+      "private": false
+    },
+    {
+      "kind": "HF Dataset",
+      "id": "SZLHOLDINGS/killinchu-osint-corpus",
+      "private": false
+    },
+    {
+      "kind": "HF Dataset",
+      "id": "SZLHOLDINGS/lean-proofs-v1",
+      "private": false
+    },
+    {
+      "kind": "HF Dataset",
+      "id": "SZLHOLDINGS/lean-theorem-tree",
+      "private": false
+    },
+    {
+      "kind": "HF Dataset",
+      "id": "SZLHOLDINGS/model-bom",
+      "private": false
+    },
+    {
+      "kind": "HF Dataset",
+      "id": "SZLHOLDINGS/oac-clinical-transport-observability-synthetic",
+      "private": false
+    },
+    {
+      "kind": "HF Dataset",
+      "id": "SZLHOLDINGS/ouroboros-arxiv-preprint",
+      "private": false
+    },
+    {
+      "kind": "HF Dataset",
+      "id": "SZLHOLDINGS/rag-corpus-v1",
+      "private": false
+    },
+    {
+      "kind": "HF Dataset",
+      "id": "SZLHOLDINGS/readiness-runs",
+      "private": false
+    },
+    {
+      "kind": "HF Dataset",
+      "id": "SZLHOLDINGS/receipted-unsloth",
+      "private": false
+    },
+    {
+      "kind": "HF Dataset",
+      "id": "SZLHOLDINGS/release-assets",
+      "private": false
+    },
+    {
+      "kind": "HF Dataset",
+      "id": "SZLHOLDINGS/szl-1-doctrine-sft",
+      "private": false
+    },
+    {
+      "kind": "HF Dataset",
+      "id": "SZLHOLDINGS/szl-artifacts",
+      "private": false
+    },
+    {
+      "kind": "HF Dataset",
+      "id": "SZLHOLDINGS/szl-estate-graph",
+      "private": false
+    },
+    {
+      "kind": "HF Dataset",
+      "id": "SZLHOLDINGS/szl-frontier-covenant",
+      "private": false
+    },
+    {
+      "kind": "HF Dataset",
+      "id": "SZLHOLDINGS/szl-frontier-evaluation-receipts",
+      "private": false
+    },
+    {
+      "kind": "HF Dataset",
+      "id": "SZLHOLDINGS/szl-lake",
+      "private": false
+    },
+    {
+      "kind": "HF Dataset",
+      "id": "SZLHOLDINGS/szl-marketing-factbase",
+      "private": false
+    },
+    {
+      "kind": "HF Dataset",
+      "id": "SZLHOLDINGS/szl-quant-sft-v1",
+      "private": false
+    },
+    {
+      "kind": "HF Dataset",
+      "id": "SZLHOLDINGS/szl-science-forum-corpus",
+      "private": false
+    },
+    {
+      "kind": "HF Dataset",
+      "id": "SZLHOLDINGS/szl-second-brain-frontier-candidates",
+      "private": false
+    },
+    {
+      "kind": "HF Dataset",
+      "id": "SZLHOLDINGS/szl-second-brain-inrepo",
+      "private": false
+    },
+    {
+      "kind": "HF Dataset",
+      "id": "SZLHOLDINGS/SZLHOLDINGS",
+      "private": false
+    },
+    {
+      "kind": "HF Dataset",
+      "id": "SZLHOLDINGS/test-results",
+      "private": false
+    },
+    {
+      "kind": "HF Dataset",
+      "id": "SZLHOLDINGS/thesis-corpus-v18",
+      "private": false
+    },
+    {
+      "kind": "HF Dataset",
+      "id": "SZLHOLDINGS/thesis-v18-formal-verification",
+      "private": false
+    },
+    {
+      "kind": "HF Dataset",
+      "id": "SZLHOLDINGS/uds-bundles-v1",
+      "private": false
+    },
+    {
+      "kind": "HF Dataset",
+      "id": "SZLHOLDINGS/uds-governance-receipts",
+      "private": false
+    },
+    {
+      "kind": "HF Dataset",
+      "id": "SZLHOLDINGS/uds-spans-receipts",
+      "private": false
+    },
+    {
+      "kind": "HF Dataset",
+      "id": "SZLHOLDINGS/why-we-lead",
+      "private": false
+    },
+    {
+      "kind": "HF Kernel",
+      "id": "SZLHOLDINGS/governed-inference-meter",
+      "private": false
+    },
+    {
+      "kind": "HF Kernel",
+      "id": "SZLHOLDINGS/szl-block-kv",
+      "private": false
+    },
+    {
+      "kind": "HF Kernel",
+      "id": "SZLHOLDINGS/szl-blocked",
+      "private": false
+    },
+    {
+      "kind": "HF Kernel",
+      "id": "SZLHOLDINGS/szl-formulas",
+      "private": false
+    },
+    {
+      "kind": "HF Kernel",
+      "id": "SZLHOLDINGS/szl-governed-norm",
+      "private": false
+    },
+    {
+      "kind": "HF Kernel",
+      "id": "SZLHOLDINGS/szl-govsign",
+      "private": false
+    },
+    {
+      "kind": "HF Kernel",
+      "id": "SZLHOLDINGS/szl-invariants",
+      "private": false
+    },
+    {
+      "kind": "HF Kernel",
+      "id": "SZLHOLDINGS/szl-kernels",
+      "private": false
+    },
+    {
+      "kind": "HF Kernel",
+      "id": "SZLHOLDINGS/szl-lambda-gate",
+      "private": false
+    },
+    {
+      "kind": "HF Kernel",
+      "id": "SZLHOLDINGS/szl-maskmod",
+      "private": false
+    },
+    {
+      "kind": "HF Kernel",
+      "id": "SZLHOLDINGS/szl-ouroboros",
+      "private": false
+    },
+    {
+      "kind": "HF Kernel",
+      "id": "SZLHOLDINGS/szl-provctl",
+      "private": false
+    },
+    {
+      "kind": "HF Kernel",
+      "id": "SZLHOLDINGS/szl-receipt-attn",
+      "private": false
+    },
+    {
+      "kind": "HF Kernel",
+      "id": "SZLHOLDINGS/YARQA-ATTN",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/A11OY-MINI",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/a11oy-v19-substrate",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/brain-navigator-r2",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/chaski",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/chaski-5050",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/chaski-r2",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/chaski-r4",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/governed-inference-meter",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/KHIPU-R2",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/khipu-r3",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/MiniEmbed-Nano",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/Moons-Nano",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/oac-clinical-transport-health-v1",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/oac-system-health-v1",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/ReceiptAgent-Nano",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/szl-block-kv",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/szl-blocked",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/szl-energy-attest",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/SZL-Forge-1.5B-ReceiptAgent",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/szl-formulas",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/szl-governed-norm",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/szl-govsign",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/szl-invariants",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/szl-kernels",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/szl-khipu",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/SZL-Khipu-1.5B",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/SZL-Khipu-1.5B-abstain",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/SZL-Khipu-1.5B-GGUF",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/szl-khipu-kernels",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/szl-lambda-gate",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/szl-maskmod",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/szl-nemo",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/szl-ouroboros",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/szl-provctl",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/szl-receipt-attn",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/szl-receiptagent-qwen35-0.8b-v2",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/szl-receiptagent-qwen35-0.8b-v2-merged",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/szl-receiptagent-qwen35-0.8b-v3",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/szl-receiptagent-qwen35-0.8b-v3-authenticated",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/szl-training-scripts",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/szl-triage-linear-development-v1",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/szl-triage-qwen3.5-0.8b-lora",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/szl-triage-qwen3.5-0.8b-lora-study5",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/szl-triage-retrain",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/TinyKhipu-Nano",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/WILLAY",
+      "private": false
+    },
+    {
+      "kind": "HF Model",
+      "id": "SZLHOLDINGS/YARQA-ATTN",
+      "private": false
+    },
+    {
+      "kind": "HF Space",
+      "id": "SZLHOLDINGS/a11oy",
+      "private": false
+    },
+    {
+      "kind": "HF Space",
+      "id": "SZLHOLDINGS/ayllu",
+      "private": false
+    },
+    {
+      "kind": "HF Space",
+      "id": "SZLHOLDINGS/counsel",
+      "private": false
+    },
+    {
+      "kind": "HF Space",
+      "id": "SZLHOLDINGS/david-leads",
+      "private": false
+    },
+    {
+      "kind": "HF Space",
+      "id": "SZLHOLDINGS/finance",
+      "private": false
+    },
+    {
+      "kind": "HF Space",
+      "id": "SZLHOLDINGS/foundation-confirmation-v2",
+      "private": false
+    },
+    {
+      "kind": "HF Space",
+      "id": "SZLHOLDINGS/gdw-frontier",
+      "private": false
+    },
+    {
+      "kind": "HF Space",
+      "id": "SZLHOLDINGS/governed-receipt-verifier",
+      "private": false
+    },
+    {
+      "kind": "HF Space",
+      "id": "SZLHOLDINGS/holographic-unify",
+      "private": false
+    },
+    {
+      "kind": "HF Space",
+      "id": "SZLHOLDINGS/immune",
+      "private": false
+    },
+    {
+      "kind": "HF Space",
+      "id": "SZLHOLDINGS/immune-lattice",
+      "private": false
+    },
+    {
+      "kind": "HF Space",
+      "id": "SZLHOLDINGS/killinchu",
+      "private": false
+    },
+    {
+      "kind": "HF Space",
+      "id": "SZLHOLDINGS/llm-router-live",
+      "private": false
+    },
+    {
+      "kind": "HF Space",
+      "id": "SZLHOLDINGS/lyte",
+      "private": false
+    },
+    {
+      "kind": "HF Space",
+      "id": "SZLHOLDINGS/oac-system-health-lab",
+      "private": false
+    },
+    {
+      "kind": "HF Space",
+      "id": "SZLHOLDINGS/prove-it",
+      "private": false
+    },
+    {
+      "kind": "HF Space",
+      "id": "SZLHOLDINGS/sentra",
+      "private": false
+    },
+    {
+      "kind": "HF Space",
+      "id": "SZLHOLDINGS/szl-atelier",
+      "private": false
+    },
+    {
+      "kind": "HF Space",
+      "id": "SZLHOLDINGS/szl-bench-suite",
+      "private": false
+    },
+    {
+      "kind": "HF Space",
+      "id": "SZLHOLDINGS/szl-brand-campaign",
+      "private": false
+    },
+    {
+      "kind": "HF Space",
+      "id": "SZLHOLDINGS/szl-command-lab",
+      "private": false
+    },
+    {
+      "kind": "HF Space",
+      "id": "SZLHOLDINGS/szl-constellation",
+      "private": false
+    },
+    {
+      "kind": "HF Space",
+      "id": "SZLHOLDINGS/szl-forge-lab",
+      "private": false
+    },
+    {
+      "kind": "HF Space",
+      "id": "SZLHOLDINGS/szl-foundation-confirmation",
+      "private": false
+    },
+    {
+      "kind": "HF Space",
+      "id": "SZLHOLDINGS/szl-frontier",
+      "private": false
+    },
+    {
+      "kind": "HF Space",
+      "id": "SZLHOLDINGS/szl-khipu",
+      "private": false
+    },
+    {
+      "kind": "HF Space",
+      "id": "SZLHOLDINGS/szl-marketing-1.1",
+      "private": false
+    },
+    {
+      "kind": "HF Space",
+      "id": "SZLHOLDINGS/szl-model-inference-lab",
+      "private": false
+    },
+    {
+      "kind": "HF Space",
+      "id": "SZLHOLDINGS/szl-router-control",
+      "private": false
+    },
+    {
+      "kind": "HF Space",
+      "id": "SZLHOLDINGS/szl-seismic-review",
+      "private": false
+    },
+    {
+      "kind": "HF Space",
+      "id": "SZLHOLDINGS/szl-typesafe-triage",
+      "private": false
+    },
+    {
+      "kind": "HF Space",
+      "id": "SZLHOLDINGS/terra",
+      "private": false
+    },
+    {
+      "kind": "HF Space",
+      "id": "SZLHOLDINGS/the-grid",
+      "private": false
+    },
+    {
+      "kind": "HF Space",
+      "id": "SZLHOLDINGS/vertical-services",
+      "private": false
+    },
+    {
+      "kind": "HF Space",
+      "id": "SZLHOLDINGS/yarqa",
+      "private": false
+    }
+  ]
+}
