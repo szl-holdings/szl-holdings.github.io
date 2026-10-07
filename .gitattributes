@@ -4,5 +4,7 @@
 app.js text eol=lf
 assets/szl-flow-v2.js text eol=lf
 assets/szl-responsive-apex-v3.js text eol=lf
+# Catalog receipts bind the exact JSON bytes checked out on every platform.
+estate/*.json text eol=lf
 # Vendored SZL KANCHAY (founder direction) files are byte-for-byte copies; never normalize them.
 assets/szl/** -text

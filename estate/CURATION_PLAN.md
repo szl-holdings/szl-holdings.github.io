@@ -2,7 +2,10 @@
 
 **ROADMAP — curation priorities, not completed experiments or release approval.**
 
-The public atlas is a dated repository inventory. GitHub is the source of truth;
+The public catalog joins current public membership and published PyPI metadata
+with separately dated repository and kernel snapshots. Its six namespaces are
+searchable together; distribution surfaces are not a count of unique projects.
+See [catalog scope and regeneration](./CATALOG.md). GitHub is the source of truth;
 Hugging Face distributes model artifacts, datasets, software mirrors and kernel
 packages. The company front door is [holdings.a-11-oy.com](https://holdings.a-11-oy.com),
 the product is [a-11-oy.com](https://a-11-oy.com), and the proof surface is
