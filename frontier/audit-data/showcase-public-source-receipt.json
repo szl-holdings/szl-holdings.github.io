@@ -1,0 +1,57 @@
+{
+  "schema": "szl.public-org-showcase-successor-source/v1",
+  "evidence_class": "DECLARED",
+  "generated_at_utc": "2026-10-06T03:21:26.404577+00:00",
+  "github_owner": "szl-holdings",
+  "hf_owner": "SZLHOLDINGS",
+  "public_assets": 247,
+  "public_types": {
+    "GitHub": 128,
+    "HF Model": 47,
+    "HF Dataset": 37,
+    "HF Space": 35
+  },
+  "source_sha256": {
+    "showcase-public.html": "e15f74d3a370a3dfc8d2642c4629031fd26299da2052aea490217219c77c13ea",
+    "assets-inventory.csv": "0028eec048fb78ca533cf6099f42b7b7b1d3aae14371b2da6cc96657a0cd22eb",
+    "audit-receipt.json": "d6fde8d71df408ef6a2a9bc838c3312ee139d652b03efa80be5572a4e3916610",
+    "audit-data/estate-summary.json": "77b7a0382e5edf8ad6a4ec4a6631856669b851aec0f6c4138851484e14998e3d",
+    "audit-data/github-repositories.json": "2e3f49b6f72fd900774d9e9759a317fee4671262ec10c2aea2c0336accad838c",
+    "audit-data/huggingface-repositories.json": "1e4a973e29f44d4e93803e7c0eb5569e3be83cf10f3f707fd48725e4363b24d5"
+  },
+  "public_projection_sha256": {
+    "assets-inventory.csv": "b199a1c91dfe3c5691b61cb7db63cf797e5f642a6a1216af3120bb60f778cab3",
+    "embedded_assets": "f505028043899046831a6135810416ba7ee5ba4f81c10c1261f188155078118d",
+    "embedded_findings": "7beb03da5027e6dba178a1a27537dce8432bbde77b9c7ffdd04e3bcb50aa798a",
+    "embedded_coverage": "6fbee9f032f2b41fad969009856be5ccb9db0a962fea4faa5308d62f61247866"
+  },
+  "projection": {
+    "required_private_value": false,
+    "allowed_owners": {
+      "GitHub": [
+        "szl-holdings"
+      ],
+      "Hugging Face": [
+        "SZLHOLDINGS"
+      ]
+    },
+    "local_inventory_included": false,
+    "raw_audit_included": false
+  },
+  "verification": {
+    "evidence_class": "MEASURED",
+    "scope": "Local hash, schema, literal privacy, owner, URL, revision, and duplicate checks only."
+  },
+  "signed": false,
+  "deployment_evidence": "UNAVAILABLE",
+  "independent_witness": "UNAVAILABLE",
+  "limitations": [
+    "Structural/documentation audit; repository code and model inference were not executed.",
+    "Workflow status comes from latest 100 default-branch runs, grouped by workflow; absent workflows remain unverified.",
+    "Card claims and listed artifact files are observations, not independent model evaluation or cryptographic verification.",
+    "File count and evidence-file absence are unknown when files_coverage is UNKNOWN; dataset files are fetched from exact-revision metadata.",
+    "Private inventory is outside this public snapshot; only records with literal private=false owned by szl-holdings or SZLHOLDINGS are included.",
+    "Classic branch protection and ruleset metadata were read; rule applicability, org security alerts, buckets and live endpoint responses remain unverified.",
+    "DECLARED source metadata is not deployment, runtime, evaluation, proof, or authorization evidence."
+  ]
+}

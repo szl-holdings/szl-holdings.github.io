@@ -36,7 +36,8 @@ health.
 | [`estate/model-contracts.csv`](./estate/model-contracts.csv) · [`estate/dataset-readiness.csv`](./estate/dataset-readiness.csv) | Public-only metadata contract review of all 47 model and 37 dataset repositories, matched to snapshot revisions |
 | [`estate/CURATION_PLAN.md`](./estate/CURATION_PLAN.md) | ROADMAP for reproducible contributions, outside replay and a focused launch |
 | [`frontier/index.html`](./frontier/index.html) | Dated public math and model atlas: 39 selected software projects and all 47 public Hub model repositories in the captured snapshot |
-| [`frontier/showcase-public.html`](./frontier/showcase-public.html) | Searchable 244-asset public organization inventory: 127 GitHub repositories, 47 Hub model-type repositories, 36 datasets, and 34 Spaces; private assets are excluded |
+| [`frontier/showcase-public.html`](./frontier/showcase-public.html) | Searchable 247-asset public organization inventory: 128 GitHub repositories, 47 Hub model-type repositories, 37 datasets, and 35 Spaces; only literal-public records owned by `szl-holdings` or `SZLHOLDINGS` are included |
+| [`frontier/audit-data/showcase-public-source-receipt.json`](./frontier/audit-data/showcase-public-source-receipt.json) | Unsigned source-projection receipt for the 6 October UTC full showcase successor; hashes, privacy/owner allowlist checks and counts are local evidence, not publication or runtime proof |
 | [`frontier/audit-data/hf-public-overlay.json`](./frontier/audit-data/hf-public-overlay.json) | Revision-pinned public Hub additions and `szl-formulas` software mirror refresh checked after the base census; the new ReceiptAgent ID is labeled as a one-file repository scaffold, and `SZLHOLDINGS/README` is an organization card represented by a static Space |
 | [`frontier/proof-to-code-matrix.csv`](./frontier/proof-to-code-matrix.csv) | Revision-pinned 21-callable formula inventory; proof-to-code mappings remain unverified |
 | [`frontier/build_proof_code_matrix.py`](./frontier/build_proof_code_matrix.py) | Source-only matrix rebuild script; requires clean formula and Lean checkouts at the recorded SHAs |
@@ -62,7 +63,7 @@ network-free:
 python3 -m http.server 8000
 ```
 
-The frontier bundle includes a [public source receipt](./frontier/audit-data/public-source-receipt.json) and a separate [proof-to-code review](./frontier/PROOF_TO_CODE.md). It shows repository metadata and reported source status; it does not claim model qualification, deployment, or a proof that Python implementations refine Lean statements. The public boundary is checked by `python3 tests/test_frontier_public_assets.py` in the link workflow.
+The focused math/model atlas retains its [public source receipt](./frontier/audit-data/public-source-receipt.json); the broader organization inventory has a separate [successor source-projection receipt](./frontier/audit-data/showcase-public-source-receipt.json). Keeping the receipts separate avoids rebinding the older formula/source review to a newer metadata census. Both surfaces show source metadata and reported status; neither claims model qualification, deployment, runtime, authorization, or a proof that Python implementations refine Lean statements. The public boundary is checked by `python3 tests/test_frontier_public_assets.py` in the link workflow.
 
 The `szl-formulas` software entry now pins the public [model mirror](https://huggingface.co/SZLHOLDINGS/szl-formulas/tree/d3f2dbbb7c59bef13cf1b755edf487bfb2960653) at `d3f2dbbb7c59bef13cf1b755edf487bfb2960653` and the separate [kernel package](https://huggingface.co/kernels/SZLHOLDINGS/szl-formulas/tree/04082bd2f7ca43ce7c00d47069cb5a25d662116c) at `04082bd2f7ca43ce7c00d47069cb5a25d662116c`. Their byte-identical public source bindings name [GitHub source `a3f9dcab6e3564ce384bd3c095f64cc2121059f9`](https://github.com/szl-holdings/szl-formulas/tree/a3f9dcab6e3564ce384bd3c095f64cc2121059f9); all 32 managed-file hash readbacks matched the bindings. This establishes the observed mirror bytes, not runtime behavior, scientific validity, or a proof-to-code refinement. The proof-to-code review remains pinned to its separately inspected source revision.
 
@@ -73,7 +74,9 @@ literal `private: false` records in `szl-holdings` and `SZLHOLDINGS`, constructs
 canonical links at exact revisions, and retains bounded CI and model promotion
 limits. A missing public revision stops generation. The current snapshot was
 generated from the completed 5 October local audit at `2026-10-06T03:50:43.441667+00:00`.
-The earlier `/frontier/` inventory retains its own separately recorded scope.
+The `/frontier/` focused math/model atlas retains its earlier separately recorded
+scope; its full organization showcase uses the distinct
+`2026-10-06T03:21:26.404577+00:00` source-projection receipt described above.
 
 The CLI requires a private `public-source-binding.json` at the **audit root**,
 beside `audit-receipt.json`, `execution-source-binding.json`, `execution/`,
