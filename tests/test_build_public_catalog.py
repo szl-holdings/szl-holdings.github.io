@@ -1,6 +1,7 @@
 """Catalog controls: complete public membership, safe links and no claim upgrade."""
 import copy
 import hashlib
+from html.parser import HTMLParser
 import json
 from pathlib import Path
 import re
@@ -11,6 +12,34 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
 import build_public_catalog as builder
+
+
+def script_blocks(text):
+    class Scripts(HTMLParser):
+        def __init__(self):
+            super().__init__(convert_charrefs=False)
+            self.blocks = []
+            self.current = None
+
+        def handle_starttag(self, tag, attrs):
+            if tag == 'script':
+                self.current = [self.get_starttag_text(), []]
+
+        def handle_data(self, data):
+            if self.current is not None:
+                self.current[1].append(data)
+
+        def handle_endtag(self, tag):
+            if tag == 'script' and self.current is not None:
+                self.blocks.append((self.current[0], ''.join(self.current[1])))
+                self.current = None
+
+    parser = Scripts()
+    parser.feed(text)
+    parser.close()
+    if parser.current is not None:
+        raise ValueError('Unclosed or malformed script block')
+    return parser.blocks
 
 
 class PublicCatalogTests(unittest.TestCase):
@@ -95,10 +124,14 @@ class PublicCatalogTests(unittest.TestCase):
         self.assertIn('&lt;img', rendered)
         template = (ROOT / 'estate/index.html').read_text(encoding='utf-8')
         page = builder.render_page(template, catalog)
-        script_pattern = r'<script\b[^>]*>.*?</script\s*>'
-        self.assertEqual(re.findall(script_pattern, template, re.S | re.I), re.findall(script_pattern, page, re.S | re.I))
+        self.assertEqual(script_blocks(template), script_blocks(page))
         self.assertEqual(re.findall(r'<meta http-equiv="Content-Security-Policy"[^>]+>', template), re.findall(r'<meta http-equiv="Content-Security-Policy"[^>]+>', page))
         self.assertEqual(page.count('data-estate-asset '), 282)
+
+    def test_script_comparison_keeps_uppercase_and_rejects_malformed_end_tags(self):
+        self.assertEqual(script_blocks('<SCRIPT>sample</SCRIPT>'), [('<SCRIPT>', 'sample')])
+        with self.assertRaisesRegex(ValueError, 'malformed script'):
+            script_blocks('<script>sample</script\t\n bar>')
 
     def test_committed_catalog_is_reproducible_from_validated_input_bytes(self):
         catalog, page = builder.generate(ROOT)
