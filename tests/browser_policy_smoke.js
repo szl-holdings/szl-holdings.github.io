@@ -14,6 +14,7 @@
     ["showcase", "/frontier/showcase-public.html"],
     ["products", "/products/"],
     ["estate", "/estate/"],
+    ["receipt_replay", "/estate/receipt-replay/"],
   ];
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   const pinnedRoutes = new Set(["root", "brain", "khipu"]);
@@ -213,6 +214,17 @@
       assert(visible().length === cards.length, "estate clearing all filters restores inventory only");
       agrees("estate restored count includes all six namespaces and excludes curated exhibits");
       assert(d.documentElement.scrollWidth <= w.innerWidth + 1, "estate compact viewport has no horizontal overflow");
+      assert(d.querySelector('a[href="receipt-replay/"]'), "estate exposes the receipt replay tutorial");
+    } else if (key === "receipt_replay") {
+      const cases = [...d.querySelectorAll("[data-replay-case]")];
+      assert(cases.length === 4, "receipt replay displays four sample cases");
+      assert(cases.filter((card) => card.textContent.includes("EXPECTED INCOMPLETE")).length === 3,
+        "receipt replay preserves three incomplete outcomes");
+      assert(d.querySelector('a[download][href="receipt-replay.zip"]'), "receipt replay exposes its bundle download");
+      assert(d.querySelector('a[href="measured-run.json"]'), "receipt replay exposes its recorded limits and outcomes");
+      assert([...d.querySelectorAll("pre")].every((block) => block.textContent.includes(" -I replay.py")),
+        "receipt replay instructions require isolated Python imports");
+      assert(d.documentElement.scrollWidth <= w.innerWidth + 1, "receipt replay compact viewport has no horizontal overflow");
     }
   }
 

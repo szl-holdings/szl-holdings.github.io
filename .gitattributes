@@ -6,5 +6,12 @@ assets/szl-flow-v2.js text eol=lf
 assets/szl-responsive-apex-v3.js text eol=lf
 # Catalog receipts bind the exact JSON bytes checked out on every platform.
 estate/*.json text eol=lf
+# Replay downloads and their receipts retain exact bytes on every platform.
+estate/receipt-replay/*.py text eol=lf
+estate/receipt-replay/*.json text eol=lf
+estate/receipt-replay/*.md text eol=lf
+estate/receipt-replay/*.lock text eol=lf
+estate/receipt-replay/LICENSE text eol=lf
+estate/receipt-replay/*.zip -text
 # Vendored SZL KANCHAY (founder direction) files are byte-for-byte copies; never normalize them.
 assets/szl/** -text

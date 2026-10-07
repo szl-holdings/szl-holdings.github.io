@@ -28,10 +28,11 @@ from urllib.parse import parse_qs, unquote, urljoin, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 PREFIX = "/__browser_policy_smoke__/"
-ROUTES = ("root", "brain", "khipu", "frontier", "showcase", "products", "estate")
+ROUTES = ("root", "brain", "khipu", "frontier", "showcase", "products", "estate", "receipt_replay")
 DOCUMENTS = (
     "index.html", "brain/index.html", "khipu/index.html", "frontier/index.html",
     "frontier/showcase-public.html", "products/index.html", "estate/index.html",
+    "estate/receipt-replay/index.html",
 )
 PINNED_ROUTES = ("root", "brain", "khipu")
 PROBE_KINDS = ("connect", "image", "script_no_integrity", "script_wrong_integrity", "script_tampered")
