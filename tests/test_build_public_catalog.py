@@ -128,10 +128,18 @@ class PublicCatalogTests(unittest.TestCase):
         self.assertEqual(re.findall(r'<meta http-equiv="Content-Security-Policy"[^>]+>', template), re.findall(r'<meta http-equiv="Content-Security-Policy"[^>]+>', page))
         self.assertEqual(page.count('data-estate-asset '), 282)
 
-    def test_script_comparison_keeps_uppercase_and_rejects_malformed_end_tags(self):
+    def test_script_comparison_keeps_uppercase_and_rejects_unclosed_blocks(self):
         self.assertEqual(script_blocks('<SCRIPT>sample</SCRIPT>'), [('<SCRIPT>', 'sample')])
         with self.assertRaisesRegex(ValueError, 'malformed script'):
-            script_blocks('<script>sample</script\t\n bar>')
+            script_blocks('<script>sample')
+        # Python versions differ in recovery of end-tag attributes. A recovered
+        # block must remain in the comparison; an explicit rejection is also safe.
+        try:
+            recovered = script_blocks('<script>sample</script\t\n bar>')
+        except ValueError:
+            pass
+        else:
+            self.assertEqual(recovered, [('<script>', 'sample')])
 
     def test_committed_catalog_is_reproducible_from_validated_input_bytes(self):
         catalog, page = builder.generate(ROOT)
