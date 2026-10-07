@@ -2,8 +2,8 @@
 
 The estate page joins six public namespaces: GitHub repositories, Hugging Face
 models, datasets, Spaces and kernels, and published PyPI distributions. The
-committed catalog contains 281 surfaces: 128 GitHub, 47 models, 37 datasets,
-35 Spaces, 14 kernels and 20 PyPI packages. A project can have several surfaces.
+committed catalog contains 282 surfaces: 128 GitHub, 47 models, 37 datasets,
+36 Spaces, 14 kernels and 20 PyPI packages. A project can have several surfaces.
 
 ## Evidence and limits
 

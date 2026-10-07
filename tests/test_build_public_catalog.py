@@ -29,7 +29,7 @@ class PublicCatalogTests(unittest.TestCase):
         self.assertEqual(catalog['counts']['HF Model'], 47)
         self.assertEqual(catalog['counts']['HF Kernel'], 14)
         self.assertEqual(catalog['counts']['PyPI'], 20)
-        self.assertEqual(len(catalog['assets']), 281)
+        self.assertEqual(len(catalog['assets']), 282)
         self.assertTrue(all(r['private'] is False for r in catalog['assets']))
         self.assertEqual(catalog['source_snapshot_observed_at'], self.inputs[0]['observed_at'])
         self.assertNotEqual(catalog['observed_at'], catalog['source_snapshot_observed_at'])
@@ -97,7 +97,7 @@ class PublicCatalogTests(unittest.TestCase):
         page = builder.render_page(template, catalog)
         self.assertEqual(re.findall(r'<script.*?</script>', template, re.S), re.findall(r'<script.*?</script>', page, re.S))
         self.assertEqual(re.findall(r'<meta http-equiv="Content-Security-Policy"[^>]+>', template), re.findall(r'<meta http-equiv="Content-Security-Policy"[^>]+>', page))
-        self.assertEqual(page.count('data-estate-asset '), 281)
+        self.assertEqual(page.count('data-estate-asset '), 282)
 
     def test_committed_catalog_is_reproducible_from_validated_input_bytes(self):
         catalog, page = builder.generate(ROOT)

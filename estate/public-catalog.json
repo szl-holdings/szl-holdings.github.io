@@ -1,6 +1,6 @@
 {
   "schema": "szl.public-software-catalog/v1",
-  "observed_at": "2026-10-07T15:18:34.605555+00:00",
+  "observed_at": "2026-10-07T15:34:31.464286+00:00",
   "source_snapshot_observed_at": "2026-10-06T03:50:43.441667+00:00",
   "kernel_snapshot_observed_at": "2026-10-06T03:55:21.332428+00:00",
   "pypi_snapshot_observed_at": "2026-10-07T15:15:49.074449+00:00",
@@ -8,13 +8,13 @@
     "public-snapshot.json": "24036dd0c22d66eec291851e30ad2d13e55946368f1ff99080418aeb15e103ba",
     "kernel-distributions.json": "298466da9f5d8102e65017bbc9919f5de308c025e4cb164522181a063c6190f7",
     "pypi-packages.json": "ff80979ded90364bc3122cc7b98c2fa51ec6578e6b5f98c4f973b17e119cc2a4",
-    "catalog-membership.json": "f8a95cb90e753f369c06923d380c2e08868fd0560c8f07ba55403752cd9709ac"
+    "catalog-membership.json": "1801596d9e61910a4da4a655332f7153279d3607e82fe58323a1dc6f3674cedf"
   },
   "counts": {
     "GitHub": 128,
     "HF Model": 47,
     "HF Dataset": 37,
-    "HF Space": 35,
+    "HF Space": 36,
     "HF Kernel": 14,
     "PyPI": 20
   },
@@ -3666,6 +3666,22 @@
       "revision": "4c43d85d03bd42828b93cf45adb274f7e5213ec5",
       "sourceUrl": "https://huggingface.co/spaces/SZLHOLDINGS/prove-it/tree/4c43d85d03bd42828b93cf45adb274f7e5213ec5",
       "url": "https://huggingface.co/spaces/SZLHOLDINGS/prove-it",
+      "state": "DECLARED RUNNING; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
+      "ciUrl": "",
+      "archived": false,
+      "private": false,
+      "summary": "Dated exact-source inventory record.",
+      "installCommand": null,
+      "requiresPython": null,
+      "sourcePackageBinding": null
+    },
+    {
+      "id": "SZLHOLDINGS/README",
+      "kind": "HF Space",
+      "category": "static",
+      "revision": "7cd34c6cbfb4594561ee30e2d7b272add875ce1e",
+      "sourceUrl": "https://huggingface.co/spaces/SZLHOLDINGS/README/tree/7cd34c6cbfb4594561ee30e2d7b272add875ce1e",
+      "url": "https://huggingface.co/spaces/SZLHOLDINGS/README",
       "state": "DECLARED RUNNING; source/runtime parity UNKNOWN; runtime behavior NOT RUN",
       "ciUrl": "",
       "archived": false,
