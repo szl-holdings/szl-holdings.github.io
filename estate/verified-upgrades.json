@@ -1,0 +1,40 @@
+{
+  "schema": "szl.public-verified-upgrades/v1",
+  "observed_at": "2026-10-08T04:54:40Z",
+  "entries": [
+    {
+      "private": false,
+      "id": "receipt-verifier",
+      "kind": "receipt",
+      "evidence_class": "MEASURED",
+      "source_repository": "szl-holdings/szl-receipt",
+      "source_revision": "2761f9eaedde02de540a7aecf182290695affe4d",
+      "ci_run_id": 37722208933,
+      "test_count": 535,
+      "subtest_count": 12,
+      "sample_case_count": 12,
+      "mismatch_count": 0,
+      "key_trust": "REPO_DECLARED",
+      "production_authorization": "BLOCKED"
+    },
+    {
+      "private": false,
+      "id": "receipt-agent-v2-adapter",
+      "kind": "adapter",
+      "evidence_class": "MEASURED",
+      "source_repository": "szl-holdings/szl-forge",
+      "source_revision": "3a0c073bd8e46d40980254d37c608be8d16f07bd",
+      "hub_repository": "SZLHOLDINGS/szl-receiptagent-qwen35-0.8b-v2",
+      "hub_revision": "bd642c7ff18736248e84fd83dace7ab368fc2288",
+      "adapter_bytes": 43346432,
+      "adapter_sha256": "885fc29fcb4cf55c280dc085fdb0a40f40d6b946fee400dd5e4ed3459fe6334f",
+      "signed_receipts_verified": 3,
+      "signature_algorithm": "Ed25519",
+      "snapshot_origin": "DECLARED",
+      "key_trust": "REPO_DECLARED",
+      "production_authorization": "BLOCKED",
+      "publication_eligible": false,
+      "held_out_evaluation_replay": "NOT RUN"
+    }
+  ]
+}

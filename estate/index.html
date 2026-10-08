@@ -68,6 +68,29 @@
     <p class="intro">Find the public GitHub projects, Hugging Face models, datasets, Spaces, Kernel Hub software and released Python packages. Open a source tree, inspect an artifact card, visit a Space, or find a pinned package release.</p><p class="intro">Public membership and PyPI metadata were observed on 7 October 2026. Repository and kernel source states retain their 6 October snapshot dates; the catalog does not assert current runtime health.</p>
     <div class="limits" role="note"><p><strong>Snapshot boundary:</strong> This is not a live monitor or release certificate. A Space marked RUNNING does not establish source/runtime parity. Listed model artifacts do not establish quality or held-out evaluation.</p><p><a href="public-catalog.json">Complete catalog JSON</a> · <a href="catalog-membership.json">Public membership JSON</a> · <a href="pypi-packages.json">PyPI versions and declared artifact hashes</a> · <a href="public-snapshot.json">Dated repository JSON</a> · <a href="kernel-distributions.json">Kernel JSON</a> · <a href="model-contracts.csv">Model contract review CSV</a> · <a href="dataset-readiness.csv">Dataset readiness CSV</a> · <a href="CURATION_PLAN.md">Curation and upgrade plan</a> · <a href="/frontier/showcase-public.html">Open the earlier Frontier inventory</a></p></div>
     <section class="asset" aria-labelledby="receipt-replay-title"><p class="asset-kind">Start with a reproducible SAMPLE</p><h2 id="receipt-replay-title"><a href="receipt-replay/">Run four receipt-verification cases</a></h2><p>Inspect a signed record, change its payload, remove its witness and try it unsigned. Download the source-bound replay and compare the actual verifier outcomes with their explicit limits.</p><p class="exhibit-limit">Synthetic inputs; actual cryptographic checks. Independent replay and production qualification NOT RUN.</p></section>
+    <!-- verified-upgrades:start -->
+<section class="research-exhibits" aria-labelledby="verified-upgrades-title">
+  <p class="eyebrow">Measured upgrades · exact source links</p>
+  <h2 id="verified-upgrades-title">Recheck the bytes behind the work</h2>
+  <p class="intro">These results cover named tests and artifacts at fixed revisions. Each card names what was measured and the authority it does not grant. <a href="verified-upgrades.json">Read the public evidence data</a> and <a href="VERIFIED_UPGRADES.md">its replay scope</a>.</p>
+  <div class="grid">
+    <article class="asset" id="upgrade-receipt-verifier">
+      <p class="asset-kind">Receipt verification · MEASURED on SAMPLE inputs</p>
+      <h3>12 cases across signature, artifact and source checks</h3>
+      <p>At the merged source revision, 535 tests and 12 subtests passed. The strict benchmark recorded 12 SAMPLE cases and 0 mismatches. Downloaded CI artifacts were checked against their provider digests.</p>
+      <p><a href="https://github.com/szl-holdings/szl-receipt/tree/2761f9eaedde02de540a7aecf182290695affe4d">Source at commit</a> · <a href="https://github.com/szl-holdings/szl-receipt/actions/runs/37722208933">Main CI run</a> · <a href="https://github.com/szl-holdings/szl-receipt/blob/2761f9eaedde02de540a7aecf182290695affe4d/conformance/README.md">Replay instructions</a></p>
+      <p class="exhibit-limit">Fixture key trust: REPO_DECLARED. Production authorization: BLOCKED. Independent external replay NOT RUN.</p>
+    </article>
+    <article class="asset" id="upgrade-receipt-agent-v2-adapter">
+      <p class="asset-kind">Proposal-only model artifact · MEASURED bytes</p>
+      <h3>ReceiptAgent v2 adapter: exact byte check</h3>
+      <p>43,346,432 opaque adapter bytes matched SHA-256 <code>885fc29fcb4cf55c280dc085fdb0a40f40d6b946fee400dd5e4ed3459fe6334f</code>. Three Ed25519 receipt signatures and their declared links verified with Forge and OpenSSL at the pinned release revision.</p>
+      <p><a href="https://github.com/szl-holdings/szl-forge/tree/3a0c073bd8e46d40980254d37c608be8d16f07bd">Forge source at commit</a> · <a href="https://huggingface.co/SZLHOLDINGS/szl-receiptagent-qwen35-0.8b-v2/tree/bd642c7ff18736248e84fd83dace7ab368fc2288">Immutable Hub files</a> · <a href="https://github.com/szl-holdings/szl-forge/blob/3a0c073bd8e46d40980254d37c608be8d16f07bd/docs/published-artifact-byte-verification.md">Replay instructions</a></p>
+      <p class="exhibit-limit">Snapshot origin: DECLARED; key trust: REPO_DECLARED. Held-out evaluation replay NOT RUN. Publication eligibility false; production authorization BLOCKED. This check covers one adapter and its declared receipts.</p>
+    </article>
+  </div>
+</section>
+<!-- verified-upgrades:end -->
     <details class="research-exhibits"><summary>Three source exhibits: receipts, mathematics and proposal-only agents</summary>
     <!-- estate-exhibits:start -->
 <section class="research-exhibits" aria-labelledby="estate-exhibits-title">
