@@ -1,6 +1,6 @@
 {
   "schema": "szl.public-verified-upgrades/v1",
-  "observed_at": "2026-10-08T04:54:40Z",
+  "observed_at": "2026-10-08T05:19:25Z",
   "entries": [
     {
       "private": false,
@@ -35,6 +35,26 @@
       "production_authorization": "BLOCKED",
       "publication_eligible": false,
       "held_out_evaluation_replay": "NOT RUN"
+    },
+    {
+      "private": false,
+      "id": "pypi-archive-byte-readback",
+      "kind": "pypi",
+      "evidence_class": "MEASURED",
+      "source_repository": "szl-holdings/szl-holdings.github.io",
+      "source_revision": "7623a44f51af3c07a41e2f8dea81753a95a7edee",
+      "source_manifest_sha256": "ff80979ded90364bc3122cc7b98c2fa51ec6578e6b5f98c4f973b17e119cc2a4",
+      "readback_sha256": "aac6abfffcafaf5ebf1b6d892926b7bac9adc0489b63c68159ee0e47a5d2a6da",
+      "package_count": 20,
+      "artifact_count": 40,
+      "matched_count": 40,
+      "measured_total_bytes": 1632195,
+      "source_package_binding": "UNKNOWN",
+      "attestation_signature_verification": "UNKNOWN",
+      "installation": "NOT RUN",
+      "extraction": "NOT RUN",
+      "independent_replay": "NOT RUN",
+      "production_authorization": "BLOCKED"
     }
   ]
 }

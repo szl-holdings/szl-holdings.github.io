@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 from datetime import datetime, timezone
+import hashlib
 import html
 import json
 from pathlib import Path
@@ -22,6 +23,10 @@ FORGE_SOURCE_REVISION = "3a0c073bd8e46d40980254d37c608be8d16f07bd"
 MODEL_REPO = "SZLHOLDINGS/szl-receiptagent-qwen35-0.8b-v2"
 MODEL_REVISION = "bd642c7ff18736248e84fd83dace7ab368fc2288"
 MODEL_SHA256 = "885fc29fcb4cf55c280dc085fdb0a40f40d6b946fee400dd5e4ed3459fe6334f"
+PYPI_SOURCE_REVISION = "7623a44f51af3c07a41e2f8dea81753a95a7edee"
+PYPI_MANIFEST_SHA256 = "ff80979ded90364bc3122cc7b98c2fa51ec6578e6b5f98c4f973b17e119cc2a4"
+PYPI_REPORT_SHA256 = "aac6abfffcafaf5ebf1b6d892926b7bac9adc0489b63c68159ee0e47a5d2a6da"
+PYPI_REPORT = ROOT / "estate" / "pypi-artifact-byte-readback.json"
 
 
 def _read_json(raw: bytes) -> dict:
@@ -61,7 +66,7 @@ def validate(document: dict) -> list[dict]:
     if when.tzinfo is None or when > datetime.now(timezone.utc):
         raise ValueError("invalid observation time")
     entries = document["entries"]
-    if not isinstance(entries, list) or not 1 <= len(entries) <= 2:
+    if not isinstance(entries, list) or not 1 <= len(entries) <= 3:
         raise ValueError("unexpected evidence count")
     seen: set[str] = set()
     for entry in entries:
@@ -99,9 +104,38 @@ def validate(document: dict) -> list[dict]:
                     or entry["snapshot_origin"] != "DECLARED"
                     or entry["publication_eligible"] is not False or entry["held_out_evaluation_replay"] != "NOT RUN"):
                 raise ValueError("adapter measured byte/profile binding mismatch")
+        elif kind == "pypi":
+            fields = {"private", "id", "kind", "evidence_class", "source_repository", "source_revision",
+                      "source_manifest_sha256", "readback_sha256", "package_count", "artifact_count",
+                      "matched_count", "measured_total_bytes", "source_package_binding",
+                      "attestation_signature_verification", "installation", "extraction", "independent_replay",
+                      "production_authorization"}
+            if (set(entry) != fields or entry["id"] != "pypi-archive-byte-readback"
+                    or entry["source_repository"] != "szl-holdings/szl-holdings.github.io"):
+                raise ValueError("PyPI public field allowlist mismatch")
+            _sha(entry["source_revision"], 40)
+            _sha(entry["source_manifest_sha256"], 64)
+            _sha(entry["readback_sha256"], 64)
+            if (entry["source_revision"] != PYPI_SOURCE_REVISION
+                    or entry["source_manifest_sha256"] != PYPI_MANIFEST_SHA256
+                    or entry["readback_sha256"] != PYPI_REPORT_SHA256
+                    or hashlib.sha256(PYPI_REPORT.read_bytes()).hexdigest() != PYPI_REPORT_SHA256):
+                raise ValueError("PyPI readback source or report bytes differ")
+            report = _read_json(PYPI_REPORT.read_bytes())
+            if any(entry[field] != report[field] for field in ("package_count", "artifact_count", "matched_count", "measured_total_bytes",
+                                                                  "source_package_binding", "attestation_signature_verification",
+                                                                  "installation", "extraction", "independent_replay")):
+                raise ValueError("PyPI public summary differs from measured report")
+            if (entry["package_count"], entry["artifact_count"], entry["matched_count"], entry["measured_total_bytes"]) != (20, 40, 40, 1632195):
+                raise ValueError("PyPI byte-readback denominator mismatch")
+            if (entry["source_package_binding"] != "UNKNOWN" or entry["attestation_signature_verification"] != "UNKNOWN"
+                    or any(entry[field] != "NOT RUN" for field in ("installation", "extraction", "independent_replay"))):
+                raise ValueError("PyPI byte-readback boundary mismatch")
         else:
             raise ValueError("unsupported public evidence kind")
-        if entry["id"] in seen or entry["evidence_class"] != "MEASURED" or entry["key_trust"] != "REPO_DECLARED" or entry["production_authorization"] != "BLOCKED":
+        if (entry["id"] in seen or entry["evidence_class"] != "MEASURED"
+                or (kind != "pypi" and entry["key_trust"] != "REPO_DECLARED")
+                or entry["production_authorization"] != "BLOCKED"):
             raise ValueError("public evidence boundary mismatch")
         seen.add(entry["id"])
     if "receipt-verifier" not in seen:
@@ -130,7 +164,7 @@ def render(entries: list[dict]) -> str:
                 '      <p class="exhibit-limit">Fixture key trust: REPO_DECLARED. Production authorization: BLOCKED. Independent external replay NOT RUN.</p>',
                 '    </article>',
             ]
-        else:
+        elif row["kind"] == "adapter":
             hub = f"https://huggingface.co/{MODEL_REPO}/tree/{row['hub_revision']}"
             lines += [
                 '    <article class="asset" id="upgrade-receipt-agent-v2-adapter">',
@@ -139,6 +173,17 @@ def render(entries: list[dict]) -> str:
                 f'      <p>{row["adapter_bytes"]:,} opaque adapter bytes matched SHA-256 <code>{row["adapter_sha256"]}</code>. Three Ed25519 receipt signatures and their declared links verified with Forge and OpenSSL at the pinned release revision.</p>',
                 f'      <p><a href="{html.escape(source, quote=True)}">Forge source at commit</a> · <a href="{html.escape(hub, quote=True)}">Immutable Hub files</a> · <a href="https://github.com/{FORGE_REPO}/blob/{row["source_revision"]}/docs/published-artifact-byte-verification.md">Replay instructions</a></p>',
                 '      <p class="exhibit-limit">Snapshot origin: DECLARED; key trust: REPO_DECLARED. Held-out evaluation replay NOT RUN. Publication eligibility false; production authorization BLOCKED. This check covers one adapter and its declared receipts.</p>',
+                '    </article>',
+            ]
+        else:
+            manifest = f"https://github.com/{row['source_repository']}/blob/{row['source_revision']}/estate/pypi-packages.json"
+            lines += [
+                '    <article class="asset" id="upgrade-pypi-archive-byte-readback">',
+                '      <p class="asset-kind">Public PyPI archives · MEASURED bytes</p>',
+                '      <h3>40 archive files matched the dated PyPI manifest</h3>',
+                f'      <p>All {row["matched_count"]} listed wheel and source archives across {row["package_count"]} packages matched their provider-declared SHA-256 and byte lengths. The streamed opaque files totaled {row["measured_total_bytes"]:,} bytes.</p>',
+                f'      <p><a href="{html.escape(manifest, quote=True)}">Pinned public manifest</a> · <a href="pypi-artifact-byte-readback.json">Per-file readback</a> · <a href="PYPI_ARTIFACT_READBACK.md">Replay scope</a></p>',
+                '      <p class="exhibit-limit">GitHub source-to-package binding: UNKNOWN. PyPI attestation signature verification: UNKNOWN. Install, extract and independent replay: NOT RUN. Production authorization: BLOCKED.</p>',
                 '    </article>',
             ]
     lines += ['  </div>', '</section>']

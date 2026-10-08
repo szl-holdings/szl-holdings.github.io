@@ -9,6 +9,8 @@ bound to site source commit
 On 8 October, all 40 exact `files.pythonhosted.org` URLs returned HTTP 200 and
 the streamed **1,632,195 bytes** matched their declared per-file SHA-256 and
 size. No downloaded archive was saved, opened, imported, extracted or installed.
+The older metadata snapshot still says `artifact_bytes_verified: NOT RUN` because
+its collector did not perform this later, separately dated byte readback.
 
 The provider hash is a **DECLARED** PyPI metadata value; this readback measures
 consistency with the bytes served at the pinned URLs. PyPI provenance

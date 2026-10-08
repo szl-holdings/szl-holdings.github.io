@@ -19,6 +19,14 @@ measures adapter and receipt integrity; it does not
 rerun held-out evaluations, establish independent signer identity, authorize
 autonomous action or certify model quality. Its model remains proposal-only.
 
+The PyPI archive card binds a dated public package manifest to a per-file
+[byte readback](pypi-artifact-byte-readback.json). The verifier streamed all 40
+listed wheel and source archives as opaque bytes and matched their PyPI-declared
+SHA-256 and lengths (1,632,195 bytes in total). The [replay scope](PYPI_ARTIFACT_READBACK.md)
+keeps GitHub source-to-package binding and attestation signature verification
+UNKNOWN; installation, extraction and independent replay were NOT RUN. This
+does not authorize production use or establish package behavior.
+
 Regenerate and check the committed page:
 
 ```sh
