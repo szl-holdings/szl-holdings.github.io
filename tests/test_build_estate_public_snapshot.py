@@ -182,6 +182,7 @@ class PublicBuilderTests(unittest.TestCase):
         rows = [hf_row("kernel", is_kernel=True),
                 hf_row("weights", files=["adapter.safetensors"]),
                 hf_row("numeric", files=["fixture.npz"]),
+                hf_row("oac-advisory", files=["model.json", "ops_health.py"]),
                 hf_row("recipe", files=["scripts/train.py"]),
                 hf_row("unknown", files_coverage="UNKNOWN", files=["model.gguf"]),
                 hf_row("stale-files", files_revision=OTHER_SHA, files=["model.gguf"]),
@@ -192,8 +193,9 @@ class PublicBuilderTests(unittest.TestCase):
         result = {a["id"].split("/")[1]: a for a in self.project(hf=rows)["assets"]}
         for name, category in (("kernel", "Kernel / software"),
                                ("weights", "Tensor / GGUF artifact"),
-                               ("numeric", "Numeric archive / fixture"),
-                               ("recipe", "Training recipe"),
+                                ("numeric", "Numeric archive / fixture"),
+                                ("oac-advisory", "Software / JSON coefficients"),
+                                ("recipe", "Training recipe"),
                                ("unknown", "Artifact inventory UNKNOWN"),
                                ("stale-files", "Artifact inventory UNKNOWN")):
             self.assertEqual(result[name]["category"], category)

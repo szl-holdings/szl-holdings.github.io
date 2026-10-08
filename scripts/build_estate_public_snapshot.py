@@ -323,6 +323,8 @@ def model_category(row: dict, revision: str) -> str:
         return "Tensor / GGUF artifact"
     if any(value.endswith((".npz", ".npy")) for value in files):
         return "Numeric archive / fixture"
+    if "model.json" in files and any(value.endswith(".py") for value in files):
+        return "Software / JSON coefficients"
     if any(value.startswith(("train", "scripts/train")) for value in files):
         return "Training recipe"
     return "Other artifact / documentation"
