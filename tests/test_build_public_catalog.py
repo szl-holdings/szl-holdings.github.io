@@ -55,10 +55,15 @@ class PublicCatalogTests(unittest.TestCase):
         catalog = self.build()
         keys = {(r['kind'], r['id']) for r in catalog['assets'] if r['kind'] != 'PyPI'}
         self.assertEqual(keys, builder.membership_keys(self.inputs[3]))
-        self.assertEqual(catalog['counts']['HF Model'], 47)
+        self.assertEqual(catalog['counts']['HF Model'], 48)
         self.assertEqual(catalog['counts']['HF Kernel'], 14)
         self.assertEqual(catalog['counts']['PyPI'], 20)
-        self.assertEqual(len(catalog['assets']), 282)
+        self.assertEqual(len(catalog['assets']), 283)
+        advisory = next(row for row in catalog['assets']
+                        if row['id'] == 'SZLHOLDINGS/oac-ops-health-v2')
+        self.assertEqual(advisory['kind'], 'HF Model')
+        self.assertEqual(advisory['category'], 'Software / JSON coefficients')
+        self.assertEqual(advisory['revision'], 'a824a32d91a383d33a1e1e595f11b8362d1b4efa')
         self.assertTrue(all(r['private'] is False for r in catalog['assets']))
         self.assertEqual(catalog['source_snapshot_observed_at'], self.inputs[0]['observed_at'])
         self.assertNotEqual(catalog['observed_at'], catalog['source_snapshot_observed_at'])
@@ -126,7 +131,7 @@ class PublicCatalogTests(unittest.TestCase):
         page = builder.render_page(template, catalog)
         self.assertEqual(script_blocks(template), script_blocks(page))
         self.assertEqual(re.findall(r'<meta http-equiv="Content-Security-Policy"[^>]+>', template), re.findall(r'<meta http-equiv="Content-Security-Policy"[^>]+>', page))
-        self.assertEqual(page.count('data-estate-asset '), 282)
+        self.assertEqual(page.count('data-estate-asset '), 283)
 
     def test_script_comparison_keeps_uppercase_and_rejects_unclosed_blocks(self):
         self.assertEqual(script_blocks('<SCRIPT>sample</SCRIPT>'), [('<SCRIPT>', 'sample')])

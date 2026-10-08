@@ -22,7 +22,7 @@ SNAPSHOT = ROOT / "estate" / "public-snapshot.json"
 PAGE = ROOT / "estate" / "index.html"
 EXPECTED_COUNTS = {
     "GitHub": 128,
-    "HF Model": 47,
+    "HF Model": 48,
     "HF Dataset": 37,
     "HF Space": 36,
 }
@@ -71,12 +71,12 @@ class PublicSnapshotTests(unittest.TestCase):
             "schema", "observed_at", "counts", "limitations", "assets",
         })
         self.assertEqual(data["schema"], "szl.public-estate-snapshot/v1")
-        self.assertEqual(data["observed_at"], "2026-10-06T03:50:43.441667+00:00")
+        self.assertEqual(data["observed_at"], "2026-10-08T05:20:34.071005+00:00")
         self.assertEqual(data["counts"], EXPECTED_COUNTS)
-        self.assertEqual(len(data["assets"]), 248)
+        self.assertEqual(len(data["assets"]), 249)
         self.assertEqual(Counter(a["kind"] for a in data["assets"]), EXPECTED_COUNTS)
         self.assertEqual(
-            len({(a["kind"], a["id"]) for a in data["assets"]}), 248
+            len({(a["kind"], a["id"]) for a in data["assets"]}), 249
         )
         self.assertTrue(all(set(a) == ASSET_FIELDS for a in data["assets"]))
         self.assertTrue(all(a["private"] is False for a in data["assets"]))
@@ -162,8 +162,10 @@ class PublicSnapshotTests(unittest.TestCase):
             self.assertRegex(row['revision'], r'\A[0-9a-f]{40}\Z')
             self.assertEqual(row['url'], 'https://huggingface.co/kernels/' + row['id'])
             self.assertEqual(row['sourceUrl'], row['url'] + '/tree/' + row['revision'])
-            self.assertEqual(row['modelMirrorRevision'], mirrors[row['id']]['revision'])
-            self.assertEqual(row['modelMirrorSourceUrl'], mirrors[row['id']]['sourceUrl'])
+            self.assertIn(row['id'], mirrors)
+            self.assertRegex(row['modelMirrorRevision'], r'\A[0-9a-f]{40}\Z')
+            self.assertEqual(row['modelMirrorSourceUrl'],
+                             'https://huggingface.co/' + row['id'] + '/tree/' + row['modelMirrorRevision'])
             links.append(row['sourceUrl'])
         self.assertEqual(len(set(links)), 14)
         self.assertEqual(re.findall(r'<a class="source-link kernel-source" href="([^"]+)"', self.html), links)

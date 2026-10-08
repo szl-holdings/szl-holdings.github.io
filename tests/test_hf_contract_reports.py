@@ -29,6 +29,13 @@ class PublicContractReportTests(unittest.TestCase):
                     self.assertEqual(row['evidence_class_this_review'], 'MEASURED')
                 else:
                     self.assertEqual(row['row_or_split_validation'], 'NOT_RUN')
+            if kind == 'HF Model':
+                advisory = next(row for row in rows if row['id'] == 'SZLHOLDINGS/oac-ops-health-v2')
+                self.assertEqual(advisory['artifact_class'], 'custom_json_coefficients_plus_kernel_software')
+                self.assertEqual(advisory['disposition'], 'SYNTHETIC_OPERATIONAL_ADVISORY')
+                self.assertEqual(advisory['forge_binding'], 'NOT_IN_CURRENT_FORGE_ARTIFACT_BINDING')
+                self.assertIn('REPORTED', advisory['published_evidence'])
+                self.assertIn('unsigned', advisory['remaining_gate'])
 
 
 if __name__ == '__main__':
