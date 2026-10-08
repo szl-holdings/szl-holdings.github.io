@@ -82,6 +82,27 @@ class VerifiedUpgradesTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     builder.validate(bad)
 
+    def test_pypi_card_is_bound_to_exact_report_and_keeps_unknowns(self) -> None:
+        base = copy.deepcopy(self.document)
+        entries = builder.validate(base)
+        card = entries[2]
+        self.assertEqual(card["kind"], "pypi")
+        self.assertEqual((card["package_count"], card["artifact_count"], card["matched_count"]), (20, 40, 40))
+        region = builder.render(entries)
+        self.assertIn("40 archive files matched", region)
+        self.assertIn("source-to-package binding: UNKNOWN", region)
+        self.assertNotIn('data-estate-asset data-kind=', region)
+        for field, value in (("readback_sha256", "0" * 64), ("source_manifest_sha256", "0" * 64),
+                             ("source_revision", "0" * 40), ("matched_count", 41),
+                             ("source_package_binding", "VERIFIED"),
+                             ("attestation_signature_verification", "VERIFIED"),
+                             ("installation", "PASS"), ("production_authorization", "AUTHORIZED")):
+            with self.subTest(field=field):
+                bad = copy.deepcopy(base)
+                bad["entries"][2][field] = value
+                with self.assertRaises(ValueError):
+                    builder.validate(bad)
+
 
 if __name__ == "__main__":
     unittest.main()
