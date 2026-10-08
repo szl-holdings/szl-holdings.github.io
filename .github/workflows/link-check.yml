@@ -68,6 +68,11 @@ jobs:
       - name: Check public model and dataset contract reports
         run: python3 -m unittest discover -s tests -p test_hf_contract_reports.py -v
 
+      - name: Check public measured upgrade evidence and exact static rendering
+        run: |
+          python3 -m unittest discover -s tests -p test_verified_upgrades.py -v
+          python3 scripts/build_verified_upgrades.py --check
+
       - name: Verify the source-bound replay download
         run: |
           python3 -m unittest discover -s tests -p test_receipt_replay_download.py -v
