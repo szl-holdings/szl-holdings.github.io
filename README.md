@@ -29,11 +29,11 @@ health.
 |---|---|
 | [`index.html`](./index.html) | Static company, investor, portfolio, and developer landing |
 | [`products/index.html`](./products/index.html) | Source-declared product catalog; not live health |
-| [`estate/index.html`](./estate/index.html) | Searchable 8 October UTC public source snapshot: 128 GitHub repositories, 48 model repositories, 37 datasets and 36 Spaces; category filters, three research exhibits and exact source links |
+| [`estate/index.html`](./estate/index.html) | Searchable 11 October UTC public source snapshot: 128 GitHub repositories, 48 model repositories, 37 datasets and 37 Spaces; category filters, three research exhibits and exact source links |
 | [`scripts/build_estate_public_snapshot.py`](./scripts/build_estate_public_snapshot.py) | Offline rebuild from an explicit completed audit and UTC collection timestamp; excludes private or unknown-privacy rows and rejects missing source revisions |
 | [`estate/kernel-distributions.json`](./estate/kernel-distributions.json) | Separate census of 14 public Kernel Hub packages with exact package and model-mirror revisions; parity remains UNKNOWN |
 | [`estate/exhibits.json`](./estate/exhibits.json) | Three DECLARED source-only research exhibits; immutable links resolve only from the public snapshot |
-| [`estate/model-contracts.csv`](./estate/model-contracts.csv) · [`estate/dataset-readiness.csv`](./estate/dataset-readiness.csv) | Public-only metadata contract review of all 48 model and 37 dataset repositories, matched to snapshot revisions |
+| [`estate/model-contracts.csv`](./estate/model-contracts.csv) · [`estate/dataset-readiness.csv`](./estate/dataset-readiness.csv) | Earlier public-only metadata contract reviews of all 48 model and 37 dataset repositories; three model and four dataset revisions predate the 11 October snapshot |
 | [`estate/CURATION_PLAN.md`](./estate/CURATION_PLAN.md) | ROADMAP for reproducible contributions, outside replay and a focused launch |
 | [`frontier/index.html`](./frontier/index.html) | Dated public math and model atlas: 39 selected software projects and all 47 public Hub model repositories in the captured snapshot |
 | [`frontier/showcase-public.html`](./frontier/showcase-public.html) | Searchable 247-asset public organization inventory: 128 GitHub repositories, 47 Hub model-type repositories, 37 datasets, and 35 Spaces; only literal-public records owned by `szl-holdings` or `SZLHOLDINGS` are included |
@@ -74,10 +74,12 @@ literal `private: false` records in `szl-holdings` and `SZLHOLDINGS`, constructs
 canonical links at exact revisions, and retains bounded CI and model promotion
 limits. A missing public revision stops generation. The current snapshot was
 generated from the completed guarded canonical audit at
-`2026-10-08T05:20:34.071005+00:00`. Its unsigned private binding covers exact
+`2026-10-11T07:11:47.450136+00:00`. Its unsigned private binding covers exact
 collector bytes, source reports, terminal GitHub pagination and a serialized
 request ledger. The new OAC v2 entry is a synthetic advisory software artifact
 in a model repository, not transformer weights or a qualified clinical model.
+The newly included public `SZLHOLDINGS/nexus` Space has a dated repository
+revision and a DECLARED provider stage; its application behavior was NOT RUN.
 The `/frontier/` focused math/model atlas retains its earlier separately recorded
 scope; its full organization showcase uses the distinct
 `2026-10-06T03:21:26.404577+00:00` source-projection receipt described above.
@@ -154,8 +156,12 @@ python3 -m unittest discover -s tests -p 'test_*.py'
 The `estate-kernels` and `estate-exhibits` markers must each occur once. Kernel
 distribution links and model mirrors are separately pinned. Their cards do not
 inflate the repository count; matching IDs or revisions do not attest byte parity.
-Public CSV reports are metadata-only and must match the public snapshot IDs and
-revisions. Keep internal reports and raw audit files outside this repository.
+Public CSV reports are metadata-only historical reviews: model curation through
+8 October and dataset curation from 6 October. They still cover the current
+public snapshot IDs, but three model and four dataset pinned revisions differ
+from the 11 October inventory. Their links point to the revisions actually reviewed;
+they are not current-revision behavioral assessments. Keep internal reports and
+raw audit files outside this repository.
 The existing hosted Chrome gate also exercises estate search, combined filters,
 compact layout and CSP enforcement on the committed page.
 

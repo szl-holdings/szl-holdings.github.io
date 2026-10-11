@@ -63,10 +63,10 @@
     <nav aria-label="Site"><a href="/">Company</a><a href="/products/">Products</a><a href="/frontier/">Research atlas</a><a href="https://a11oy.net">Proof</a></nav>
   </div></header>
   <main class="shell" id="main" tabindex="-1">
-    <p class="eyebrow">Public source inventory · observed <time id="estate-observed-at" datetime="2026-10-08T05:20:34.071005+00:00">8 October 2026, 05:20 UTC</time></p>
+    <p class="eyebrow">Public source inventory · observed <time id="estate-observed-at" datetime="2026-10-11T07:11:47.450136+00:00">11 October 2026, 07:11 UTC</time></p>
     <h1>Your path into SZL software.</h1>
     <p class="intro">Find the public GitHub projects, Hugging Face models, datasets, Spaces, Kernel Hub software and released Python packages. Open a source tree, inspect an artifact card, visit a Space, or find a pinned package release.</p><p class="intro">Public membership and GitHub/Hugging Face repository source states were observed on 8 October 2026. PyPI metadata retains its 7 October observation; Kernel Hub revisions retain their separate 6 October snapshot. The catalog does not assert current runtime health or model quality.</p>
-    <div class="limits" role="note"><p><strong>Snapshot boundary:</strong> This is not a live monitor or release certificate. A Space marked RUNNING does not establish source/runtime parity. Listed model artifacts do not establish quality or held-out evaluation.</p><p><a href="public-catalog.json">Complete catalog JSON</a> · <a href="catalog-membership.json">Public membership JSON</a> · <a href="pypi-packages.json">PyPI versions and declared artifact hashes</a> · <a href="public-snapshot.json">Dated repository JSON</a> · <a href="kernel-distributions.json">Kernel JSON</a> · <a href="model-contracts.csv">Model contract review CSV</a> · <a href="dataset-readiness.csv">Dataset readiness CSV</a> · <a href="CURATION_PLAN.md">Curation and upgrade plan</a> · <a href="/frontier/showcase-public.html">Open the earlier Frontier inventory</a></p></div>
+    <div class="limits" role="note"><p><strong>Snapshot boundary:</strong> This is not a live monitor or release certificate. A Space marked RUNNING does not establish source/runtime parity. Listed model artifacts do not establish quality or held-out evaluation. The model and dataset review CSVs pin earlier revisions; three model and four dataset entries predate this snapshot.</p><p><a href="public-catalog.json">Complete catalog JSON</a> · <a href="catalog-membership.json">Public membership JSON</a> · <a href="pypi-packages.json">PyPI versions and declared artifact hashes</a> · <a href="public-snapshot.json">Dated repository JSON</a> · <a href="kernel-distributions.json">Kernel JSON</a> · <a href="model-contracts.csv">Dated model contract review CSV</a> · <a href="dataset-readiness.csv">Dated dataset readiness CSV</a> · <a href="CURATION_PLAN.md">Curation and upgrade plan</a> · <a href="/frontier/showcase-public.html">Open the earlier Frontier inventory</a></p></div>
     <section class="asset" aria-labelledby="receipt-replay-title"><p class="asset-kind">Start with a reproducible SAMPLE</p><h2 id="receipt-replay-title"><a href="receipt-replay/">Run four receipt-verification cases</a></h2><p>Inspect a signed record, change its payload, remove its witness and try it unsigned. Download the source-bound replay and compare the actual verifier outcomes with their explicit limits.</p><p class="exhibit-limit">Synthetic inputs; actual cryptographic checks. Independent replay and production qualification NOT RUN.</p></section>
     <!-- verified-upgrades:start -->
 <section class="research-exhibits" aria-labelledby="verified-upgrades-title">
@@ -126,7 +126,7 @@
     <h3>Compare formal mathematics with executable source</h3>
     <p>Read the formal statements in lutar-lean beside the executable formula library in szl-formulas. Inspect their hypotheses and implementation contracts before proposing a correspondence between a theorem and a callable.</p>
     <ul class="exhibit-sources">
-      <li><a href="https://github.com/szl-holdings/lutar-lean/tree/59322314becab54ee3d0bc36a12600de042e3474" target="_blank" rel="noopener noreferrer">szl-holdings/lutar-lean</a><p class="exhibit-state"><strong>Snapshot state:</strong> 17 SUCCESS matching collected SHA; 2 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></li>
+      <li><a href="https://github.com/szl-holdings/lutar-lean/tree/1e13274df2c83f4126f1ac949d12c2c5acfb9c53" target="_blank" rel="noopener noreferrer">szl-holdings/lutar-lean</a><p class="exhibit-state"><strong>Snapshot state:</strong> 17 SUCCESS matching collected SHA; 2 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></li>
       <li><a href="https://github.com/szl-holdings/szl-formulas/tree/0784a8c1b4ac408edb95e45e6c6d08d4edb5b07d" target="_blank" rel="noopener noreferrer">szl-holdings/szl-formulas</a><p class="exhibit-state"><strong>Snapshot state:</strong> 3 SUCCESS matching collected SHA; 4 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (54 returned); absent workflows UNKNOWN</p></li>
     </ul>
     <p class="exhibit-limit"><strong>Limit:</strong> This is a source-only comparison. Proof-to-implementation correspondence and fresh proof or numerical replay are UNKNOWN. Lambda uniqueness remains Conjecture 1; the eight locked formula IDs do not certify every implementation.</p>
@@ -136,8 +136,8 @@
     <h3>Inspect proposal-only Forge and ReceiptAgent</h3>
     <p>Explore the Forge fine-tuning tooling and the ReceiptAgent repository as a proposal-only research workflow. Forge uses QLoRA on an open base; a model proposal must be evaluated by a separate governed decision layer.</p>
     <ul class="exhibit-sources">
-      <li><a href="https://github.com/szl-holdings/szl-forge/tree/2e0bb5cbe8804855809e4cc742bcf05906dbf676" target="_blank" rel="noopener noreferrer">szl-holdings/szl-forge</a><p class="exhibit-state"><strong>Snapshot state:</strong> 1 IN_PROGRESS; 12 SUCCESS matching collected SHA; 13 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></li>
-      <li><a href="https://huggingface.co/SZLHOLDINGS/SZL-Forge-1.5B-ReceiptAgent/tree/79f4d4bef354e2134a4ac99a95819547b06867e8" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/SZL-Forge-1.5B-ReceiptAgent</a><p class="exhibit-state"><strong>Snapshot state:</strong> UNKNOWN: artifact quality and held-out evaluation; listed files do not establish trained weights</p></li>
+      <li><a href="https://github.com/szl-holdings/szl-forge/tree/3b00912d3e10e45ce043da1dc2ab9376be48cb61" target="_blank" rel="noopener noreferrer">szl-holdings/szl-forge</a><p class="exhibit-state"><strong>Snapshot state:</strong> 19 SUCCESS matching collected SHA; 4 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></li>
+      <li><a href="https://huggingface.co/SZLHOLDINGS/SZL-Forge-1.5B-ReceiptAgent/tree/80cf37ce1ee24dbb2a2bcc0d7a12d69dcf6bd160" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/SZL-Forge-1.5B-ReceiptAgent</a><p class="exhibit-state"><strong>Snapshot state:</strong> UNKNOWN: artifact quality and held-out evaluation; listed files do not establish trained weights</p></li>
     </ul>
     <p class="exhibit-limit"><strong>Limit:</strong> This is a source-only exhibit. Inference, held-out evaluation and independent replay are UNKNOWN here. Model output grants no tool execution or authorization. A GGUF derivative requires its own conversion and equivalence evidence; listed files do not establish a qualified release.</p>
   </article>
@@ -152,7 +152,7 @@
 <div class="stat"><strong>128</strong><span>GitHub projects</span></div>
 <div class="stat"><strong>48</strong><span>Model repositories</span></div>
 <div class="stat"><strong>37</strong><span>Datasets</span></div>
-<div class="stat"><strong>36</strong><span>Spaces</span></div>
+<div class="stat"><strong>37</strong><span>Spaces</span></div>
 <div class="stat"><strong>14</strong><span>Kernel distributions</span></div>
 <div class="stat"><strong>20</strong><span>PyPI distributions</span></div>
 </div>
@@ -161,16 +161,16 @@
       <label for="estate-kind">Asset type<select id="estate-kind"><option value="">All types</option><option value="GitHub">GitHub</option><option value="HF Model">HF Model</option><option value="HF Dataset">HF Dataset</option><option value="HF Space">HF Space</option><option value="HF Kernel">HF Kernel</option><option value="PyPI">PyPI</option></select></label>
       <label for="estate-category">Category<select id="estate-category"><option value="">All categories</option><option value="CSS">CSS</option><option value="Dataset repository">Dataset repository</option><option value="docker">docker</option><option value="gradio">gradio</option><option value="HTML">HTML</option><option value="JavaScript">JavaScript</option><option value="Kernel / software">Kernel / software</option><option value="Kernel distribution">Kernel distribution</option><option value="Lean">Lean</option><option value="Numeric archive / fixture">Numeric archive / fixture</option><option value="Other artifact / documentation">Other artifact / documentation</option><option value="Python">Python</option><option value="Python package">Python package</option><option value="Shell">Shell</option><option value="Software / JSON coefficients">Software / JSON coefficients</option><option value="static">static</option><option value="Tensor / GGUF artifact">Tensor / GGUF artifact</option><option value="TeX">TeX</option><option value="Training recipe">Training recipe</option><option value="TypeScript">TypeScript</option><option value="Unclassified">Unclassified</option></select></label>
     </div>
-    <p class="count" id="estate-count" role="status" aria-live="polite">283 matching public assets</p>
+    <p class="count" id="estate-count" role="status" aria-live="polite">284 matching public assets</p>
     <div class="grid" id="estate-grid">
-<article class="asset" data-estate-asset data-kind="GitHub" data-category="HTML" data-id="szl-holdings/.github" data-search="szl-holdings/.github github html 2 in_progress; 13 success matching collected sha; 18 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
+<article class="asset" data-estate-asset data-kind="GitHub" data-category="HTML" data-id="szl-holdings/.github" data-search="szl-holdings/.github github html 7 failure; 1 in_progress; 1 pending; 29 success matching collected sha; 2 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
-<h2><a class="source-link" href="https://github.com/szl-holdings/.github/tree/18365d7bd18c8a78db0df79f3d1860f22cc38cee" target="_blank" rel="noopener noreferrer">szl-holdings/.github</a></h2>
+<h2><a class="source-link" href="https://github.com/szl-holdings/.github/tree/3ef11ccd08c8350ff837c83735c802ff4d8323f9" target="_blank" rel="noopener noreferrer">szl-holdings/.github</a></h2>
 <p class="asset-category">HTML</p><p>Dated exact-source inventory record.</p>
-<details><summary>Recorded evidence</summary><p class="asset-claim">2 IN_PROGRESS; 13 SUCCESS matching collected SHA; 18 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
-<details><summary>Source snapshot revision</summary><code>18365d7bd18c8a78db0df79f3d1860f22cc38cee</code></details>
+<details><summary>Recorded evidence</summary><p class="asset-claim">7 FAILURE; 1 IN_PROGRESS; 1 PENDING; 29 SUCCESS matching collected SHA; 2 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
+<details><summary>Source snapshot revision</summary><code>3ef11ccd08c8350ff837c83735c802ff4d8323f9</code></details>
 
-<p><a href="https://github.com/szl-holdings/.github" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/.github/actions/runs/37731194610" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/.github" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/.github/actions/runs/38119945289" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
 <article class="asset" data-estate-asset data-kind="GitHub" data-category="JavaScript" data-id="szl-holdings/a-11-oy.github.io" data-search="szl-holdings/a-11-oy.github.io github javascript unavailable: exact-source ci metadata not collected; bounded latest 100 default-branch runs; absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub · Archived source</p>
@@ -181,50 +181,50 @@
 
 <p><a href="https://github.com/szl-holdings/a-11-oy.github.io" target="_blank" rel="noopener noreferrer">Repository and docs</a> </p>
 </article>
-<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/a11oy" data-search="szl-holdings/a11oy github python 2 failure; 9 in_progress; 1 pending; 1 queued; 47 success matching collected sha; 3 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
+<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/a11oy" data-search="szl-holdings/a11oy github python 7 failure; 2 in_progress; 55 success matching collected sha; 3 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
-<h2><a class="source-link" href="https://github.com/szl-holdings/a11oy/tree/f4d5e448bb428c8e8f0b6f6e85a633110411e1bc" target="_blank" rel="noopener noreferrer">szl-holdings/a11oy</a></h2>
+<h2><a class="source-link" href="https://github.com/szl-holdings/a11oy/tree/4b5bb09922a1d2dcdd41fa60567e7138e0226e82" target="_blank" rel="noopener noreferrer">szl-holdings/a11oy</a></h2>
 <p class="asset-category">Python</p><p>Dated exact-source inventory record.</p>
-<details><summary>Recorded evidence</summary><p class="asset-claim">2 FAILURE; 9 IN_PROGRESS; 1 PENDING; 1 QUEUED; 47 SUCCESS matching collected SHA; 3 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
-<details><summary>Source snapshot revision</summary><code>f4d5e448bb428c8e8f0b6f6e85a633110411e1bc</code></details>
+<details><summary>Recorded evidence</summary><p class="asset-claim">7 FAILURE; 2 IN_PROGRESS; 55 SUCCESS matching collected SHA; 3 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
+<details><summary>Source snapshot revision</summary><code>4b5bb09922a1d2dcdd41fa60567e7138e0226e82</code></details>
 
-<p><a href="https://github.com/szl-holdings/a11oy" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/a11oy/actions/runs/37731336195" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/a11oy" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/a11oy/actions/runs/38119958757" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
-<article class="asset" data-estate-asset data-kind="GitHub" data-category="TypeScript" data-id="szl-holdings/a11oy-factory" data-search="szl-holdings/a11oy-factory github typescript 8 success matching collected sha; 4 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
+<article class="asset" data-estate-asset data-kind="GitHub" data-category="TypeScript" data-id="szl-holdings/a11oy-factory" data-search="szl-holdings/a11oy-factory github typescript 6 success matching collected sha; 5 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
-<h2><a class="source-link" href="https://github.com/szl-holdings/a11oy-factory/tree/8f93c1885f90e97539701445ffc9fabeec4beb5d" target="_blank" rel="noopener noreferrer">szl-holdings/a11oy-factory</a></h2>
+<h2><a class="source-link" href="https://github.com/szl-holdings/a11oy-factory/tree/abc64f379e1fc7d202208861e4c4b7263d3f1068" target="_blank" rel="noopener noreferrer">szl-holdings/a11oy-factory</a></h2>
 <p class="asset-category">TypeScript</p><p>Dated exact-source inventory record.</p>
-<details><summary>Recorded evidence</summary><p class="asset-claim">8 SUCCESS matching collected SHA; 4 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
-<details><summary>Source snapshot revision</summary><code>8f93c1885f90e97539701445ffc9fabeec4beb5d</code></details>
+<details><summary>Recorded evidence</summary><p class="asset-claim">6 SUCCESS matching collected SHA; 5 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
+<details><summary>Source snapshot revision</summary><code>abc64f379e1fc7d202208861e4c4b7263d3f1068</code></details>
 
-<p><a href="https://github.com/szl-holdings/a11oy-factory" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/a11oy-factory/actions/runs/37646165078" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/a11oy-factory" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/a11oy-factory/actions/runs/38115127727" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
-<article class="asset" data-estate-asset data-kind="GitHub" data-category="HTML" data-id="szl-holdings/a11oy-net" data-search="szl-holdings/a11oy-net github html 1 failure; 8 success matching collected sha; 5 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
+<article class="asset" data-estate-asset data-kind="GitHub" data-category="HTML" data-id="szl-holdings/a11oy-net" data-search="szl-holdings/a11oy-net github html 1 failure; 9 success matching collected sha; 3 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
-<h2><a class="source-link" href="https://github.com/szl-holdings/a11oy-net/tree/f73a94ac8ee2ab19b7ee5f2ea1f7c83dd909a03a" target="_blank" rel="noopener noreferrer">szl-holdings/a11oy-net</a></h2>
+<h2><a class="source-link" href="https://github.com/szl-holdings/a11oy-net/tree/61e3d84669b0d664d21cf514b679e804818698db" target="_blank" rel="noopener noreferrer">szl-holdings/a11oy-net</a></h2>
 <p class="asset-category">HTML</p><p>Dated exact-source inventory record.</p>
-<details><summary>Recorded evidence</summary><p class="asset-claim">1 FAILURE; 8 SUCCESS matching collected SHA; 5 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
-<details><summary>Source snapshot revision</summary><code>f73a94ac8ee2ab19b7ee5f2ea1f7c83dd909a03a</code></details>
+<details><summary>Recorded evidence</summary><p class="asset-claim">1 FAILURE; 9 SUCCESS matching collected SHA; 3 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
+<details><summary>Source snapshot revision</summary><code>61e3d84669b0d664d21cf514b679e804818698db</code></details>
 
-<p><a href="https://github.com/szl-holdings/a11oy-net" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/a11oy-net/actions/runs/37731138600" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/a11oy-net" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/a11oy-net/actions/runs/38119183136" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
-<article class="asset" data-estate-asset data-kind="GitHub" data-category="JavaScript" data-id="szl-holdings/anatomy" data-search="szl-holdings/anatomy github javascript 2 failure; 6 success matching collected sha; 2 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
+<article class="asset" data-estate-asset data-kind="GitHub" data-category="JavaScript" data-id="szl-holdings/anatomy" data-search="szl-holdings/anatomy github javascript 8 success matching collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
-<h2><a class="source-link" href="https://github.com/szl-holdings/anatomy/tree/654ff8725cf77bfb8155ec6fa29bdc83c2e9a38d" target="_blank" rel="noopener noreferrer">szl-holdings/anatomy</a></h2>
+<h2><a class="source-link" href="https://github.com/szl-holdings/anatomy/tree/9fcf4d08b3ec2cd8ec45b3b26af259af2ee0fe05" target="_blank" rel="noopener noreferrer">szl-holdings/anatomy</a></h2>
 <p class="asset-category">JavaScript</p><p>Dated exact-source inventory record.</p>
-<details><summary>Recorded evidence</summary><p class="asset-claim">2 FAILURE; 6 SUCCESS matching collected SHA; 2 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
-<details><summary>Source snapshot revision</summary><code>654ff8725cf77bfb8155ec6fa29bdc83c2e9a38d</code></details>
+<details><summary>Recorded evidence</summary><p class="asset-claim">8 SUCCESS matching collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
+<details><summary>Source snapshot revision</summary><code>9fcf4d08b3ec2cd8ec45b3b26af259af2ee0fe05</code></details>
 
-<p><a href="https://github.com/szl-holdings/anatomy" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/anatomy/actions/runs/37728309061" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/anatomy" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/anatomy/actions/runs/38119332175" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
 <article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/ayllu" data-search="szl-holdings/ayllu github python 4 success matching collected sha; 3 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
-<h2><a class="source-link" href="https://github.com/szl-holdings/ayllu/tree/790405e7f7ae7ba4807ba09613e122357edcbbfc" target="_blank" rel="noopener noreferrer">szl-holdings/ayllu</a></h2>
+<h2><a class="source-link" href="https://github.com/szl-holdings/ayllu/tree/1a794440905788ecb56536202c03e6109d2de217" target="_blank" rel="noopener noreferrer">szl-holdings/ayllu</a></h2>
 <p class="asset-category">Python</p><p>Dated exact-source inventory record.</p>
 <details><summary>Recorded evidence</summary><p class="asset-claim">4 SUCCESS matching collected SHA; 3 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
-<details><summary>Source snapshot revision</summary><code>790405e7f7ae7ba4807ba09613e122357edcbbfc</code></details>
+<details><summary>Source snapshot revision</summary><code>1a794440905788ecb56536202c03e6109d2de217</code></details>
 
-<p><a href="https://github.com/szl-holdings/ayllu" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/ayllu/actions/runs/37728555660" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/ayllu" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/ayllu/actions/runs/37914466174" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
 <article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/ayllu-hf-space" data-search="szl-holdings/ayllu-hf-space github python 3 success matching collected sha; bounded latest 100 default-branch runs (8 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
@@ -269,7 +269,7 @@
 <details><summary>Recorded evidence</summary><p class="asset-claim">2 FAILURE; 8 SUCCESS matching collected SHA; 3 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
 <details><summary>Source snapshot revision</summary><code>d854e79ef19aa602bc2390d470c42cb6dc337988</code></details>
 
-<p><a href="https://github.com/szl-holdings/david-leads" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/david-leads/actions/runs/37711520851" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/david-leads" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/david-leads/actions/runs/38119175371" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
 <article class="asset" data-estate-asset data-kind="GitHub" data-category="HTML" data-id="szl-holdings/developers" data-search="szl-holdings/developers github html unavailable: exact-source ci metadata not collected; bounded latest 100 default-branch runs; absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub · Archived source</p>
@@ -334,14 +334,14 @@
 
 <p><a href="https://github.com/szl-holdings/fail-closed-governed-ai-services" target="_blank" rel="noopener noreferrer">Repository and docs</a> </p>
 </article>
-<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/frontier-bench" data-search="szl-holdings/frontier-bench github python 1 failure; 4 success matching collected sha; 1 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
+<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/frontier-bench" data-search="szl-holdings/frontier-bench github python 1 failure; 3 success matching collected sha; 2 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
-<h2><a class="source-link" href="https://github.com/szl-holdings/frontier-bench/tree/63806d20a6c573984c1406bb2941a1f920b15524" target="_blank" rel="noopener noreferrer">szl-holdings/frontier-bench</a></h2>
+<h2><a class="source-link" href="https://github.com/szl-holdings/frontier-bench/tree/a7b89eeb1c9aca5cae2cd046ec684c3f05f8c355" target="_blank" rel="noopener noreferrer">szl-holdings/frontier-bench</a></h2>
 <p class="asset-category">Python</p><p>Dated exact-source inventory record.</p>
-<details><summary>Recorded evidence</summary><p class="asset-claim">1 FAILURE; 4 SUCCESS matching collected SHA; 1 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
-<details><summary>Source snapshot revision</summary><code>63806d20a6c573984c1406bb2941a1f920b15524</code></details>
+<details><summary>Recorded evidence</summary><p class="asset-claim">1 FAILURE; 3 SUCCESS matching collected SHA; 2 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
+<details><summary>Source snapshot revision</summary><code>a7b89eeb1c9aca5cae2cd046ec684c3f05f8c355</code></details>
 
-<p><a href="https://github.com/szl-holdings/frontier-bench" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/frontier-bench/actions/runs/37324921205" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/frontier-bench" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/frontier-bench/actions/runs/37764681478" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
 <article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/governance-as-code" data-search="szl-holdings/governance-as-code github python 5 success matching collected sha; 2 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (66 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
@@ -370,23 +370,23 @@
 
 <p><a href="https://github.com/szl-holdings/governed-norm-holo" target="_blank" rel="noopener noreferrer">Repository and docs</a> </p>
 </article>
-<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/governed-receipt-spec" data-search="szl-holdings/governed-receipt-spec github python 6 success matching collected sha; 1 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
+<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/governed-receipt-spec" data-search="szl-holdings/governed-receipt-spec github python 5 success matching collected sha; 2 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
-<h2><a class="source-link" href="https://github.com/szl-holdings/governed-receipt-spec/tree/09a30a2bc547cad0bcbeb1017e250438badd9727" target="_blank" rel="noopener noreferrer">szl-holdings/governed-receipt-spec</a></h2>
+<h2><a class="source-link" href="https://github.com/szl-holdings/governed-receipt-spec/tree/9cbd78da5b30cda405145b0e7846dcf469567835" target="_blank" rel="noopener noreferrer">szl-holdings/governed-receipt-spec</a></h2>
 <p class="asset-category">Python</p><p>Dated exact-source inventory record.</p>
-<details><summary>Recorded evidence</summary><p class="asset-claim">6 SUCCESS matching collected SHA; 1 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
-<details><summary>Source snapshot revision</summary><code>09a30a2bc547cad0bcbeb1017e250438badd9727</code></details>
+<details><summary>Recorded evidence</summary><p class="asset-claim">5 SUCCESS matching collected SHA; 2 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
+<details><summary>Source snapshot revision</summary><code>9cbd78da5b30cda405145b0e7846dcf469567835</code></details>
 
-<p><a href="https://github.com/szl-holdings/governed-receipt-spec" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/governed-receipt-spec/actions/runs/37292125380" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/governed-receipt-spec" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/governed-receipt-spec/actions/runs/37964684273" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
 <article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/hatun-mcp" data-search="szl-holdings/hatun-mcp github python 7 success matching collected sha; 5 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
-<h2><a class="source-link" href="https://github.com/szl-holdings/hatun-mcp/tree/5def5ba1eb033ff521ffbc946c8c0c1e0cbb8fa8" target="_blank" rel="noopener noreferrer">szl-holdings/hatun-mcp</a></h2>
+<h2><a class="source-link" href="https://github.com/szl-holdings/hatun-mcp/tree/b5b7caecb9231f8401f5d27051d29a18dc03cf61" target="_blank" rel="noopener noreferrer">szl-holdings/hatun-mcp</a></h2>
 <p class="asset-category">Python</p><p>Dated exact-source inventory record.</p>
 <details><summary>Recorded evidence</summary><p class="asset-claim">7 SUCCESS matching collected SHA; 5 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
-<details><summary>Source snapshot revision</summary><code>5def5ba1eb033ff521ffbc946c8c0c1e0cbb8fa8</code></details>
+<details><summary>Source snapshot revision</summary><code>b5b7caecb9231f8401f5d27051d29a18dc03cf61</code></details>
 
-<p><a href="https://github.com/szl-holdings/hatun-mcp" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/hatun-mcp/actions/runs/37719593583" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/hatun-mcp" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/hatun-mcp/actions/runs/38106509267" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
 <article class="asset" data-estate-asset data-kind="GitHub" data-category="TypeScript" data-id="szl-holdings/holographic-unify" data-search="szl-holdings/holographic-unify github typescript 4 success matching collected sha; 2 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (86 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
@@ -397,14 +397,14 @@
 
 <p><a href="https://github.com/szl-holdings/holographic-unify" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/holographic-unify/actions/runs/37314544090" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
-<article class="asset" data-estate-asset data-kind="GitHub" data-category="TypeScript" data-id="szl-holdings/immune" data-search="szl-holdings/immune github typescript 9 success matching collected sha; 2 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
+<article class="asset" data-estate-asset data-kind="GitHub" data-category="TypeScript" data-id="szl-holdings/immune" data-search="szl-holdings/immune github typescript 10 success matching collected sha; 1 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
 <h2><a class="source-link" href="https://github.com/szl-holdings/immune/tree/d7ef52b3833ff5663db0885a81cf81775623cc27" target="_blank" rel="noopener noreferrer">szl-holdings/immune</a></h2>
 <p class="asset-category">TypeScript</p><p>Dated exact-source inventory record.</p>
-<details><summary>Recorded evidence</summary><p class="asset-claim">9 SUCCESS matching collected SHA; 2 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
+<details><summary>Recorded evidence</summary><p class="asset-claim">10 SUCCESS matching collected SHA; 1 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
 <details><summary>Source snapshot revision</summary><code>d7ef52b3833ff5663db0885a81cf81775623cc27</code></details>
 
-<p><a href="https://github.com/szl-holdings/immune" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/immune/actions/runs/37654131835" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/immune" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/immune/actions/runs/37749955128" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
 <article class="asset" data-estate-asset data-kind="GitHub" data-category="TypeScript" data-id="szl-holdings/immune-lattice" data-search="szl-holdings/immune-lattice github typescript unavailable: exact-source ci metadata not collected; bounded latest 100 default-branch runs; absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub · Archived source</p>
@@ -449,7 +449,7 @@
 <details><summary>Recorded evidence</summary><p class="asset-claim">7 SUCCESS matching collected SHA; 1 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
 <details><summary>Source snapshot revision</summary><code>f1bf7b815cb3c113edc2dedb02affcd6027ccae6</code></details>
 
-<p><a href="https://github.com/szl-holdings/khipu-sda-core" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/khipu-sda-core/actions/runs/37307714990" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/khipu-sda-core" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/khipu-sda-core/actions/runs/38014930442" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
 <article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/khipu-x1" data-search="szl-holdings/khipu-x1 github python 5 success matching collected sha; 1 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (47 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
@@ -460,14 +460,14 @@
 
 <p><a href="https://github.com/szl-holdings/khipu-x1" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/khipu-x1/actions/runs/37308185917" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
-<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/killinchu" data-search="szl-holdings/killinchu github python 29 success matching collected sha; 5 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
+<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/killinchu" data-search="szl-holdings/killinchu github python 32 success matching collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
-<h2><a class="source-link" href="https://github.com/szl-holdings/killinchu/tree/887c833933b2b8174a598c2b3654293585e9cc5f" target="_blank" rel="noopener noreferrer">szl-holdings/killinchu</a></h2>
+<h2><a class="source-link" href="https://github.com/szl-holdings/killinchu/tree/7acb234691b5718fc98ae1c6b0c9d801b599bdea" target="_blank" rel="noopener noreferrer">szl-holdings/killinchu</a></h2>
 <p class="asset-category">Python</p><p>Dated exact-source inventory record.</p>
-<details><summary>Recorded evidence</summary><p class="asset-claim">29 SUCCESS matching collected SHA; 5 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
-<details><summary>Source snapshot revision</summary><code>887c833933b2b8174a598c2b3654293585e9cc5f</code></details>
+<details><summary>Recorded evidence</summary><p class="asset-claim">32 SUCCESS matching collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
+<details><summary>Source snapshot revision</summary><code>7acb234691b5718fc98ae1c6b0c9d801b599bdea</code></details>
 
-<p><a href="https://github.com/szl-holdings/killinchu" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/killinchu/actions/runs/37728870079" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/killinchu" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/killinchu/actions/runs/38119883369" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
 <article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/lambda-gate-holo" data-search="szl-holdings/lambda-gate-holo github python unavailable: exact-source ci metadata not collected; bounded latest 100 default-branch runs; absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub · Archived source</p>
@@ -489,12 +489,12 @@
 </article>
 <article class="asset" data-estate-asset data-kind="GitHub" data-category="Lean" data-id="szl-holdings/lutar-lean" data-search="szl-holdings/lutar-lean github lean 17 success matching collected sha; 2 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
-<h2><a class="source-link" href="https://github.com/szl-holdings/lutar-lean/tree/59322314becab54ee3d0bc36a12600de042e3474" target="_blank" rel="noopener noreferrer">szl-holdings/lutar-lean</a></h2>
+<h2><a class="source-link" href="https://github.com/szl-holdings/lutar-lean/tree/1e13274df2c83f4126f1ac949d12c2c5acfb9c53" target="_blank" rel="noopener noreferrer">szl-holdings/lutar-lean</a></h2>
 <p class="asset-category">Lean</p><p>Dated exact-source inventory record.</p>
 <details><summary>Recorded evidence</summary><p class="asset-claim">17 SUCCESS matching collected SHA; 2 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
-<details><summary>Source snapshot revision</summary><code>59322314becab54ee3d0bc36a12600de042e3474</code></details>
+<details><summary>Source snapshot revision</summary><code>1e13274df2c83f4126f1ac949d12c2c5acfb9c53</code></details>
 
-<p><a href="https://github.com/szl-holdings/lutar-lean" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/lutar-lean/actions/runs/37714232613" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/lutar-lean" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/lutar-lean/actions/runs/38102740471" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
 <article class="asset" data-estate-asset data-kind="GitHub" data-category="TypeScript" data-id="szl-holdings/lyte-lattice" data-search="szl-holdings/lyte-lattice github typescript 1 failure; 3 success matching collected sha; 1 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
@@ -514,14 +514,14 @@
 
 <p><a href="https://github.com/szl-holdings/lyte-services" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/lyte-services/actions/runs/37312403037" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
-<article class="asset" data-estate-asset data-kind="GitHub" data-category="TypeScript" data-id="szl-holdings/nexus" data-search="szl-holdings/nexus github typescript 3 success matching collected sha; 3 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (78 returned); absent workflows unknown dated exact-source inventory record.">
+<article class="asset" data-estate-asset data-kind="GitHub" data-category="TypeScript" data-id="szl-holdings/nexus" data-search="szl-holdings/nexus github typescript 4 success matching collected sha; 2 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (82 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
-<h2><a class="source-link" href="https://github.com/szl-holdings/nexus/tree/c993af91740249825615be1c58a21af1f302ea2b" target="_blank" rel="noopener noreferrer">szl-holdings/nexus</a></h2>
+<h2><a class="source-link" href="https://github.com/szl-holdings/nexus/tree/00edebc993282efd5b43b0144b3d3d27ab43e264" target="_blank" rel="noopener noreferrer">szl-holdings/nexus</a></h2>
 <p class="asset-category">TypeScript</p><p>Dated exact-source inventory record.</p>
-<details><summary>Recorded evidence</summary><p class="asset-claim">3 SUCCESS matching collected SHA; 3 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (78 returned); absent workflows UNKNOWN</p></details>
-<details><summary>Source snapshot revision</summary><code>c993af91740249825615be1c58a21af1f302ea2b</code></details>
+<details><summary>Recorded evidence</summary><p class="asset-claim">4 SUCCESS matching collected SHA; 2 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (82 returned); absent workflows UNKNOWN</p></details>
+<details><summary>Source snapshot revision</summary><code>00edebc993282efd5b43b0144b3d3d27ab43e264</code></details>
 
-<p><a href="https://github.com/szl-holdings/nexus" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/nexus/actions/runs/37398667378" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/nexus" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/nexus/actions/runs/37833019272" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
 <article class="asset" data-estate-asset data-kind="GitHub" data-category="TypeScript" data-id="szl-holdings/ouroboros" data-search="szl-holdings/ouroboros github typescript unavailable: exact-source ci metadata not collected; bounded latest 100 default-branch runs; absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub · Archived source</p>
@@ -532,23 +532,23 @@
 
 <p><a href="https://github.com/szl-holdings/ouroboros" target="_blank" rel="noopener noreferrer">Repository and docs</a> </p>
 </article>
-<article class="asset" data-estate-asset data-kind="GitHub" data-category="TypeScript" data-id="szl-holdings/platform" data-search="szl-holdings/platform github typescript 2 failure; 4 in_progress; 16 success matching collected sha; 7 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
+<article class="asset" data-estate-asset data-kind="GitHub" data-category="TypeScript" data-id="szl-holdings/platform" data-search="szl-holdings/platform github typescript 2 failure; 26 success matching collected sha; 4 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
-<h2><a class="source-link" href="https://github.com/szl-holdings/platform/tree/bef1c76cfcef035e8c0576ee131dfd8cbfb0ddbd" target="_blank" rel="noopener noreferrer">szl-holdings/platform</a></h2>
+<h2><a class="source-link" href="https://github.com/szl-holdings/platform/tree/690959d29c6d26f0f3f4a42ef91fd442067c186e" target="_blank" rel="noopener noreferrer">szl-holdings/platform</a></h2>
 <p class="asset-category">TypeScript</p><p>Dated exact-source inventory record.</p>
-<details><summary>Recorded evidence</summary><p class="asset-claim">2 FAILURE; 4 IN_PROGRESS; 16 SUCCESS matching collected SHA; 7 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
-<details><summary>Source snapshot revision</summary><code>bef1c76cfcef035e8c0576ee131dfd8cbfb0ddbd</code></details>
+<details><summary>Recorded evidence</summary><p class="asset-claim">2 FAILURE; 26 SUCCESS matching collected SHA; 4 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
+<details><summary>Source snapshot revision</summary><code>690959d29c6d26f0f3f4a42ef91fd442067c186e</code></details>
 
-<p><a href="https://github.com/szl-holdings/platform" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/platform/actions/runs/37730950627" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/platform" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/platform/actions/runs/38119802928" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
-<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/puriq-live" data-search="szl-holdings/puriq-live github python 4 success matching collected sha; 2 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (54 returned); absent workflows unknown dated exact-source inventory record.">
+<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/puriq-live" data-search="szl-holdings/puriq-live github python 4 success matching collected sha; 2 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (58 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
-<h2><a class="source-link" href="https://github.com/szl-holdings/puriq-live/tree/2809f84acc002fced84df6809af0a1e9eee50f97" target="_blank" rel="noopener noreferrer">szl-holdings/puriq-live</a></h2>
+<h2><a class="source-link" href="https://github.com/szl-holdings/puriq-live/tree/2ea8ea4bb9de2ca432f40c0c55ea5a5ed02786bf" target="_blank" rel="noopener noreferrer">szl-holdings/puriq-live</a></h2>
 <p class="asset-category">Python</p><p>Dated exact-source inventory record.</p>
-<details><summary>Recorded evidence</summary><p class="asset-claim">4 SUCCESS matching collected SHA; 2 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (54 returned); absent workflows UNKNOWN</p></details>
-<details><summary>Source snapshot revision</summary><code>2809f84acc002fced84df6809af0a1e9eee50f97</code></details>
+<details><summary>Recorded evidence</summary><p class="asset-claim">4 SUCCESS matching collected SHA; 2 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (58 returned); absent workflows UNKNOWN</p></details>
+<details><summary>Source snapshot revision</summary><code>2ea8ea4bb9de2ca432f40c0c55ea5a5ed02786bf</code></details>
 
-<p><a href="https://github.com/szl-holdings/puriq-live" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/puriq-live/actions/runs/37315531310" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/puriq-live" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/puriq-live/actions/runs/37759395339" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
 <article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/quant-curve" data-search="szl-holdings/quant-curve github python 5 success matching collected sha; 1 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (54 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
@@ -568,14 +568,14 @@
 
 <p><a href="https://github.com/szl-holdings/receipt-chain-live" target="_blank" rel="noopener noreferrer">Repository and docs</a> </p>
 </article>
-<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/registry-mirror" data-search="szl-holdings/registry-mirror github python 1 failure; 3 success matching collected sha; 1 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (24 returned); absent workflows unknown dated exact-source inventory record.">
+<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/registry-mirror" data-search="szl-holdings/registry-mirror github python 1 failure; 3 success matching collected sha; 1 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (35 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
-<h2><a class="source-link" href="https://github.com/szl-holdings/registry-mirror/tree/cf266cf2b73f5549bc3445c58883a5159f3c1b8b" target="_blank" rel="noopener noreferrer">szl-holdings/registry-mirror</a></h2>
+<h2><a class="source-link" href="https://github.com/szl-holdings/registry-mirror/tree/81aefa3222ec6ac0c365daa5805bd71c04f64f35" target="_blank" rel="noopener noreferrer">szl-holdings/registry-mirror</a></h2>
 <p class="asset-category">Python</p><p>Dated exact-source inventory record.</p>
-<details><summary>Recorded evidence</summary><p class="asset-claim">1 FAILURE; 3 SUCCESS matching collected SHA; 1 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (24 returned); absent workflows UNKNOWN</p></details>
-<details><summary>Source snapshot revision</summary><code>cf266cf2b73f5549bc3445c58883a5159f3c1b8b</code></details>
+<details><summary>Recorded evidence</summary><p class="asset-claim">1 FAILURE; 3 SUCCESS matching collected SHA; 1 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (35 returned); absent workflows UNKNOWN</p></details>
+<details><summary>Source snapshot revision</summary><code>81aefa3222ec6ac0c365daa5805bd71c04f64f35</code></details>
 
-<p><a href="https://github.com/szl-holdings/registry-mirror" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/registry-mirror/actions/runs/37577072984" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/registry-mirror" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/registry-mirror/actions/runs/38115223719" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
 <article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/retrieval-bench" data-search="szl-holdings/retrieval-bench github python 5 success matching collected sha; 1 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (63 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
@@ -640,14 +640,14 @@
 
 <p><a href="https://github.com/szl-holdings/szl-build-env" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-build-env/actions/runs/37307672122" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
-<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-calibration" data-search="szl-holdings/szl-calibration github python 4 success matching collected sha; 2 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (52 returned); absent workflows unknown dated exact-source inventory record.">
+<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-calibration" data-search="szl-holdings/szl-calibration github python 3 success matching collected sha; 3 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (55 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
-<h2><a class="source-link" href="https://github.com/szl-holdings/szl-calibration/tree/7a27411f7d0a97bca978432129fc95c17379c7b0" target="_blank" rel="noopener noreferrer">szl-holdings/szl-calibration</a></h2>
+<h2><a class="source-link" href="https://github.com/szl-holdings/szl-calibration/tree/004a7aa877ba5939a40259a0a5fab5396358afe8" target="_blank" rel="noopener noreferrer">szl-holdings/szl-calibration</a></h2>
 <p class="asset-category">Python</p><p>Dated exact-source inventory record.</p>
-<details><summary>Recorded evidence</summary><p class="asset-claim">4 SUCCESS matching collected SHA; 2 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (52 returned); absent workflows UNKNOWN</p></details>
-<details><summary>Source snapshot revision</summary><code>7a27411f7d0a97bca978432129fc95c17379c7b0</code></details>
+<details><summary>Recorded evidence</summary><p class="asset-claim">3 SUCCESS matching collected SHA; 3 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (55 returned); absent workflows UNKNOWN</p></details>
+<details><summary>Source snapshot revision</summary><code>004a7aa877ba5939a40259a0a5fab5396358afe8</code></details>
 
-<p><a href="https://github.com/szl-holdings/szl-calibration" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-calibration/actions/runs/37308355094" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/szl-calibration" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-calibration/actions/runs/38075904639" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
 <article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-ci-witness" data-search="szl-holdings/szl-ci-witness github python 5 success matching collected sha; 2 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (49 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
@@ -658,14 +658,14 @@
 
 <p><a href="https://github.com/szl-holdings/szl-ci-witness" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-ci-witness/actions/runs/37308350117" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
-<article class="asset" data-estate-asset data-kind="GitHub" data-category="TypeScript" data-id="szl-holdings/szl-command-lab" data-search="szl-holdings/szl-command-lab github typescript 5 success matching collected sha; 4 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
+<article class="asset" data-estate-asset data-kind="GitHub" data-category="TypeScript" data-id="szl-holdings/szl-command-lab" data-search="szl-holdings/szl-command-lab github typescript 6 success matching collected sha; 3 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
-<h2><a class="source-link" href="https://github.com/szl-holdings/szl-command-lab/tree/54716b32f9515c99e15f3b677618a919202216e5" target="_blank" rel="noopener noreferrer">szl-holdings/szl-command-lab</a></h2>
+<h2><a class="source-link" href="https://github.com/szl-holdings/szl-command-lab/tree/192e4ede07c9629b920e33048762c644bb50c1fb" target="_blank" rel="noopener noreferrer">szl-holdings/szl-command-lab</a></h2>
 <p class="asset-category">TypeScript</p><p>Dated exact-source inventory record.</p>
-<details><summary>Recorded evidence</summary><p class="asset-claim">5 SUCCESS matching collected SHA; 4 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
-<details><summary>Source snapshot revision</summary><code>54716b32f9515c99e15f3b677618a919202216e5</code></details>
+<details><summary>Recorded evidence</summary><p class="asset-claim">6 SUCCESS matching collected SHA; 3 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
+<details><summary>Source snapshot revision</summary><code>192e4ede07c9629b920e33048762c644bb50c1fb</code></details>
 
-<p><a href="https://github.com/szl-holdings/szl-command-lab" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-command-lab/actions/runs/37318110708" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/szl-command-lab" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-command-lab/actions/runs/37978031718" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
 <article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-constellation" data-search="szl-holdings/szl-constellation github python 6 success matching collected sha; 2 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
@@ -710,7 +710,7 @@
 <details><summary>Recorded evidence</summary><p class="asset-claim">5 SUCCESS matching collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
 <details><summary>Source snapshot revision</summary><code>6898bfadb206c82599f5164d16a025c9f8c9951f</code></details>
 
-<p><a href="https://github.com/szl-holdings/szl-drift" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-drift/actions/runs/37712184036" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/szl-drift" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-drift/actions/runs/38119697173" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
 <article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-eclipse" data-search="szl-holdings/szl-eclipse github python 5 success matching collected sha; 1 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (43 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
@@ -721,23 +721,23 @@
 
 <p><a href="https://github.com/szl-holdings/szl-eclipse" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-eclipse/actions/runs/37308353004" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
-<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-energy-attest" data-search="szl-holdings/szl-energy-attest github python 6 success matching collected sha; 4 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
+<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-energy-attest" data-search="szl-holdings/szl-energy-attest github python 7 success matching collected sha; 3 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
-<h2><a class="source-link" href="https://github.com/szl-holdings/szl-energy-attest/tree/7823d106a8ecf056fa735af405cb658829a3f309" target="_blank" rel="noopener noreferrer">szl-holdings/szl-energy-attest</a></h2>
+<h2><a class="source-link" href="https://github.com/szl-holdings/szl-energy-attest/tree/2cc3866d2bbc303b06822151f13926bac5a0ca76" target="_blank" rel="noopener noreferrer">szl-holdings/szl-energy-attest</a></h2>
 <p class="asset-category">Python</p><p>Dated exact-source inventory record.</p>
-<details><summary>Recorded evidence</summary><p class="asset-claim">6 SUCCESS matching collected SHA; 4 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
-<details><summary>Source snapshot revision</summary><code>7823d106a8ecf056fa735af405cb658829a3f309</code></details>
+<details><summary>Recorded evidence</summary><p class="asset-claim">7 SUCCESS matching collected SHA; 3 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
+<details><summary>Source snapshot revision</summary><code>2cc3866d2bbc303b06822151f13926bac5a0ca76</code></details>
 
-<p><a href="https://github.com/szl-holdings/szl-energy-attest" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-energy-attest/actions/runs/37522875095" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/szl-energy-attest" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-energy-attest/actions/runs/37767056862" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
-<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-engine-bench" data-search="szl-holdings/szl-engine-bench github python 5 success matching collected sha; 1 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (49 returned); absent workflows unknown dated exact-source inventory record.">
+<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-engine-bench" data-search="szl-holdings/szl-engine-bench github python 5 success matching collected sha; 1 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (57 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
-<h2><a class="source-link" href="https://github.com/szl-holdings/szl-engine-bench/tree/0854b5a8cb12ba94494557bd88b946d32fbebc4b" target="_blank" rel="noopener noreferrer">szl-holdings/szl-engine-bench</a></h2>
+<h2><a class="source-link" href="https://github.com/szl-holdings/szl-engine-bench/tree/bb2a369d8ce3f989d80322856c3b480d53811af9" target="_blank" rel="noopener noreferrer">szl-holdings/szl-engine-bench</a></h2>
 <p class="asset-category">Python</p><p>Dated exact-source inventory record.</p>
-<details><summary>Recorded evidence</summary><p class="asset-claim">5 SUCCESS matching collected SHA; 1 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (49 returned); absent workflows UNKNOWN</p></details>
-<details><summary>Source snapshot revision</summary><code>0854b5a8cb12ba94494557bd88b946d32fbebc4b</code></details>
+<details><summary>Recorded evidence</summary><p class="asset-claim">5 SUCCESS matching collected SHA; 1 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (57 returned); absent workflows UNKNOWN</p></details>
+<details><summary>Source snapshot revision</summary><code>bb2a369d8ce3f989d80322856c3b480d53811af9</code></details>
 
-<p><a href="https://github.com/szl-holdings/szl-engine-bench" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-engine-bench/actions/runs/37308334441" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/szl-engine-bench" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-engine-bench/actions/runs/38060268726" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
 <article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-evidence-core" data-search="szl-holdings/szl-evidence-core github python 2 success matching collected sha; bounded latest 100 default-branch runs (6 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
@@ -784,14 +784,14 @@
 
 <p><a href="https://github.com/szl-holdings/szl-fleet-overlay" target="_blank" rel="noopener noreferrer">Repository and docs</a> </p>
 </article>
-<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-forge" data-search="szl-holdings/szl-forge github python 1 in_progress; 12 success matching collected sha; 13 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
+<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-forge" data-search="szl-holdings/szl-forge github python 19 success matching collected sha; 4 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
-<h2><a class="source-link" href="https://github.com/szl-holdings/szl-forge/tree/2e0bb5cbe8804855809e4cc742bcf05906dbf676" target="_blank" rel="noopener noreferrer">szl-holdings/szl-forge</a></h2>
+<h2><a class="source-link" href="https://github.com/szl-holdings/szl-forge/tree/3b00912d3e10e45ce043da1dc2ab9376be48cb61" target="_blank" rel="noopener noreferrer">szl-holdings/szl-forge</a></h2>
 <p class="asset-category">Python</p><p>Dated exact-source inventory record.</p>
-<details><summary>Recorded evidence</summary><p class="asset-claim">1 IN_PROGRESS; 12 SUCCESS matching collected SHA; 13 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
-<details><summary>Source snapshot revision</summary><code>2e0bb5cbe8804855809e4cc742bcf05906dbf676</code></details>
+<details><summary>Recorded evidence</summary><p class="asset-claim">19 SUCCESS matching collected SHA; 4 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
+<details><summary>Source snapshot revision</summary><code>3b00912d3e10e45ce043da1dc2ab9376be48cb61</code></details>
 
-<p><a href="https://github.com/szl-holdings/szl-forge" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-forge/actions/runs/37731144573" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/szl-forge" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-forge/actions/runs/38119308174" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
 <article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-formula-ledger" data-search="szl-holdings/szl-formula-ledger github python unavailable: exact-source ci metadata not collected; bounded latest 100 default-branch runs; absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub · Archived source</p>
@@ -811,14 +811,14 @@
 
 <p><a href="https://github.com/szl-holdings/szl-formulas" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-formulas/actions/runs/37645992460" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
-<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-frontier" data-search="szl-holdings/szl-frontier github python 6 success matching collected sha; 3 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
+<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-frontier" data-search="szl-holdings/szl-frontier github python 1 failure; 6 success matching collected sha; 2 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
-<h2><a class="source-link" href="https://github.com/szl-holdings/szl-frontier/tree/cd20f131e29d3ab07eb9aa3d0f7fd33677ac2e6b" target="_blank" rel="noopener noreferrer">szl-holdings/szl-frontier</a></h2>
+<h2><a class="source-link" href="https://github.com/szl-holdings/szl-frontier/tree/7825bf6350b2e8c307f13e168e0cd17a59d62fda" target="_blank" rel="noopener noreferrer">szl-holdings/szl-frontier</a></h2>
 <p class="asset-category">Python</p><p>Dated exact-source inventory record.</p>
-<details><summary>Recorded evidence</summary><p class="asset-claim">6 SUCCESS matching collected SHA; 3 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
-<details><summary>Source snapshot revision</summary><code>cd20f131e29d3ab07eb9aa3d0f7fd33677ac2e6b</code></details>
+<details><summary>Recorded evidence</summary><p class="asset-claim">1 FAILURE; 6 SUCCESS matching collected SHA; 2 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
+<details><summary>Source snapshot revision</summary><code>7825bf6350b2e8c307f13e168e0cd17a59d62fda</code></details>
 
-<p><a href="https://github.com/szl-holdings/szl-frontier" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-frontier/actions/runs/37725317045" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/szl-frontier" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-frontier/actions/runs/38115834686" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
 <article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-gov" data-search="szl-holdings/szl-gov github python 5 success matching collected sha; 1 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (50 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
@@ -847,14 +847,14 @@
 
 <p><a href="https://github.com/szl-holdings/szl-govsign" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-govsign/actions/runs/37308462821" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
-<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-gpu-bridge" data-search="szl-holdings/szl-gpu-bridge github python 4 success matching collected sha; 1 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
+<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-gpu-bridge" data-search="szl-holdings/szl-gpu-bridge github python 1 success matching collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
 <h2><a class="source-link" href="https://github.com/szl-holdings/szl-gpu-bridge/tree/46caf53a4eda9ecaf12abc4cc9af3fcc5a5a6ee1" target="_blank" rel="noopener noreferrer">szl-holdings/szl-gpu-bridge</a></h2>
 <p class="asset-category">Python</p><p>Dated exact-source inventory record.</p>
-<details><summary>Recorded evidence</summary><p class="asset-claim">4 SUCCESS matching collected SHA; 1 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
+<details><summary>Recorded evidence</summary><p class="asset-claim">1 SUCCESS matching collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
 <details><summary>Source snapshot revision</summary><code>46caf53a4eda9ecaf12abc4cc9af3fcc5a5a6ee1</code></details>
 
-<p><a href="https://github.com/szl-holdings/szl-gpu-bridge" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-gpu-bridge/actions/runs/37730864882" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/szl-gpu-bridge" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-gpu-bridge/actions/runs/38117252494" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
 <article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-guardrail-receipt" data-search="szl-holdings/szl-guardrail-receipt github python 5 success matching collected sha; 1 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (52 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
@@ -867,12 +867,12 @@
 </article>
 <article class="asset" data-estate-asset data-kind="GitHub" data-category="HTML" data-id="szl-holdings/szl-holdings.github.io" data-search="szl-holdings/szl-holdings.github.io github html 5 success matching collected sha; 2 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
-<h2><a class="source-link" href="https://github.com/szl-holdings/szl-holdings.github.io/tree/7623a44f51af3c07a41e2f8dea81753a95a7edee" target="_blank" rel="noopener noreferrer">szl-holdings/szl-holdings.github.io</a></h2>
+<h2><a class="source-link" href="https://github.com/szl-holdings/szl-holdings.github.io/tree/57b45ec9652836b407fc7bd195a122c750a365f2" target="_blank" rel="noopener noreferrer">szl-holdings/szl-holdings.github.io</a></h2>
 <p class="asset-category">HTML</p><p>Dated exact-source inventory record.</p>
 <details><summary>Recorded evidence</summary><p class="asset-claim">5 SUCCESS matching collected SHA; 2 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
-<details><summary>Source snapshot revision</summary><code>7623a44f51af3c07a41e2f8dea81753a95a7edee</code></details>
+<details><summary>Source snapshot revision</summary><code>57b45ec9652836b407fc7bd195a122c750a365f2</code></details>
 
-<p><a href="https://github.com/szl-holdings/szl-holdings.github.io" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-holdings.github.io/actions/runs/37729953317" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/szl-holdings.github.io" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-holdings.github.io/actions/runs/38112819864" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
 <article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-invariants" data-search="szl-holdings/szl-invariants github python 6 success matching collected sha; 2 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
@@ -910,23 +910,23 @@
 
 <p><a href="https://github.com/szl-holdings/szl-khipu" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-khipu/actions/runs/37316748408" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
-<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-lake" data-search="szl-holdings/szl-lake github python 13 success matching collected sha; 1 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
+<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-lake" data-search="szl-holdings/szl-lake github python 13 success matching collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
 <h2><a class="source-link" href="https://github.com/szl-holdings/szl-lake/tree/1b0a5b65d60afa7474c012f2d514f1f5a3e3160d" target="_blank" rel="noopener noreferrer">szl-holdings/szl-lake</a></h2>
 <p class="asset-category">Python</p><p>Dated exact-source inventory record.</p>
-<details><summary>Recorded evidence</summary><p class="asset-claim">13 SUCCESS matching collected SHA; 1 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
+<details><summary>Recorded evidence</summary><p class="asset-claim">13 SUCCESS matching collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
 <details><summary>Source snapshot revision</summary><code>1b0a5b65d60afa7474c012f2d514f1f5a3e3160d</code></details>
 
-<p><a href="https://github.com/szl-holdings/szl-lake" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-lake/actions/runs/37712450737" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/szl-lake" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-lake/actions/runs/38119737658" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
-<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-lambda-gate" data-search="szl-holdings/szl-lambda-gate github python 8 success matching collected sha; 4 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
+<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-lambda-gate" data-search="szl-holdings/szl-lambda-gate github python 1 failure; 8 success matching collected sha; 3 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
-<h2><a class="source-link" href="https://github.com/szl-holdings/szl-lambda-gate/tree/8035af3e190a2e23ca1345bdc07736935634f6f4" target="_blank" rel="noopener noreferrer">szl-holdings/szl-lambda-gate</a></h2>
+<h2><a class="source-link" href="https://github.com/szl-holdings/szl-lambda-gate/tree/e2b64ec21925511576aca06580d7fa24d6ff7d6c" target="_blank" rel="noopener noreferrer">szl-holdings/szl-lambda-gate</a></h2>
 <p class="asset-category">Python</p><p>Dated exact-source inventory record.</p>
-<details><summary>Recorded evidence</summary><p class="asset-claim">8 SUCCESS matching collected SHA; 4 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
-<details><summary>Source snapshot revision</summary><code>8035af3e190a2e23ca1345bdc07736935634f6f4</code></details>
+<details><summary>Recorded evidence</summary><p class="asset-claim">1 FAILURE; 8 SUCCESS matching collected SHA; 3 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
+<details><summary>Source snapshot revision</summary><code>e2b64ec21925511576aca06580d7fa24d6ff7d6c</code></details>
 
-<p><a href="https://github.com/szl-holdings/szl-lambda-gate" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-lambda-gate/actions/runs/37522046406" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/szl-lambda-gate" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-lambda-gate/actions/runs/38117805202" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
 <article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-maskmod" data-search="szl-holdings/szl-maskmod github python 6 success matching collected sha; 1 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (44 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
@@ -991,14 +991,14 @@
 
 <p><a href="https://github.com/szl-holdings/szl-otel-mesh" target="_blank" rel="noopener noreferrer">Repository and docs</a> </p>
 </article>
-<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-ouroboros" data-search="szl-holdings/szl-ouroboros github python 7 success matching collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
+<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-ouroboros" data-search="szl-holdings/szl-ouroboros github python 1 in_progress; 6 success matching collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
 <h2><a class="source-link" href="https://github.com/szl-holdings/szl-ouroboros/tree/9ae23a9d46bc526b7e665aade505c2eaedb66c75" target="_blank" rel="noopener noreferrer">szl-holdings/szl-ouroboros</a></h2>
 <p class="asset-category">Python</p><p>Dated exact-source inventory record.</p>
-<details><summary>Recorded evidence</summary><p class="asset-claim">7 SUCCESS matching collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
+<details><summary>Recorded evidence</summary><p class="asset-claim">1 IN_PROGRESS; 6 SUCCESS matching collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
 <details><summary>Source snapshot revision</summary><code>9ae23a9d46bc526b7e665aade505c2eaedb66c75</code></details>
 
-<p><a href="https://github.com/szl-holdings/szl-ouroboros" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-ouroboros/actions/runs/37729861724" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/szl-ouroboros" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-ouroboros/actions/runs/38120116211" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
 <article class="asset" data-estate-asset data-kind="GitHub" data-category="TeX" data-id="szl-holdings/szl-papers" data-search="szl-holdings/szl-papers github tex 7 success matching collected sha; 2 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
@@ -1052,7 +1052,7 @@
 <details><summary>Recorded evidence</summary><p class="asset-claim">5 SUCCESS matching collected SHA; 1 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
 <details><summary>Source snapshot revision</summary><code>9626ec549cbc1e3411bca7256e9c2a6190f739fe</code></details>
 
-<p><a href="https://github.com/szl-holdings/szl-quant" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-quant/actions/runs/37711512184" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/szl-quant" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-quant/actions/runs/38119175581" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
 <article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-quant-bench" data-search="szl-holdings/szl-quant-bench github python 5 success matching collected sha; 1 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (46 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
@@ -1070,7 +1070,7 @@
 <details><summary>Recorded evidence</summary><p class="asset-claim">5 SUCCESS matching collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
 <details><summary>Source snapshot revision</summary><code>9edfc04ae9160794698de436f38f492a4da5098e</code></details>
 
-<p><a href="https://github.com/szl-holdings/szl-quant-witness" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-quant-witness/actions/runs/37718940865" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/szl-quant-witness" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-quant-witness/actions/runs/38106008272" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
 <article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-real-estate" data-search="szl-holdings/szl-real-estate github python 7 success matching collected sha; 1 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (97 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
@@ -1099,23 +1099,23 @@
 
 <p><a href="https://github.com/szl-holdings/szl-receipt-attn" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-receipt-attn/actions/runs/37308449969" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
-<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-retrieval-bench" data-search="szl-holdings/szl-retrieval-bench github python 5 success matching collected sha; 1 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (55 returned); absent workflows unknown dated exact-source inventory record.">
+<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-retrieval-bench" data-search="szl-holdings/szl-retrieval-bench github python 3 success matching collected sha; 3 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (58 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
-<h2><a class="source-link" href="https://github.com/szl-holdings/szl-retrieval-bench/tree/20bcdec06182a990ee34108ec1af28d3197c8766" target="_blank" rel="noopener noreferrer">szl-holdings/szl-retrieval-bench</a></h2>
+<h2><a class="source-link" href="https://github.com/szl-holdings/szl-retrieval-bench/tree/a00282a83ccdf0a9f87f87c73cc15187fe047dc9" target="_blank" rel="noopener noreferrer">szl-holdings/szl-retrieval-bench</a></h2>
 <p class="asset-category">Python</p><p>Dated exact-source inventory record.</p>
-<details><summary>Recorded evidence</summary><p class="asset-claim">5 SUCCESS matching collected SHA; 1 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (55 returned); absent workflows UNKNOWN</p></details>
-<details><summary>Source snapshot revision</summary><code>20bcdec06182a990ee34108ec1af28d3197c8766</code></details>
+<details><summary>Recorded evidence</summary><p class="asset-claim">3 SUCCESS matching collected SHA; 3 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (58 returned); absent workflows UNKNOWN</p></details>
+<details><summary>Source snapshot revision</summary><code>a00282a83ccdf0a9f87f87c73cc15187fe047dc9</code></details>
 
-<p><a href="https://github.com/szl-holdings/szl-retrieval-bench" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-retrieval-bench/actions/runs/37308447013" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/szl-retrieval-bench" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-retrieval-bench/actions/runs/37846407089" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
-<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-router" data-search="szl-holdings/szl-router github python 9 success matching collected sha; 4 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
+<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-router" data-search="szl-holdings/szl-router github python 7 success matching collected sha; 6 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
-<h2><a class="source-link" href="https://github.com/szl-holdings/szl-router/tree/e53dbb91cfe410cf50497c612e5b21ec9390211c" target="_blank" rel="noopener noreferrer">szl-holdings/szl-router</a></h2>
+<h2><a class="source-link" href="https://github.com/szl-holdings/szl-router/tree/2ef08893dafe77eb0bd73cff05afb418b421744d" target="_blank" rel="noopener noreferrer">szl-holdings/szl-router</a></h2>
 <p class="asset-category">Python</p><p>Dated exact-source inventory record.</p>
-<details><summary>Recorded evidence</summary><p class="asset-claim">9 SUCCESS matching collected SHA; 4 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
-<details><summary>Source snapshot revision</summary><code>e53dbb91cfe410cf50497c612e5b21ec9390211c</code></details>
+<details><summary>Recorded evidence</summary><p class="asset-claim">7 SUCCESS matching collected SHA; 6 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
+<details><summary>Source snapshot revision</summary><code>2ef08893dafe77eb0bd73cff05afb418b421744d</code></details>
 
-<p><a href="https://github.com/szl-holdings/szl-router" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-router/actions/runs/37583361698" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/szl-router" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-router/actions/runs/38119060019" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
 <article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-runbook-catalog" data-search="szl-holdings/szl-runbook-catalog github python 4 success matching collected sha; 1 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (16 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
@@ -1126,32 +1126,32 @@
 
 <p><a href="https://github.com/szl-holdings/szl-runbook-catalog" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-runbook-catalog/actions/runs/37308337923" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
-<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-science-forum-corpus" data-search="szl-holdings/szl-science-forum-corpus github python 2 success matching collected sha; 2 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (48 returned); absent workflows unknown dated exact-source inventory record.">
+<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-science-forum-corpus" data-search="szl-holdings/szl-science-forum-corpus github python 2 success matching collected sha; 2 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (51 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
 <h2><a class="source-link" href="https://github.com/szl-holdings/szl-science-forum-corpus/tree/fc9ea0575eaef5dd8f73311039caeb55e9f62035" target="_blank" rel="noopener noreferrer">szl-holdings/szl-science-forum-corpus</a></h2>
 <p class="asset-category">Python</p><p>Dated exact-source inventory record.</p>
-<details><summary>Recorded evidence</summary><p class="asset-claim">2 SUCCESS matching collected SHA; 2 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (48 returned); absent workflows UNKNOWN</p></details>
+<details><summary>Recorded evidence</summary><p class="asset-claim">2 SUCCESS matching collected SHA; 2 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (51 returned); absent workflows UNKNOWN</p></details>
 <details><summary>Source snapshot revision</summary><code>fc9ea0575eaef5dd8f73311039caeb55e9f62035</code></details>
 
-<p><a href="https://github.com/szl-holdings/szl-science-forum-corpus" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-science-forum-corpus/actions/runs/37728492903" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/szl-science-forum-corpus" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-science-forum-corpus/actions/runs/38112226018" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
-<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-second-brain" data-search="szl-holdings/szl-second-brain github python 4 success matching collected sha; 1 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
+<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-second-brain" data-search="szl-holdings/szl-second-brain github python 4 success matching collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
 <h2><a class="source-link" href="https://github.com/szl-holdings/szl-second-brain/tree/c96fd1f309a0a7298b89e8469f58fecaeada8fb3" target="_blank" rel="noopener noreferrer">szl-holdings/szl-second-brain</a></h2>
 <p class="asset-category">Python</p><p>Dated exact-source inventory record.</p>
-<details><summary>Recorded evidence</summary><p class="asset-claim">4 SUCCESS matching collected SHA; 1 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
+<details><summary>Recorded evidence</summary><p class="asset-claim">4 SUCCESS matching collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
 <details><summary>Source snapshot revision</summary><code>c96fd1f309a0a7298b89e8469f58fecaeada8fb3</code></details>
 
-<p><a href="https://github.com/szl-holdings/szl-second-brain" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-second-brain/actions/runs/37728245555" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/szl-second-brain" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-second-brain/actions/runs/38119058250" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
-<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-seismic-review" data-search="szl-holdings/szl-seismic-review github python 3 success matching collected sha; 3 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (61 returned); absent workflows unknown dated exact-source inventory record.">
+<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-seismic-review" data-search="szl-holdings/szl-seismic-review github python 3 success matching collected sha; 3 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (65 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
-<h2><a class="source-link" href="https://github.com/szl-holdings/szl-seismic-review/tree/59e1f83cabb69930f3e9dd1a01f77a5b8515e00d" target="_blank" rel="noopener noreferrer">szl-holdings/szl-seismic-review</a></h2>
+<h2><a class="source-link" href="https://github.com/szl-holdings/szl-seismic-review/tree/1696236e49cc04018d77cdd7ac696262be7745f9" target="_blank" rel="noopener noreferrer">szl-holdings/szl-seismic-review</a></h2>
 <p class="asset-category">Python</p><p>Dated exact-source inventory record.</p>
-<details><summary>Recorded evidence</summary><p class="asset-claim">3 SUCCESS matching collected SHA; 3 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (61 returned); absent workflows UNKNOWN</p></details>
-<details><summary>Source snapshot revision</summary><code>59e1f83cabb69930f3e9dd1a01f77a5b8515e00d</code></details>
+<details><summary>Recorded evidence</summary><p class="asset-claim">3 SUCCESS matching collected SHA; 3 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (65 returned); absent workflows UNKNOWN</p></details>
+<details><summary>Source snapshot revision</summary><code>1696236e49cc04018d77cdd7ac696262be7745f9</code></details>
 
-<p><a href="https://github.com/szl-holdings/szl-seismic-review" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-seismic-review/actions/runs/37731559249" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/szl-seismic-review" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-seismic-review/actions/runs/37836693270" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
 <article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-serve" data-search="szl-holdings/szl-serve github python 5 success matching collected sha; 1 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (42 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
@@ -1164,12 +1164,12 @@
 </article>
 <article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-skills" data-search="szl-holdings/szl-skills github python 3 success matching collected sha; 1 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
-<h2><a class="source-link" href="https://github.com/szl-holdings/szl-skills/tree/b8e259c43f01190a306657c2fe2cde61abb5e801" target="_blank" rel="noopener noreferrer">szl-holdings/szl-skills</a></h2>
+<h2><a class="source-link" href="https://github.com/szl-holdings/szl-skills/tree/71b513ae2a3697466a3e8e0ec0f3599d6bfac4a6" target="_blank" rel="noopener noreferrer">szl-holdings/szl-skills</a></h2>
 <p class="asset-category">Python</p><p>Dated exact-source inventory record.</p>
 <details><summary>Recorded evidence</summary><p class="asset-claim">3 SUCCESS matching collected SHA; 1 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
-<details><summary>Source snapshot revision</summary><code>b8e259c43f01190a306657c2fe2cde61abb5e801</code></details>
+<details><summary>Source snapshot revision</summary><code>71b513ae2a3697466a3e8e0ec0f3599d6bfac4a6</code></details>
 
-<p><a href="https://github.com/szl-holdings/szl-skills" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-skills/actions/runs/37330423264" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/szl-skills" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-skills/actions/runs/37965693720" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
 <article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-sovereign-os" data-search="szl-holdings/szl-sovereign-os github python 5 success matching collected sha; 2 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (63 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
@@ -1198,23 +1198,23 @@
 
 <p><a href="https://github.com/szl-holdings/szl-telemetry" target="_blank" rel="noopener noreferrer">Repository and docs</a> </p>
 </article>
-<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-trust" data-search="szl-holdings/szl-trust github python 8 success matching collected sha; 1 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
+<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-trust" data-search="szl-holdings/szl-trust github python 7 success matching collected sha; 3 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
-<h2><a class="source-link" href="https://github.com/szl-holdings/szl-trust/tree/73e0a106ec8c49b206c2a0ff4810c16f30e65e19" target="_blank" rel="noopener noreferrer">szl-holdings/szl-trust</a></h2>
+<h2><a class="source-link" href="https://github.com/szl-holdings/szl-trust/tree/be94c76768f58f272efc791e962575eef72da2a1" target="_blank" rel="noopener noreferrer">szl-holdings/szl-trust</a></h2>
 <p class="asset-category">Python</p><p>Dated exact-source inventory record.</p>
-<details><summary>Recorded evidence</summary><p class="asset-claim">8 SUCCESS matching collected SHA; 1 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
-<details><summary>Source snapshot revision</summary><code>73e0a106ec8c49b206c2a0ff4810c16f30e65e19</code></details>
+<details><summary>Recorded evidence</summary><p class="asset-claim">7 SUCCESS matching collected SHA; 3 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
+<details><summary>Source snapshot revision</summary><code>be94c76768f58f272efc791e962575eef72da2a1</code></details>
 
-<p><a href="https://github.com/szl-holdings/szl-trust" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-trust/actions/runs/37517285335" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/szl-trust" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-trust/actions/runs/37982600357" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
 <article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/szl-typesafe-triage" data-search="szl-holdings/szl-typesafe-triage github python 5 success matching collected sha; 3 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
-<h2><a class="source-link" href="https://github.com/szl-holdings/szl-typesafe-triage/tree/e19330fb4806fbe1615d647c0ab09886fef91c90" target="_blank" rel="noopener noreferrer">szl-holdings/szl-typesafe-triage</a></h2>
+<h2><a class="source-link" href="https://github.com/szl-holdings/szl-typesafe-triage/tree/aebd86ada92eb374c1c89f9c940efade2e282917" target="_blank" rel="noopener noreferrer">szl-holdings/szl-typesafe-triage</a></h2>
 <p class="asset-category">Python</p><p>Dated exact-source inventory record.</p>
 <details><summary>Recorded evidence</summary><p class="asset-claim">5 SUCCESS matching collected SHA; 3 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
-<details><summary>Source snapshot revision</summary><code>e19330fb4806fbe1615d647c0ab09886fef91c90</code></details>
+<details><summary>Source snapshot revision</summary><code>aebd86ada92eb374c1c89f9c940efade2e282917</code></details>
 
-<p><a href="https://github.com/szl-holdings/szl-typesafe-triage" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-typesafe-triage/actions/runs/37378824009" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/szl-typesafe-triage" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szl-typesafe-triage/actions/runs/38101739846" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
 <article class="asset" data-estate-asset data-kind="GitHub" data-category="Shell" data-id="szl-holdings/szl-uds-deployment" data-search="szl-holdings/szl-uds-deployment github shell unavailable: exact-source ci metadata not collected; bounded latest 100 default-branch runs; absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub · Archived source</p>
@@ -1252,14 +1252,14 @@
 
 <p><a href="https://github.com/szl-holdings/szlholdings.com" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/szlholdings.com/actions/runs/37275490531" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
-<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/the-grid" data-search="szl-holdings/the-grid github python 1 failure; 3 success matching collected sha; 1 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (32 returned); absent workflows unknown dated exact-source inventory record.">
+<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/the-grid" data-search="szl-holdings/the-grid github python 1 failure; 3 success matching collected sha; 1 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (36 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
-<h2><a class="source-link" href="https://github.com/szl-holdings/the-grid/tree/0597c680be5fc98bc39d12ec8a32a1bf89cd07be" target="_blank" rel="noopener noreferrer">szl-holdings/the-grid</a></h2>
+<h2><a class="source-link" href="https://github.com/szl-holdings/the-grid/tree/f7dbafb454b54900bff1d3d64d101df1ec51d1be" target="_blank" rel="noopener noreferrer">szl-holdings/the-grid</a></h2>
 <p class="asset-category">Python</p><p>Dated exact-source inventory record.</p>
-<details><summary>Recorded evidence</summary><p class="asset-claim">1 FAILURE; 3 SUCCESS matching collected SHA; 1 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (32 returned); absent workflows UNKNOWN</p></details>
-<details><summary>Source snapshot revision</summary><code>0597c680be5fc98bc39d12ec8a32a1bf89cd07be</code></details>
+<details><summary>Recorded evidence</summary><p class="asset-claim">1 FAILURE; 3 SUCCESS matching collected SHA; 1 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (36 returned); absent workflows UNKNOWN</p></details>
+<details><summary>Source snapshot revision</summary><code>f7dbafb454b54900bff1d3d64d101df1ec51d1be</code></details>
 
-<p><a href="https://github.com/szl-holdings/the-grid" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/the-grid/actions/runs/37554099403" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/the-grid" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/the-grid/actions/runs/37870871563" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
 <article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/uds-bundles" data-search="szl-holdings/uds-bundles github python 10 success matching collected sha; 3 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
@@ -1268,16 +1268,16 @@
 <details><summary>Recorded evidence</summary><p class="asset-claim">10 SUCCESS matching collected SHA; 3 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
 <details><summary>Source snapshot revision</summary><code>fd0599ea937a24e07f3f836a47b5ce95a006e227</code></details>
 
-<p><a href="https://github.com/szl-holdings/uds-bundles" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/uds-bundles/actions/runs/37714299978" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/uds-bundles" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/uds-bundles/actions/runs/38102780932" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
-<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/vertical-services" data-search="szl-holdings/vertical-services github python 7 success matching collected sha; 4 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
+<article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/vertical-services" data-search="szl-holdings/vertical-services github python 9 success matching collected sha; 2 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
-<h2><a class="source-link" href="https://github.com/szl-holdings/vertical-services/tree/3906c6692a75c37bbf3d7221097d7c92c939544b" target="_blank" rel="noopener noreferrer">szl-holdings/vertical-services</a></h2>
+<h2><a class="source-link" href="https://github.com/szl-holdings/vertical-services/tree/f0b759ed2f0b392c0152911603f4f04bd6cced2c" target="_blank" rel="noopener noreferrer">szl-holdings/vertical-services</a></h2>
 <p class="asset-category">Python</p><p>Dated exact-source inventory record.</p>
-<details><summary>Recorded evidence</summary><p class="asset-claim">7 SUCCESS matching collected SHA; 4 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
-<details><summary>Source snapshot revision</summary><code>3906c6692a75c37bbf3d7221097d7c92c939544b</code></details>
+<details><summary>Recorded evidence</summary><p class="asset-claim">9 SUCCESS matching collected SHA; 2 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
+<details><summary>Source snapshot revision</summary><code>f0b759ed2f0b392c0152911603f4f04bd6cced2c</code></details>
 
-<p><a href="https://github.com/szl-holdings/vertical-services" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/vertical-services/actions/runs/37583543485" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/vertical-services" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/vertical-services/actions/runs/38119171224" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
 <article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/vsp-otel" data-search="szl-holdings/vsp-otel github python 10 success matching collected sha; 4 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (100 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
@@ -1304,7 +1304,7 @@
 <details><summary>Recorded evidence</summary><p class="asset-claim">1 FAILURE; 10 SUCCESS matching collected SHA; 3 older run(s) UNKNOWN at collected SHA; bounded latest 100 default-branch runs (100 returned); absent workflows UNKNOWN</p></details>
 <details><summary>Source snapshot revision</summary><code>2da73f3278f8eda4144c3c166d343e27ba9cdf8f</code></details>
 
-<p><a href="https://github.com/szl-holdings/yarqa" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/yarqa/actions/runs/37714278516" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
+<p><a href="https://github.com/szl-holdings/yarqa" target="_blank" rel="noopener noreferrer">Repository and docs</a> <a href="https://github.com/szl-holdings/yarqa/actions/runs/38102766383" target="_blank" rel="noopener noreferrer">Observed workflow</a></p>
 </article>
 <article class="asset" data-estate-asset data-kind="GitHub" data-category="Python" data-id="szl-holdings/YARQA-ATTN" data-search="szl-holdings/yarqa-attn github python 5 success matching collected sha; 2 older run(s) unknown at collected sha; bounded latest 100 default-branch runs (53 returned); absent workflows unknown dated exact-source inventory record.">
 <p class="asset-kind">GitHub</p>
@@ -1488,10 +1488,10 @@
 </article>
 <article class="asset" data-estate-asset data-kind="HF Model" data-category="Tensor / GGUF artifact" data-id="SZLHOLDINGS/SZL-Forge-1.5B-ReceiptAgent" data-search="szlholdings/szl-forge-1.5b-receiptagent hf model tensor / gguf artifact unknown: artifact quality and held-out evaluation; listed files do not establish trained weights dated exact-source inventory record.">
 <p class="asset-kind">HF Model</p>
-<h2><a class="source-link" href="https://huggingface.co/SZLHOLDINGS/SZL-Forge-1.5B-ReceiptAgent/tree/79f4d4bef354e2134a4ac99a95819547b06867e8" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/SZL-Forge-1.5B-ReceiptAgent</a></h2>
+<h2><a class="source-link" href="https://huggingface.co/SZLHOLDINGS/SZL-Forge-1.5B-ReceiptAgent/tree/80cf37ce1ee24dbb2a2bcc0d7a12d69dcf6bd160" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/SZL-Forge-1.5B-ReceiptAgent</a></h2>
 <p class="asset-category">Tensor / GGUF artifact</p><p>Dated exact-source inventory record.</p>
 <details><summary>Recorded evidence</summary><p class="asset-claim">UNKNOWN: artifact quality and held-out evaluation; listed files do not establish trained weights</p></details>
-<details><summary>Source snapshot revision</summary><code>79f4d4bef354e2134a4ac99a95819547b06867e8</code></details>
+<details><summary>Source snapshot revision</summary><code>80cf37ce1ee24dbb2a2bcc0d7a12d69dcf6bd160</code></details>
 
 <p><a href="https://huggingface.co/SZLHOLDINGS/SZL-Forge-1.5B-ReceiptAgent" target="_blank" rel="noopener noreferrer">Model card and artifacts</a> </p>
 </article>
@@ -1551,10 +1551,10 @@
 </article>
 <article class="asset" data-estate-asset data-kind="HF Model" data-category="Tensor / GGUF artifact" data-id="SZLHOLDINGS/SZL-Khipu-1.5B" data-search="szlholdings/szl-khipu-1.5b hf model tensor / gguf artifact declared promotion gate blocked; reported 2/6 abstention; publication_eligible=false; fresh held-out replay unknown dated exact-source inventory record.">
 <p class="asset-kind">HF Model</p>
-<h2><a class="source-link" href="https://huggingface.co/SZLHOLDINGS/SZL-Khipu-1.5B/tree/50d2c0655e4721d717fb8634f0642e341eb21a87" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/SZL-Khipu-1.5B</a></h2>
+<h2><a class="source-link" href="https://huggingface.co/SZLHOLDINGS/SZL-Khipu-1.5B/tree/d2bdc20bdb98a70628f66be259dbf102e03ae169" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/SZL-Khipu-1.5B</a></h2>
 <p class="asset-category">Tensor / GGUF artifact</p><p>Dated exact-source inventory record.</p>
 <details><summary>Recorded evidence</summary><p class="asset-claim">DECLARED promotion gate BLOCKED; REPORTED 2/6 abstention; publication_eligible=false; fresh held-out replay UNKNOWN</p></details>
-<details><summary>Source snapshot revision</summary><code>50d2c0655e4721d717fb8634f0642e341eb21a87</code></details>
+<details><summary>Source snapshot revision</summary><code>d2bdc20bdb98a70628f66be259dbf102e03ae169</code></details>
 
 <p><a href="https://huggingface.co/SZLHOLDINGS/SZL-Khipu-1.5B" target="_blank" rel="noopener noreferrer">Model card and artifacts</a> </p>
 </article>
@@ -1569,10 +1569,10 @@
 </article>
 <article class="asset" data-estate-asset data-kind="HF Model" data-category="Tensor / GGUF artifact" data-id="SZLHOLDINGS/SZL-Khipu-1.5B-GGUF" data-search="szlholdings/szl-khipu-1.5b-gguf hf model tensor / gguf artifact unknown: artifact quality and held-out evaluation; listed files do not establish trained weights dated exact-source inventory record.">
 <p class="asset-kind">HF Model</p>
-<h2><a class="source-link" href="https://huggingface.co/SZLHOLDINGS/SZL-Khipu-1.5B-GGUF/tree/789cc7b1af1aaa0ca95998096664dc5021c41c4a" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/SZL-Khipu-1.5B-GGUF</a></h2>
+<h2><a class="source-link" href="https://huggingface.co/SZLHOLDINGS/SZL-Khipu-1.5B-GGUF/tree/46775a0bfa8352fe3e7567075b2120f9b270a806" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/SZL-Khipu-1.5B-GGUF</a></h2>
 <p class="asset-category">Tensor / GGUF artifact</p><p>Dated exact-source inventory record.</p>
 <details><summary>Recorded evidence</summary><p class="asset-claim">UNKNOWN: artifact quality and held-out evaluation; listed files do not establish trained weights</p></details>
-<details><summary>Source snapshot revision</summary><code>789cc7b1af1aaa0ca95998096664dc5021c41c4a</code></details>
+<details><summary>Source snapshot revision</summary><code>46775a0bfa8352fe3e7567075b2120f9b270a806</code></details>
 
 <p><a href="https://huggingface.co/SZLHOLDINGS/SZL-Khipu-1.5B-GGUF" target="_blank" rel="noopener noreferrer">Model card and artifacts</a> </p>
 </article>
@@ -1821,10 +1821,10 @@
 </article>
 <article class="asset" data-estate-asset data-kind="HF Dataset" data-category="Dataset repository" data-id="SZLHOLDINGS/killinchu-osint-corpus" data-search="szlholdings/killinchu-osint-corpus hf dataset dataset repository unknown: dataset suitability and evaluation; rows not run dated exact-source inventory record.">
 <p class="asset-kind">HF Dataset</p>
-<h2><a class="source-link" href="https://huggingface.co/datasets/SZLHOLDINGS/killinchu-osint-corpus/tree/c3e21cce8399a3ea77dc27d033b7610cf8995661" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/killinchu-osint-corpus</a></h2>
+<h2><a class="source-link" href="https://huggingface.co/datasets/SZLHOLDINGS/killinchu-osint-corpus/tree/a8f29fc944012f041a51e7e46fe63a64668165c7" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/killinchu-osint-corpus</a></h2>
 <p class="asset-category">Dataset repository</p><p>Dated exact-source inventory record.</p>
 <details><summary>Recorded evidence</summary><p class="asset-claim">UNKNOWN: dataset suitability and evaluation; rows NOT RUN</p></details>
-<details><summary>Source snapshot revision</summary><code>c3e21cce8399a3ea77dc27d033b7610cf8995661</code></details>
+<details><summary>Source snapshot revision</summary><code>a8f29fc944012f041a51e7e46fe63a64668165c7</code></details>
 
 <p><a href="https://huggingface.co/datasets/SZLHOLDINGS/killinchu-osint-corpus" target="_blank" rel="noopener noreferrer">Dataset card</a> </p>
 </article>
@@ -1884,10 +1884,10 @@
 </article>
 <article class="asset" data-estate-asset data-kind="HF Dataset" data-category="Dataset repository" data-id="SZLHOLDINGS/readiness-runs" data-search="szlholdings/readiness-runs hf dataset dataset repository unknown: dataset suitability and evaluation; rows not run dated exact-source inventory record.">
 <p class="asset-kind">HF Dataset</p>
-<h2><a class="source-link" href="https://huggingface.co/datasets/SZLHOLDINGS/readiness-runs/tree/6e80dcc92ea4df5f8739eb7d9ad615c7e4a4e180" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/readiness-runs</a></h2>
+<h2><a class="source-link" href="https://huggingface.co/datasets/SZLHOLDINGS/readiness-runs/tree/f1cd37fb57c0a10e24b603bec53993639a018f8b" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/readiness-runs</a></h2>
 <p class="asset-category">Dataset repository</p><p>Dated exact-source inventory record.</p>
 <details><summary>Recorded evidence</summary><p class="asset-claim">UNKNOWN: dataset suitability and evaluation; rows NOT RUN</p></details>
-<details><summary>Source snapshot revision</summary><code>6e80dcc92ea4df5f8739eb7d9ad615c7e4a4e180</code></details>
+<details><summary>Source snapshot revision</summary><code>f1cd37fb57c0a10e24b603bec53993639a018f8b</code></details>
 
 <p><a href="https://huggingface.co/datasets/SZLHOLDINGS/readiness-runs" target="_blank" rel="noopener noreferrer">Dataset card</a> </p>
 </article>
@@ -1947,10 +1947,10 @@
 </article>
 <article class="asset" data-estate-asset data-kind="HF Dataset" data-category="Dataset repository" data-id="SZLHOLDINGS/szl-frontier-evaluation-receipts" data-search="szlholdings/szl-frontier-evaluation-receipts hf dataset dataset repository unknown: dataset suitability and evaluation; rows not run dated exact-source inventory record.">
 <p class="asset-kind">HF Dataset</p>
-<h2><a class="source-link" href="https://huggingface.co/datasets/SZLHOLDINGS/szl-frontier-evaluation-receipts/tree/0a9e19eba1e35542c16aaf1b7194512344821b02" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/szl-frontier-evaluation-receipts</a></h2>
+<h2><a class="source-link" href="https://huggingface.co/datasets/SZLHOLDINGS/szl-frontier-evaluation-receipts/tree/8d98bbddd05f20c46edadef61fe7ca515f76fd8d" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/szl-frontier-evaluation-receipts</a></h2>
 <p class="asset-category">Dataset repository</p><p>Dated exact-source inventory record.</p>
 <details><summary>Recorded evidence</summary><p class="asset-claim">UNKNOWN: dataset suitability and evaluation; rows NOT RUN</p></details>
-<details><summary>Source snapshot revision</summary><code>0a9e19eba1e35542c16aaf1b7194512344821b02</code></details>
+<details><summary>Source snapshot revision</summary><code>8d98bbddd05f20c46edadef61fe7ca515f76fd8d</code></details>
 
 <p><a href="https://huggingface.co/datasets/SZLHOLDINGS/szl-frontier-evaluation-receipts" target="_blank" rel="noopener noreferrer">Dataset card</a> </p>
 </article>
@@ -1992,10 +1992,10 @@
 </article>
 <article class="asset" data-estate-asset data-kind="HF Dataset" data-category="Dataset repository" data-id="SZLHOLDINGS/szl-second-brain-frontier-candidates" data-search="szlholdings/szl-second-brain-frontier-candidates hf dataset dataset repository unknown: dataset suitability and evaluation; rows not run dated exact-source inventory record.">
 <p class="asset-kind">HF Dataset</p>
-<h2><a class="source-link" href="https://huggingface.co/datasets/SZLHOLDINGS/szl-second-brain-frontier-candidates/tree/ca899882a0e0a4c287c7c6bd245db4c359bbe19b" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/szl-second-brain-frontier-candidates</a></h2>
+<h2><a class="source-link" href="https://huggingface.co/datasets/SZLHOLDINGS/szl-second-brain-frontier-candidates/tree/bc7851ca1f82044756ab895d7eea906674260b27" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/szl-second-brain-frontier-candidates</a></h2>
 <p class="asset-category">Dataset repository</p><p>Dated exact-source inventory record.</p>
 <details><summary>Recorded evidence</summary><p class="asset-claim">UNKNOWN: dataset suitability and evaluation; rows NOT RUN</p></details>
-<details><summary>Source snapshot revision</summary><code>ca899882a0e0a4c287c7c6bd245db4c359bbe19b</code></details>
+<details><summary>Source snapshot revision</summary><code>bc7851ca1f82044756ab895d7eea906674260b27</code></details>
 
 <p><a href="https://huggingface.co/datasets/SZLHOLDINGS/szl-second-brain-frontier-candidates" target="_blank" rel="noopener noreferrer">Dataset card</a> </p>
 </article>
@@ -2080,12 +2080,12 @@
 
 <p><a href="https://huggingface.co/datasets/SZLHOLDINGS/why-we-lead" target="_blank" rel="noopener noreferrer">Dataset card</a> </p>
 </article>
-<article class="asset" data-estate-asset data-kind="HF Space" data-category="docker" data-id="SZLHOLDINGS/a11oy" data-search="szlholdings/a11oy hf space docker declared running_building; cpu-basic; source/runtime parity unknown; runtime behavior not run dated exact-source inventory record.">
+<article class="asset" data-estate-asset data-kind="HF Space" data-category="docker" data-id="SZLHOLDINGS/a11oy" data-search="szlholdings/a11oy hf space docker declared running; cpu-basic; source/runtime parity unknown; runtime behavior not run dated exact-source inventory record.">
 <p class="asset-kind">HF Space</p>
-<h2><a class="source-link" href="https://huggingface.co/spaces/SZLHOLDINGS/a11oy/tree/9f6bedecce77a4e756ceecf2714aabdb52dc4357" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/a11oy</a></h2>
+<h2><a class="source-link" href="https://huggingface.co/spaces/SZLHOLDINGS/a11oy/tree/6d89248dfe180323009ab62b4166bdd467d9555a" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/a11oy</a></h2>
 <p class="asset-category">docker</p><p>Dated exact-source inventory record.</p>
-<details><summary>Recorded evidence</summary><p class="asset-claim">DECLARED RUNNING_BUILDING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN</p></details>
-<details><summary>Source snapshot revision</summary><code>9f6bedecce77a4e756ceecf2714aabdb52dc4357</code></details>
+<details><summary>Recorded evidence</summary><p class="asset-claim">DECLARED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN</p></details>
+<details><summary>Source snapshot revision</summary><code>6d89248dfe180323009ab62b4166bdd467d9555a</code></details>
 
 <p><a href="https://huggingface.co/spaces/SZLHOLDINGS/a11oy" target="_blank" rel="noopener noreferrer">Open Space</a> </p>
 </article>
@@ -2118,10 +2118,10 @@
 </article>
 <article class="asset" data-estate-asset data-kind="HF Space" data-category="docker" data-id="SZLHOLDINGS/finance" data-search="szlholdings/finance hf space docker declared running; cpu-basic; source/runtime parity unknown; runtime behavior not run dated exact-source inventory record.">
 <p class="asset-kind">HF Space</p>
-<h2><a class="source-link" href="https://huggingface.co/spaces/SZLHOLDINGS/finance/tree/77de03f570870f1ea7f578a8055d67232dce9596" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/finance</a></h2>
+<h2><a class="source-link" href="https://huggingface.co/spaces/SZLHOLDINGS/finance/tree/609b60b4ffbbb9a555476173d586d539ca9eedf9" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/finance</a></h2>
 <p class="asset-category">docker</p><p>Dated exact-source inventory record.</p>
 <details><summary>Recorded evidence</summary><p class="asset-claim">DECLARED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN</p></details>
-<details><summary>Source snapshot revision</summary><code>77de03f570870f1ea7f578a8055d67232dce9596</code></details>
+<details><summary>Source snapshot revision</summary><code>609b60b4ffbbb9a555476173d586d539ca9eedf9</code></details>
 
 <p><a href="https://huggingface.co/spaces/SZLHOLDINGS/finance" target="_blank" rel="noopener noreferrer">Open Space</a> </p>
 </article>
@@ -2172,19 +2172,19 @@
 </article>
 <article class="asset" data-estate-asset data-kind="HF Space" data-category="docker" data-id="SZLHOLDINGS/immune-lattice" data-search="szlholdings/immune-lattice hf space docker declared running; cpu-basic; source/runtime parity unknown; runtime behavior not run dated exact-source inventory record.">
 <p class="asset-kind">HF Space</p>
-<h2><a class="source-link" href="https://huggingface.co/spaces/SZLHOLDINGS/immune-lattice/tree/62e614728e933dcc987595b02cb761c64007fdea" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/immune-lattice</a></h2>
+<h2><a class="source-link" href="https://huggingface.co/spaces/SZLHOLDINGS/immune-lattice/tree/7245efa3429254b178cb385efb894e4e6547b597" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/immune-lattice</a></h2>
 <p class="asset-category">docker</p><p>Dated exact-source inventory record.</p>
 <details><summary>Recorded evidence</summary><p class="asset-claim">DECLARED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN</p></details>
-<details><summary>Source snapshot revision</summary><code>62e614728e933dcc987595b02cb761c64007fdea</code></details>
+<details><summary>Source snapshot revision</summary><code>7245efa3429254b178cb385efb894e4e6547b597</code></details>
 
 <p><a href="https://huggingface.co/spaces/SZLHOLDINGS/immune-lattice" target="_blank" rel="noopener noreferrer">Open Space</a> </p>
 </article>
 <article class="asset" data-estate-asset data-kind="HF Space" data-category="docker" data-id="SZLHOLDINGS/killinchu" data-search="szlholdings/killinchu hf space docker declared running; cpu-basic; source/runtime parity unknown; runtime behavior not run dated exact-source inventory record.">
 <p class="asset-kind">HF Space</p>
-<h2><a class="source-link" href="https://huggingface.co/spaces/SZLHOLDINGS/killinchu/tree/6d61c5febb3a082bb0aaae4af7cf0b0359d76cbe" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/killinchu</a></h2>
+<h2><a class="source-link" href="https://huggingface.co/spaces/SZLHOLDINGS/killinchu/tree/be4e1237815de328f2b389da7d36e2048df70fb6" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/killinchu</a></h2>
 <p class="asset-category">docker</p><p>Dated exact-source inventory record.</p>
 <details><summary>Recorded evidence</summary><p class="asset-claim">DECLARED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN</p></details>
-<details><summary>Source snapshot revision</summary><code>6d61c5febb3a082bb0aaae4af7cf0b0359d76cbe</code></details>
+<details><summary>Source snapshot revision</summary><code>be4e1237815de328f2b389da7d36e2048df70fb6</code></details>
 
 <p><a href="https://huggingface.co/spaces/SZLHOLDINGS/killinchu" target="_blank" rel="noopener noreferrer">Open Space</a> </p>
 </article>
@@ -2199,12 +2199,21 @@
 </article>
 <article class="asset" data-estate-asset data-kind="HF Space" data-category="docker" data-id="SZLHOLDINGS/lyte" data-search="szlholdings/lyte hf space docker declared running; cpu-basic; source/runtime parity unknown; runtime behavior not run dated exact-source inventory record.">
 <p class="asset-kind">HF Space</p>
-<h2><a class="source-link" href="https://huggingface.co/spaces/SZLHOLDINGS/lyte/tree/23be6e83f7252f1951a0580693c1a9261073306e" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/lyte</a></h2>
+<h2><a class="source-link" href="https://huggingface.co/spaces/SZLHOLDINGS/lyte/tree/d9f23936dab517f8bc4f98396604631d48ea070f" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/lyte</a></h2>
 <p class="asset-category">docker</p><p>Dated exact-source inventory record.</p>
 <details><summary>Recorded evidence</summary><p class="asset-claim">DECLARED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN</p></details>
-<details><summary>Source snapshot revision</summary><code>23be6e83f7252f1951a0580693c1a9261073306e</code></details>
+<details><summary>Source snapshot revision</summary><code>d9f23936dab517f8bc4f98396604631d48ea070f</code></details>
 
 <p><a href="https://huggingface.co/spaces/SZLHOLDINGS/lyte" target="_blank" rel="noopener noreferrer">Open Space</a> </p>
+</article>
+<article class="asset" data-estate-asset data-kind="HF Space" data-category="docker" data-id="SZLHOLDINGS/nexus" data-search="szlholdings/nexus hf space docker declared running; cpu-basic; source/runtime parity unknown; runtime behavior not run dated exact-source inventory record.">
+<p class="asset-kind">HF Space</p>
+<h2><a class="source-link" href="https://huggingface.co/spaces/SZLHOLDINGS/nexus/tree/31b3c4787d32cc325351c703c393155c2f0aa413" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/nexus</a></h2>
+<p class="asset-category">docker</p><p>Dated exact-source inventory record.</p>
+<details><summary>Recorded evidence</summary><p class="asset-claim">DECLARED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN</p></details>
+<details><summary>Source snapshot revision</summary><code>31b3c4787d32cc325351c703c393155c2f0aa413</code></details>
+
+<p><a href="https://huggingface.co/spaces/SZLHOLDINGS/nexus" target="_blank" rel="noopener noreferrer">Open Space</a> </p>
 </article>
 <article class="asset" data-estate-asset data-kind="HF Space" data-category="docker" data-id="SZLHOLDINGS/oac-system-health-lab" data-search="szlholdings/oac-system-health-lab hf space docker declared running; cpu-basic; source/runtime parity unknown; runtime behavior not run dated exact-source inventory record.">
 <p class="asset-kind">HF Space</p>
@@ -2226,10 +2235,10 @@
 </article>
 <article class="asset" data-estate-asset data-kind="HF Space" data-category="static" data-id="SZLHOLDINGS/README" data-search="szlholdings/readme hf space static declared running; source/runtime parity unknown; runtime behavior not run dated exact-source inventory record.">
 <p class="asset-kind">HF Space</p>
-<h2><a class="source-link" href="https://huggingface.co/spaces/SZLHOLDINGS/README/tree/b304ecd8cb0461c6ff816abcc36c87edf4a17896" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/README</a></h2>
+<h2><a class="source-link" href="https://huggingface.co/spaces/SZLHOLDINGS/README/tree/70b1c55eabd49d8295fd7db7e9a92f4a2387eb40" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/README</a></h2>
 <p class="asset-category">static</p><p>Dated exact-source inventory record.</p>
 <details><summary>Recorded evidence</summary><p class="asset-claim">DECLARED RUNNING; source/runtime parity UNKNOWN; runtime behavior NOT RUN</p></details>
-<details><summary>Source snapshot revision</summary><code>b304ecd8cb0461c6ff816abcc36c87edf4a17896</code></details>
+<details><summary>Source snapshot revision</summary><code>70b1c55eabd49d8295fd7db7e9a92f4a2387eb40</code></details>
 
 <p><a href="https://huggingface.co/spaces/SZLHOLDINGS/README" target="_blank" rel="noopener noreferrer">Open Space</a> </p>
 </article>
@@ -2271,10 +2280,10 @@
 </article>
 <article class="asset" data-estate-asset data-kind="HF Space" data-category="docker" data-id="SZLHOLDINGS/szl-command-lab" data-search="szlholdings/szl-command-lab hf space docker declared running; cpu-basic; source/runtime parity unknown; runtime behavior not run dated exact-source inventory record.">
 <p class="asset-kind">HF Space</p>
-<h2><a class="source-link" href="https://huggingface.co/spaces/SZLHOLDINGS/szl-command-lab/tree/836b3113b1d21a8bca07bc65f72358cab240f223" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/szl-command-lab</a></h2>
+<h2><a class="source-link" href="https://huggingface.co/spaces/SZLHOLDINGS/szl-command-lab/tree/ed99d49f0b36549dda07f9998bea5857a9413f43" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/szl-command-lab</a></h2>
 <p class="asset-category">docker</p><p>Dated exact-source inventory record.</p>
 <details><summary>Recorded evidence</summary><p class="asset-claim">DECLARED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN</p></details>
-<details><summary>Source snapshot revision</summary><code>836b3113b1d21a8bca07bc65f72358cab240f223</code></details>
+<details><summary>Source snapshot revision</summary><code>ed99d49f0b36549dda07f9998bea5857a9413f43</code></details>
 
 <p><a href="https://huggingface.co/spaces/SZLHOLDINGS/szl-command-lab" target="_blank" rel="noopener noreferrer">Open Space</a> </p>
 </article>
@@ -2307,10 +2316,10 @@
 </article>
 <article class="asset" data-estate-asset data-kind="HF Space" data-category="docker" data-id="SZLHOLDINGS/szl-frontier" data-search="szlholdings/szl-frontier hf space docker declared running; cpu-basic; source/runtime parity unknown; runtime behavior not run dated exact-source inventory record.">
 <p class="asset-kind">HF Space</p>
-<h2><a class="source-link" href="https://huggingface.co/spaces/SZLHOLDINGS/szl-frontier/tree/29e3eb93a4e5efb7fc5599d403ee3df0c4c83144" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/szl-frontier</a></h2>
+<h2><a class="source-link" href="https://huggingface.co/spaces/SZLHOLDINGS/szl-frontier/tree/7466ab2a8f782e3033326d1ed290a92a890a5d7f" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/szl-frontier</a></h2>
 <p class="asset-category">docker</p><p>Dated exact-source inventory record.</p>
 <details><summary>Recorded evidence</summary><p class="asset-claim">DECLARED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN</p></details>
-<details><summary>Source snapshot revision</summary><code>29e3eb93a4e5efb7fc5599d403ee3df0c4c83144</code></details>
+<details><summary>Source snapshot revision</summary><code>7466ab2a8f782e3033326d1ed290a92a890a5d7f</code></details>
 
 <p><a href="https://huggingface.co/spaces/SZLHOLDINGS/szl-frontier" target="_blank" rel="noopener noreferrer">Open Space</a> </p>
 </article>
@@ -2334,10 +2343,10 @@
 </article>
 <article class="asset" data-estate-asset data-kind="HF Space" data-category="docker" data-id="SZLHOLDINGS/szl-model-inference-lab" data-search="szlholdings/szl-model-inference-lab hf space docker declared running; cpu-basic; source/runtime parity unknown; runtime behavior not run dated exact-source inventory record.">
 <p class="asset-kind">HF Space</p>
-<h2><a class="source-link" href="https://huggingface.co/spaces/SZLHOLDINGS/szl-model-inference-lab/tree/44f0dceaf8610ae9b7253733c835d8129f60c6e1" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/szl-model-inference-lab</a></h2>
+<h2><a class="source-link" href="https://huggingface.co/spaces/SZLHOLDINGS/szl-model-inference-lab/tree/af4f3ce465822eb5590c559aa75c1d21da916fc0" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/szl-model-inference-lab</a></h2>
 <p class="asset-category">docker</p><p>Dated exact-source inventory record.</p>
 <details><summary>Recorded evidence</summary><p class="asset-claim">DECLARED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN</p></details>
-<details><summary>Source snapshot revision</summary><code>44f0dceaf8610ae9b7253733c835d8129f60c6e1</code></details>
+<details><summary>Source snapshot revision</summary><code>af4f3ce465822eb5590c559aa75c1d21da916fc0</code></details>
 
 <p><a href="https://huggingface.co/spaces/SZLHOLDINGS/szl-model-inference-lab" target="_blank" rel="noopener noreferrer">Open Space</a> </p>
 </article>
@@ -2350,12 +2359,12 @@
 
 <p><a href="https://huggingface.co/spaces/SZLHOLDINGS/szl-router-control" target="_blank" rel="noopener noreferrer">Open Space</a> </p>
 </article>
-<article class="asset" data-estate-asset data-kind="HF Space" data-category="docker" data-id="SZLHOLDINGS/szl-seismic-review" data-search="szlholdings/szl-seismic-review hf space docker declared running_app_starting; cpu-basic; source/runtime parity unknown; runtime behavior not run dated exact-source inventory record.">
+<article class="asset" data-estate-asset data-kind="HF Space" data-category="docker" data-id="SZLHOLDINGS/szl-seismic-review" data-search="szlholdings/szl-seismic-review hf space docker declared running; cpu-basic; source/runtime parity unknown; runtime behavior not run dated exact-source inventory record.">
 <p class="asset-kind">HF Space</p>
-<h2><a class="source-link" href="https://huggingface.co/spaces/SZLHOLDINGS/szl-seismic-review/tree/1ab8e0606526e585833d0fe4f3bdce49255b1735" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/szl-seismic-review</a></h2>
+<h2><a class="source-link" href="https://huggingface.co/spaces/SZLHOLDINGS/szl-seismic-review/tree/4000f94cd1e877852e9b578d81194bfdc4ff64af" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/szl-seismic-review</a></h2>
 <p class="asset-category">docker</p><p>Dated exact-source inventory record.</p>
-<details><summary>Recorded evidence</summary><p class="asset-claim">DECLARED RUNNING_APP_STARTING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN</p></details>
-<details><summary>Source snapshot revision</summary><code>1ab8e0606526e585833d0fe4f3bdce49255b1735</code></details>
+<details><summary>Recorded evidence</summary><p class="asset-claim">DECLARED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN</p></details>
+<details><summary>Source snapshot revision</summary><code>4000f94cd1e877852e9b578d81194bfdc4ff64af</code></details>
 
 <p><a href="https://huggingface.co/spaces/SZLHOLDINGS/szl-seismic-review" target="_blank" rel="noopener noreferrer">Open Space</a> </p>
 </article>
@@ -2388,10 +2397,10 @@
 </article>
 <article class="asset" data-estate-asset data-kind="HF Space" data-category="docker" data-id="SZLHOLDINGS/vertical-services" data-search="szlholdings/vertical-services hf space docker declared running; cpu-basic; source/runtime parity unknown; runtime behavior not run dated exact-source inventory record.">
 <p class="asset-kind">HF Space</p>
-<h2><a class="source-link" href="https://huggingface.co/spaces/SZLHOLDINGS/vertical-services/tree/04ea1240aa8638c8cd25fe8995f31233542ceb91" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/vertical-services</a></h2>
+<h2><a class="source-link" href="https://huggingface.co/spaces/SZLHOLDINGS/vertical-services/tree/7f7f1c5ad7e8fb8bec120d26c12ad8d4860b3373" target="_blank" rel="noopener noreferrer">SZLHOLDINGS/vertical-services</a></h2>
 <p class="asset-category">docker</p><p>Dated exact-source inventory record.</p>
 <details><summary>Recorded evidence</summary><p class="asset-claim">DECLARED RUNNING; cpu-basic; source/runtime parity UNKNOWN; runtime behavior NOT RUN</p></details>
-<details><summary>Source snapshot revision</summary><code>04ea1240aa8638c8cd25fe8995f31233542ceb91</code></details>
+<details><summary>Source snapshot revision</summary><code>7f7f1c5ad7e8fb8bec120d26c12ad8d4860b3373</code></details>
 
 <p><a href="https://huggingface.co/spaces/SZLHOLDINGS/vertical-services" target="_blank" rel="noopener noreferrer">Open Space</a> </p>
 </article>
@@ -2713,7 +2722,7 @@
     </div>
     <noscript><p>All public entries are visible. Enable JavaScript only to filter this page locally.</p></noscript>
   </main>
-  <footer><div class="shell">Source snapshot: 2026-10-08 05:20 UTC · Public records only · No live authorization claim.</div></footer>
+  <footer><div class="shell">Source snapshot: 2026-10-11 07:11 UTC · Public records only · No live authorization claim.</div></footer>
   <script id="estate-filter">
     (() => {
       const search = document.getElementById('estate-search');
