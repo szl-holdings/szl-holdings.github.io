@@ -1,0 +1,12 @@
+{
+  "schema": "szl.brand-projection.v1",
+  "source_repository": "szl-holdings/szl-brand",
+  "source_revision": "4309f6fce89179331b0b3ed8c99494e76c5be256",
+  "source_path": "kit/logos/orbit-v2/suite/szl-orbit-mono-navy.svg",
+  "suite_version": "1.0.0",
+  "master_sha256": "84a23d7b2a6dd198378ded91e52c545df2943fd33cbc4a67dd4184e94f4d94fb",
+  "sha256": "194077b528325839428f1862b2d5c79e7197169467d51e0fb11cf873b93fc18d",
+  "destination_path": "assets/szl/logos/szl-orbit-mono-navy.svg",
+  "scope": "Company navigation on a light surface, 64 px placement with adjacent literal company text and quarter-width clear space",
+  "live_deployment": "NOT_ATTESTED"
+}

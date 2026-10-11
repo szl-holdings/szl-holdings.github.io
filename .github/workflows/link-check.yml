@@ -29,7 +29,9 @@ jobs:
           fetch-depth: 0 # offline byte readbacks bind to immutable dated source commits
 
       - name: Test recursive route and fragment guard
-        run: python3 -m unittest discover -s tests -p test_site_links.py -v
+        run: |
+          python3 -m unittest discover -s tests -p test_site_links.py -v
+          python3 -m unittest discover -s tests -p test_kanchay_projection.py -v
 
       - name: Test and verify exact browser policy
         run: |
