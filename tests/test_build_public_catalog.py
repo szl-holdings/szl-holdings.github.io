@@ -58,7 +58,10 @@ class PublicCatalogTests(unittest.TestCase):
         self.assertEqual(catalog['counts']['HF Model'], 48)
         self.assertEqual(catalog['counts']['HF Kernel'], 14)
         self.assertEqual(catalog['counts']['PyPI'], 20)
-        self.assertEqual(len(catalog['assets']), 283)
+        self.assertEqual(len(catalog['assets']), 284)
+        nexus = next(row for row in catalog['assets'] if row['id'] == 'SZLHOLDINGS/nexus')
+        self.assertEqual(nexus['kind'], 'HF Space')
+        self.assertIn('runtime behavior NOT RUN', nexus['state'])
         advisory = next(row for row in catalog['assets']
                         if row['id'] == 'SZLHOLDINGS/oac-ops-health-v2')
         self.assertEqual(advisory['kind'], 'HF Model')
@@ -131,7 +134,7 @@ class PublicCatalogTests(unittest.TestCase):
         page = builder.render_page(template, catalog)
         self.assertEqual(script_blocks(template), script_blocks(page))
         self.assertEqual(re.findall(r'<meta http-equiv="Content-Security-Policy"[^>]+>', template), re.findall(r'<meta http-equiv="Content-Security-Policy"[^>]+>', page))
-        self.assertEqual(page.count('data-estate-asset '), 283)
+        self.assertEqual(page.count('data-estate-asset '), 284)
 
     def test_script_comparison_keeps_uppercase_and_rejects_unclosed_blocks(self):
         self.assertEqual(script_blocks('<SCRIPT>sample</SCRIPT>'), [('<SCRIPT>', 'sample')])

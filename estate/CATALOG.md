@@ -2,16 +2,18 @@
 
 The estate page joins six public namespaces: GitHub repositories, Hugging Face
 models, datasets, Spaces and kernels, and published PyPI distributions. The
-committed catalog contains 283 surfaces: 128 GitHub, 48 model repositories, 37 datasets,
-36 Spaces, 14 kernels and 20 PyPI packages. A project can have several surfaces.
+committed catalog contains 284 surfaces: 128 GitHub, 48 model repositories, 37 datasets,
+37 Spaces, 14 kernels and 20 PyPI packages. A project can have several surfaces.
 
 ## Evidence and limits
 
-- **MEASURED:** public membership enumeration on 2026-10-08; PyPI metadata
+- **MEASURED:** public membership enumeration on 2026-10-11; PyPI metadata
   retains its 2026-10-07 observation. The public projection admitted only
   literal `private: false` rows. The public `SZLHOLDINGS/README` Space was
   confirmed by direct API readback after the anonymous author list omitted it.
-- Repository and kernel states retain separate 2026-10-08 and 2026-10-06
+  `SZLHOLDINGS/nexus` appears in the current anonymous Space list and its
+  public API record pins the revision used here.
+- Repository and kernel states retain separate 2026-10-11 and 2026-10-06
   observation dates and immutable revisions. A kernel's dated model-mirror
   revision can differ from the newer model repository snapshot. This join does
   not refresh CI or runtime state beyond the recorded source observation.
@@ -23,6 +25,10 @@ committed catalog contains 283 surfaces: 128 GitHub, 48 model repositories, 37 d
 - Kernel/model-mirror equivalence is **UNKNOWN**. A distribution is not another
   trained model. Inference, training, numerical replay and independent evaluation
   were **NOT RUN**. Published failed gates remain visible.
+- The model and dataset contract CSVs are earlier metadata reviews. They cover
+  the same 48 model and 37 dataset IDs, but three model and four dataset
+  revisions precede this source snapshot. Their pinned links remain historical
+  review links.
 - `SZLHOLDINGS/oac-ops-health-v2` is model-hosted software with a Python
   kernel and JSON coefficients, not a transformer checkpoint. Its card reports
   a synthetic operational advisory only. Its receipt is unsigned; the

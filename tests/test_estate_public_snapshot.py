@@ -24,7 +24,7 @@ EXPECTED_COUNTS = {
     "GitHub": 128,
     "HF Model": 48,
     "HF Dataset": 37,
-    "HF Space": 36,
+    "HF Space": 37,
 }
 ASSET_FIELDS = {
     "id", "kind", "url", "revision", "archived", "category", "ci",
@@ -71,16 +71,27 @@ class PublicSnapshotTests(unittest.TestCase):
             "schema", "observed_at", "counts", "limitations", "assets",
         })
         self.assertEqual(data["schema"], "szl.public-estate-snapshot/v1")
-        self.assertEqual(data["observed_at"], "2026-10-08T05:20:34.071005+00:00")
+        self.assertEqual(data["observed_at"], "2026-10-11T07:11:47.450136+00:00")
         self.assertEqual(data["counts"], EXPECTED_COUNTS)
-        self.assertEqual(len(data["assets"]), 249)
+        self.assertEqual(len(data["assets"]), 250)
         self.assertEqual(Counter(a["kind"] for a in data["assets"]), EXPECTED_COUNTS)
         self.assertEqual(
-            len({(a["kind"], a["id"]) for a in data["assets"]}), 249
+            len({(a["kind"], a["id"]) for a in data["assets"]}), 250
         )
         self.assertTrue(all(set(a) == ASSET_FIELDS for a in data["assets"]))
         self.assertTrue(all(a["private"] is False for a in data["assets"]))
         self.assertNotIn("C:\\Users\\", SNAPSHOT.read_text(encoding="utf-8"))
+
+    def test_new_public_space_keeps_source_and_runtime_separate(self) -> None:
+        space = next(a for a in self.snapshot["assets"] if a["id"] == "SZLHOLDINGS/nexus")
+        self.assertEqual(space["kind"], "HF Space")
+        self.assertEqual(space["revision"], "31b3c4787d32cc325351c703c393155c2f0aa413")
+        self.assertIn("DECLARED RUNNING", space["state"])
+        self.assertIn("source/runtime parity UNKNOWN", space["state"])
+        self.assertIn("runtime behavior NOT RUN", space["state"])
+        khipu = next(a for a in self.snapshot["assets"] if a["id"] == "SZLHOLDINGS/SZL-Khipu-1.5B")
+        self.assertIn("REPORTED 2/6 abstention", khipu["state"])
+        self.assertIn("promotion gate BLOCKED", khipu["state"])
 
     def test_canonical_immutable_source_and_ci_urls(self) -> None:
         for asset in self.snapshot["assets"]:
