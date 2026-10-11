@@ -27,6 +27,10 @@ PYPI_SOURCE_REVISION = "7623a44f51af3c07a41e2f8dea81753a95a7edee"
 PYPI_MANIFEST_SHA256 = "ff80979ded90364bc3122cc7b98c2fa51ec6578e6b5f98c4f973b17e119cc2a4"
 PYPI_REPORT_SHA256 = "aac6abfffcafaf5ebf1b6d892926b7bac9adc0489b63c68159ee0e47a5d2a6da"
 PYPI_REPORT = ROOT / "estate" / "pypi-artifact-byte-readback.json"
+KERNEL_SOURCE_REVISION = "dccee6aeda928aa24f40a8a1e568ad58bb925e67"
+KERNEL_MANIFEST_SHA256 = "298466da9f5d8102e65017bbc9919f5de308c025e4cb164522181a063c6190f7"
+KERNEL_REPORT_SHA256 = "11e13d26297287644a71153c13a3d9265d0930ed4b0241473a0e34108c8777ed"
+KERNEL_REPORT = ROOT / "estate" / "kernel-shared-byte-readback.json"
 
 
 def _read_json(raw: bytes) -> dict:
@@ -66,7 +70,7 @@ def validate(document: dict) -> list[dict]:
     if when.tzinfo is None or when > datetime.now(timezone.utc):
         raise ValueError("invalid observation time")
     entries = document["entries"]
-    if not isinstance(entries, list) or not 1 <= len(entries) <= 3:
+    if not isinstance(entries, list) or not 1 <= len(entries) <= 4:
         raise ValueError("unexpected evidence count")
     seen: set[str] = set()
     for entry in entries:
@@ -131,10 +135,47 @@ def validate(document: dict) -> list[dict]:
             if (entry["source_package_binding"] != "UNKNOWN" or entry["attestation_signature_verification"] != "UNKNOWN"
                     or any(entry[field] != "NOT RUN" for field in ("installation", "extraction", "independent_replay"))):
                 raise ValueError("PyPI byte-readback boundary mismatch")
+        elif kind == "kernel":
+            fields = {"private", "id", "kind", "evidence_class", "source_repository", "source_revision",
+                      "source_manifest_sha256", "readback_sha256", "scope", "pair_count", "measured_pair_count",
+                      "unavailable_pair_count", "shared_path_count", "measured_shared_count",
+                      "unavailable_shared_count", "matched_count", "differing_count", "measured_bytes",
+                      "whole_artifact_equivalence", "runtime_behavior", "independent_replay",
+                      "production_authorization"}
+            if (set(entry) != fields or entry["id"] != "kernel-shared-byte-readback"
+                    or entry["source_repository"] != "szl-holdings/szl-holdings.github.io"):
+                raise ValueError("kernel public field allowlist mismatch")
+            _sha(entry["source_revision"], 40)
+            _sha(entry["source_manifest_sha256"], 64)
+            _sha(entry["readback_sha256"], 64)
+            if (entry["source_revision"] != KERNEL_SOURCE_REVISION
+                    or entry["source_manifest_sha256"] != KERNEL_MANIFEST_SHA256
+                    or entry["readback_sha256"] != KERNEL_REPORT_SHA256
+                    or hashlib.sha256(KERNEL_REPORT.read_bytes()).hexdigest() != KERNEL_REPORT_SHA256):
+                raise ValueError("kernel readback source or report bytes differ")
+            report = _read_json(KERNEL_REPORT.read_bytes())
+            if (report.get("schema") != "szl.public-kernel-shared-byte-readback/v1"
+                    or report.get("evidence_class") != "MEASURED"
+                    or any(entry[field] != report[field] for field in fields - {
+                        "private", "id", "kind", "source_repository", "readback_sha256", "production_authorization"
+                    })):
+                raise ValueError("kernel public summary differs from measured report")
+            for field in ("pair_count", "measured_pair_count", "unavailable_pair_count", "shared_path_count",
+                          "measured_shared_count", "unavailable_shared_count", "matched_count", "differing_count",
+                          "measured_bytes"):
+                _nonnegative(entry[field])
+            if (tuple(entry[field] for field in ("pair_count", "measured_pair_count", "unavailable_pair_count",
+                                                 "shared_path_count", "measured_shared_count", "unavailable_shared_count",
+                                                 "matched_count", "differing_count", "measured_bytes"))
+                    != (14, 13, 1, 158, 125, 33, 61, 64, 1616218)
+                    or entry["scope"] != "PINNED_PUBLIC_SHARED_PATH_BYTES_ONLY"
+                    or entry["whole_artifact_equivalence"] != "UNKNOWN"
+                    or entry["runtime_behavior"] != "NOT RUN" or entry["independent_replay"] != "NOT RUN"):
+                raise ValueError("kernel byte-readback denominator or boundary mismatch")
         else:
             raise ValueError("unsupported public evidence kind")
         if (entry["id"] in seen or entry["evidence_class"] != "MEASURED"
-                or (kind != "pypi" and entry["key_trust"] != "REPO_DECLARED")
+                or (kind not in {"pypi", "kernel"} and entry["key_trust"] != "REPO_DECLARED")
                 or entry["production_authorization"] != "BLOCKED"):
             raise ValueError("public evidence boundary mismatch")
         seen.add(entry["id"])
@@ -175,7 +216,7 @@ def render(entries: list[dict]) -> str:
                 '      <p class="exhibit-limit">Snapshot origin: DECLARED; key trust: REPO_DECLARED. Held-out evaluation replay NOT RUN. Publication eligibility false; production authorization BLOCKED. This check covers one adapter and its declared receipts.</p>',
                 '    </article>',
             ]
-        else:
+        elif row["kind"] == "pypi":
             manifest = f"https://github.com/{row['source_repository']}/blob/{row['source_revision']}/estate/pypi-packages.json"
             lines += [
                 '    <article class="asset" id="upgrade-pypi-archive-byte-readback">',
@@ -184,6 +225,18 @@ def render(entries: list[dict]) -> str:
                 f'      <p>All {row["matched_count"]} listed wheel and source archives across {row["package_count"]} packages matched their provider-declared SHA-256 and byte lengths. The streamed opaque files totaled {row["measured_total_bytes"]:,} bytes.</p>',
                 f'      <p><a href="{html.escape(manifest, quote=True)}">Pinned public manifest</a> · <a href="pypi-artifact-byte-readback.json">Per-file readback</a> · <a href="PYPI_ARTIFACT_READBACK.md">Replay scope</a></p>',
                 '      <p class="exhibit-limit">GitHub source-to-package binding: UNKNOWN. PyPI attestation signature verification: UNKNOWN. Install, extract and independent replay: NOT RUN. Production authorization: BLOCKED.</p>',
+                '    </article>',
+            ]
+        else:
+            manifest = f"https://github.com/{row['source_repository']}/blob/{row['source_revision']}/estate/kernel-distributions.json"
+            lines += [
+                '    <article class="asset" id="upgrade-kernel-shared-byte-readback">',
+                '      <p class="asset-kind">Pinned Kernel Hub and model mirror files · MEASURED bytes</p>',
+                '      <h3>Shared paths: 61 equal, 64 different, one mirror unavailable</h3>',
+                f'      <p>Across {row["pair_count"]} pinned kernel and model-mirror pairs, {row["measured_pair_count"]} pairs had downloadable shared files. Of {row["measured_shared_count"]} measured shared paths, {row["matched_count"]} had equal bytes and {row["differing_count"]} differed. The readback downloaded {row["measured_bytes"]:,} bytes. One manually gated mirror made {row["unavailable_shared_count"]} additional shared metadata paths UNAVAILABLE for byte comparison.</p>',
+                f'      <p>Report SHA-256: <code>{row["readback_sha256"]}</code>.</p>',
+                f'      <p><a href="{html.escape(manifest, quote=True)}">Pinned distribution manifest</a> · <a href="kernel-shared-byte-readback.json">Per-path readback</a> · <a href="KERNEL_SHARED_BYTE_READBACK.md">Replay scope</a></p>',
+                f'      <p class="exhibit-limit">Shared metadata paths: {row["shared_path_count"]}; measured pairs: {row["measured_pair_count"]}; unavailable pairs: {row["unavailable_pair_count"]}. Whole artifact equivalence: UNKNOWN. Runtime behavior and independent replay: NOT RUN. Production authorization: BLOCKED.</p>',
                 '    </article>',
             ]
     lines += ['  </div>', '</section>']
