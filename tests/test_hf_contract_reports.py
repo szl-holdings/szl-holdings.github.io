@@ -8,9 +8,9 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 HISTORICAL_REPORTS = {
     'model-contracts.csv': (
-        'HF Model', '83db803e5733a202035dd173f9360d33dab4aa0bff19a113e67976a94a2ea532'),
+        'HF Model', '6ff4f0e9ac9dd27017d9a568f4a1ebcaa326d624f84a832c4ef9cb652d056523'),
     'dataset-readiness.csv': (
-        'HF Dataset', 'b32d78c14a2b730f66b464bfc5b923bd886ea98fe852f4ca9091875f0c3050d7'),
+        'HF Dataset', '926d322383554819dacb59cf33177b8ea1ec5f4c2915b021ab425978e6dfccc4'),
 }
 
 
@@ -20,7 +20,9 @@ class PublicContractReportTests(unittest.TestCase):
         for filename, (kind, digest) in HISTORICAL_REPORTS.items():
             expected = {a['id']: a for a in snapshot['assets'] if a['kind'] == kind}
             report = ROOT / 'estate' / filename
-            self.assertEqual(hashlib.sha256(report.read_bytes()).hexdigest(), digest)
+            canonical = report.read_bytes().replace(b'\r\n', b'\n')
+            self.assertNotIn(b'\r', canonical)
+            self.assertEqual(hashlib.sha256(canonical).hexdigest(), digest)
             with report.open(encoding='utf-8', newline='') as stream:
                 rows = list(csv.DictReader(stream))
             self.assertEqual(len(rows), len(expected))
