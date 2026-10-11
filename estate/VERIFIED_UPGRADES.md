@@ -27,12 +27,29 @@ keeps GitHub source-to-package binding and attestation signature verification
 UNKNOWN; installation, extraction and independent replay were NOT RUN. This
 does not authorize production use or establish package behavior.
 
+The Kernel Hub card binds the pinned [distribution manifest](kernel-distributions.json)
+to a [shared-path byte readback](kernel-shared-byte-readback.json) by source
+revision, manifest SHA-256, and report SHA-256
+`11e13d26297287644a71153c13a3d9265d0930ed4b0241473a0e34108c8777ed`.
+Across 14 kernel/model-mirror
+pairs, 13 pairs had downloadable shared files: 61 of 125 measured shared paths
+had equal bytes and 64 differed. The readback downloaded 1,616,218 bytes from
+both namespaces. The model mirror for `SZLHOLDINGS/szl-lambda-gate` requires a
+manual gate; its 33 shared metadata paths were UNAVAILABLE for byte comparison.
+The report lists 158 shared metadata paths in total. These are per-path
+comparisons at pinned revisions, not whole-artifact equivalence, which remains
+UNKNOWN. Runtime behavior and independent replay were NOT RUN, and production
+authorization remains BLOCKED. The [replay scope](KERNEL_SHARED_BYTE_READBACK.md)
+documents the file and access boundaries. The offline verifier checks the exact
+report digest, structure, and source binding without repeating provider downloads.
+
 Regenerate and check the committed page:
 
 ```sh
 python scripts/build_verified_upgrades.py
 python scripts/build_verified_upgrades.py --check
 python -m unittest discover -s tests -p test_verified_upgrades.py -v
+python scripts/verify_kernel_shared_bytes.py --check
 ```
 
 The source snapshot catalogs keep their separately dated revisions. A card's

@@ -103,6 +103,33 @@ class VerifiedUpgradesTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     builder.validate(bad)
 
+    def test_kernel_card_binds_pinned_report_and_unavailable_mirror(self) -> None:
+        base = copy.deepcopy(self.document)
+        entries = builder.validate(base)
+        card = entries[3]
+        self.assertEqual(card["kind"], "kernel")
+        self.assertEqual((card["pair_count"], card["measured_pair_count"], card["unavailable_pair_count"]),
+                         (14, 13, 1))
+        self.assertEqual((card["shared_path_count"], card["measured_shared_count"],
+                          card["unavailable_shared_count"], card["matched_count"], card["differing_count"]),
+                         (158, 125, 33, 61, 64))
+        region = builder.render(entries)
+        self.assertIn("61 equal, 64 different, one mirror unavailable", region)
+        self.assertIn("33 additional shared metadata paths UNAVAILABLE", region)
+        self.assertIn("Report SHA-256: <code>" + card["readback_sha256"] + "</code>", region)
+        self.assertIn("Whole artifact equivalence: UNKNOWN", region)
+        self.assertIn("Runtime behavior and independent replay: NOT RUN", region)
+        for field, value in (("source_revision", "0" * 40), ("source_manifest_sha256", "0" * 64),
+                             ("readback_sha256", "0" * 64), ("measured_pair_count", 14),
+                             ("unavailable_shared_count", 0), ("matched_count", 125),
+                             ("whole_artifact_equivalence", "VERIFIED"), ("runtime_behavior", "PASS"),
+                             ("production_authorization", "AUTHORIZED")):
+            with self.subTest(field=field):
+                bad = copy.deepcopy(base)
+                bad["entries"][3][field] = value
+                with self.assertRaises(ValueError):
+                    builder.validate(bad)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -26,7 +26,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          fetch-depth: 0 # offline byte readback binds to the immutable 7 Oct source commit
+          fetch-depth: 0 # offline byte readbacks bind to immutable dated source commits
 
       - name: Test recursive route and fragment guard
         run: python3 -m unittest discover -s tests -p test_site_links.py -v
@@ -71,6 +71,11 @@ jobs:
         run: |
           python3 -m unittest discover -s tests -p test_verify_pypi_artifact_bytes.py -v
           python3 scripts/verify_pypi_artifact_bytes.py --check
+
+      - name: Check pinned Kernel Hub shared-path byte readback offline
+        run: |
+          python3 -m unittest discover -s tests -p test_verify_kernel_shared_bytes.py -v
+          python3 scripts/verify_kernel_shared_bytes.py --check
 
       - name: Check public model and dataset contract reports
         run: python3 -m unittest discover -s tests -p test_hf_contract_reports.py -v

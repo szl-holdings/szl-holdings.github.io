@@ -1,0 +1,3726 @@
+{
+  "schema": "szl.public-kernel-shared-byte-readback/v1",
+  "observed_at": "2026-10-11T04:20:17.421704+00:00",
+  "evidence_class": "MEASURED",
+  "scope": "PINNED_PUBLIC_SHARED_PATH_BYTES_ONLY",
+  "source_revision": "dccee6aeda928aa24f40a8a1e568ad58bb925e67",
+  "source_manifest_sha256": "298466da9f5d8102e65017bbc9919f5de308c025e4cb164522181a063c6190f7",
+  "source_manifest_observed_at": "2026-10-06T03:55:21.332428+00:00",
+  "pair_count": 14,
+  "measured_pair_count": 13,
+  "unavailable_pair_count": 1,
+  "shared_path_count": 158,
+  "measured_shared_count": 125,
+  "unavailable_shared_count": 33,
+  "matched_count": 61,
+  "differing_count": 64,
+  "measured_bytes": 1616218,
+  "whole_artifact_equivalence": "UNKNOWN",
+  "runtime_behavior": "NOT RUN",
+  "independent_replay": "NOT RUN",
+  "pairs": [
+    {
+      "id": "SZLHOLDINGS/governed-inference-meter",
+      "kernel_revision": "b76a57e1b74dd6dc9f7e1c59d7a857f56469d673",
+      "model_mirror_revision": "5049f8ec259a5356d5b8eeaf11b85d3e9c1fea74",
+      "model_access_current_revision": "5049f8ec259a5356d5b8eeaf11b85d3e9c1fea74",
+      "model_access_gated": false,
+      "model_access_metadata_sha256": "1c15a402315d85b0a3e212a83e97f20a951c90e678fb1fb7661dfd2ac579612e",
+      "kernel_tree_sha256": "8137fd2f5bbd1ceef20c8c976e0fa930ea6d5de618f58afef61cb32b74f5214c",
+      "mirror_tree_sha256": "c51782b7fc5c3e0e775269b49774df62ad0047d140eac566207d455c86c599e4",
+      "kernel_tree_pages": 1,
+      "mirror_tree_pages": 1,
+      "kernel_only_paths": [
+        "build/torch-cpu/governed_inference_meter/__init__.py",
+        "build/torch-cpu/governed_inference_meter/_attest.py",
+        "build/torch-cpu/governed_inference_meter/_energy.py",
+        "build/torch-cpu/governed_inference_meter/_policy.py",
+        "build/torch-cpu/governed_inference_meter/_receipt.py",
+        "build/torch-cpu/governed_inference_meter/_spine.py",
+        "build/torch-cpu/metadata.json",
+        "contract.json"
+      ],
+      "mirror_only_paths": [
+        ".devcontainer/devcontainer.json",
+        ".editorconfig",
+        "AGENTS.md",
+        "CLAUDE.md",
+        "DEPRECATED.md",
+        "PROMOTION_READINESS_AUDIT.json",
+        "SECURITY.md",
+        "SZL_ESTATE_MANAGED.json",
+        "bom/model-bom.cdx.json",
+        "build.toml",
+        "pyproject.toml",
+        "tests/test_attest.py",
+        "tests/test_chain_hardening.py",
+        "tests/test_meter.py",
+        "tests/test_signing.py",
+        "tests/test_spine.py"
+      ],
+      "shared_files": [
+        {
+          "path": ".gitattributes",
+          "kernel_declared": {
+            "bytes": 127,
+            "git_blob_oid": "6b7a283f6a9d189d65bccdb859c6f80016f52228"
+          },
+          "mirror_declared": {
+            "bytes": 983,
+            "git_blob_oid": "a340658fc2f406e50e35212d343c9363820bccc9"
+          },
+          "kernel_measured": {
+            "bytes": 127,
+            "sha256": "315871b322399f4d4163420d48ab6b22bae746799c5178967623ffa6ba7b6504"
+          },
+          "mirror_measured": {
+            "bytes": 983,
+            "sha256": "b7644a048db22164ea38116e2c7b62cf83c8b0e0a755eb914985d0caf1e83942"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "LICENSE",
+          "kernel_declared": {
+            "bytes": 11358,
+            "git_blob_oid": "d645695673349e3947e8e5ae42332d0ac3164cd7"
+          },
+          "mirror_declared": {
+            "bytes": 11358,
+            "git_blob_oid": "d645695673349e3947e8e5ae42332d0ac3164cd7"
+          },
+          "kernel_measured": {
+            "bytes": 11358,
+            "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+          },
+          "mirror_measured": {
+            "bytes": 11358,
+            "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "README.md",
+          "kernel_declared": {
+            "bytes": 2182,
+            "git_blob_oid": "493a2cb5bd0ac62933822e514d7c08606c8e512d"
+          },
+          "mirror_declared": {
+            "bytes": 17765,
+            "git_blob_oid": "593fdee65a42a97aaf5cb884a2d4eb667a339771"
+          },
+          "kernel_measured": {
+            "bytes": 2182,
+            "sha256": "f7c177f5210931c8b41dc1d2f57203df67e6e8e79960bd9ed1db10e4c41e92d5"
+          },
+          "mirror_measured": {
+            "bytes": 17765,
+            "sha256": "4176da5b9de28db7d9f79c671826b59dcfc9d8fae837057d9124f19066c6623b"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "build/torch-universal/governed_inference_meter/__init__.py",
+          "kernel_declared": {
+            "bytes": 11909,
+            "git_blob_oid": "797f30020d98cf377d9d8353f3684734fcc89a2f"
+          },
+          "mirror_declared": {
+            "bytes": 11549,
+            "git_blob_oid": "299d67ee4641eff6fe52228816a0203ea65c68f3"
+          },
+          "kernel_measured": {
+            "bytes": 11909,
+            "sha256": "26eb6c23beea51693707fa74866f9e1e169c11923edc50bc7f55fda8e8872dc9"
+          },
+          "mirror_measured": {
+            "bytes": 11549,
+            "sha256": "f9876a0bee2d90b81d4cde4346eeed0e9ec427acbb25bc1df4a526878a953aa7"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "build/torch-universal/governed_inference_meter/_attest.py",
+          "kernel_declared": {
+            "bytes": 9960,
+            "git_blob_oid": "cf13e067abbcd692c8d3bc7090d5af9638836fa5"
+          },
+          "mirror_declared": {
+            "bytes": 9737,
+            "git_blob_oid": "b38cff8a9fdd9d89a03d5a9905b00c73edb13109"
+          },
+          "kernel_measured": {
+            "bytes": 9960,
+            "sha256": "6a3065be1e459bdd584f14189883edf287146671c87053b46748f0dd2781806e"
+          },
+          "mirror_measured": {
+            "bytes": 9737,
+            "sha256": "0e3bed1c468da88e147ba2518a48b0514b28dab955e2580393d0d60a3d406c30"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "build/torch-universal/governed_inference_meter/_energy.py",
+          "kernel_declared": {
+            "bytes": 9324,
+            "git_blob_oid": "92fc2074a07842bbb0f257ce5513fdd1bae174cb"
+          },
+          "mirror_declared": {
+            "bytes": 9098,
+            "git_blob_oid": "4e09d2607713dc8d25e5b9e8fa491f76a5d439c9"
+          },
+          "kernel_measured": {
+            "bytes": 9324,
+            "sha256": "465e3d89f351e1a62f3f5c172967800de834a638f4c63eb6a439a8933b374e93"
+          },
+          "mirror_measured": {
+            "bytes": 9098,
+            "sha256": "d1ae459b182d328fe05589fe099a37c56f605960078e8702a196b167d93ec33f"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "build/torch-universal/governed_inference_meter/_policy.py",
+          "kernel_declared": {
+            "bytes": 3281,
+            "git_blob_oid": "baa972ed6e0dea4a5f84463a9ef3db3f666525ea"
+          },
+          "mirror_declared": {
+            "bytes": 3204,
+            "git_blob_oid": "2a304e09773a6a1ad6c53b6647dd82548a073dce"
+          },
+          "kernel_measured": {
+            "bytes": 3281,
+            "sha256": "f5c9eac9ad57df0c2ec722fdd116fcf18c9e9c85ff043c3c2b23b5ec00f01955"
+          },
+          "mirror_measured": {
+            "bytes": 3204,
+            "sha256": "96d7ea0b227f1a54462964e2406e8284beb0a0dfa530d3be38581a1a25fa42dd"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "build/torch-universal/governed_inference_meter/_receipt.py",
+          "kernel_declared": {
+            "bytes": 8408,
+            "git_blob_oid": "61ceab521c60c7320fa715b959064418af653d52"
+          },
+          "mirror_declared": {
+            "bytes": 8201,
+            "git_blob_oid": "fa28052715d4fc98820acb58e83424d0b1f33330"
+          },
+          "kernel_measured": {
+            "bytes": 8408,
+            "sha256": "415450c448534ff6e491981239cd2f17775bb6c0157ded3d857c6fefb4ed9204"
+          },
+          "mirror_measured": {
+            "bytes": 8201,
+            "sha256": "5ab4a43279d288c2e4c6a82ceb1fa52e2cdfb9d459f3a995b017355f67c23897"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "build/torch-universal/governed_inference_meter/_spine.py",
+          "kernel_declared": {
+            "bytes": 15087,
+            "git_blob_oid": "e36ce837e7153520a24d7883467d18dd4cf67303"
+          },
+          "mirror_declared": {
+            "bytes": 14711,
+            "git_blob_oid": "e3b895d4a592a23a7265ee8f77c27841a701ba1b"
+          },
+          "kernel_measured": {
+            "bytes": 15087,
+            "sha256": "4c1e0a20c4d34eef8975a7fced9dfb10bf276bd280cfe9b2c8717a9a97f644a8"
+          },
+          "mirror_measured": {
+            "bytes": 14711,
+            "sha256": "a5b4d38e01d7137cbcd6e4ec2a3bd89fe2f680e1e7b9f8c6dadd81fe9bd3d126"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "build/torch-universal/governed_inference_meter/metadata.json",
+          "kernel_declared": {
+            "bytes": 850,
+            "git_blob_oid": "b7bcdbd5e65a5cfa9a2f9f3736a2161fc85da732"
+          },
+          "mirror_declared": {
+            "bytes": 819,
+            "git_blob_oid": "2a3b92976307b65ef7bd53db831405dd07538a97"
+          },
+          "kernel_measured": {
+            "bytes": 850,
+            "sha256": "8c543507415f54c16d7dec46de32b2a8f9a9f4143691367c9638127cf70fea4c"
+          },
+          "mirror_measured": {
+            "bytes": 819,
+            "sha256": "ce03e0d107c54c99d141eba0a4ddec5582775f41999f3b4f545d9d5098c19c8e"
+          },
+          "bytes_match": false
+        }
+      ],
+      "kernel_file_count": 18,
+      "mirror_file_count": 26,
+      "access_status": "MEASURED",
+      "shared_count": 10,
+      "measured_count": 10,
+      "unavailable_count": 0,
+      "matched_count": 1,
+      "differing_count": 9,
+      "measured_bytes": 159911,
+      "whole_artifact_equivalence": "UNKNOWN"
+    },
+    {
+      "id": "SZLHOLDINGS/szl-block-kv",
+      "kernel_revision": "54a19796ee2c4f761c9482f77dd1f989a773e17f",
+      "model_mirror_revision": "b5e86e4038e630eda94e3bd83cee1c5729d6d826",
+      "model_access_current_revision": "b5e86e4038e630eda94e3bd83cee1c5729d6d826",
+      "model_access_gated": false,
+      "model_access_metadata_sha256": "51895bfb30d1a42c402d61ecb9d1616778229c6e67fa9f1916acba61a5b93e2a",
+      "kernel_tree_sha256": "98be09d51732c52ad96b3fe51ec1b366046fe90e841c90779bf23fdd2643dcae",
+      "mirror_tree_sha256": "330bcf5195014d747346e69435bad95d172018b57715e5ff95073af48165451f",
+      "kernel_tree_pages": 1,
+      "mirror_tree_pages": 1,
+      "kernel_only_paths": [
+        "CPU_QUALIFICATION.json",
+        "SOURCE_BINDING.json",
+        "build/torch-cpu/metadata.json",
+        "build/torch-cpu/szl_block_kv/__init__.py",
+        "build/torch-cpu/szl_block_kv/_chain.py",
+        "build/torch-cpu/szl_block_kv/_invariant.py",
+        "build/torch-cpu/szl_block_kv/_ops.py",
+        "build/torch-universal/metadata.json",
+        "build/torch-universal/szl_block_kv/__init__.py",
+        "build/torch-universal/szl_block_kv/_chain.py",
+        "build/torch-universal/szl_block_kv/_invariant.py",
+        "build/torch-universal/szl_block_kv/_ops.py"
+      ],
+      "mirror_only_paths": [
+        "block_kv.py",
+        "bom/model-bom.cdx.json",
+        "build.toml",
+        "chain.py",
+        "og-card.png",
+        "tests/test_block_kv.py",
+        "torch-ext/szl_block_kv/__init__.py",
+        "torch-ext/szl_block_kv/_chain.py",
+        "torch-ext/szl_block_kv/_ops.py"
+      ],
+      "shared_files": [
+        {
+          "path": ".gitattributes",
+          "kernel_declared": {
+            "bytes": 127,
+            "git_blob_oid": "6b7a283f6a9d189d65bccdb859c6f80016f52228"
+          },
+          "mirror_declared": {
+            "bytes": 1519,
+            "git_blob_oid": "a6344aac8c09253b3b630fb776ae94478aa0275b"
+          },
+          "kernel_measured": {
+            "bytes": 127,
+            "sha256": "315871b322399f4d4163420d48ab6b22bae746799c5178967623ffa6ba7b6504"
+          },
+          "mirror_measured": {
+            "bytes": 1519,
+            "sha256": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "BENCH.laptop-blackwell.json",
+          "kernel_declared": {
+            "bytes": 5454,
+            "git_blob_oid": "f351f676f677adc5ae301a6340f8efe1f331ada7"
+          },
+          "mirror_declared": {
+            "bytes": 5454,
+            "git_blob_oid": "f351f676f677adc5ae301a6340f8efe1f331ada7"
+          },
+          "kernel_measured": {
+            "bytes": 5454,
+            "sha256": "d0d6a3ecc3bf5eb009a718e26565f970b3e53d7fb1ebc29bec9e1f8feae8103c"
+          },
+          "mirror_measured": {
+            "bytes": 5454,
+            "sha256": "d0d6a3ecc3bf5eb009a718e26565f970b3e53d7fb1ebc29bec9e1f8feae8103c"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "LICENSE",
+          "kernel_declared": {
+            "bytes": 11343,
+            "git_blob_oid": "6a400e011f1cf8f455404c167c99d81d7b3ba1ab"
+          },
+          "mirror_declared": {
+            "bytes": 553,
+            "git_blob_oid": "be03f79d4ef224757dcad3564b780cb58efde543"
+          },
+          "kernel_measured": {
+            "bytes": 11343,
+            "sha256": "bc8cef3450d423b046a3ba2b1a03089c8c795302f502cabbdbef055a68f0b1e7"
+          },
+          "mirror_measured": {
+            "bytes": 553,
+            "sha256": "29d29dfa8b5aa6569b203f8b9000eb370fad9cd3826a33fe048f495cb744d9cf"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "OPERATIONAL.json",
+          "kernel_declared": {
+            "bytes": 1925,
+            "git_blob_oid": "e856f19b41f70948f39e086499884ea9904ec2e6"
+          },
+          "mirror_declared": {
+            "bytes": 1925,
+            "git_blob_oid": "e856f19b41f70948f39e086499884ea9904ec2e6"
+          },
+          "kernel_measured": {
+            "bytes": 1925,
+            "sha256": "6527f4251d1dbaed9136102b5866277c66773ffcb02039e8c3da28f86c3e1a7b"
+          },
+          "mirror_measured": {
+            "bytes": 1925,
+            "sha256": "6527f4251d1dbaed9136102b5866277c66773ffcb02039e8c3da28f86c3e1a7b"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "README.md",
+          "kernel_declared": {
+            "bytes": 7873,
+            "git_blob_oid": "f51c6724a19cfb715e1a6e817122cf6b466f7c09"
+          },
+          "mirror_declared": {
+            "bytes": 6131,
+            "git_blob_oid": "3882220828bf2552fe75ceaf099317b7a8570442"
+          },
+          "kernel_measured": {
+            "bytes": 7873,
+            "sha256": "a180c1d1483dfa8a157fb9b41baab6a31cdebf19448020751f421af098655f9d"
+          },
+          "mirror_measured": {
+            "bytes": 6131,
+            "sha256": "f6105e4530f3394a40d8465118eda175d531c54bee612d05d82aa6c0569390bf"
+          },
+          "bytes_match": false
+        }
+      ],
+      "kernel_file_count": 17,
+      "mirror_file_count": 14,
+      "access_status": "MEASURED",
+      "shared_count": 5,
+      "measured_count": 5,
+      "unavailable_count": 0,
+      "matched_count": 2,
+      "differing_count": 3,
+      "measured_bytes": 42304,
+      "whole_artifact_equivalence": "UNKNOWN"
+    },
+    {
+      "id": "SZLHOLDINGS/szl-blocked",
+      "kernel_revision": "3be2b2a7448406efaaf6d5036e1eae92e3a46929",
+      "model_mirror_revision": "911a87be9e1889eac81c24dda8eb4c3f55b9440e",
+      "model_access_current_revision": "911a87be9e1889eac81c24dda8eb4c3f55b9440e",
+      "model_access_gated": false,
+      "model_access_metadata_sha256": "27b6b28b6b95831ef55c3b399c69232896d542d2de8ccd26d1841d32e48f7246",
+      "kernel_tree_sha256": "65df8fa87026fc36f9d6d82c7db883ef231f6436bdb16dc8e1febbc42d2df480",
+      "mirror_tree_sha256": "07b5d63c84dd237f8fe33242033948defbce90dbb6406e792bc870030296c53c",
+      "kernel_tree_pages": 1,
+      "mirror_tree_pages": 1,
+      "kernel_only_paths": [
+        "build/torch-cpu/szl_euaiact/__init__.py",
+        "build/torch-cpu/szl_euaiact/_annex_iv.py"
+      ],
+      "mirror_only_paths": [
+        "MODEL_PROVENANCE.json",
+        "PROMOTION_READINESS_AUDIT.json",
+        "SECURITY.md",
+        "SZL_ESTATE_MANAGED.json",
+        "TRAINING_RECEIPT.json",
+        "bom/model-bom.cdx.json",
+        "build.toml",
+        "card/holo-banner.svg",
+        "scripts/eval.py",
+        "scripts/forge.py"
+      ],
+      "shared_files": [
+        {
+          "path": ".gitattributes",
+          "kernel_declared": {
+            "bytes": 127,
+            "git_blob_oid": "6b7a283f6a9d189d65bccdb859c6f80016f52228"
+          },
+          "mirror_declared": {
+            "bytes": 1519,
+            "git_blob_oid": "a6344aac8c09253b3b630fb776ae94478aa0275b"
+          },
+          "kernel_measured": {
+            "bytes": 127,
+            "sha256": "315871b322399f4d4163420d48ab6b22bae746799c5178967623ffa6ba7b6504"
+          },
+          "mirror_measured": {
+            "bytes": 1519,
+            "sha256": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "BENCH.laptop-blackwell.json",
+          "kernel_declared": {
+            "bytes": 5477,
+            "git_blob_oid": "71f985aca0e6662b651d8ef8afb2c029e13204b9"
+          },
+          "mirror_declared": {
+            "bytes": 5477,
+            "git_blob_oid": "71f985aca0e6662b651d8ef8afb2c029e13204b9"
+          },
+          "kernel_measured": {
+            "bytes": 5477,
+            "sha256": "8a0dd23d39b2cb303c52a0fac4727ddfe7f45329468cd5e3ffb33497eb170232"
+          },
+          "mirror_measured": {
+            "bytes": 5477,
+            "sha256": "8a0dd23d39b2cb303c52a0fac4727ddfe7f45329468cd5e3ffb33497eb170232"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "LICENSE",
+          "kernel_declared": {
+            "bytes": 809,
+            "git_blob_oid": "f02122ea79cbad4d0137dfd71c7fba654ec1233e"
+          },
+          "mirror_declared": {
+            "bytes": 809,
+            "git_blob_oid": "f02122ea79cbad4d0137dfd71c7fba654ec1233e"
+          },
+          "kernel_measured": {
+            "bytes": 809,
+            "sha256": "9589109b10f273b246999e87435e92140ec68dfe8fd4db623a64ab70a81c9871"
+          },
+          "mirror_measured": {
+            "bytes": 809,
+            "sha256": "9589109b10f273b246999e87435e92140ec68dfe8fd4db623a64ab70a81c9871"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "OPERATIONAL.json",
+          "kernel_declared": {
+            "bytes": 1924,
+            "git_blob_oid": "a19656f23631f031d782df2785d0b8bee4352575"
+          },
+          "mirror_declared": {
+            "bytes": 1924,
+            "git_blob_oid": "a19656f23631f031d782df2785d0b8bee4352575"
+          },
+          "kernel_measured": {
+            "bytes": 1924,
+            "sha256": "94ecca1888b803c0adbc8a11b8c8f79b7a5d503eae20175569e0923b026b51ec"
+          },
+          "mirror_measured": {
+            "bytes": 1924,
+            "sha256": "94ecca1888b803c0adbc8a11b8c8f79b7a5d503eae20175569e0923b026b51ec"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "README.md",
+          "kernel_declared": {
+            "bytes": 13312,
+            "git_blob_oid": "5a20a97dd5f0c6f41c2fade78b39081845a1a31d"
+          },
+          "mirror_declared": {
+            "bytes": 7687,
+            "git_blob_oid": "7be8c24aaf674e5090b91a6b6c8c14d87100bfae"
+          },
+          "kernel_measured": {
+            "bytes": 13312,
+            "sha256": "3ef7ca1d3aece077421b76e9396e47ec47540e2127a05bb5e7a92e460f5034d4"
+          },
+          "mirror_measured": {
+            "bytes": 7687,
+            "sha256": "c5576832e1fd5940c98a49441ca9f4d69e47079d4b065a9aa7001caddd2276c9"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "SZL_SOURCE_BINDING.json",
+          "kernel_declared": {
+            "bytes": 2769,
+            "git_blob_oid": "60eb08089dc1b03caf801642ab0a14bd6cb55cd1"
+          },
+          "mirror_declared": {
+            "bytes": 2769,
+            "git_blob_oid": "60eb08089dc1b03caf801642ab0a14bd6cb55cd1"
+          },
+          "kernel_measured": {
+            "bytes": 2769,
+            "sha256": "6f1d4a311c8b8340eccecaac6fe90d437cee46b981b0106b5cc4355b49817778"
+          },
+          "mirror_measured": {
+            "bytes": 2769,
+            "sha256": "6f1d4a311c8b8340eccecaac6fe90d437cee46b981b0106b5cc4355b49817778"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "build/torch-cpu/metadata.json",
+          "kernel_declared": {
+            "bytes": 287,
+            "git_blob_oid": "a185406e3ebed39f7a27bdaf82b41c369ea4c088"
+          },
+          "mirror_declared": {
+            "bytes": 287,
+            "git_blob_oid": "a185406e3ebed39f7a27bdaf82b41c369ea4c088"
+          },
+          "kernel_measured": {
+            "bytes": 287,
+            "sha256": "47cab1147925faa9411f31507949bae6ca6fd76a6e5cf11eb2d5442b8aa60dd9"
+          },
+          "mirror_measured": {
+            "bytes": 287,
+            "sha256": "47cab1147925faa9411f31507949bae6ca6fd76a6e5cf11eb2d5442b8aa60dd9"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "build/torch-cpu/szl_blocked/__init__.py",
+          "kernel_declared": {
+            "bytes": 2873,
+            "git_blob_oid": "a0b93a8f52250c77d229dbad630cac350682ac9d"
+          },
+          "mirror_declared": {
+            "bytes": 2873,
+            "git_blob_oid": "a0b93a8f52250c77d229dbad630cac350682ac9d"
+          },
+          "kernel_measured": {
+            "bytes": 2873,
+            "sha256": "805318541e816e8b4a71ed05e9f214dc3662e328e10b2a6ea91c742891c40fd6"
+          },
+          "mirror_measured": {
+            "bytes": 2873,
+            "sha256": "805318541e816e8b4a71ed05e9f214dc3662e328e10b2a6ea91c742891c40fd6"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "build/torch-cpu/szl_blocked/_chain.py",
+          "kernel_declared": {
+            "bytes": 6685,
+            "git_blob_oid": "ac395fa374c4f8c5547000d7f7d5ecd482069857"
+          },
+          "mirror_declared": {
+            "bytes": 6685,
+            "git_blob_oid": "ac395fa374c4f8c5547000d7f7d5ecd482069857"
+          },
+          "kernel_measured": {
+            "bytes": 6685,
+            "sha256": "bfe91348b57948a7dd0203bb6834ab644d32af9a2746c4f81e68df035b40b7f3"
+          },
+          "mirror_measured": {
+            "bytes": 6685,
+            "sha256": "bfe91348b57948a7dd0203bb6834ab644d32af9a2746c4f81e68df035b40b7f3"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "build/torch-cpu/szl_blocked/_gate.py",
+          "kernel_declared": {
+            "bytes": 23305,
+            "git_blob_oid": "16e2b86d926353029d62ca0cf2e0407875f91c73"
+          },
+          "mirror_declared": {
+            "bytes": 23305,
+            "git_blob_oid": "16e2b86d926353029d62ca0cf2e0407875f91c73"
+          },
+          "kernel_measured": {
+            "bytes": 23305,
+            "sha256": "5d359c823b445e980a385ba66ac6f433d364b6ce449e58cd68f54b2abfdac9ad"
+          },
+          "mirror_measured": {
+            "bytes": 23305,
+            "sha256": "5d359c823b445e980a385ba66ac6f433d364b6ce449e58cd68f54b2abfdac9ad"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "build/torch-cpu/szl_blocked/_rules.py",
+          "kernel_declared": {
+            "bytes": 3325,
+            "git_blob_oid": "892398996ef43dcd1ca4959f9919346561029fee"
+          },
+          "mirror_declared": {
+            "bytes": 3325,
+            "git_blob_oid": "892398996ef43dcd1ca4959f9919346561029fee"
+          },
+          "kernel_measured": {
+            "bytes": 3325,
+            "sha256": "fb855b2dabf0697ea39da280188c11d694e35e1d4a7d104f13b3be4a8a5f1086"
+          },
+          "mirror_measured": {
+            "bytes": 3325,
+            "sha256": "fb855b2dabf0697ea39da280188c11d694e35e1d4a7d104f13b3be4a8a5f1086"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "build/torch-cpu/szl_blocked/metadata.json",
+          "kernel_declared": {
+            "bytes": 528,
+            "git_blob_oid": "48fcf89187b4324a9847b464d8ba011b5bc5dd15"
+          },
+          "mirror_declared": {
+            "bytes": 528,
+            "git_blob_oid": "48fcf89187b4324a9847b464d8ba011b5bc5dd15"
+          },
+          "kernel_measured": {
+            "bytes": 528,
+            "sha256": "cfd5228d489275ecb7633d6598d17e62026c96869ac9ce1a7724a262955e6c73"
+          },
+          "mirror_measured": {
+            "bytes": 528,
+            "sha256": "cfd5228d489275ecb7633d6598d17e62026c96869ac9ce1a7724a262955e6c73"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "build/torch-universal/metadata.json",
+          "kernel_declared": {
+            "bytes": 292,
+            "git_blob_oid": "f44ee219a8c7215de16c613abfbb0f25525a26d8"
+          },
+          "mirror_declared": {
+            "bytes": 292,
+            "git_blob_oid": "f44ee219a8c7215de16c613abfbb0f25525a26d8"
+          },
+          "kernel_measured": {
+            "bytes": 292,
+            "sha256": "f304a4c306f1efa37f38e1335ee79d20d8a1f163510e21a4c6ac2ef7f4c46151"
+          },
+          "mirror_measured": {
+            "bytes": 292,
+            "sha256": "f304a4c306f1efa37f38e1335ee79d20d8a1f163510e21a4c6ac2ef7f4c46151"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "build/torch-universal/szl_blocked/__init__.py",
+          "kernel_declared": {
+            "bytes": 2873,
+            "git_blob_oid": "a0b93a8f52250c77d229dbad630cac350682ac9d"
+          },
+          "mirror_declared": {
+            "bytes": 2873,
+            "git_blob_oid": "a0b93a8f52250c77d229dbad630cac350682ac9d"
+          },
+          "kernel_measured": {
+            "bytes": 2873,
+            "sha256": "805318541e816e8b4a71ed05e9f214dc3662e328e10b2a6ea91c742891c40fd6"
+          },
+          "mirror_measured": {
+            "bytes": 2873,
+            "sha256": "805318541e816e8b4a71ed05e9f214dc3662e328e10b2a6ea91c742891c40fd6"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "build/torch-universal/szl_blocked/_chain.py",
+          "kernel_declared": {
+            "bytes": 6685,
+            "git_blob_oid": "ac395fa374c4f8c5547000d7f7d5ecd482069857"
+          },
+          "mirror_declared": {
+            "bytes": 6685,
+            "git_blob_oid": "ac395fa374c4f8c5547000d7f7d5ecd482069857"
+          },
+          "kernel_measured": {
+            "bytes": 6685,
+            "sha256": "bfe91348b57948a7dd0203bb6834ab644d32af9a2746c4f81e68df035b40b7f3"
+          },
+          "mirror_measured": {
+            "bytes": 6685,
+            "sha256": "bfe91348b57948a7dd0203bb6834ab644d32af9a2746c4f81e68df035b40b7f3"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "build/torch-universal/szl_blocked/_gate.py",
+          "kernel_declared": {
+            "bytes": 23305,
+            "git_blob_oid": "16e2b86d926353029d62ca0cf2e0407875f91c73"
+          },
+          "mirror_declared": {
+            "bytes": 23305,
+            "git_blob_oid": "16e2b86d926353029d62ca0cf2e0407875f91c73"
+          },
+          "kernel_measured": {
+            "bytes": 23305,
+            "sha256": "5d359c823b445e980a385ba66ac6f433d364b6ce449e58cd68f54b2abfdac9ad"
+          },
+          "mirror_measured": {
+            "bytes": 23305,
+            "sha256": "5d359c823b445e980a385ba66ac6f433d364b6ce449e58cd68f54b2abfdac9ad"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "build/torch-universal/szl_blocked/_rules.py",
+          "kernel_declared": {
+            "bytes": 3325,
+            "git_blob_oid": "892398996ef43dcd1ca4959f9919346561029fee"
+          },
+          "mirror_declared": {
+            "bytes": 3325,
+            "git_blob_oid": "892398996ef43dcd1ca4959f9919346561029fee"
+          },
+          "kernel_measured": {
+            "bytes": 3325,
+            "sha256": "fb855b2dabf0697ea39da280188c11d694e35e1d4a7d104f13b3be4a8a5f1086"
+          },
+          "mirror_measured": {
+            "bytes": 3325,
+            "sha256": "fb855b2dabf0697ea39da280188c11d694e35e1d4a7d104f13b3be4a8a5f1086"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "build/torch-universal/szl_blocked/metadata.json",
+          "kernel_declared": {
+            "bytes": 528,
+            "git_blob_oid": "48fcf89187b4324a9847b464d8ba011b5bc5dd15"
+          },
+          "mirror_declared": {
+            "bytes": 528,
+            "git_blob_oid": "48fcf89187b4324a9847b464d8ba011b5bc5dd15"
+          },
+          "kernel_measured": {
+            "bytes": 528,
+            "sha256": "cfd5228d489275ecb7633d6598d17e62026c96869ac9ce1a7724a262955e6c73"
+          },
+          "mirror_measured": {
+            "bytes": 528,
+            "sha256": "cfd5228d489275ecb7633d6598d17e62026c96869ac9ce1a7724a262955e6c73"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "build/torch-universal/szl_euaiact/__init__.py",
+          "kernel_declared": {
+            "bytes": 1622,
+            "git_blob_oid": "2893a657510279fade98ad617ba7d566d9536573"
+          },
+          "mirror_declared": {
+            "bytes": 1577,
+            "git_blob_oid": "31e1511e147b7175c32e139c72e4f65ea04c4665"
+          },
+          "kernel_measured": {
+            "bytes": 1622,
+            "sha256": "03b65de1b6abc6e7de19f3676806ebaaa00b673ea0c9d3a787c9e83888e057dc"
+          },
+          "mirror_measured": {
+            "bytes": 1577,
+            "sha256": "1939aa6d5c8942c96b9caa160954dce49948ac7d39a4c7985172290fa8bf59a9"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "build/torch-universal/szl_euaiact/_annex_iv.py",
+          "kernel_declared": {
+            "bytes": 21563,
+            "git_blob_oid": "e220618c1570faa593bfe2e69355839d5fdade3d"
+          },
+          "mirror_declared": {
+            "bytes": 21047,
+            "git_blob_oid": "ef2712b6c3030543aaaf2f5499f050a01e7f3423"
+          },
+          "kernel_measured": {
+            "bytes": 21563,
+            "sha256": "6e8f4814de011c16c7e29d1877f4e282f8b41d33cfac393a87da9faa99cbffb4"
+          },
+          "mirror_measured": {
+            "bytes": 21047,
+            "sha256": "25d6aa4c30c6b496b9637bc037c1aa252040c79097c460f93749f381e89bd3d4"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "build/torch-universal/szl_euaiact/metadata.json",
+          "kernel_declared": {
+            "bytes": 792,
+            "git_blob_oid": "1f9005943d7e41f131c38dd5be580aabd3487b22"
+          },
+          "mirror_declared": {
+            "bytes": 779,
+            "git_blob_oid": "bb043e2e648e4d965949c72b269df57da4320119"
+          },
+          "kernel_measured": {
+            "bytes": 792,
+            "sha256": "438a69eed5ee46053512f19804d7b1c2f1465112d5b840666c145feb3c558453"
+          },
+          "mirror_measured": {
+            "bytes": 779,
+            "sha256": "f389cd7a45dd5448ad07661cbec09246761fee4a6906d34a909581a6a771fc9a"
+          },
+          "bytes_match": false
+        }
+      ],
+      "kernel_file_count": 23,
+      "mirror_file_count": 31,
+      "access_status": "MEASURED",
+      "shared_count": 21,
+      "measured_count": 21,
+      "unavailable_count": 0,
+      "matched_count": 16,
+      "differing_count": 5,
+      "measured_bytes": 240005,
+      "whole_artifact_equivalence": "UNKNOWN"
+    },
+    {
+      "id": "SZLHOLDINGS/szl-formulas",
+      "kernel_revision": "5cac04af95c9d205e80154458257a0182bba3ba3",
+      "model_mirror_revision": "2363023fee676d20480ff015ea8687a0313e42dc",
+      "model_access_current_revision": "2363023fee676d20480ff015ea8687a0313e42dc",
+      "model_access_gated": false,
+      "model_access_metadata_sha256": "768a142d12ff319cc1a4285d122d9ea33574a44ba3de7fdc904b8a0d3663850b",
+      "kernel_tree_sha256": "772dbdd11f430f38ba0c9bbdcab84a0d242cf99f2cea5c4190541412ad709fc7",
+      "mirror_tree_sha256": "9a14bbd94062e121d41b3df457fa4c01e7d24d90f7ca9d148b7c3421b0d4940f",
+      "kernel_tree_pages": 1,
+      "mirror_tree_pages": 1,
+      "kernel_only_paths": [],
+      "mirror_only_paths": [
+        "MODEL_PROVENANCE.json",
+        "PROMOTION_READINESS_AUDIT.json",
+        "SECURITY.md",
+        "SZL_ESTATE_MANAGED.json",
+        "TRAINING_RECEIPT.json",
+        "bom/model-bom.cdx.json",
+        "build.toml",
+        "card/holo-banner.svg",
+        "scripts/eval.py",
+        "scripts/forge.py",
+        "tests/test_formulas.py"
+      ],
+      "shared_files": [
+        {
+          "path": ".gitattributes",
+          "kernel_declared": {
+            "bytes": 127,
+            "git_blob_oid": "6b7a283f6a9d189d65bccdb859c6f80016f52228"
+          },
+          "mirror_declared": {
+            "bytes": 1519,
+            "git_blob_oid": "a6344aac8c09253b3b630fb776ae94478aa0275b"
+          },
+          "kernel_measured": {
+            "bytes": 127,
+            "sha256": "315871b322399f4d4163420d48ab6b22bae746799c5178967623ffa6ba7b6504"
+          },
+          "mirror_measured": {
+            "bytes": 1519,
+            "sha256": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "BENCH.laptop-blackwell.json",
+          "kernel_declared": {
+            "bytes": 6952,
+            "git_blob_oid": "c61f4aab98acbd5f6cd0f382dc31d33c0b1ec1cb"
+          },
+          "mirror_declared": {
+            "bytes": 6952,
+            "git_blob_oid": "c61f4aab98acbd5f6cd0f382dc31d33c0b1ec1cb"
+          },
+          "kernel_measured": {
+            "bytes": 6952,
+            "sha256": "8cf5a45d401426ae185f4ee3dbc7b83e95eecf8bb5d073ceed0e8a5dc3940497"
+          },
+          "mirror_measured": {
+            "bytes": 6952,
+            "sha256": "8cf5a45d401426ae185f4ee3dbc7b83e95eecf8bb5d073ceed0e8a5dc3940497"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "LICENSE",
+          "kernel_declared": {
+            "bytes": 776,
+            "git_blob_oid": "7c317ba373932bf7f56ab969a3698aa3468811be"
+          },
+          "mirror_declared": {
+            "bytes": 776,
+            "git_blob_oid": "7c317ba373932bf7f56ab969a3698aa3468811be"
+          },
+          "kernel_measured": {
+            "bytes": 776,
+            "sha256": "acf6ce407174b791ceddc263dfc7b1e3ea16579cec3e0caca3d4469e6ccf544b"
+          },
+          "mirror_measured": {
+            "bytes": 776,
+            "sha256": "acf6ce407174b791ceddc263dfc7b1e3ea16579cec3e0caca3d4469e6ccf544b"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "OPERATIONAL.json",
+          "kernel_declared": {
+            "bytes": 1927,
+            "git_blob_oid": "83599f7a34bf8265b3f3a5d386bf9affbd71830f"
+          },
+          "mirror_declared": {
+            "bytes": 1927,
+            "git_blob_oid": "83599f7a34bf8265b3f3a5d386bf9affbd71830f"
+          },
+          "kernel_measured": {
+            "bytes": 1927,
+            "sha256": "c607e6a244673d5cb9ecb8d24b6047092949836a43443915aecb0871febd16fa"
+          },
+          "mirror_measured": {
+            "bytes": 1927,
+            "sha256": "c607e6a244673d5cb9ecb8d24b6047092949836a43443915aecb0871febd16fa"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "README.md",
+          "kernel_declared": {
+            "bytes": 9510,
+            "git_blob_oid": "e73973001f6aa1c2277756817e15925bff503828"
+          },
+          "mirror_declared": {
+            "bytes": 7845,
+            "git_blob_oid": "adfe712a5234159889503ff503f7cd2ccb4cceb3"
+          },
+          "kernel_measured": {
+            "bytes": 9510,
+            "sha256": "5160e361a8800ff2b948c67efe88d8bc670f4313d325cbbaf933b1a076f1c02b"
+          },
+          "mirror_measured": {
+            "bytes": 7845,
+            "sha256": "ecabef90ae2071d1edb25a22d2e08f489ab37516dbbfd91c1cffc9a2a409a551"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "SZL_SOURCE_BINDING.json",
+          "kernel_declared": {
+            "bytes": 3659,
+            "git_blob_oid": "658b51c59d856b1a8df2b3bd38428c2c38270a4b"
+          },
+          "mirror_declared": {
+            "bytes": 3659,
+            "git_blob_oid": "658b51c59d856b1a8df2b3bd38428c2c38270a4b"
+          },
+          "kernel_measured": {
+            "bytes": 3659,
+            "sha256": "35c8669ed5b513e3bcef5e6b164ba136e72859fd02b6a4819a55809c513e99cc"
+          },
+          "mirror_measured": {
+            "bytes": 3659,
+            "sha256": "35c8669ed5b513e3bcef5e6b164ba136e72859fd02b6a4819a55809c513e99cc"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "build/torch-cpu/metadata.json",
+          "kernel_declared": {
+            "bytes": 289,
+            "git_blob_oid": "ffcecc7ca772c6c5319e7d07fe3b84833ad8ac8c"
+          },
+          "mirror_declared": {
+            "bytes": 289,
+            "git_blob_oid": "ffcecc7ca772c6c5319e7d07fe3b84833ad8ac8c"
+          },
+          "kernel_measured": {
+            "bytes": 289,
+            "sha256": "58866d38ecad3b1d9b0276fe8983d4d24f2b2a64090a75f8b8a6395dc486fddd"
+          },
+          "mirror_measured": {
+            "bytes": 289,
+            "sha256": "58866d38ecad3b1d9b0276fe8983d4d24f2b2a64090a75f8b8a6395dc486fddd"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "build/torch-cpu/szl_formulas/__init__.py",
+          "kernel_declared": {
+            "bytes": 9645,
+            "git_blob_oid": "328ca09d416255b72b4b02152e3a777cb34244d6"
+          },
+          "mirror_declared": {
+            "bytes": 9645,
+            "git_blob_oid": "328ca09d416255b72b4b02152e3a777cb34244d6"
+          },
+          "kernel_measured": {
+            "bytes": 9645,
+            "sha256": "b21246f3349625ca90b852e407667c87b12e244f3651b230d6a01e24966f70a6"
+          },
+          "mirror_measured": {
+            "bytes": 9645,
+            "sha256": "b21246f3349625ca90b852e407667c87b12e244f3651b230d6a01e24966f70a6"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "build/torch-cpu/szl_formulas/_aggregators.py",
+          "kernel_declared": {
+            "bytes": 18516,
+            "git_blob_oid": "bd5b38d4f643d7ebd1b3313b779d7adbd6ac68e5"
+          },
+          "mirror_declared": {
+            "bytes": 18516,
+            "git_blob_oid": "bd5b38d4f643d7ebd1b3313b779d7adbd6ac68e5"
+          },
+          "kernel_measured": {
+            "bytes": 18516,
+            "sha256": "1ffeff63559ec9e7041bc0574a43833e89ceff9301776e5681c081593514f777"
+          },
+          "mirror_measured": {
+            "bytes": 18516,
+            "sha256": "1ffeff63559ec9e7041bc0574a43833e89ceff9301776e5681c081593514f777"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "build/torch-cpu/szl_formulas/_composer.py",
+          "kernel_declared": {
+            "bytes": 6598,
+            "git_blob_oid": "a037a16c25d8f4a95117d99168eaf6bbd73c6cda"
+          },
+          "mirror_declared": {
+            "bytes": 6598,
+            "git_blob_oid": "a037a16c25d8f4a95117d99168eaf6bbd73c6cda"
+          },
+          "kernel_measured": {
+            "bytes": 6598,
+            "sha256": "378eb3d9df7bbc8f14bd609e6b62d4b0b92e732c86c4cb51162cd6e36ddcb764"
+          },
+          "mirror_measured": {
+            "bytes": 6598,
+            "sha256": "378eb3d9df7bbc8f14bd609e6b62d4b0b92e732c86c4cb51162cd6e36ddcb764"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "build/torch-cpu/szl_formulas/_formulas.py",
+          "kernel_declared": {
+            "bytes": 18107,
+            "git_blob_oid": "ad544c6304ec63058d3602eea40ef1b54efc49af"
+          },
+          "mirror_declared": {
+            "bytes": 18107,
+            "git_blob_oid": "ad544c6304ec63058d3602eea40ef1b54efc49af"
+          },
+          "kernel_measured": {
+            "bytes": 18107,
+            "sha256": "900b93d645db89a27d49b2d9b4ef03fbcb644fb367c916025a5b403bcce49ed0"
+          },
+          "mirror_measured": {
+            "bytes": 18107,
+            "sha256": "900b93d645db89a27d49b2d9b4ef03fbcb644fb367c916025a5b403bcce49ed0"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "build/torch-cpu/szl_formulas/atlas.py",
+          "kernel_declared": {
+            "bytes": 837,
+            "git_blob_oid": "802cd7c60509c2859f9925e478a0f8766bc5ed8f"
+          },
+          "mirror_declared": {
+            "bytes": 837,
+            "git_blob_oid": "802cd7c60509c2859f9925e478a0f8766bc5ed8f"
+          },
+          "kernel_measured": {
+            "bytes": 837,
+            "sha256": "4792d4e943e8ebeefbae7e455b63b6bbfaa3911b6050c1ca897c74812d8ecd94"
+          },
+          "mirror_measured": {
+            "bytes": 837,
+            "sha256": "4792d4e943e8ebeefbae7e455b63b6bbfaa3911b6050c1ca897c74812d8ecd94"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "build/torch-cpu/szl_formulas/formula_atlas.v1.json",
+          "kernel_declared": {
+            "bytes": 21253,
+            "git_blob_oid": "2a70d047b51b1f4cc292395c029603bbfe724a3c"
+          },
+          "mirror_declared": {
+            "bytes": 21253,
+            "git_blob_oid": "2a70d047b51b1f4cc292395c029603bbfe724a3c"
+          },
+          "kernel_measured": {
+            "bytes": 21253,
+            "sha256": "ff8b0c8e1513ae140eccbf14e359aaaf2ca46a0c018a99a2ccbb35a278a8e602"
+          },
+          "mirror_measured": {
+            "bytes": 21253,
+            "sha256": "ff8b0c8e1513ae140eccbf14e359aaaf2ca46a0c018a99a2ccbb35a278a8e602"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "build/torch-cpu/szl_formulas/metadata.json",
+          "kernel_declared": {
+            "bytes": 1282,
+            "git_blob_oid": "294f2aebc0951b4bef0dbd5c3edb0597749cffd3"
+          },
+          "mirror_declared": {
+            "bytes": 1282,
+            "git_blob_oid": "294f2aebc0951b4bef0dbd5c3edb0597749cffd3"
+          },
+          "kernel_measured": {
+            "bytes": 1282,
+            "sha256": "39c8befb6c5a5b636792be8973acd39f294b1eabc521f78541ba53400875b094"
+          },
+          "mirror_measured": {
+            "bytes": 1282,
+            "sha256": "39c8befb6c5a5b636792be8973acd39f294b1eabc521f78541ba53400875b094"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "build/torch-universal/metadata.json",
+          "kernel_declared": {
+            "bytes": 294,
+            "git_blob_oid": "a2c876da375952c2061c211cc40d6347232c406f"
+          },
+          "mirror_declared": {
+            "bytes": 294,
+            "git_blob_oid": "a2c876da375952c2061c211cc40d6347232c406f"
+          },
+          "kernel_measured": {
+            "bytes": 294,
+            "sha256": "b1c77b7cfa00fa336040f3304aa3f0b41232d3465b6068565184d06567775db8"
+          },
+          "mirror_measured": {
+            "bytes": 294,
+            "sha256": "b1c77b7cfa00fa336040f3304aa3f0b41232d3465b6068565184d06567775db8"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "build/torch-universal/szl_formulas/__init__.py",
+          "kernel_declared": {
+            "bytes": 9645,
+            "git_blob_oid": "328ca09d416255b72b4b02152e3a777cb34244d6"
+          },
+          "mirror_declared": {
+            "bytes": 9645,
+            "git_blob_oid": "328ca09d416255b72b4b02152e3a777cb34244d6"
+          },
+          "kernel_measured": {
+            "bytes": 9645,
+            "sha256": "b21246f3349625ca90b852e407667c87b12e244f3651b230d6a01e24966f70a6"
+          },
+          "mirror_measured": {
+            "bytes": 9645,
+            "sha256": "b21246f3349625ca90b852e407667c87b12e244f3651b230d6a01e24966f70a6"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "build/torch-universal/szl_formulas/_aggregators.py",
+          "kernel_declared": {
+            "bytes": 18516,
+            "git_blob_oid": "bd5b38d4f643d7ebd1b3313b779d7adbd6ac68e5"
+          },
+          "mirror_declared": {
+            "bytes": 18516,
+            "git_blob_oid": "bd5b38d4f643d7ebd1b3313b779d7adbd6ac68e5"
+          },
+          "kernel_measured": {
+            "bytes": 18516,
+            "sha256": "1ffeff63559ec9e7041bc0574a43833e89ceff9301776e5681c081593514f777"
+          },
+          "mirror_measured": {
+            "bytes": 18516,
+            "sha256": "1ffeff63559ec9e7041bc0574a43833e89ceff9301776e5681c081593514f777"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "build/torch-universal/szl_formulas/_composer.py",
+          "kernel_declared": {
+            "bytes": 6598,
+            "git_blob_oid": "a037a16c25d8f4a95117d99168eaf6bbd73c6cda"
+          },
+          "mirror_declared": {
+            "bytes": 6598,
+            "git_blob_oid": "a037a16c25d8f4a95117d99168eaf6bbd73c6cda"
+          },
+          "kernel_measured": {
+            "bytes": 6598,
+            "sha256": "378eb3d9df7bbc8f14bd609e6b62d4b0b92e732c86c4cb51162cd6e36ddcb764"
+          },
+          "mirror_measured": {
+            "bytes": 6598,
+            "sha256": "378eb3d9df7bbc8f14bd609e6b62d4b0b92e732c86c4cb51162cd6e36ddcb764"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "build/torch-universal/szl_formulas/_formulas.py",
+          "kernel_declared": {
+            "bytes": 18107,
+            "git_blob_oid": "ad544c6304ec63058d3602eea40ef1b54efc49af"
+          },
+          "mirror_declared": {
+            "bytes": 18107,
+            "git_blob_oid": "ad544c6304ec63058d3602eea40ef1b54efc49af"
+          },
+          "kernel_measured": {
+            "bytes": 18107,
+            "sha256": "900b93d645db89a27d49b2d9b4ef03fbcb644fb367c916025a5b403bcce49ed0"
+          },
+          "mirror_measured": {
+            "bytes": 18107,
+            "sha256": "900b93d645db89a27d49b2d9b4ef03fbcb644fb367c916025a5b403bcce49ed0"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "build/torch-universal/szl_formulas/atlas.py",
+          "kernel_declared": {
+            "bytes": 837,
+            "git_blob_oid": "802cd7c60509c2859f9925e478a0f8766bc5ed8f"
+          },
+          "mirror_declared": {
+            "bytes": 837,
+            "git_blob_oid": "802cd7c60509c2859f9925e478a0f8766bc5ed8f"
+          },
+          "kernel_measured": {
+            "bytes": 837,
+            "sha256": "4792d4e943e8ebeefbae7e455b63b6bbfaa3911b6050c1ca897c74812d8ecd94"
+          },
+          "mirror_measured": {
+            "bytes": 837,
+            "sha256": "4792d4e943e8ebeefbae7e455b63b6bbfaa3911b6050c1ca897c74812d8ecd94"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "build/torch-universal/szl_formulas/formula_atlas.v1.json",
+          "kernel_declared": {
+            "bytes": 21253,
+            "git_blob_oid": "2a70d047b51b1f4cc292395c029603bbfe724a3c"
+          },
+          "mirror_declared": {
+            "bytes": 21253,
+            "git_blob_oid": "2a70d047b51b1f4cc292395c029603bbfe724a3c"
+          },
+          "kernel_measured": {
+            "bytes": 21253,
+            "sha256": "ff8b0c8e1513ae140eccbf14e359aaaf2ca46a0c018a99a2ccbb35a278a8e602"
+          },
+          "mirror_measured": {
+            "bytes": 21253,
+            "sha256": "ff8b0c8e1513ae140eccbf14e359aaaf2ca46a0c018a99a2ccbb35a278a8e602"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "build/torch-universal/szl_formulas/metadata.json",
+          "kernel_declared": {
+            "bytes": 1282,
+            "git_blob_oid": "294f2aebc0951b4bef0dbd5c3edb0597749cffd3"
+          },
+          "mirror_declared": {
+            "bytes": 1282,
+            "git_blob_oid": "294f2aebc0951b4bef0dbd5c3edb0597749cffd3"
+          },
+          "kernel_measured": {
+            "bytes": 1282,
+            "sha256": "39c8befb6c5a5b636792be8973acd39f294b1eabc521f78541ba53400875b094"
+          },
+          "mirror_measured": {
+            "bytes": 1282,
+            "sha256": "39c8befb6c5a5b636792be8973acd39f294b1eabc521f78541ba53400875b094"
+          },
+          "bytes_match": true
+        }
+      ],
+      "kernel_file_count": 22,
+      "mirror_file_count": 33,
+      "access_status": "MEASURED",
+      "shared_count": 22,
+      "measured_count": 22,
+      "unavailable_count": 0,
+      "matched_count": 20,
+      "differing_count": 2,
+      "measured_bytes": 351747,
+      "whole_artifact_equivalence": "UNKNOWN"
+    },
+    {
+      "id": "SZLHOLDINGS/szl-governed-norm",
+      "kernel_revision": "dc3adf2be8a5f877b1269406d22609cb42122bc5",
+      "model_mirror_revision": "5abbd073ff159385be1f4e51c9fee4613cf52513",
+      "model_access_current_revision": "5abbd073ff159385be1f4e51c9fee4613cf52513",
+      "model_access_gated": false,
+      "model_access_metadata_sha256": "4936015a999d37474c04e166f36cb2448d64138ba2d5756907c9aeb8ffd30880",
+      "kernel_tree_sha256": "69cf655f05f861c2cf0673fd3312ea30d6c4edf2f5e53b2b8ddd2947efdd4ede",
+      "mirror_tree_sha256": "a5ab472fd84340651d0baafd4126557dd5b97fddd7acff8381f28abf2f31b0f4",
+      "kernel_tree_pages": 1,
+      "mirror_tree_pages": 1,
+      "kernel_only_paths": [
+        "build/torch-cpu/metadata.json",
+        "build/torch-cpu/szl_governed_norm/__init__.py",
+        "build/torch-cpu/szl_governed_norm/_norm.py",
+        "build/torch-cpu/szl_governed_norm/_ops.py",
+        "build/torch-cpu/szl_governed_norm/_receipt.py",
+        "build/torch-cpu/szl_governed_norm/layers.py",
+        "build/torch-universal/metadata.json",
+        "contract.json"
+      ],
+      "mirror_only_paths": [
+        ".szl_probe",
+        "MODEL_PROVENANCE.json",
+        "MODEL_PROVENANCE_CORRECTION.2026-09-24.json",
+        "PROMOTION_READINESS_AUDIT.json",
+        "SECURITY.md",
+        "SOURCE_CPU_TESTS.2026-09-24.json",
+        "SZL_ESTATE_MANAGED.json",
+        "TRAINING_RECEIPT.json",
+        "bom/model-bom.cdx.json",
+        "build.toml",
+        "build/torch-universal/szl_governed_norm/metadata.json",
+        "chain.py",
+        "evidence/source-cpu-tests/2026-09-24/github-norm-msvc.log",
+        "evidence/source-cpu-tests/2026-09-24/github-norm-msvc.xml",
+        "governed_norm.py",
+        "publication.json",
+        "scripts/eval.py",
+        "scripts/forge.py"
+      ],
+      "shared_files": [
+        {
+          "path": ".gitattributes",
+          "kernel_declared": {
+            "bytes": 127,
+            "git_blob_oid": "6b7a283f6a9d189d65bccdb859c6f80016f52228"
+          },
+          "mirror_declared": {
+            "bytes": 1519,
+            "git_blob_oid": "a6344aac8c09253b3b630fb776ae94478aa0275b"
+          },
+          "kernel_measured": {
+            "bytes": 127,
+            "sha256": "315871b322399f4d4163420d48ab6b22bae746799c5178967623ffa6ba7b6504"
+          },
+          "mirror_measured": {
+            "bytes": 1519,
+            "sha256": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "BENCH.laptop-blackwell.json",
+          "kernel_declared": {
+            "bytes": 10043,
+            "git_blob_oid": "e97f02cebbee5fbad6a507571191f1efeb52dc65"
+          },
+          "mirror_declared": {
+            "bytes": 10043,
+            "git_blob_oid": "e97f02cebbee5fbad6a507571191f1efeb52dc65"
+          },
+          "kernel_measured": {
+            "bytes": 10043,
+            "sha256": "378674beb14db92d9ea12f8710fb1114f399c2c9ddcfc08cc216a9c77993bf68"
+          },
+          "mirror_measured": {
+            "bytes": 10043,
+            "sha256": "378674beb14db92d9ea12f8710fb1114f399c2c9ddcfc08cc216a9c77993bf68"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "LICENSE",
+          "kernel_declared": {
+            "bytes": 809,
+            "git_blob_oid": "f02122ea79cbad4d0137dfd71c7fba654ec1233e"
+          },
+          "mirror_declared": {
+            "bytes": 809,
+            "git_blob_oid": "f02122ea79cbad4d0137dfd71c7fba654ec1233e"
+          },
+          "kernel_measured": {
+            "bytes": 809,
+            "sha256": "9589109b10f273b246999e87435e92140ec68dfe8fd4db623a64ab70a81c9871"
+          },
+          "mirror_measured": {
+            "bytes": 809,
+            "sha256": "9589109b10f273b246999e87435e92140ec68dfe8fd4db623a64ab70a81c9871"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "OPERATIONAL.json",
+          "kernel_declared": {
+            "bytes": 1954,
+            "git_blob_oid": "ec331d9c14e364934b6350e1f8ea9a16760c425c"
+          },
+          "mirror_declared": {
+            "bytes": 1954,
+            "git_blob_oid": "ec331d9c14e364934b6350e1f8ea9a16760c425c"
+          },
+          "kernel_measured": {
+            "bytes": 1954,
+            "sha256": "39c951e44776015fb3e4d26f86fb680ae6297df78688829308b08385ff8a5ca1"
+          },
+          "mirror_measured": {
+            "bytes": 1954,
+            "sha256": "39c951e44776015fb3e4d26f86fb680ae6297df78688829308b08385ff8a5ca1"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "README.md",
+          "kernel_declared": {
+            "bytes": 2138,
+            "git_blob_oid": "f5560cf592e47eb442e6fc2c7d3c3ea98c95a1e6"
+          },
+          "mirror_declared": {
+            "bytes": 28617,
+            "git_blob_oid": "63da0fa91c46a5fdb0a8a66fc9d62134a06fd433"
+          },
+          "kernel_measured": {
+            "bytes": 2138,
+            "sha256": "331a37344e3ba8b311562c7991b7d431f0c2d1b75831a4b8b2f9f6a1c24f57d5"
+          },
+          "mirror_measured": {
+            "bytes": 28617,
+            "sha256": "08fbb2a7c38fee75c63b1311defa611c1861a8e9ecb1a947fd55545d2ff4945a"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "build/torch-universal/szl_governed_norm/__init__.py",
+          "kernel_declared": {
+            "bytes": 11122,
+            "git_blob_oid": "436333116fd641474e4f2739bb9be2e715c15ec1"
+          },
+          "mirror_declared": {
+            "bytes": 10296,
+            "git_blob_oid": "dd2bd066760038d5e8ca0c1f368cdc23b8f75a58"
+          },
+          "kernel_measured": {
+            "bytes": 11122,
+            "sha256": "adc74101f5da00b87fb5eef3b02e94a35f0445ffd5a232bc2c6f2e65ea0b5916"
+          },
+          "mirror_measured": {
+            "bytes": 10296,
+            "sha256": "8313c7b2654be0d1640bcb022518328ff30a422f674baaf8b1f7dabb4d886c4a"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "build/torch-universal/szl_governed_norm/_norm.py",
+          "kernel_declared": {
+            "bytes": 10259,
+            "git_blob_oid": "efeb82b88976dd6e88d90fd2a142e7d8c46ee2a1"
+          },
+          "mirror_declared": {
+            "bytes": 10259,
+            "git_blob_oid": "efeb82b88976dd6e88d90fd2a142e7d8c46ee2a1"
+          },
+          "kernel_measured": {
+            "bytes": 10259,
+            "sha256": "cf72ace281ec86c504426f75e23eebdb661a1e3a12e4dfcc6c8b9fa634b03942"
+          },
+          "mirror_measured": {
+            "bytes": 10259,
+            "sha256": "cf72ace281ec86c504426f75e23eebdb661a1e3a12e4dfcc6c8b9fa634b03942"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "build/torch-universal/szl_governed_norm/_ops.py",
+          "kernel_declared": {
+            "bytes": 361,
+            "git_blob_oid": "2b3d1997cb976544ce5f5ff88455554523ecdd99"
+          },
+          "mirror_declared": {
+            "bytes": 361,
+            "git_blob_oid": "2b3d1997cb976544ce5f5ff88455554523ecdd99"
+          },
+          "kernel_measured": {
+            "bytes": 361,
+            "sha256": "616dac2e24d18966b4bca90acab7fec975980794643b7f72ac2a482dd13c28e3"
+          },
+          "mirror_measured": {
+            "bytes": 361,
+            "sha256": "616dac2e24d18966b4bca90acab7fec975980794643b7f72ac2a482dd13c28e3"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "build/torch-universal/szl_governed_norm/_receipt.py",
+          "kernel_declared": {
+            "bytes": 11669,
+            "git_blob_oid": "6b2c1ebec5a5422bd6694a1ae432d5c686df2968"
+          },
+          "mirror_declared": {
+            "bytes": 4614,
+            "git_blob_oid": "f44b15e9be041828fb56f3f1dd3598b2f20a8cf1"
+          },
+          "kernel_measured": {
+            "bytes": 11669,
+            "sha256": "4a7e2a690a2c5e19aa19963c095100d8e8e8faa836790a4c40a1eb45ce5b265d"
+          },
+          "mirror_measured": {
+            "bytes": 4614,
+            "sha256": "48d8150c86ec311cd1bfeb65f588764ae90b6f5a1c9f0eafaaed660a423864c9"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "build/torch-universal/szl_governed_norm/layers.py",
+          "kernel_declared": {
+            "bytes": 2404,
+            "git_blob_oid": "1d564e9a32a473ed6717673b46680389c84fdb26"
+          },
+          "mirror_declared": {
+            "bytes": 2404,
+            "git_blob_oid": "1d564e9a32a473ed6717673b46680389c84fdb26"
+          },
+          "kernel_measured": {
+            "bytes": 2404,
+            "sha256": "d79c83355cb2332b9d0e9d98584b86434e486532e27d30652df10158b30fc37b"
+          },
+          "mirror_measured": {
+            "bytes": 2404,
+            "sha256": "d79c83355cb2332b9d0e9d98584b86434e486532e27d30652df10158b30fc37b"
+          },
+          "bytes_match": true
+        }
+      ],
+      "kernel_file_count": 18,
+      "mirror_file_count": 28,
+      "access_status": "MEASURED",
+      "shared_count": 10,
+      "measured_count": 10,
+      "unavailable_count": 0,
+      "matched_count": 6,
+      "differing_count": 4,
+      "measured_bytes": 121762,
+      "whole_artifact_equivalence": "UNKNOWN"
+    },
+    {
+      "id": "SZLHOLDINGS/szl-govsign",
+      "kernel_revision": "fb01398843fc67e6b5059f4c1fc27ca4411fc5f9",
+      "model_mirror_revision": "db2c14ef08ee20edfd5aada53ac2b11e02583107",
+      "model_access_current_revision": "db2c14ef08ee20edfd5aada53ac2b11e02583107",
+      "model_access_gated": false,
+      "model_access_metadata_sha256": "e23ddeeb7b148c972a33d0b71858af110825988de17c14e7c41c8801a32a7393",
+      "kernel_tree_sha256": "9273d9fdc729e9b61dfc28f90aca4b653716ad082a90de2087d99d75501dbc31",
+      "mirror_tree_sha256": "09441f837cebd79b34e55be9a4c03082189d099fd09656b1a149dfee96876a15",
+      "kernel_tree_pages": 1,
+      "mirror_tree_pages": 1,
+      "kernel_only_paths": [
+        "build/torch-cpu/metadata.json",
+        "build/torch-cpu/szl_govsign/__init__.py",
+        "build/torch-cpu/szl_govsign/envelope.py",
+        "build/torch-cpu/szl_govsign/pae.py",
+        "build/torch-cpu/szl_govsign/predicate.py",
+        "build/torch-cpu/szl_govsign/selfcheck.py",
+        "build/torch-universal/metadata.json"
+      ],
+      "mirror_only_paths": [
+        "BENCH.laptop-blackwell.json",
+        "MODEL_PROVENANCE.json",
+        "PROMOTION_READINESS_AUDIT.json",
+        "SECURITY.md",
+        "SZL_ESTATE_MANAGED.json",
+        "TRAINING_RECEIPT.json",
+        "bom/model-bom.cdx.json",
+        "build.toml",
+        "card/holo-banner.svg",
+        "scripts/eval.py",
+        "scripts/forge.py"
+      ],
+      "shared_files": [
+        {
+          "path": ".gitattributes",
+          "kernel_declared": {
+            "bytes": 127,
+            "git_blob_oid": "6b7a283f6a9d189d65bccdb859c6f80016f52228"
+          },
+          "mirror_declared": {
+            "bytes": 1519,
+            "git_blob_oid": "a6344aac8c09253b3b630fb776ae94478aa0275b"
+          },
+          "kernel_measured": {
+            "bytes": 127,
+            "sha256": "315871b322399f4d4163420d48ab6b22bae746799c5178967623ffa6ba7b6504"
+          },
+          "mirror_measured": {
+            "bytes": 1519,
+            "sha256": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "LICENSE",
+          "kernel_declared": {
+            "bytes": 12168,
+            "git_blob_oid": "8af5266273c73750d07e10cb2665348c9be8da6c"
+          },
+          "mirror_declared": {
+            "bytes": 809,
+            "git_blob_oid": "f02122ea79cbad4d0137dfd71c7fba654ec1233e"
+          },
+          "kernel_measured": {
+            "bytes": 12168,
+            "sha256": "27918ba5a0657bd97d421f87ee57d723438e3c4db4e2645078cbc5be056ba54b"
+          },
+          "mirror_measured": {
+            "bytes": 809,
+            "sha256": "9589109b10f273b246999e87435e92140ec68dfe8fd4db623a64ab70a81c9871"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "README.md",
+          "kernel_declared": {
+            "bytes": 9719,
+            "git_blob_oid": "2765d7f662160049053430fcb2e8df47c7f55832"
+          },
+          "mirror_declared": {
+            "bytes": 7591,
+            "git_blob_oid": "93264c3b82b42a4310adc92a98efff7304ef47da"
+          },
+          "kernel_measured": {
+            "bytes": 9719,
+            "sha256": "47d9db139f12f36a6299c5cd13b550b628f5d56d4a0517317b4e4b176a0583ef"
+          },
+          "mirror_measured": {
+            "bytes": 7591,
+            "sha256": "60a206a4b349106a9038df16162c85a051a9338bf7f0acb725300f9ae683822f"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "build/torch-universal/szl_govsign/__init__.py",
+          "kernel_declared": {
+            "bytes": 1904,
+            "git_blob_oid": "d6bc82b139b49898f1aede8b8f8a455c76fae0a9"
+          },
+          "mirror_declared": {
+            "bytes": 1845,
+            "git_blob_oid": "54e9c7934b08858c6b683ef81064a52dee165fe0"
+          },
+          "kernel_measured": {
+            "bytes": 1904,
+            "sha256": "2ae78794cc48efa871696820cffcd615b70f8a740af2567d5b402b18245c7287"
+          },
+          "mirror_measured": {
+            "bytes": 1845,
+            "sha256": "ca1edea8064985b20f7248030d8362cd1e3f12a9f4e55d47ebd0c38f2135dd8a"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "build/torch-universal/szl_govsign/envelope.py",
+          "kernel_declared": {
+            "bytes": 5534,
+            "git_blob_oid": "f942b5a286154cccbe7d11d308ea1c2d602cc701"
+          },
+          "mirror_declared": {
+            "bytes": 5375,
+            "git_blob_oid": "ded0ff7c31dfcd5dfad72b60da41869033ce5857"
+          },
+          "kernel_measured": {
+            "bytes": 5534,
+            "sha256": "26310797239357b695d4bc314dced36856158e3b26d71c57112a7ab8570a4025"
+          },
+          "mirror_measured": {
+            "bytes": 5375,
+            "sha256": "380f7442eea032aabd9c0e0f5db37846350e56ea2f40ead700a4abc4c9bcfa95"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "build/torch-universal/szl_govsign/metadata.json",
+          "kernel_declared": {
+            "bytes": 532,
+            "git_blob_oid": "a4b9aa298bb5268f72b37dab1411b933b79e174b"
+          },
+          "mirror_declared": {
+            "bytes": 521,
+            "git_blob_oid": "b7edb1da3b7cd7b4749b2693c5c5e7f57210ca5b"
+          },
+          "kernel_measured": {
+            "bytes": 532,
+            "sha256": "d86f92254db0b654d64060f0b549013efbb6997895549977316ebd8491e35843"
+          },
+          "mirror_measured": {
+            "bytes": 521,
+            "sha256": "5a2309e18a860988c2c1d79baca4dde767b22603ed827698cd91d9754fbd3bbc"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "build/torch-universal/szl_govsign/pae.py",
+          "kernel_declared": {
+            "bytes": 1248,
+            "git_blob_oid": "13cfc34050c5a9824c339c5c0c74f3f27e089e50"
+          },
+          "mirror_declared": {
+            "bytes": 1206,
+            "git_blob_oid": "4cee0d66bf1112e9f0b76d8a3475538a55b905f6"
+          },
+          "kernel_measured": {
+            "bytes": 1248,
+            "sha256": "40e4629102d8fc6bf34d39f6bf28a8c799985ae0478ce9499fea29d0373d8c1b"
+          },
+          "mirror_measured": {
+            "bytes": 1206,
+            "sha256": "c9914af469fbf44e09424d1b1e15f73e57c95db0e7a2def46feb1637f4307d2b"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "build/torch-universal/szl_govsign/predicate.py",
+          "kernel_declared": {
+            "bytes": 5573,
+            "git_blob_oid": "2fdbf773ebb0d18283899343069588a87aea49aa"
+          },
+          "mirror_declared": {
+            "bytes": 5419,
+            "git_blob_oid": "3627d5aeb3229692bf1b845c7e1765afba6e578c"
+          },
+          "kernel_measured": {
+            "bytes": 5573,
+            "sha256": "535d816554342894b2713c0c7a548d441867f734ae4f4838a35bb35f6b05ddef"
+          },
+          "mirror_measured": {
+            "bytes": 5419,
+            "sha256": "4f2838cbc21d794d22781bf8430f062c564bc453d2a291388e5c4234246e1bd5"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "build/torch-universal/szl_govsign/selfcheck.py",
+          "kernel_declared": {
+            "bytes": 4018,
+            "git_blob_oid": "107b459c8f74da6340332a026adfc66bcbec5801"
+          },
+          "mirror_declared": {
+            "bytes": 3906,
+            "git_blob_oid": "20898e67d8a3ff2ad657129222e8cd3d6b5afc38"
+          },
+          "kernel_measured": {
+            "bytes": 4018,
+            "sha256": "50a53a9e6c52ae0bdba507b6215d949d43d8d37198e38a8df7d118518198b106"
+          },
+          "mirror_measured": {
+            "bytes": 3906,
+            "sha256": "a4fb6f06804c712aea9394e4dbb9c33d43438acd56bc85c5b5047c3b9731b27f"
+          },
+          "bytes_match": false
+        }
+      ],
+      "kernel_file_count": 16,
+      "mirror_file_count": 20,
+      "access_status": "MEASURED",
+      "shared_count": 9,
+      "measured_count": 9,
+      "unavailable_count": 0,
+      "matched_count": 0,
+      "differing_count": 9,
+      "measured_bytes": 69014,
+      "whole_artifact_equivalence": "UNKNOWN"
+    },
+    {
+      "id": "SZLHOLDINGS/szl-invariants",
+      "kernel_revision": "78d04afef253e526326d6b0f4e944fa3d4b1990c",
+      "model_mirror_revision": "7897123905a17539fc421bd5bffead93d7ad7748",
+      "model_access_current_revision": "7897123905a17539fc421bd5bffead93d7ad7748",
+      "model_access_gated": false,
+      "model_access_metadata_sha256": "3ff057ad5a5752b4c967b120b0352fd0996edd4590eaae9b9fa79e58b052076e",
+      "kernel_tree_sha256": "1aa603750e12f24e8f83b0d1214457890e0178d7490e06bae26baa6a6fcbba90",
+      "mirror_tree_sha256": "c49200736069fc44bb22e963a11198327224600c311f3cd909dbdca6197468bc",
+      "kernel_tree_pages": 1,
+      "mirror_tree_pages": 1,
+      "kernel_only_paths": [
+        "build/torch-cpu/metadata.json",
+        "build/torch-cpu/szl_invariants/__init__.py",
+        "build/torch-universal/metadata.json"
+      ],
+      "mirror_only_paths": [
+        "MODEL_PROVENANCE.json",
+        "PROMOTION_READINESS_AUDIT.json",
+        "SECURITY.md",
+        "SZL_ESTATE_MANAGED.json",
+        "TRAINING_RECEIPT.json",
+        "bom/model-bom.cdx.json",
+        "build.toml",
+        "card/holo-banner.svg",
+        "scripts/eval.py",
+        "scripts/forge.py",
+        "tests/test_invariants.py"
+      ],
+      "shared_files": [
+        {
+          "path": ".gitattributes",
+          "kernel_declared": {
+            "bytes": 127,
+            "git_blob_oid": "6b7a283f6a9d189d65bccdb859c6f80016f52228"
+          },
+          "mirror_declared": {
+            "bytes": 1519,
+            "git_blob_oid": "a6344aac8c09253b3b630fb776ae94478aa0275b"
+          },
+          "kernel_measured": {
+            "bytes": 127,
+            "sha256": "315871b322399f4d4163420d48ab6b22bae746799c5178967623ffa6ba7b6504"
+          },
+          "mirror_measured": {
+            "bytes": 1519,
+            "sha256": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "BENCH.laptop-blackwell.json",
+          "kernel_declared": {
+            "bytes": 6229,
+            "git_blob_oid": "f0e761a06144e929945bc310e74a2af8580dbbe0"
+          },
+          "mirror_declared": {
+            "bytes": 6229,
+            "git_blob_oid": "f0e761a06144e929945bc310e74a2af8580dbbe0"
+          },
+          "kernel_measured": {
+            "bytes": 6229,
+            "sha256": "dc87dff000b14ee22d8e70c937b8e9b636ab19ad2e004b61d953796ef3868c2a"
+          },
+          "mirror_measured": {
+            "bytes": 6229,
+            "sha256": "dc87dff000b14ee22d8e70c937b8e9b636ab19ad2e004b61d953796ef3868c2a"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "LICENSE",
+          "kernel_declared": {
+            "bytes": 776,
+            "git_blob_oid": "7c317ba373932bf7f56ab969a3698aa3468811be"
+          },
+          "mirror_declared": {
+            "bytes": 776,
+            "git_blob_oid": "7c317ba373932bf7f56ab969a3698aa3468811be"
+          },
+          "kernel_measured": {
+            "bytes": 776,
+            "sha256": "acf6ce407174b791ceddc263dfc7b1e3ea16579cec3e0caca3d4469e6ccf544b"
+          },
+          "mirror_measured": {
+            "bytes": 776,
+            "sha256": "acf6ce407174b791ceddc263dfc7b1e3ea16579cec3e0caca3d4469e6ccf544b"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "OPERATIONAL.json",
+          "kernel_declared": {
+            "bytes": 1933,
+            "git_blob_oid": "ec32bf8648eba5a445589015d3c9356e73473560"
+          },
+          "mirror_declared": {
+            "bytes": 1933,
+            "git_blob_oid": "ec32bf8648eba5a445589015d3c9356e73473560"
+          },
+          "kernel_measured": {
+            "bytes": 1933,
+            "sha256": "72e286bfdec10d38127bade48272e9624f059538bc0b312d33ca0ed5fd41ae99"
+          },
+          "mirror_measured": {
+            "bytes": 1933,
+            "sha256": "72e286bfdec10d38127bade48272e9624f059538bc0b312d33ca0ed5fd41ae99"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "README.md",
+          "kernel_declared": {
+            "bytes": 9379,
+            "git_blob_oid": "f809d0b35e0e59a1312ee7b68e1382a3b00b78c4"
+          },
+          "mirror_declared": {
+            "bytes": 7789,
+            "git_blob_oid": "c75fd0a523a481de43394f71c8218e5bada1c4fb"
+          },
+          "kernel_measured": {
+            "bytes": 9379,
+            "sha256": "c015338b9a0b4dbbab279b1682789f6c864329f23667f8d6aab151f995a8b2e8"
+          },
+          "mirror_measured": {
+            "bytes": 7789,
+            "sha256": "f6e38b677daf18fb5d2ad423c8870023e894b26dc4a9862cc33b08ebbcb581e4"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "build/torch-universal/szl_invariants/__init__.py",
+          "kernel_declared": {
+            "bytes": 33800,
+            "git_blob_oid": "2bfa471d9831ae4d27afa2b224732dc8706c808f"
+          },
+          "mirror_declared": {
+            "bytes": 32114,
+            "git_blob_oid": "f37c06f7f5df4ab6ef910b5a779b72ad3d631b08"
+          },
+          "kernel_measured": {
+            "bytes": 33800,
+            "sha256": "7a26a1f41f3686035c25ef9c871400fa902f6cc54fc00da7f158109f714792e5"
+          },
+          "mirror_measured": {
+            "bytes": 32114,
+            "sha256": "83469f3521e4553fd20a9012830449f0b88d2b2cbd971f21c85c6491e978f3ee"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "build/torch-universal/szl_invariants/metadata.json",
+          "kernel_declared": {
+            "bytes": 689,
+            "git_blob_oid": "ba8083e5b78ed3ba572cebb63fc540a9cce980de"
+          },
+          "mirror_declared": {
+            "bytes": 833,
+            "git_blob_oid": "76c8ffd1da09cb94ca69a10c8e7f0a991ddccc44"
+          },
+          "kernel_measured": {
+            "bytes": 689,
+            "sha256": "06d96c954e79a6189d9edbb9e723e0c5240ba4c02588d8021045dc5d067387ce"
+          },
+          "mirror_measured": {
+            "bytes": 833,
+            "sha256": "938fbba561047b0728e60603e71f535d6a2eb7adf9bd52b5f2c8af9b4ad97816"
+          },
+          "bytes_match": false
+        }
+      ],
+      "kernel_file_count": 10,
+      "mirror_file_count": 18,
+      "access_status": "MEASURED",
+      "shared_count": 7,
+      "measured_count": 7,
+      "unavailable_count": 0,
+      "matched_count": 3,
+      "differing_count": 4,
+      "measured_bytes": 104126,
+      "whole_artifact_equivalence": "UNKNOWN"
+    },
+    {
+      "id": "SZLHOLDINGS/szl-kernels",
+      "kernel_revision": "53a6acfc468f1611b3d665c3deea2efaca7bcaf3",
+      "model_mirror_revision": "72df0342e34a1f198dd9c428cca072e9b1389ccd",
+      "model_access_current_revision": "0751d72ab70fde1c5f932684075b4b423bfb43ac",
+      "model_access_gated": false,
+      "model_access_metadata_sha256": "4505c41368e9390df90592d4aa03d504384155f5a8fb3b8e2022cf25b08fb179",
+      "kernel_tree_sha256": "75792cfc33d4fbab19b6f8744a381ff9388af5ceded9b1f5f33fa05e6e390fe2",
+      "mirror_tree_sha256": "26f2e4fe15a39fdeb88f37039c072bd98f80f979f8fb4d3789ccf3596986e86e",
+      "kernel_tree_pages": 1,
+      "mirror_tree_pages": 2,
+      "kernel_only_paths": [
+        "build/torch-cpu/metadata.json",
+        "build/torch-cpu/szl_kernels/__init__.py",
+        "build/torch-cpu/szl_kernels/_chain.py",
+        "build/torch-cpu/szl_kernels/_ops.py",
+        "build/torch-universal/metadata.json"
+      ],
+      "mirror_only_paths": [
+        "KERNEL_HUB.md",
+        "MODEL_PROVENANCE.json",
+        "PROMOTION_READINESS_AUDIT.json",
+        "SECURITY.md",
+        "SZL_ESTATE_MANAGED.json",
+        "TRAINING_RECEIPT.json",
+        "bom/model-bom.cdx.json",
+        "build.toml",
+        "build/torch-universal/szl_kernels/_kernel_api.py",
+        "build/torch-universal/szl_kernels/retrieval.py",
+        "config.json",
+        "corpus/doctrine-v10-v11/CANONICAL_WEDGE.md",
+        "corpus/doctrine-v10-v11/DOCTRINE_V10_LOCKED_2026-05-31_2355.md",
+        "corpus/doctrine-v10-v11/DOCTRINE_V11_LOCKED_2026-06-01_0145.md",
+        "corpus/doctrine-v10-v11/MYTHOS_TO_HATUN_WILLAY_RULE.md",
+        "corpus/doctrine-v10-v11/README.md",
+        "corpus/kernels/README.md",
+        "corpus/kernels/build/torch-universal/szl_kernels/__init__.py",
+        "corpus/kernels/build/torch-universal/szl_kernels/_chain.py",
+        "corpus/kernels/build/torch-universal/szl_kernels/_ops.py",
+        "corpus/rag-corpus-v1/corpus.jsonl",
+        "corpus/thesis-corpus-v18/chapters/00_abstract.tex",
+        "corpus/thesis-corpus-v18/chapters/01_introduction.tex",
+        "corpus/thesis-corpus-v18/chapters/02_mathematical_foundations.tex",
+        "corpus/thesis-corpus-v18/chapters/03_runtime_substrate.tex",
+        "corpus/thesis-corpus-v18/chapters/04_agentic_substrate.tex",
+        "corpus/thesis-corpus-v18/chapters/05_observability_security_governance.tex",
+        "corpus/thesis-corpus-v18/chapters/06_new_formulas.tex",
+        "corpus/thesis-corpus-v18/chapters/07_formal_validation.tex",
+        "corpus/thesis-corpus-v18/chapters/08_conclusion.tex",
+        "corpus/thesis-corpus-v18/main.tex",
+        "get_kernel_cuda_probe.json",
+        "og-card.png",
+        "publication.json",
+        "scripts/eval.py",
+        "scripts/forge.py",
+        "tests/test_estate.py",
+        "tests/test_miniembed.py",
+        "tests/test_replay_portability.py",
+        "tests/test_suite.py",
+        "torch-ext/szl_kernels/_chain.py",
+        "torch-ext/szl_kernels/_kernel_api.py",
+        "torch-ext/szl_kernels/_ops.py",
+        "torch-ext/szl_kernels/estate.py",
+        "torch-ext/szl_kernels/metadata.json",
+        "torch-ext/szl_kernels/retrieval.py",
+        "vectors.npz",
+        "vocab.json"
+      ],
+      "shared_files": [
+        {
+          "path": ".gitattributes",
+          "kernel_declared": {
+            "bytes": 127,
+            "git_blob_oid": "6b7a283f6a9d189d65bccdb859c6f80016f52228"
+          },
+          "mirror_declared": {
+            "bytes": 2258,
+            "git_blob_oid": "3761004fb8df0ca1379f2c88ac23e13849b50ce4"
+          },
+          "kernel_measured": {
+            "bytes": 127,
+            "sha256": "315871b322399f4d4163420d48ab6b22bae746799c5178967623ffa6ba7b6504"
+          },
+          "mirror_measured": {
+            "bytes": 2258,
+            "sha256": "58198c37222f48b53e6af4f885c6e27fefce6589c6ada541b3c48703c1c98d31"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "BENCH.laptop-blackwell.json",
+          "kernel_declared": {
+            "bytes": 7845,
+            "git_blob_oid": "a5c7128686d968f33bb7c2247fed9910cba65388"
+          },
+          "mirror_declared": {
+            "bytes": 7845,
+            "git_blob_oid": "a5c7128686d968f33bb7c2247fed9910cba65388"
+          },
+          "kernel_measured": {
+            "bytes": 7845,
+            "sha256": "3f7ab3a5c9a8c45e486dff2c1fd4c63568ec3145de8311177c79d81f7adc85aa"
+          },
+          "mirror_measured": {
+            "bytes": 7845,
+            "sha256": "3f7ab3a5c9a8c45e486dff2c1fd4c63568ec3145de8311177c79d81f7adc85aa"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "LICENSE",
+          "kernel_declared": {
+            "bytes": 809,
+            "git_blob_oid": "f02122ea79cbad4d0137dfd71c7fba654ec1233e"
+          },
+          "mirror_declared": {
+            "bytes": 11358,
+            "git_blob_oid": "d645695673349e3947e8e5ae42332d0ac3164cd7"
+          },
+          "kernel_measured": {
+            "bytes": 809,
+            "sha256": "9589109b10f273b246999e87435e92140ec68dfe8fd4db623a64ab70a81c9871"
+          },
+          "mirror_measured": {
+            "bytes": 11358,
+            "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "OPERATIONAL.json",
+          "kernel_declared": {
+            "bytes": 1924,
+            "git_blob_oid": "6a108fca57bb201d0f777d678562aba42f2ee3a4"
+          },
+          "mirror_declared": {
+            "bytes": 861,
+            "git_blob_oid": "c880433b51faf23ee6b940d35d25753c662d71b2"
+          },
+          "kernel_measured": {
+            "bytes": 1924,
+            "sha256": "df43cc1dcde47c67ec37a13272cdadcadcc72c9155ad736e3c43908ab5662e0a"
+          },
+          "mirror_measured": {
+            "bytes": 861,
+            "sha256": "90ddf45b653a5d0a2fedaa582ae12ae708a7f97e83a016991cafba6efe446508"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "README.md",
+          "kernel_declared": {
+            "bytes": 4055,
+            "git_blob_oid": "392d84df43a332ded2eafa6e8cdc8cff9e2cbb80"
+          },
+          "mirror_declared": {
+            "bytes": 34425,
+            "git_blob_oid": "957446dc2547c54c2984235a5f3f736d2134c30b"
+          },
+          "kernel_measured": {
+            "bytes": 4055,
+            "sha256": "87300b466a10dee65d2b10ae1cab40ee6c215fe0c88dd9fc1a7d8cc9fa24f610"
+          },
+          "mirror_measured": {
+            "bytes": 34425,
+            "sha256": "1189a0cd67922fd5244af6aab0c9a11c3fd7c34cb809aa9d3e9e30fd25dd132c"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "build/torch-universal/szl_kernels/__init__.py",
+          "kernel_declared": {
+            "bytes": 12179,
+            "git_blob_oid": "3b5c2b4a6902d32c9b7fd129494fda48a496bc66"
+          },
+          "mirror_declared": {
+            "bytes": 11967,
+            "git_blob_oid": "e90d5c6df724cf32e838c3463fd9506c014c21aa"
+          },
+          "kernel_measured": {
+            "bytes": 12179,
+            "sha256": "3d8b0e0cd557bfdd147b5db17acf3b4d19f6bb64d81fe906bda10ce8323a9fb2"
+          },
+          "mirror_measured": {
+            "bytes": 11967,
+            "sha256": "b22f76e2af4af9ff1265f09149226fd13367b3bb9d305b0a649d4b91af8f4ba0"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "build/torch-universal/szl_kernels/_chain.py",
+          "kernel_declared": {
+            "bytes": 11672,
+            "git_blob_oid": "68e68165d9b0d8abcc12b77bbb7f2cfe6ca6725b"
+          },
+          "mirror_declared": {
+            "bytes": 16424,
+            "git_blob_oid": "87118ab32287dad4b64a6c0a92d61ac3bf58d05c"
+          },
+          "kernel_measured": {
+            "bytes": 11672,
+            "sha256": "5ffd4e581ad99ca23d2c90fdd81e7106d879211e3d1f965e210dbf44b008b5de"
+          },
+          "mirror_measured": {
+            "bytes": 16424,
+            "sha256": "9344309099b3b8e8f4a30f7d412c699ea8637a09d3cbf35d101d8c3beca01b56"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "build/torch-universal/szl_kernels/_ops.py",
+          "kernel_declared": {
+            "bytes": 9058,
+            "git_blob_oid": "d10ef5a7bc5a40c94a801a1a09832ce4a895fd20"
+          },
+          "mirror_declared": {
+            "bytes": 11462,
+            "git_blob_oid": "e5826dfdf72be09969246fdfe88b282be3d1a33c"
+          },
+          "kernel_measured": {
+            "bytes": 9058,
+            "sha256": "7eb0ca4c11308c7b16df0e7bdd35cbed6b1464ca9f05c9acd925a2f0154130bd"
+          },
+          "mirror_measured": {
+            "bytes": 11462,
+            "sha256": "b5c4fbced950da908f3d4b0a7b4b5efa43e8d7fc735b8e4c00f7bd9952c85f80"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "build/torch-universal/szl_kernels/estate.py",
+          "kernel_declared": {
+            "bytes": 10139,
+            "git_blob_oid": "0c28c2f361b5922b21409bf29e03038b5ea4faf3"
+          },
+          "mirror_declared": {
+            "bytes": 11735,
+            "git_blob_oid": "cc6538b9a6b4baec40f9937aa14e1a2e2f17b7f3"
+          },
+          "kernel_measured": {
+            "bytes": 10139,
+            "sha256": "bcdab74e0b5a7f56dddbb403130e6ad3e79dcf7b5b81150caf6d77752016d5d4"
+          },
+          "mirror_measured": {
+            "bytes": 11735,
+            "sha256": "c2f17449ff5a02f3491b42cf5264329bbfa037768873e04034da73c485150c96"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "build/torch-universal/szl_kernels/metadata.json",
+          "kernel_declared": {
+            "bytes": 837,
+            "git_blob_oid": "ff23bd1997b5977a35df14545da3861ab526952a"
+          },
+          "mirror_declared": {
+            "bytes": 815,
+            "git_blob_oid": "fe238a043ccb7a67b35f4b97c8f314007d59209f"
+          },
+          "kernel_measured": {
+            "bytes": 837,
+            "sha256": "b35204e148201bed927526af6e875be52647ba30733b54f3e1e96753e362bb7e"
+          },
+          "mirror_measured": {
+            "bytes": 815,
+            "sha256": "6af8c0699f12cc7cea710794a835e5a74a5f7db1b746050c145b22ac71b58b08"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "build/torch-universal/szl_kernels/miniembed.py",
+          "kernel_declared": {
+            "bytes": 21133,
+            "git_blob_oid": "5d65c06bebaca53a6a85905ae58cccacc288a985"
+          },
+          "mirror_declared": {
+            "bytes": 21133,
+            "git_blob_oid": "5d65c06bebaca53a6a85905ae58cccacc288a985"
+          },
+          "kernel_measured": {
+            "bytes": 21133,
+            "sha256": "1a4bba8a629442d74b2240621092e18046e672fc7094a4799666af9efb16bd50"
+          },
+          "mirror_measured": {
+            "bytes": 21133,
+            "sha256": "1a4bba8a629442d74b2240621092e18046e672fc7094a4799666af9efb16bd50"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "torch-ext/szl_kernels/__init__.py",
+          "kernel_declared": {
+            "bytes": 11649,
+            "git_blob_oid": "7c7377a80b62f2d824acfafbeffc6d006af55d84"
+          },
+          "mirror_declared": {
+            "bytes": 11967,
+            "git_blob_oid": "e90d5c6df724cf32e838c3463fd9506c014c21aa"
+          },
+          "kernel_measured": {
+            "bytes": 11649,
+            "sha256": "82a11093f391c8dd2d799b693a07ee164300ee2ff73a7cade33cdc092e77c921"
+          },
+          "mirror_measured": {
+            "bytes": 11967,
+            "sha256": "b22f76e2af4af9ff1265f09149226fd13367b3bb9d305b0a649d4b91af8f4ba0"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "torch-ext/szl_kernels/miniembed.py",
+          "kernel_declared": {
+            "bytes": 21133,
+            "git_blob_oid": "5d65c06bebaca53a6a85905ae58cccacc288a985"
+          },
+          "mirror_declared": {
+            "bytes": 21133,
+            "git_blob_oid": "5d65c06bebaca53a6a85905ae58cccacc288a985"
+          },
+          "kernel_measured": {
+            "bytes": 21133,
+            "sha256": "1a4bba8a629442d74b2240621092e18046e672fc7094a4799666af9efb16bd50"
+          },
+          "mirror_measured": {
+            "bytes": 21133,
+            "sha256": "1a4bba8a629442d74b2240621092e18046e672fc7094a4799666af9efb16bd50"
+          },
+          "bytes_match": true
+        }
+      ],
+      "kernel_file_count": 18,
+      "mirror_file_count": 61,
+      "access_status": "MEASURED",
+      "shared_count": 13,
+      "measured_count": 13,
+      "unavailable_count": 0,
+      "matched_count": 3,
+      "differing_count": 10,
+      "measured_bytes": 275943,
+      "whole_artifact_equivalence": "UNKNOWN"
+    },
+    {
+      "id": "SZLHOLDINGS/szl-lambda-gate",
+      "kernel_revision": "41a1ebe6a8ac505299bb4e8fc018911d9c462b72",
+      "model_mirror_revision": "f0c518b22f488e9f008deed27765c9fced32001e",
+      "model_access_current_revision": "f0c518b22f488e9f008deed27765c9fced32001e",
+      "model_access_gated": "manual",
+      "model_access_metadata_sha256": "3d63163a8d49e9a7fbe49319551bc55c4c75739e7d0423efa6bdf838691be872",
+      "kernel_tree_sha256": "928c98fcb39f0acbaff85a428c55d1bb2a7083b5f8ae39183fd7a74810212130",
+      "mirror_tree_sha256": "7375e710c023f2af303f3c49627e77c630c1366fff2bf4b40ae7094224632e8f",
+      "kernel_tree_pages": 1,
+      "mirror_tree_pages": 3,
+      "kernel_only_paths": [],
+      "mirror_only_paths": [
+        ".gitignore",
+        ".zenodo.json",
+        "CITATION.cff",
+        "CODEOWNERS",
+        "MODEL_PROVENANCE.json",
+        "MODEL_PROVENANCE_CORRECTION.2026-09-24.json",
+        "PROMOTION_READINESS_AUDIT.json",
+        "SECURITY.md",
+        "SOURCE_CPU_TESTS.2026-09-24.json",
+        "SZL_ESTATE_MANAGED.json",
+        "TRAINING_RECEIPT.json",
+        "bom/model-bom.cdx.json",
+        "docs/distribution-methodology.md",
+        "docs/hf-protected-pr-release.md",
+        "doctrine.py",
+        "evidence/source-cpu-tests/2026-09-24/github-lambda-folded-baseline.log",
+        "evidence/source-cpu-tests/2026-09-24/github-lambda-folded-baseline.xml",
+        "evidence/source-cpu-tests/2026-09-24/github-lambda-msvc.log",
+        "evidence/source-cpu-tests/2026-09-24/github-lambda-msvc.xml",
+        "flake.nix",
+        "frontier/TYPESAFE_JEV_AND_GM_ADMIT.md",
+        "frontier/compile_matrix.json",
+        "frontier/model_admit_contract.v1.json",
+        "hf-kernels/szl-governed-norm/README.md",
+        "hf-kernels/szl-governed-norm/contract.json",
+        "lambda_gate.py",
+        "pyproject.toml",
+        "scripts/build_lambda_distribution.py",
+        "scripts/check_lambda_distribution.py",
+        "scripts/eval.py",
+        "scripts/find_hf_publication.py",
+        "scripts/forge.py",
+        "scripts/hf_mirror_finalize.py",
+        "scripts/hf_mirror_release.py",
+        "scripts/render_model_card.py",
+        "scripts/wait_release_sbom.py",
+        "szl-lambda-gate-sbom-2.spdx.json",
+        "szl-lambda-gate-sbom.cyclonedx.json",
+        "torch-ext/szl_lambda_gate/__init__.py",
+        "torch-ext/szl_lambda_gate/_lambda.py",
+        "torch-ext/szl_lambda_gate/_ops.py",
+        "torch-ext/szl_lambda_gate/_v1.py",
+        "torch-ext/szl_lambda_gate/governed_norm/__init__.py",
+        "torch-ext/szl_lambda_gate/governed_norm/_norm.py",
+        "torch-ext/szl_lambda_gate/governed_norm/_receipt.py",
+        "torch-ext/szl_lambda_gate/governed_norm/layers.py",
+        "torch-ext/szl_lambda_gate/layers.py"
+      ],
+      "shared_files": [
+        {
+          "path": ".gitattributes",
+          "kernel_declared": {
+            "bytes": 127,
+            "git_blob_oid": "6b7a283f6a9d189d65bccdb859c6f80016f52228"
+          },
+          "mirror_declared": {
+            "bytes": 1519,
+            "git_blob_oid": "a6344aac8c09253b3b630fb776ae94478aa0275b"
+          },
+          "kernel_measured": null,
+          "mirror_measured": null,
+          "bytes_match": null
+        },
+        {
+          "path": "BENCH.laptop-blackwell.json",
+          "kernel_declared": {
+            "bytes": 9814,
+            "git_blob_oid": "fbb2cbda6ab8c18479fac344a4edf465dbd741f9"
+          },
+          "mirror_declared": {
+            "bytes": 9814,
+            "git_blob_oid": "fbb2cbda6ab8c18479fac344a4edf465dbd741f9"
+          },
+          "kernel_measured": null,
+          "mirror_measured": null,
+          "bytes_match": null
+        },
+        {
+          "path": "LICENSE",
+          "kernel_declared": {
+            "bytes": 809,
+            "git_blob_oid": "f02122ea79cbad4d0137dfd71c7fba654ec1233e"
+          },
+          "mirror_declared": {
+            "bytes": 809,
+            "git_blob_oid": "f02122ea79cbad4d0137dfd71c7fba654ec1233e"
+          },
+          "kernel_measured": null,
+          "mirror_measured": null,
+          "bytes_match": null
+        },
+        {
+          "path": "OPERATIONAL.json",
+          "kernel_declared": {
+            "bytes": 1948,
+            "git_blob_oid": "0a5241867ab5fb3213e641b3fb0c134484778722"
+          },
+          "mirror_declared": {
+            "bytes": 1948,
+            "git_blob_oid": "0a5241867ab5fb3213e641b3fb0c134484778722"
+          },
+          "kernel_measured": null,
+          "mirror_measured": null,
+          "bytes_match": null
+        },
+        {
+          "path": "README.md",
+          "kernel_declared": {
+            "bytes": 12375,
+            "git_blob_oid": "f2994ba6e6e52b3cc8194906cf28fabff6001b91"
+          },
+          "mirror_declared": {
+            "bytes": 24618,
+            "git_blob_oid": "5dbe0302c9e4b5bf0bb10267d0ac70a20b57130c"
+          },
+          "kernel_measured": null,
+          "mirror_measured": null,
+          "bytes_match": null
+        },
+        {
+          "path": "build.toml",
+          "kernel_declared": {
+            "bytes": 61,
+            "git_blob_oid": "3a697919f940eddae92364f3ca29c3e7f9c114c1"
+          },
+          "mirror_declared": {
+            "bytes": 61,
+            "git_blob_oid": "3a697919f940eddae92364f3ca29c3e7f9c114c1"
+          },
+          "kernel_measured": null,
+          "mirror_measured": null,
+          "bytes_match": null
+        },
+        {
+          "path": "build/torch-cpu/__init__.py",
+          "kernel_declared": {
+            "bytes": 87,
+            "git_blob_oid": "bdb1a0dfc85329ba8a34a90a403c35442f8f4502"
+          },
+          "mirror_declared": {
+            "bytes": 87,
+            "git_blob_oid": "bdb1a0dfc85329ba8a34a90a403c35442f8f4502"
+          },
+          "kernel_measured": null,
+          "mirror_measured": null,
+          "bytes_match": null
+        },
+        {
+          "path": "build/torch-cpu/metadata.json",
+          "kernel_declared": {
+            "bytes": 1088,
+            "git_blob_oid": "824f13962004f00ed954f2bd32d23bae284a6cd4"
+          },
+          "mirror_declared": {
+            "bytes": 1088,
+            "git_blob_oid": "824f13962004f00ed954f2bd32d23bae284a6cd4"
+          },
+          "kernel_measured": null,
+          "mirror_measured": null,
+          "bytes_match": null
+        },
+        {
+          "path": "build/torch-cpu/szl_lambda_gate/__init__.py",
+          "kernel_declared": {
+            "bytes": 9240,
+            "git_blob_oid": "14d61e8ab120d4df9868de5f1cadd4292b33ad48"
+          },
+          "mirror_declared": {
+            "bytes": 9240,
+            "git_blob_oid": "14d61e8ab120d4df9868de5f1cadd4292b33ad48"
+          },
+          "kernel_measured": null,
+          "mirror_measured": null,
+          "bytes_match": null
+        },
+        {
+          "path": "build/torch-cpu/szl_lambda_gate/_lambda.py",
+          "kernel_declared": {
+            "bytes": 25162,
+            "git_blob_oid": "278d603d63193e2d58c3b3a776c24ad747afb3ed"
+          },
+          "mirror_declared": {
+            "bytes": 25162,
+            "git_blob_oid": "278d603d63193e2d58c3b3a776c24ad747afb3ed"
+          },
+          "kernel_measured": null,
+          "mirror_measured": null,
+          "bytes_match": null
+        },
+        {
+          "path": "build/torch-cpu/szl_lambda_gate/_ops.py",
+          "kernel_declared": {
+            "bytes": 357,
+            "git_blob_oid": "706dbc5d36369bbcf9441a88b228209b4e578e6b"
+          },
+          "mirror_declared": {
+            "bytes": 357,
+            "git_blob_oid": "706dbc5d36369bbcf9441a88b228209b4e578e6b"
+          },
+          "kernel_measured": null,
+          "mirror_measured": null,
+          "bytes_match": null
+        },
+        {
+          "path": "build/torch-cpu/szl_lambda_gate/_v1.py",
+          "kernel_declared": {
+            "bytes": 9175,
+            "git_blob_oid": "e879f9631399b58a0c5aef0df2cfdfe545ff4603"
+          },
+          "mirror_declared": {
+            "bytes": 9175,
+            "git_blob_oid": "e879f9631399b58a0c5aef0df2cfdfe545ff4603"
+          },
+          "kernel_measured": null,
+          "mirror_measured": null,
+          "bytes_match": null
+        },
+        {
+          "path": "build/torch-cpu/szl_lambda_gate/governed_norm/__init__.py",
+          "kernel_declared": {
+            "bytes": 11224,
+            "git_blob_oid": "5e6241d17116275bf531bef2909b51197f2f8eaf"
+          },
+          "mirror_declared": {
+            "bytes": 11224,
+            "git_blob_oid": "5e6241d17116275bf531bef2909b51197f2f8eaf"
+          },
+          "kernel_measured": null,
+          "mirror_measured": null,
+          "bytes_match": null
+        },
+        {
+          "path": "build/torch-cpu/szl_lambda_gate/governed_norm/_norm.py",
+          "kernel_declared": {
+            "bytes": 10259,
+            "git_blob_oid": "efeb82b88976dd6e88d90fd2a142e7d8c46ee2a1"
+          },
+          "mirror_declared": {
+            "bytes": 10259,
+            "git_blob_oid": "efeb82b88976dd6e88d90fd2a142e7d8c46ee2a1"
+          },
+          "kernel_measured": null,
+          "mirror_measured": null,
+          "bytes_match": null
+        },
+        {
+          "path": "build/torch-cpu/szl_lambda_gate/governed_norm/_receipt.py",
+          "kernel_declared": {
+            "bytes": 10338,
+            "git_blob_oid": "77c09db9d6e1712931b27ce1b744685542e939a6"
+          },
+          "mirror_declared": {
+            "bytes": 10338,
+            "git_blob_oid": "77c09db9d6e1712931b27ce1b744685542e939a6"
+          },
+          "kernel_measured": null,
+          "mirror_measured": null,
+          "bytes_match": null
+        },
+        {
+          "path": "build/torch-cpu/szl_lambda_gate/governed_norm/layers.py",
+          "kernel_declared": {
+            "bytes": 2404,
+            "git_blob_oid": "1d564e9a32a473ed6717673b46680389c84fdb26"
+          },
+          "mirror_declared": {
+            "bytes": 2404,
+            "git_blob_oid": "1d564e9a32a473ed6717673b46680389c84fdb26"
+          },
+          "kernel_measured": null,
+          "mirror_measured": null,
+          "bytes_match": null
+        },
+        {
+          "path": "build/torch-cpu/szl_lambda_gate/layers.py",
+          "kernel_declared": {
+            "bytes": 2068,
+            "git_blob_oid": "0ae7506c90a1f067b5cf0ca841f1a6fca9f39293"
+          },
+          "mirror_declared": {
+            "bytes": 2068,
+            "git_blob_oid": "0ae7506c90a1f067b5cf0ca841f1a6fca9f39293"
+          },
+          "kernel_measured": null,
+          "mirror_measured": null,
+          "bytes_match": null
+        },
+        {
+          "path": "build/torch-universal/__init__.py",
+          "kernel_declared": {
+            "bytes": 87,
+            "git_blob_oid": "bdb1a0dfc85329ba8a34a90a403c35442f8f4502"
+          },
+          "mirror_declared": {
+            "bytes": 87,
+            "git_blob_oid": "bdb1a0dfc85329ba8a34a90a403c35442f8f4502"
+          },
+          "kernel_measured": null,
+          "mirror_measured": null,
+          "bytes_match": null
+        },
+        {
+          "path": "build/torch-universal/metadata.json",
+          "kernel_declared": {
+            "bytes": 1093,
+            "git_blob_oid": "71e603308e35d9bb09fef1a120056dfae50ccf53"
+          },
+          "mirror_declared": {
+            "bytes": 1093,
+            "git_blob_oid": "71e603308e35d9bb09fef1a120056dfae50ccf53"
+          },
+          "kernel_measured": null,
+          "mirror_measured": null,
+          "bytes_match": null
+        },
+        {
+          "path": "build/torch-universal/szl_lambda_gate/__init__.py",
+          "kernel_declared": {
+            "bytes": 9240,
+            "git_blob_oid": "14d61e8ab120d4df9868de5f1cadd4292b33ad48"
+          },
+          "mirror_declared": {
+            "bytes": 9240,
+            "git_blob_oid": "14d61e8ab120d4df9868de5f1cadd4292b33ad48"
+          },
+          "kernel_measured": null,
+          "mirror_measured": null,
+          "bytes_match": null
+        },
+        {
+          "path": "build/torch-universal/szl_lambda_gate/_lambda.py",
+          "kernel_declared": {
+            "bytes": 25162,
+            "git_blob_oid": "278d603d63193e2d58c3b3a776c24ad747afb3ed"
+          },
+          "mirror_declared": {
+            "bytes": 25162,
+            "git_blob_oid": "278d603d63193e2d58c3b3a776c24ad747afb3ed"
+          },
+          "kernel_measured": null,
+          "mirror_measured": null,
+          "bytes_match": null
+        },
+        {
+          "path": "build/torch-universal/szl_lambda_gate/_ops.py",
+          "kernel_declared": {
+            "bytes": 357,
+            "git_blob_oid": "706dbc5d36369bbcf9441a88b228209b4e578e6b"
+          },
+          "mirror_declared": {
+            "bytes": 357,
+            "git_blob_oid": "706dbc5d36369bbcf9441a88b228209b4e578e6b"
+          },
+          "kernel_measured": null,
+          "mirror_measured": null,
+          "bytes_match": null
+        },
+        {
+          "path": "build/torch-universal/szl_lambda_gate/_v1.py",
+          "kernel_declared": {
+            "bytes": 9175,
+            "git_blob_oid": "e879f9631399b58a0c5aef0df2cfdfe545ff4603"
+          },
+          "mirror_declared": {
+            "bytes": 9175,
+            "git_blob_oid": "e879f9631399b58a0c5aef0df2cfdfe545ff4603"
+          },
+          "kernel_measured": null,
+          "mirror_measured": null,
+          "bytes_match": null
+        },
+        {
+          "path": "build/torch-universal/szl_lambda_gate/governed_norm/__init__.py",
+          "kernel_declared": {
+            "bytes": 11224,
+            "git_blob_oid": "5e6241d17116275bf531bef2909b51197f2f8eaf"
+          },
+          "mirror_declared": {
+            "bytes": 11224,
+            "git_blob_oid": "5e6241d17116275bf531bef2909b51197f2f8eaf"
+          },
+          "kernel_measured": null,
+          "mirror_measured": null,
+          "bytes_match": null
+        },
+        {
+          "path": "build/torch-universal/szl_lambda_gate/governed_norm/_norm.py",
+          "kernel_declared": {
+            "bytes": 10259,
+            "git_blob_oid": "efeb82b88976dd6e88d90fd2a142e7d8c46ee2a1"
+          },
+          "mirror_declared": {
+            "bytes": 10259,
+            "git_blob_oid": "efeb82b88976dd6e88d90fd2a142e7d8c46ee2a1"
+          },
+          "kernel_measured": null,
+          "mirror_measured": null,
+          "bytes_match": null
+        },
+        {
+          "path": "build/torch-universal/szl_lambda_gate/governed_norm/_receipt.py",
+          "kernel_declared": {
+            "bytes": 10338,
+            "git_blob_oid": "77c09db9d6e1712931b27ce1b744685542e939a6"
+          },
+          "mirror_declared": {
+            "bytes": 10338,
+            "git_blob_oid": "77c09db9d6e1712931b27ce1b744685542e939a6"
+          },
+          "kernel_measured": null,
+          "mirror_measured": null,
+          "bytes_match": null
+        },
+        {
+          "path": "build/torch-universal/szl_lambda_gate/governed_norm/layers.py",
+          "kernel_declared": {
+            "bytes": 2404,
+            "git_blob_oid": "1d564e9a32a473ed6717673b46680389c84fdb26"
+          },
+          "mirror_declared": {
+            "bytes": 2404,
+            "git_blob_oid": "1d564e9a32a473ed6717673b46680389c84fdb26"
+          },
+          "kernel_measured": null,
+          "mirror_measured": null,
+          "bytes_match": null
+        },
+        {
+          "path": "build/torch-universal/szl_lambda_gate/layers.py",
+          "kernel_declared": {
+            "bytes": 2068,
+            "git_blob_oid": "0ae7506c90a1f067b5cf0ca841f1a6fca9f39293"
+          },
+          "mirror_declared": {
+            "bytes": 2068,
+            "git_blob_oid": "0ae7506c90a1f067b5cf0ca841f1a6fca9f39293"
+          },
+          "kernel_measured": null,
+          "mirror_measured": null,
+          "bytes_match": null
+        },
+        {
+          "path": "distribution.json",
+          "kernel_declared": {
+            "bytes": 4814,
+            "git_blob_oid": "092eb17723bc95e4c5c8b396a984146801d5514e"
+          },
+          "mirror_declared": {
+            "bytes": 4814,
+            "git_blob_oid": "092eb17723bc95e4c5c8b396a984146801d5514e"
+          },
+          "kernel_measured": null,
+          "mirror_measured": null,
+          "bytes_match": null
+        },
+        {
+          "path": "reference/szl_lambda_v1.py",
+          "kernel_declared": {
+            "bytes": 7724,
+            "git_blob_oid": "8396d8bee64f8aa4431e215dba203eae25225fc2"
+          },
+          "mirror_declared": {
+            "bytes": 7724,
+            "git_blob_oid": "8396d8bee64f8aa4431e215dba203eae25225fc2"
+          },
+          "kernel_measured": null,
+          "mirror_measured": null,
+          "bytes_match": null
+        },
+        {
+          "path": "source/LICENSE",
+          "kernel_declared": {
+            "bytes": 11343,
+            "git_blob_oid": "6a400e011f1cf8f455404c167c99d81d7b3ba1ab"
+          },
+          "mirror_declared": {
+            "bytes": 11343,
+            "git_blob_oid": "6a400e011f1cf8f455404c167c99d81d7b3ba1ab"
+          },
+          "kernel_measured": null,
+          "mirror_measured": null,
+          "bytes_match": null
+        },
+        {
+          "path": "spec/lambda_v1_vectors.json",
+          "kernel_declared": {
+            "bytes": 35430,
+            "git_blob_oid": "d99cc31298b8fad424d6783bdd2295ca9d7adab2"
+          },
+          "mirror_declared": {
+            "bytes": 35430,
+            "git_blob_oid": "d99cc31298b8fad424d6783bdd2295ca9d7adab2"
+          },
+          "kernel_measured": null,
+          "mirror_measured": null,
+          "bytes_match": null
+        },
+        {
+          "path": "spec/szl.lambda.v1.json",
+          "kernel_declared": {
+            "bytes": 4569,
+            "git_blob_oid": "57c12a3c9233a4a1fe788e9cb2329e941f4e6be5"
+          },
+          "mirror_declared": {
+            "bytes": 4569,
+            "git_blob_oid": "57c12a3c9233a4a1fe788e9cb2329e941f4e6be5"
+          },
+          "kernel_measured": null,
+          "mirror_measured": null,
+          "bytes_match": null
+        }
+      ],
+      "kernel_file_count": 33,
+      "mirror_file_count": 80,
+      "access_status": "UNAVAILABLE",
+      "shared_count": 33,
+      "measured_count": 0,
+      "unavailable_count": 33,
+      "matched_count": 0,
+      "differing_count": 0,
+      "measured_bytes": 0,
+      "whole_artifact_equivalence": "UNKNOWN"
+    },
+    {
+      "id": "SZLHOLDINGS/szl-maskmod",
+      "kernel_revision": "66107f821c597aef71555cd2a1d4014228f95f1b",
+      "model_mirror_revision": "654a01aaaf86d06471f019cf2f84305703ccc260",
+      "model_access_current_revision": "654a01aaaf86d06471f019cf2f84305703ccc260",
+      "model_access_gated": false,
+      "model_access_metadata_sha256": "d40402648a7e755ff54b4a44b46c688fd54fa43a4ad21fc1465bea4bfd3ae158",
+      "kernel_tree_sha256": "7a5d454114ba62d49b652456e220ab123b3344a67a03bc5b88437e82b425d1cc",
+      "mirror_tree_sha256": "9b48f6191f7f9ce2df6bdc52fb0dd38787451187d768c4c9e8c82ab904c785c5",
+      "kernel_tree_pages": 1,
+      "mirror_tree_pages": 1,
+      "kernel_only_paths": [
+        "build/torch-cpu/metadata.json",
+        "build/torch-cpu/szl_maskmod/__init__.py",
+        "build/torch-cpu/szl_maskmod/_chain.py",
+        "build/torch-cpu/szl_maskmod/_ops.py",
+        "build/torch-universal/metadata.json",
+        "build/torch-universal/szl_maskmod/__init__.py",
+        "build/torch-universal/szl_maskmod/_chain.py",
+        "build/torch-universal/szl_maskmod/_masks.py",
+        "build/torch-universal/szl_maskmod/_ops.py"
+      ],
+      "mirror_only_paths": [
+        "LICENSE",
+        "bom/model-bom.cdx.json",
+        "build.toml",
+        "maskmod.py",
+        "og-card.png",
+        "tests/test_maskmod.py",
+        "torch-ext/szl_maskmod/__init__.py",
+        "torch-ext/szl_maskmod/_chain.py",
+        "torch-ext/szl_maskmod/_ops.py"
+      ],
+      "shared_files": [
+        {
+          "path": ".gitattributes",
+          "kernel_declared": {
+            "bytes": 127,
+            "git_blob_oid": "6b7a283f6a9d189d65bccdb859c6f80016f52228"
+          },
+          "mirror_declared": {
+            "bytes": 1519,
+            "git_blob_oid": "a6344aac8c09253b3b630fb776ae94478aa0275b"
+          },
+          "kernel_measured": {
+            "bytes": 127,
+            "sha256": "315871b322399f4d4163420d48ab6b22bae746799c5178967623ffa6ba7b6504"
+          },
+          "mirror_measured": {
+            "bytes": 1519,
+            "sha256": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "BENCH.laptop-blackwell.json",
+          "kernel_declared": {
+            "bytes": 5697,
+            "git_blob_oid": "71451250b979b86f929df08d287b680683574cfc"
+          },
+          "mirror_declared": {
+            "bytes": 5697,
+            "git_blob_oid": "71451250b979b86f929df08d287b680683574cfc"
+          },
+          "kernel_measured": {
+            "bytes": 5697,
+            "sha256": "6378f0646666eea8be85c00416a2c5d05b05958654d9deb94a84372050d22d6e"
+          },
+          "mirror_measured": {
+            "bytes": 5697,
+            "sha256": "6378f0646666eea8be85c00416a2c5d05b05958654d9deb94a84372050d22d6e"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "OPERATIONAL.json",
+          "kernel_declared": {
+            "bytes": 1936,
+            "git_blob_oid": "db785870d1c09fed4b72991db496aa440ac900b3"
+          },
+          "mirror_declared": {
+            "bytes": 1936,
+            "git_blob_oid": "db785870d1c09fed4b72991db496aa440ac900b3"
+          },
+          "kernel_measured": {
+            "bytes": 1936,
+            "sha256": "c7c3dc1538a67a349c0bb514d0672ad71ffc67908dcc4438acca40aa698f4695"
+          },
+          "mirror_measured": {
+            "bytes": 1936,
+            "sha256": "c7c3dc1538a67a349c0bb514d0672ad71ffc67908dcc4438acca40aa698f4695"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "README.md",
+          "kernel_declared": {
+            "bytes": 4213,
+            "git_blob_oid": "cf4a7c3161a65c5c0d53525617bdd8f8a78f5e98"
+          },
+          "mirror_declared": {
+            "bytes": 5398,
+            "git_blob_oid": "bcf0faf4a4b492ba540a090980b9eff375f79b34"
+          },
+          "kernel_measured": {
+            "bytes": 4213,
+            "sha256": "19705ae87ed2d8211f195c5dc558de34fcc7dc055fabe5394bbdc18a60711c1d"
+          },
+          "mirror_measured": {
+            "bytes": 5398,
+            "sha256": "96e645a73266a82c85b13ca9a3395cacb79c2abddbbf9959421c2a9839bb87b1"
+          },
+          "bytes_match": false
+        }
+      ],
+      "kernel_file_count": 13,
+      "mirror_file_count": 13,
+      "access_status": "MEASURED",
+      "shared_count": 4,
+      "measured_count": 4,
+      "unavailable_count": 0,
+      "matched_count": 2,
+      "differing_count": 2,
+      "measured_bytes": 26523,
+      "whole_artifact_equivalence": "UNKNOWN"
+    },
+    {
+      "id": "SZLHOLDINGS/szl-ouroboros",
+      "kernel_revision": "194970667faa1292ce09c7ae5880a1918f5cddeb",
+      "model_mirror_revision": "8c868cbf5689eb0cfecb6c670a3efa6ed6cc03cd",
+      "model_access_current_revision": "8c868cbf5689eb0cfecb6c670a3efa6ed6cc03cd",
+      "model_access_gated": false,
+      "model_access_metadata_sha256": "6d560c0d9d5c2664024a6334dba40b4eaaefbf634e4b0e02f66a12ce8993d839",
+      "kernel_tree_sha256": "5cd86d6e56e70e1b9f0234750af275b8e75c17d0873020b32a49484a14b5d5ee",
+      "mirror_tree_sha256": "23aac9c8ef806fbda7977e5df173339f97fa2416f34987640fd13fce54aa7f67",
+      "kernel_tree_pages": 1,
+      "mirror_tree_pages": 1,
+      "kernel_only_paths": [
+        "build/torch-cpu/metadata.json",
+        "build/torch-cpu/szl_ouroboros/__init__.py",
+        "build/torch-universal/metadata.json"
+      ],
+      "mirror_only_paths": [
+        "MODEL_PROVENANCE.json",
+        "PROMOTION_READINESS_AUDIT.json",
+        "SECURITY.md",
+        "SZL_ESTATE_MANAGED.json",
+        "TRAINING_RECEIPT.json",
+        "bom/model-bom.cdx.json",
+        "build.toml",
+        "card/holo-banner.svg",
+        "og-card.png",
+        "ouroboros.py",
+        "scripts/eval.py",
+        "scripts/forge.py",
+        "tests/test_ouroboros.py"
+      ],
+      "shared_files": [
+        {
+          "path": ".gitattributes",
+          "kernel_declared": {
+            "bytes": 127,
+            "git_blob_oid": "6b7a283f6a9d189d65bccdb859c6f80016f52228"
+          },
+          "mirror_declared": {
+            "bytes": 1519,
+            "git_blob_oid": "a6344aac8c09253b3b630fb776ae94478aa0275b"
+          },
+          "kernel_measured": {
+            "bytes": 127,
+            "sha256": "315871b322399f4d4163420d48ab6b22bae746799c5178967623ffa6ba7b6504"
+          },
+          "mirror_measured": {
+            "bytes": 1519,
+            "sha256": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "BENCH.laptop-blackwell.json",
+          "kernel_declared": {
+            "bytes": 6366,
+            "git_blob_oid": "1c9c66706799fb01100c4766d519c67c0724a3b1"
+          },
+          "mirror_declared": {
+            "bytes": 6366,
+            "git_blob_oid": "1c9c66706799fb01100c4766d519c67c0724a3b1"
+          },
+          "kernel_measured": {
+            "bytes": 6366,
+            "sha256": "60200ab9ab05e54a6104de5cd915cea4743adf13fadc5bff65b23a18ca355998"
+          },
+          "mirror_measured": {
+            "bytes": 6366,
+            "sha256": "60200ab9ab05e54a6104de5cd915cea4743adf13fadc5bff65b23a18ca355998"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "LICENSE",
+          "kernel_declared": {
+            "bytes": 776,
+            "git_blob_oid": "7c317ba373932bf7f56ab969a3698aa3468811be"
+          },
+          "mirror_declared": {
+            "bytes": 776,
+            "git_blob_oid": "7c317ba373932bf7f56ab969a3698aa3468811be"
+          },
+          "kernel_measured": {
+            "bytes": 776,
+            "sha256": "acf6ce407174b791ceddc263dfc7b1e3ea16579cec3e0caca3d4469e6ccf544b"
+          },
+          "mirror_measured": {
+            "bytes": 776,
+            "sha256": "acf6ce407174b791ceddc263dfc7b1e3ea16579cec3e0caca3d4469e6ccf544b"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "OPERATIONAL.json",
+          "kernel_declared": {
+            "bytes": 1930,
+            "git_blob_oid": "d4881664266fa85559313b12e61c1de100bd8d89"
+          },
+          "mirror_declared": {
+            "bytes": 1930,
+            "git_blob_oid": "d4881664266fa85559313b12e61c1de100bd8d89"
+          },
+          "kernel_measured": {
+            "bytes": 1930,
+            "sha256": "298bce09687170d0fb8ebecaab29f47657b596c41f73a29e82922897a0f7be63"
+          },
+          "mirror_measured": {
+            "bytes": 1930,
+            "sha256": "298bce09687170d0fb8ebecaab29f47657b596c41f73a29e82922897a0f7be63"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "README.md",
+          "kernel_declared": {
+            "bytes": 8396,
+            "git_blob_oid": "dd22378f638746bd7528c9b5384397ca22c678d5"
+          },
+          "mirror_declared": {
+            "bytes": 7622,
+            "git_blob_oid": "186efb847fa3d2d50f0d41f924cb9cbd43d97e35"
+          },
+          "kernel_measured": {
+            "bytes": 8396,
+            "sha256": "e37c75cc6e5f9a76fceb1efb6c63b1fecb67a4766133559c80d5b0dfb224e992"
+          },
+          "mirror_measured": {
+            "bytes": 7622,
+            "sha256": "14439cc99a3d47305aef33d01c7d2e44dd02a721b54021ccc048dfb9aaffc228"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "build/torch-universal/szl_ouroboros/__init__.py",
+          "kernel_declared": {
+            "bytes": 14846,
+            "git_blob_oid": "42e31ce96d65ed205078282df8ba55f3a8041c63"
+          },
+          "mirror_declared": {
+            "bytes": 14506,
+            "git_blob_oid": "3f93d91af8e3d1c210b472f03cbd9d84b0d48353"
+          },
+          "kernel_measured": {
+            "bytes": 14846,
+            "sha256": "d06754c5fc50fae574d46b7a94f189be66984b612c2a08cec620e12ec59c84fc"
+          },
+          "mirror_measured": {
+            "bytes": 14506,
+            "sha256": "3874f31ac8f7aa13f0fc605307d9fe305c1e55862ecebfccc8258fd6b079c15c"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "build/torch-universal/szl_ouroboros/metadata.json",
+          "kernel_declared": {
+            "bytes": 694,
+            "git_blob_oid": "323e6497566e5c2d372b1358f4dc846582d1a6a1"
+          },
+          "mirror_declared": {
+            "bytes": 673,
+            "git_blob_oid": "e23e86103c257fbb2e80dd383dee5cd9365b02f8"
+          },
+          "kernel_measured": {
+            "bytes": 694,
+            "sha256": "bd03b2f68bcba44b159b03c9903da895a5fce1b0f0d6b1d9929db06e785091f3"
+          },
+          "mirror_measured": {
+            "bytes": 673,
+            "sha256": "3b40044cd2435cd071440803260acd8e3f738d6620ace43e0bf308997adbc2dd"
+          },
+          "bytes_match": false
+        }
+      ],
+      "kernel_file_count": 10,
+      "mirror_file_count": 20,
+      "access_status": "MEASURED",
+      "shared_count": 7,
+      "measured_count": 7,
+      "unavailable_count": 0,
+      "matched_count": 3,
+      "differing_count": 4,
+      "measured_bytes": 66527,
+      "whole_artifact_equivalence": "UNKNOWN"
+    },
+    {
+      "id": "SZLHOLDINGS/szl-provctl",
+      "kernel_revision": "424418b95e5d3403278c53189403e098662d4a3b",
+      "model_mirror_revision": "3e1f9d3c67940b1ef2db2efe44c6acf1653ff264",
+      "model_access_current_revision": "3e1f9d3c67940b1ef2db2efe44c6acf1653ff264",
+      "model_access_gated": false,
+      "model_access_metadata_sha256": "1dede065ee16c41e3cd69136d4e4bdfe1d8833dd7536c8fa812b1c13606db66e",
+      "kernel_tree_sha256": "817f0a862ed882eac7e39adf1cdd77dae5dc06e92295ff7197c24e9dae03e013",
+      "mirror_tree_sha256": "16c5eeceda02d66381be645e3fc35a9e4cd27302fb315a7ca1d78d1d8ad3b9eb",
+      "kernel_tree_pages": 1,
+      "mirror_tree_pages": 1,
+      "kernel_only_paths": [
+        "build/torch-cpu/metadata.json",
+        "build/torch-cpu/szl_provctl/__init__.py",
+        "build/torch-cpu/szl_provctl/_chain.py",
+        "build/torch-cpu/szl_provctl/_dag.py",
+        "build/torch-cpu/szl_provctl/_energy.py",
+        "build/torch-cpu/szl_provctl/_interop.py",
+        "build/torch-universal/metadata.json"
+      ],
+      "mirror_only_paths": [
+        "BENCH.laptop-blackwell.json",
+        "MODEL_PROVENANCE.json",
+        "PROMOTION_READINESS_AUDIT.json",
+        "SECURITY.md",
+        "SZL_ESTATE_MANAGED.json",
+        "TRAINING_RECEIPT.json",
+        "bom/model-bom.cdx.json",
+        "build.toml",
+        "card/holo-banner.svg",
+        "scripts/eval.py",
+        "scripts/forge.py"
+      ],
+      "shared_files": [
+        {
+          "path": ".gitattributes",
+          "kernel_declared": {
+            "bytes": 127,
+            "git_blob_oid": "6b7a283f6a9d189d65bccdb859c6f80016f52228"
+          },
+          "mirror_declared": {
+            "bytes": 1519,
+            "git_blob_oid": "a6344aac8c09253b3b630fb776ae94478aa0275b"
+          },
+          "kernel_measured": {
+            "bytes": 127,
+            "sha256": "315871b322399f4d4163420d48ab6b22bae746799c5178967623ffa6ba7b6504"
+          },
+          "mirror_measured": {
+            "bytes": 1519,
+            "sha256": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "LICENSE",
+          "kernel_declared": {
+            "bytes": 809,
+            "git_blob_oid": "f02122ea79cbad4d0137dfd71c7fba654ec1233e"
+          },
+          "mirror_declared": {
+            "bytes": 809,
+            "git_blob_oid": "f02122ea79cbad4d0137dfd71c7fba654ec1233e"
+          },
+          "kernel_measured": {
+            "bytes": 809,
+            "sha256": "9589109b10f273b246999e87435e92140ec68dfe8fd4db623a64ab70a81c9871"
+          },
+          "mirror_measured": {
+            "bytes": 809,
+            "sha256": "9589109b10f273b246999e87435e92140ec68dfe8fd4db623a64ab70a81c9871"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "README.md",
+          "kernel_declared": {
+            "bytes": 11969,
+            "git_blob_oid": "125705272b6da44e08c771cae0806e05e5acf5b7"
+          },
+          "mirror_declared": {
+            "bytes": 7883,
+            "git_blob_oid": "2fc7836f90948506ac4832c227f5dfe0ba86792c"
+          },
+          "kernel_measured": {
+            "bytes": 11969,
+            "sha256": "3c186c0c7e47be479085516b1c38d0c73245793661e3eafc157a37ab36ad7a73"
+          },
+          "mirror_measured": {
+            "bytes": 7883,
+            "sha256": "6ffdd96ce222c8441a4b22519e0e7e38e3a6d88f77ae8cab0afed453ecaca046"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "build/torch-universal/szl_provctl/__init__.py",
+          "kernel_declared": {
+            "bytes": 10314,
+            "git_blob_oid": "d090bc4b596723e676be0815c2e8ced3b57be83a"
+          },
+          "mirror_declared": {
+            "bytes": 10057,
+            "git_blob_oid": "32409a3b21ac2545f596358bc2f3ae0fc0210b45"
+          },
+          "kernel_measured": {
+            "bytes": 10314,
+            "sha256": "cc4e8a2ad1087b20baa5de0182111ade30094ba8869276f51cfa38b70d56c682"
+          },
+          "mirror_measured": {
+            "bytes": 10057,
+            "sha256": "4338b35e856a532e7ce175810885bd19222ed5611fbbb79299dc7a21d3349091"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "build/torch-universal/szl_provctl/_chain.py",
+          "kernel_declared": {
+            "bytes": 5714,
+            "git_blob_oid": "ae16d595942619d0300ea7d092d8023706ce8aee"
+          },
+          "mirror_declared": {
+            "bytes": 5568,
+            "git_blob_oid": "e1b7aa9caec1789295d1d38019c73c62ff6c9254"
+          },
+          "kernel_measured": {
+            "bytes": 5714,
+            "sha256": "d4ce69176050905f131902cb63a61da72dc4a06a676df6fa26338687d9a3785d"
+          },
+          "mirror_measured": {
+            "bytes": 5568,
+            "sha256": "0da3b4ac617251bb0d2be72c1ad7aac6ef0d18b74371b806c97d1b94d4c529bb"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "build/torch-universal/szl_provctl/_dag.py",
+          "kernel_declared": {
+            "bytes": 8904,
+            "git_blob_oid": "2633f590b29219d01c542075271ec3371681e90a"
+          },
+          "mirror_declared": {
+            "bytes": 8667,
+            "git_blob_oid": "6b4b17b7cb1cbc323d4fe357071f1447d18813ce"
+          },
+          "kernel_measured": {
+            "bytes": 8904,
+            "sha256": "b1b0c64de48e9354bbb4887418542e64dcf6b2c88856456921b259d617a7b697"
+          },
+          "mirror_measured": {
+            "bytes": 8667,
+            "sha256": "42527ed73213bf8f6245a0afeef3aa10e3bec1f488c3e8319a6773e1ed17d982"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "build/torch-universal/szl_provctl/_energy.py",
+          "kernel_declared": {
+            "bytes": 4018,
+            "git_blob_oid": "9e5593e75c23019c2756357312d25c953fdc2d3f"
+          },
+          "mirror_declared": {
+            "bytes": 3902,
+            "git_blob_oid": "b30c1631e2981e0a261e797a353c0f6b9065e97c"
+          },
+          "kernel_measured": {
+            "bytes": 4018,
+            "sha256": "e6d2744e9738d7afff52fd421cac7c51088916ad102a3cc44fb00b7f14517f50"
+          },
+          "mirror_measured": {
+            "bytes": 3902,
+            "sha256": "e383eddafb8a7d4a4e1797ae5417bf19208e7c39aa56f47715509021d6f5f1b2"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "build/torch-universal/szl_provctl/_interop.py",
+          "kernel_declared": {
+            "bytes": 9981,
+            "git_blob_oid": "eeaea8b359fd32095edd9e7b5c7eb4d7c373f0aa"
+          },
+          "mirror_declared": {
+            "bytes": 9706,
+            "git_blob_oid": "002696602a1fa824c85adfd928438d75065a604c"
+          },
+          "kernel_measured": {
+            "bytes": 9981,
+            "sha256": "05cf4f411360bee2cda74a3f44590a2f205d2a8d5ba43052881d6949bf7e1cd5"
+          },
+          "mirror_measured": {
+            "bytes": 9706,
+            "sha256": "25962f8787bc8522f796c3678541f9d9f84af37e33a283eeee9b3e101786af5c"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "build/torch-universal/szl_provctl/metadata.json",
+          "kernel_declared": {
+            "bytes": 737,
+            "git_blob_oid": "82a4ca520fad7e7668bbd85fa04b493c7a117b2e"
+          },
+          "mirror_declared": {
+            "bytes": 726,
+            "git_blob_oid": "8f096343f91c6ef0b68dfcd0b513714cffd893bb"
+          },
+          "kernel_measured": {
+            "bytes": 737,
+            "sha256": "195769d89033dfca69fc3ca134921d6c1b66081eec46f1770cac5834cc87f1c3"
+          },
+          "mirror_measured": {
+            "bytes": 726,
+            "sha256": "c3087c29988a5043c563aceb0517b6bac82cde7bb2734f39aadf3022b7bb338a"
+          },
+          "bytes_match": false
+        }
+      ],
+      "kernel_file_count": 16,
+      "mirror_file_count": 20,
+      "access_status": "MEASURED",
+      "shared_count": 9,
+      "measured_count": 9,
+      "unavailable_count": 0,
+      "matched_count": 1,
+      "differing_count": 8,
+      "measured_bytes": 101410,
+      "whole_artifact_equivalence": "UNKNOWN"
+    },
+    {
+      "id": "SZLHOLDINGS/szl-receipt-attn",
+      "kernel_revision": "013dc8a884faa3ae9ac6a0835c5233440132ca3a",
+      "model_mirror_revision": "e1383537e2dd74316a07fcbb683352af62dd24b0",
+      "model_access_current_revision": "e1383537e2dd74316a07fcbb683352af62dd24b0",
+      "model_access_gated": false,
+      "model_access_metadata_sha256": "6d012cf2269751383c83db5282da3de4052016c425f49c7f9cf258f2a2102405",
+      "kernel_tree_sha256": "262915f0e9a7e346c2572a75282e77b4ec172b05b240996fa3445748717e9ffd",
+      "mirror_tree_sha256": "0db01637c031e0b9c626275cbbebce5cf17592715adf144ea654483fb51f91ea",
+      "kernel_tree_pages": 1,
+      "mirror_tree_pages": 1,
+      "kernel_only_paths": [
+        "build/torch-cpu/metadata.json",
+        "build/torch-cpu/szl_receipt_attn/__init__.py",
+        "build/torch-cpu/szl_receipt_attn/_chain.py",
+        "build/torch-cpu/szl_receipt_attn/_ops.py",
+        "build/torch-cpu/szl_receipt_attn/_triton.py",
+        "build/torch-cpu/szl_receipt_attn/api.py",
+        "build/torch-cpu/szl_receipt_attn/const.py",
+        "build/torch-cpu/szl_receipt_attn/ops.py",
+        "build/torch-cpu/szl_receipt_attn/receipt.py",
+        "build/torch-cpu/szl_receipt_attn/reference.py",
+        "build/torch-cpu/szl_receipt_attn/selfcheck.py",
+        "build/torch-cpu/szl_receipt_attn/triton_kernel.py",
+        "build/torch-universal/metadata.json",
+        "build/torch-universal/szl_receipt_attn/__init__.py",
+        "build/torch-universal/szl_receipt_attn/_chain.py",
+        "build/torch-universal/szl_receipt_attn/_ops.py",
+        "build/torch-universal/szl_receipt_attn/_triton.py",
+        "build/torch-universal/szl_receipt_attn/api.py",
+        "build/torch-universal/szl_receipt_attn/const.py",
+        "build/torch-universal/szl_receipt_attn/ops.py",
+        "build/torch-universal/szl_receipt_attn/receipt.py",
+        "build/torch-universal/szl_receipt_attn/reference.py",
+        "build/torch-universal/szl_receipt_attn/selfcheck.py",
+        "build/torch-universal/szl_receipt_attn/triton_kernel.py"
+      ],
+      "mirror_only_paths": [
+        "LICENSE",
+        "bom/model-bom.cdx.json",
+        "build.toml",
+        "og-card.png",
+        "receipt_attn.py",
+        "tests/__init__.py",
+        "tests/conftest.py",
+        "tests/test_receipt_attn.py",
+        "torch-ext/szl_receipt_attn/__init__.py",
+        "torch-ext/szl_receipt_attn/_chain.py",
+        "torch-ext/szl_receipt_attn/_ops.py",
+        "torch-ext/szl_receipt_attn/_triton.py",
+        "torch-ext/szl_receipt_attn/api.py",
+        "torch-ext/szl_receipt_attn/const.py",
+        "torch-ext/szl_receipt_attn/ops.py",
+        "torch-ext/szl_receipt_attn/receipt.py",
+        "torch-ext/szl_receipt_attn/reference.py",
+        "torch-ext/szl_receipt_attn/selfcheck.py",
+        "torch-ext/szl_receipt_attn/triton_kernel.py"
+      ],
+      "shared_files": [
+        {
+          "path": ".gitattributes",
+          "kernel_declared": {
+            "bytes": 127,
+            "git_blob_oid": "6b7a283f6a9d189d65bccdb859c6f80016f52228"
+          },
+          "mirror_declared": {
+            "bytes": 1519,
+            "git_blob_oid": "a6344aac8c09253b3b630fb776ae94478aa0275b"
+          },
+          "kernel_measured": {
+            "bytes": 127,
+            "sha256": "315871b322399f4d4163420d48ab6b22bae746799c5178967623ffa6ba7b6504"
+          },
+          "mirror_measured": {
+            "bytes": 1519,
+            "sha256": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "BENCH.laptop-blackwell.json",
+          "kernel_declared": {
+            "bytes": 5499,
+            "git_blob_oid": "562bfbebc488c2e2be5200bdc88d9c76c8e7d73f"
+          },
+          "mirror_declared": {
+            "bytes": 5499,
+            "git_blob_oid": "562bfbebc488c2e2be5200bdc88d9c76c8e7d73f"
+          },
+          "kernel_measured": {
+            "bytes": 5499,
+            "sha256": "fc948891497baae5618c3eb97b97efc725ee50e36ae5a3e8dc35168f95313661"
+          },
+          "mirror_measured": {
+            "bytes": 5499,
+            "sha256": "fc948891497baae5618c3eb97b97efc725ee50e36ae5a3e8dc35168f95313661"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "OPERATIONAL.json",
+          "kernel_declared": {
+            "bytes": 1937,
+            "git_blob_oid": "f2cc60017974cab9f7d7e60513f46bb739d50f47"
+          },
+          "mirror_declared": {
+            "bytes": 1937,
+            "git_blob_oid": "f2cc60017974cab9f7d7e60513f46bb739d50f47"
+          },
+          "kernel_measured": {
+            "bytes": 1937,
+            "sha256": "f5108f1ac2f6530aba77324e39de32c3c99403bf2e5de38fa3d4377ff019d126"
+          },
+          "mirror_measured": {
+            "bytes": 1937,
+            "sha256": "f5108f1ac2f6530aba77324e39de32c3c99403bf2e5de38fa3d4377ff019d126"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "README.md",
+          "kernel_declared": {
+            "bytes": 4072,
+            "git_blob_oid": "e925c5d53b92e40b5d71718ee62f5b5c9eb68f5c"
+          },
+          "mirror_declared": {
+            "bytes": 5319,
+            "git_blob_oid": "c3a24d7934b16be0232390f83adebc07b5680b73"
+          },
+          "kernel_measured": {
+            "bytes": 4072,
+            "sha256": "0b77acdd49c06d49b94b5be5e3471c62f05c5e278abd8aa60af34d36e04bbe21"
+          },
+          "mirror_measured": {
+            "bytes": 5319,
+            "sha256": "2905be18de06c4499d370703aa23201f66c4cf47414ac2c42396d598a7181549"
+          },
+          "bytes_match": false
+        }
+      ],
+      "kernel_file_count": 28,
+      "mirror_file_count": 23,
+      "access_status": "MEASURED",
+      "shared_count": 4,
+      "measured_count": 4,
+      "unavailable_count": 0,
+      "matched_count": 2,
+      "differing_count": 2,
+      "measured_bytes": 25909,
+      "whole_artifact_equivalence": "UNKNOWN"
+    },
+    {
+      "id": "SZLHOLDINGS/YARQA-ATTN",
+      "kernel_revision": "4e0828e517e84377d0024ab3f9d0cdab7d31520d",
+      "model_mirror_revision": "d6aeb4f24655c07acc155eed7acade5ad249724f",
+      "model_access_current_revision": "d6aeb4f24655c07acc155eed7acade5ad249724f",
+      "model_access_gated": false,
+      "model_access_metadata_sha256": "d20b64453dada382f7541951b7cfbf6a5e2907421b2f677321305e19e565d849",
+      "kernel_tree_sha256": "c0a258e0b6e8a0b91a6923c683e62e43506ec42da4eb2f40fd3554fe9e8960d3",
+      "mirror_tree_sha256": "cbb0f2dae88299b181767bd35f7760b91e5c1f33193692df3fd6e7a5d70f4ee0",
+      "kernel_tree_pages": 1,
+      "mirror_tree_pages": 1,
+      "kernel_only_paths": [
+        "build/torch-cpu/metadata.json",
+        "build/torch-cpu/yarqa_attn/__init__.py",
+        "build/torch-cpu/yarqa_attn/_chain.py",
+        "build/torch-cpu/yarqa_attn/attn.py",
+        "build/torch-universal/metadata.json",
+        "build/torch-universal/yarqa_attn/__init__.py",
+        "build/torch-universal/yarqa_attn/_chain.py",
+        "build/torch-universal/yarqa_attn/attn.py"
+      ],
+      "mirror_only_paths": [
+        "CARD.md",
+        "LICENSE",
+        "TRAINING_RECEIPT.json",
+        "bom/model-bom.cdx.json",
+        "build.toml",
+        "example.py",
+        "flake.nix",
+        "og-card.png",
+        "pyproject.toml",
+        "tests/__init__.py",
+        "tests/conftest.py",
+        "tests/test_api_edges.py",
+        "tests/test_honesty.py",
+        "tests/test_layout.py",
+        "tests/test_local_kernels.py",
+        "tests/test_receipt.py",
+        "tests/test_yarqa_attn.py",
+        "torch-ext/yarqa_attn/__init__.py",
+        "torch-ext/yarqa_attn/_chain.py",
+        "torch-ext/yarqa_attn/attn.py",
+        "yarqa.py",
+        "yarqa_attn.npz"
+      ],
+      "shared_files": [
+        {
+          "path": ".gitattributes",
+          "kernel_declared": {
+            "bytes": 127,
+            "git_blob_oid": "6b7a283f6a9d189d65bccdb859c6f80016f52228"
+          },
+          "mirror_declared": {
+            "bytes": 1519,
+            "git_blob_oid": "a6344aac8c09253b3b630fb776ae94478aa0275b"
+          },
+          "kernel_measured": {
+            "bytes": 127,
+            "sha256": "315871b322399f4d4163420d48ab6b22bae746799c5178967623ffa6ba7b6504"
+          },
+          "mirror_measured": {
+            "bytes": 1519,
+            "sha256": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361"
+          },
+          "bytes_match": false
+        },
+        {
+          "path": "BENCH.laptop-blackwell.json",
+          "kernel_declared": {
+            "bytes": 5817,
+            "git_blob_oid": "1317ea66396c485215f418a7df1669c6b887088a"
+          },
+          "mirror_declared": {
+            "bytes": 5817,
+            "git_blob_oid": "1317ea66396c485215f418a7df1669c6b887088a"
+          },
+          "kernel_measured": {
+            "bytes": 5817,
+            "sha256": "866daca807fe2d1f2b15b5d106439fcccce7b5dc0da3fe4869c5b7faa3670499"
+          },
+          "mirror_measured": {
+            "bytes": 5817,
+            "sha256": "866daca807fe2d1f2b15b5d106439fcccce7b5dc0da3fe4869c5b7faa3670499"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "OPERATIONAL.json",
+          "kernel_declared": {
+            "bytes": 1919,
+            "git_blob_oid": "8909228c6d600768e9e88a34d3d49227bafdee65"
+          },
+          "mirror_declared": {
+            "bytes": 1919,
+            "git_blob_oid": "8909228c6d600768e9e88a34d3d49227bafdee65"
+          },
+          "kernel_measured": {
+            "bytes": 1919,
+            "sha256": "825ebe915db2ffdf36a9f45c064b2e5119bbce9b26c2b3e5f4b444ca4c914c3c"
+          },
+          "mirror_measured": {
+            "bytes": 1919,
+            "sha256": "825ebe915db2ffdf36a9f45c064b2e5119bbce9b26c2b3e5f4b444ca4c914c3c"
+          },
+          "bytes_match": true
+        },
+        {
+          "path": "README.md",
+          "kernel_declared": {
+            "bytes": 6096,
+            "git_blob_oid": "17bf71e5e07ab43808ec943049a0f7b67e040652"
+          },
+          "mirror_declared": {
+            "bytes": 7823,
+            "git_blob_oid": "a0025e6c28dc8eb29bd7971b35eb254faadd942a"
+          },
+          "kernel_measured": {
+            "bytes": 6096,
+            "sha256": "eaa4eaf73fe9e57f568781e18317fcf2cce3799c2caa46ffc91414e8c00e3d3d"
+          },
+          "mirror_measured": {
+            "bytes": 7823,
+            "sha256": "cd192d0a071eaa5d0a2044ca1028993b5b10a2bb50eaaadf03220022dc05b9ec"
+          },
+          "bytes_match": false
+        }
+      ],
+      "kernel_file_count": 12,
+      "mirror_file_count": 26,
+      "access_status": "MEASURED",
+      "shared_count": 4,
+      "measured_count": 4,
+      "unavailable_count": 0,
+      "matched_count": 2,
+      "differing_count": 2,
+      "measured_bytes": 31037,
+      "whole_artifact_equivalence": "UNKNOWN"
+    }
+  ]
+}

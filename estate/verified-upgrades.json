@@ -1,6 +1,6 @@
 {
   "schema": "szl.public-verified-upgrades/v1",
-  "observed_at": "2026-10-08T05:19:25Z",
+  "observed_at": "2026-10-11T04:20:17.421704+00:00",
   "entries": [
     {
       "private": false,
@@ -53,6 +53,30 @@
       "attestation_signature_verification": "UNKNOWN",
       "installation": "NOT RUN",
       "extraction": "NOT RUN",
+      "independent_replay": "NOT RUN",
+      "production_authorization": "BLOCKED"
+    },
+    {
+      "private": false,
+      "id": "kernel-shared-byte-readback",
+      "kind": "kernel",
+      "evidence_class": "MEASURED",
+      "source_repository": "szl-holdings/szl-holdings.github.io",
+      "source_revision": "dccee6aeda928aa24f40a8a1e568ad58bb925e67",
+      "source_manifest_sha256": "298466da9f5d8102e65017bbc9919f5de308c025e4cb164522181a063c6190f7",
+      "readback_sha256": "11e13d26297287644a71153c13a3d9265d0930ed4b0241473a0e34108c8777ed",
+      "scope": "PINNED_PUBLIC_SHARED_PATH_BYTES_ONLY",
+      "pair_count": 14,
+      "measured_pair_count": 13,
+      "unavailable_pair_count": 1,
+      "shared_path_count": 158,
+      "measured_shared_count": 125,
+      "unavailable_shared_count": 33,
+      "matched_count": 61,
+      "differing_count": 64,
+      "measured_bytes": 1616218,
+      "whole_artifact_equivalence": "UNKNOWN",
+      "runtime_behavior": "NOT RUN",
       "independent_replay": "NOT RUN",
       "production_authorization": "BLOCKED"
     }
