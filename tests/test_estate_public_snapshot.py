@@ -24,7 +24,7 @@ EXPECTED_COUNTS = {
     "GitHub": 128,
     "HF Model": 48,
     "HF Dataset": 37,
-    "HF Space": 37,
+    "HF Space": 38,
 }
 ASSET_FIELDS = {
     "id", "kind", "url", "revision", "archived", "category", "ci",
@@ -71,24 +71,29 @@ class PublicSnapshotTests(unittest.TestCase):
             "schema", "observed_at", "counts", "limitations", "assets",
         })
         self.assertEqual(data["schema"], "szl.public-estate-snapshot/v1")
-        self.assertEqual(data["observed_at"], "2026-10-11T07:11:47.450136+00:00")
+        self.assertEqual(data["observed_at"], "2026-10-16T00:01:02.534650+00:00")
         self.assertEqual(data["counts"], EXPECTED_COUNTS)
-        self.assertEqual(len(data["assets"]), 250)
+        self.assertEqual(len(data["assets"]), 251)
         self.assertEqual(Counter(a["kind"] for a in data["assets"]), EXPECTED_COUNTS)
         self.assertEqual(
-            len({(a["kind"], a["id"]) for a in data["assets"]}), 250
+            len({(a["kind"], a["id"]) for a in data["assets"]}), 251
         )
         self.assertTrue(all(set(a) == ASSET_FIELDS for a in data["assets"]))
         self.assertTrue(all(a["private"] is False for a in data["assets"]))
         self.assertNotIn("C:\\Users\\", SNAPSHOT.read_text(encoding="utf-8"))
 
-    def test_new_public_space_keeps_source_and_runtime_separate(self) -> None:
+    def test_public_spaces_keep_source_and_runtime_separate(self) -> None:
         space = next(a for a in self.snapshot["assets"] if a["id"] == "SZLHOLDINGS/nexus")
         self.assertEqual(space["kind"], "HF Space")
-        self.assertEqual(space["revision"], "31b3c4787d32cc325351c703c393155c2f0aa413")
+        self.assertEqual(space["revision"], "7e30f9303a1cc5ac01e83ccfb890ca85627eecfd")
         self.assertIn("DECLARED RUNNING", space["state"])
         self.assertIn("source/runtime parity UNKNOWN", space["state"])
         self.assertIn("runtime behavior NOT RUN", space["state"])
+        bench = next(a for a in self.snapshot["assets"] if a["kind"] == "HF Space" and a["id"] == "SZLHOLDINGS/governed-agent-bench")
+        self.assertEqual(bench["kind"], "HF Space")
+        self.assertEqual(bench["revision"], "1502c7540f32cdd4344ae4cba5dec04c2514f624")
+        self.assertIn("source/runtime parity UNKNOWN", bench["state"])
+        self.assertIn("runtime behavior NOT RUN", bench["state"])
         khipu = next(a for a in self.snapshot["assets"] if a["id"] == "SZLHOLDINGS/SZL-Khipu-1.5B")
         self.assertIn("REPORTED 2/6 abstention", khipu["state"])
         self.assertIn("promotion gate BLOCKED", khipu["state"])

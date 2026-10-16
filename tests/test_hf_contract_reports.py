@@ -50,7 +50,7 @@ class PublicContractReportTests(unittest.TestCase):
                     self.assertEqual(row['evidence_class_this_review'], 'MEASURED')
                 else:
                     self.assertEqual(row['row_or_split_validation'], 'NOT_RUN')
-            expected_historical = 3 if kind == 'HF Model' else 4
+            expected_historical = 33 if kind == 'HF Model' else 11
             self.assertEqual(
                 historical_revisions, expected_historical,
                 'report scope changed; refresh or redate the CSV review')
@@ -61,6 +61,8 @@ class PublicContractReportTests(unittest.TestCase):
                 self.assertEqual(advisory['forge_binding'], 'NOT_IN_CURRENT_FORGE_ARTIFACT_BINDING')
                 self.assertIn('REPORTED', advisory['published_evidence'])
                 self.assertIn('unsigned', advisory['remaining_gate'])
+        for document in (ROOT / 'README.md', ROOT / 'estate/CATALOG.md', ROOT / 'estate/index.html'):
+            self.assertIn('33 model and 11 dataset', document.read_text(encoding='utf-8'))
 
 
 if __name__ == '__main__':

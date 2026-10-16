@@ -2,18 +2,18 @@
 
 The estate page joins six public namespaces: GitHub repositories, Hugging Face
 models, datasets, Spaces and kernels, and published PyPI distributions. The
-committed catalog contains 284 surfaces: 128 GitHub, 48 model repositories, 37 datasets,
-37 Spaces, 14 kernels and 20 PyPI packages. A project can have several surfaces.
+committed catalog contains 285 surfaces: 128 GitHub, 48 model repositories, 37 datasets,
+38 Spaces, 14 kernels and 20 PyPI packages. A project can have several surfaces.
 
 ## Evidence and limits
 
-- **MEASURED:** public membership enumeration on 2026-10-11; PyPI metadata
+- **MEASURED:** public membership enumeration on 2026-10-16 UTC; PyPI metadata
   retains its 2026-10-07 observation. The public projection admitted only
   literal `private: false` rows. The public `SZLHOLDINGS/README` Space was
-  confirmed by direct API readback after the anonymous author list omitted it.
-  `SZLHOLDINGS/nexus` appears in the current anonymous Space list and its
-  public API record pins the revision used here.
-- Repository and kernel states retain separate 2026-10-11 and 2026-10-06
+  also confirmed by direct API readback.
+  The source snapshot includes the public `SZLHOLDINGS/governed-agent-bench`
+  Space at its observed repository revision.
+- Repository and kernel states retain separate 2026-10-16 and 2026-10-06
   observation dates and immutable revisions. A kernel's dated model-mirror
   revision can differ from the newer model repository snapshot. This join does
   not refresh CI or runtime state beyond the recorded source observation.
@@ -26,14 +26,14 @@ committed catalog contains 284 surfaces: 128 GitHub, 48 model repositories, 37 d
   trained model. Inference, training, numerical replay and independent evaluation
   were **NOT RUN**. Published failed gates remain visible.
 - The model and dataset contract CSVs are earlier metadata reviews. They cover
-  the same 48 model and 37 dataset IDs, but three model and four dataset
-  revisions precede this source snapshot. Their pinned links remain historical
+  the same 48 model and 37 dataset IDs, but 33 model and 11 dataset
+  revisions differ from this source snapshot. Their pinned links remain historical
   review links.
-- `SZLHOLDINGS/oac-ops-health-v2` is model-hosted software with a Python
-  kernel and JSON coefficients, not a transformer checkpoint. Its card reports
-  a synthetic operational advisory only. Its receipt is unsigned; the
-  canonical Forge publishing manifest has no binding for this ID. No clinical
-  or production authority follows from its listing.
+- The earlier metadata review classified `SZLHOLDINGS/oac-ops-health-v2` as
+  model-hosted software with a Python kernel and JSON coefficients. The fresh
+  source census does not establish trained weights or held-out quality. Its
+  earlier receipt is unsigned, and no clinical or production authority follows
+  from its listing.
 
 The joined [public-catalog.json](./public-catalog.json) binds the exact bytes of
 [public-snapshot.json](./public-snapshot.json),
