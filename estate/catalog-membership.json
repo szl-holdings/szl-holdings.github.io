@@ -1,6 +1,6 @@
 {
   "schema": "szl.public-catalog-membership/v1",
-  "observed_at": "2026-10-11T07:12:34.015207+00:00",
+  "observed_at": "2026-10-16T00:11:48.700291+00:00",
   "evidence_class": "MEASURED",
   "scope": "Anonymous public enumeration plus direct-public README Space readback; source state and runtime NOT RUN.",
   "assets": [
@@ -1102,6 +1102,11 @@
     {
       "kind": "HF Space",
       "id": "SZLHOLDINGS/gdw-frontier",
+      "private": false
+    },
+    {
+      "kind": "HF Space",
+      "id": "SZLHOLDINGS/governed-agent-bench",
       "private": false
     },
     {
