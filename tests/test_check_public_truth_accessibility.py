@@ -20,9 +20,11 @@ INPUTS = (
     "CNAME",
     "app.js",
     "brain/index.html",
+    "estate/public-catalog.json",
     "index.html",
     "khipu/index.html",
     "origin-authority.json",
+    "origin-status.json",
     "products/catalog.json",
     "products/index.html",
     "robots.txt",
@@ -50,7 +52,7 @@ class PublicTruthAccessibilityContract(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertEqual(result.stderr, "")
         self.assertEqual(
-            result.stdout, "OK: 14 required and 7 prohibited truth checks passed.\n"
+            result.stdout, "OK: 16 required and 7 prohibited truth checks passed.\n"
         )
 
     def test_missing_organization_node_fails_closed(self):

@@ -9,6 +9,7 @@ The name is deliberately not check_public_truth.py: the responsive-apex-v3
 contract workflow runs a script by that name whenever one exists.
 """
 from pathlib import Path
+from datetime import date
 import hashlib
 import html.parser
 import json
@@ -109,6 +110,25 @@ if (
     or authority.get("company_front_door", {}).get("runtime_health_claimed") is not False
 ):
     failures.append("source authority must preserve the separate company and product origins")
+public_catalog = json.loads(Path("estate/public-catalog.json").read_text(encoding="utf-8"))
+catalog_total = sum(public_catalog["counts"].values())
+catalog_date = date.fromisoformat(public_catalog["observed_at"][:10])
+catalog_time = f'<time datetime="{catalog_date.isoformat()}">{catalog_date.day} {catalog_date.strftime("%B %Y")}</time>'
+if (
+    f"lists {catalog_total} public source and distribution surfaces" not in html_text
+    or catalog_time not in html_text
+):
+    failures.append("investor inventory must show the catalog's actual count and observation date")
+
+historical_origin = json.loads(Path("origin-status.json").read_text(encoding="utf-8"))
+origin_date = date.fromisoformat(historical_origin["observed_at_utc"][:10])
+origin_time = f'<time datetime="{origin_date.isoformat()}">{origin_date.day} {origin_date.strftime("%B %Y")}</time>'
+if (
+    historical_origin.get("evidence_class") != "MEASURED"
+    or f'<a href="/origin-status.json">HISTORICAL MEASURED origin observation</a> was captured {origin_time}' not in html_text
+):
+    failures.append("historical origin observation must retain its source class and date")
+
 catalog = json.loads(Path("products/catalog.json").read_text(encoding="utf-8"))
 if catalog.get("canonical_front_door") != origin + "products/":
     failures.append("product catalog must bind to the company origin")
@@ -380,6 +400,8 @@ required = {
     'id="verifyBadge">CHECKING</span>': "fail-closed initial receipt state",
     "offline sample": "offline truth label",
     "A public URL proves where a surface is published": "surface truth boundary",
+    'id="start-here"': "investor and developer paths",
+    'szl-receipt#quick-start': "source-bound Python quick start",
     'var PINNED_RECEIPT_KEY_ID = ""': "fail-closed trust-root pin",
     'var PINNED_RECEIPT_SPKI_SHA256 = ""': "fail-closed SPKI pin",
     'var ROUTER_ENDPOINT = ""': "disabled unavailable live route",

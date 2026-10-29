@@ -232,6 +232,9 @@ main [data-szl-spectral-card="true"].card:hover{border-color:var(--border-subtle
   .status-key dl{grid-template-columns:1fr}
   .footer{padding-bottom:calc(38px + var(--safe-area-bottom))}
 }
+@media(max-width:360px){
+  .hero-eq code{font-size:var(--text-sm);padding-inline:var(--space-3);white-space:nowrap;max-width:100%;overflow-x:auto}
+}
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *{animation:none!important}
