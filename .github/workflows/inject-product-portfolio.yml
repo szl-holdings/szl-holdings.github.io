@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
-          persist-credentials: true
+          persist-credentials: false
       - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
         with:
           python-version: '3.12'
@@ -25,10 +25,23 @@ jobs:
           grep -q 'id="products"' index.html
           python -m json.tool products/catalog.json >/dev/null
       - name: Commit generated front door
+        id: commit
         run: |
-          if git diff --quiet -- index.html; then exit 0; fi
+          if git diff --quiet -- index.html; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add index.html
           git commit -m 'feat(site): expose full product portfolio on front door'
-          git push origin HEAD:feat/product-portfolio-front-door
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+      - name: Push generated front door
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GIT_TERMINAL_PROMPT: "0"
+        run: |
+          git -c credential.helper= \
+            -c 'credential.helper=!f() { test "$1" = get || exit 0; echo "username=x-access-token"; echo "password=$GH_TOKEN"; }; f' \
+            push "https://github.com/${GITHUB_REPOSITORY}.git" HEAD:feat/product-portfolio-front-door
