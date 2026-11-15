@@ -129,7 +129,7 @@
     { g: "Formal methods & research", no: "D",
       note: "Machine-checked truth — and honesty about what is proven versus conjectured.",
       items: [
-        { name: "lutar-lean", lang: "Lean", title: "Machine-checked Λ", href: "https://doi.org/10.5281/zenodo.20434308",
+        { name: "lutar-lean", lang: "Lean", title: "Machine-checked Λ", href: "https://doi.org/10.5281/zenodo.24239654",
           desc: "Lean 4 + Mathlib formalization of the Λ aggregator. 749 declarations · 14 axioms · 163 tracked sorries. Λ-uniqueness stated as Conjecture 1." },
         { name: "lean-kernel", lang: "Python", title: "Live proof kernel", href: GH + "lean-kernel",
           desc: "Live Lean v4.13.0 kernel for the Lutar Invariant, source-mirrored from a Hugging Face Space. The proofs, running — not just claimed." },
@@ -481,7 +481,7 @@
     { q: /sovereign|router|brain|inference|model/i,
       a: "Live concierge responses are requested from szl-router. This page reports the served_by and sovereign fields returned by that response and falls back to an explicitly labeled offline sample when the endpoint is unavailable." },
     { q: /lean|theorem|proof|conjecture|lambda|\u039b|math/i,
-      a: "The governance aggregator \u039b has a source-linked Lean 4 + Mathlib formalization. We state \u039b-uniqueness as Conjecture 1 \u2014 not a closed theorem. Being honest about that distinction is the point (DOI 10.5281/zenodo.20434308)." },
+      a: "The governance aggregator \u039b has a source-linked Lean 4 + Mathlib formalization. We state \u039b-uniqueness as Conjecture 1 \u2014 not a closed theorem. Being honest about that distinction is the point (DOI 10.5281/zenodo.24239654)." },
     { q: /killinchu|drone|uas|defense|counter/i,
       a: "Killinchu is the public counter-UAS interface at szlholdings-killinchu.hf.space/elite. Its named surface separates feed, simulation, and authority states; inspect its current evidence labels before treating any control as operational." },
     { q: /immune|matrix|hugging/i,
