@@ -24,3 +24,6 @@ identifiers:
 - type: doi
   value: 10.5281/zenodo.19944926
   description: Concept DOI for the canonical Ouroboros Thesis (always resolves to the latest version)
+- type: doi
+  value: 10.5281/zenodo.24240321
+  description: Zenodo DOI for this repository archive (always resolves to the latest version)
