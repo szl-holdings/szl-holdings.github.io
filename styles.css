@@ -242,6 +242,17 @@ main [data-szl-spectral-card="true"].card:hover{border-color:var(--border-subtle
   .nav-links,.surface-card{transition:none}
 }
 
+/* ---- spectral section reveal: finish before the section is read ----
+   /assets/szl-spectral-v2.css (hash-pinned product asset, not edited here) ends its
+   scroll-driven reveal at "cover 28%". That range grows with section height, so a tall
+   section (#ecosystem, #front-door) is still at ~0.8 opacity with a 2px blur when its top
+   sits in reading position, including after a nav-anchor jump. Ending the reveal inside the
+   entry range ties it to the viewport instead: the section is fully opaque and sharp once
+   its top edge reaches the middle of the viewport. Same selector set, higher specificity. */
+@supports (animation-timeline: view()){
+  body[data-szl-spectral="product"] :is(main > section,main > article,[data-szl-reveal="true"]){animation-range:entry 0% entry 50%}
+}
+
 /* ---- verifiable receipts (concierge receipt chips) ---- */
 .msg .receipt-chip{margin-top:10px;cursor:pointer;line-height:1}
 .msg .receipt-chip:hover{border-color:var(--control-edge);color:var(--text)}
